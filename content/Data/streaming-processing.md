@@ -1,5 +1,5 @@
 ---
-title: 스트리밍 tags: 분산 처리
+title: 스트리밍 & 분산 처리
 tags:
   - tech
 created: 2026-05-13 (수)
