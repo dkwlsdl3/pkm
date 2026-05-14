@@ -1,4 +1,5 @@
 ---
+title: Dotfiles 관리
 tags:
   - tech
 created: 2026-05-13 (수)

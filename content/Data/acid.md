@@ -1,4 +1,5 @@
 ---
+title: ACID
 tags:
   - tech
 created: 2026-05-13 (수)

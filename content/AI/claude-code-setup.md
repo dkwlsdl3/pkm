@@ -1,4 +1,5 @@
 ---
+title: Claude Code 세팅 및 워크플로우
 tags:
   - tech
 created: 2026-05-13 (수)

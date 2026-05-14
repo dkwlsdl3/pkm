@@ -1,4 +1,5 @@
 ---
+title: 워크플로우 오케스트레이션
 tags:
   - tech
 created: 2026-05-13 (수)

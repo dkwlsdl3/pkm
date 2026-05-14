@@ -1,4 +1,5 @@
 ---
+title: Data Observability (데이터 가시성)
 tags:
   - tech
 created: 2026-05-13 (수)

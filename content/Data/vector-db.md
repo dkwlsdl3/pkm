@@ -1,4 +1,5 @@
 ---
+title: Vector DB (벡터 데이터베이스)
 tags:
   - tech
 created: 2026-05-13 (수)

@@ -1,4 +1,5 @@
 ---
+title: Context Engineering (CLAUDE.md 최적화)
 tags:
   - tech
 created: 2026-05-14 (목)

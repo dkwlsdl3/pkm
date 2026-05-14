@@ -1,4 +1,5 @@
 ---
+title: Lustre 파일시스템 개요 (MOC)
 tags:
   - tech
   - moc

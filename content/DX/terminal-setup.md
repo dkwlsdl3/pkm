@@ -1,4 +1,5 @@
 ---
+title: 터미널 환경 세팅
 tags:
   - tech
 created: 2026-05-13 (수)

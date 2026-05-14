@@ -1,4 +1,5 @@
 ---
+title: 로컬 LLM (검열 없는 모델)
 tags:
   - tech
 created: 2026-05-12 (화)

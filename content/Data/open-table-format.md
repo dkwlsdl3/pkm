@@ -1,4 +1,5 @@
 ---
+title: 오픈 테이블 포맷 (Open Table Formats)
 tags:
   - tech
 created: 2026-05-13 (수)

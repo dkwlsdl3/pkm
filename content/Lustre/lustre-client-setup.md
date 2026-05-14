@@ -1,4 +1,5 @@
 ---
+title: Lustre 클라이언트 설치 (Ubuntu)
 tags:
   - tech
 created: 2026-05-12 (화)

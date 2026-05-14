@@ -1,4 +1,5 @@
 ---
+title: Ubuntu ↔ Mac 키보드/마우스 공유 설정
 tags:
   - tech
 created: 2026-05-12 (화)

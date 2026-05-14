@@ -1,4 +1,5 @@
 ---
+title: systemd 서비스
 tags:
   - tech
 created: 2026-05-14 (목)

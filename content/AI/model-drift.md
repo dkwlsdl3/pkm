@@ -1,4 +1,5 @@
 ---
+title: 모델 드리프트 (Model Drift)
 tags:
   - tech
 created: 2026-05-14 (목)

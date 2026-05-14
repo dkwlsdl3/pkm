@@ -1,4 +1,5 @@
 ---
+title: 데이터 저장소 종류
 tags:
   - tech
 created: 2026-05-13 (수)

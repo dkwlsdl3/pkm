@@ -1,4 +1,5 @@
 ---
+title: Linux 파일 권한
 tags:
   - tech
 created: 2026-05-14 (목)

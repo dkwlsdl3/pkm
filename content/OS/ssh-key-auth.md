@@ -1,4 +1,5 @@
 ---
+title: Ubuntu → Mac SSH 키 인증 설정
 tags:
   - tech
 created: 2026-05-13 (수)

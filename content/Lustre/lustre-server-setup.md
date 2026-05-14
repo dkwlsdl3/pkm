@@ -1,4 +1,5 @@
 ---
+title: Lustre 서버 설치 (EL8)
 tags:
   - tech
 created: 2026-05-12 (화)

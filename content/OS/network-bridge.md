@@ -1,4 +1,5 @@
 ---
+title: 네트워크 브리지
 tags:
   - tech
 created: 2026-05-14 (목)

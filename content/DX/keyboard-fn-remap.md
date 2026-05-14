@@ -1,4 +1,5 @@
 ---
+title: Ubuntu 키보드 Fn키 리매핑 (keyd)
 tags:
   - tech
 created: 2026-05-13 (수)

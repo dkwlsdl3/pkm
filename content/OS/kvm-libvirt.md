@@ -1,4 +1,5 @@
 ---
+title: KVM / libvirt 가상화
 tags:
   - tech
 created: 2026-05-11 (월)
