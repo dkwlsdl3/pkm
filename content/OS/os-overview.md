@@ -13,11 +13,21 @@ created: 2026-05-13 (수)
 
 ## 네트워크 & 원격 접속
 
-- [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향)
+- [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향), SSH config alias
+- [[iptables-nat]] — NAT/MASQUERADE 설정, VM 인터넷 연결
+- [[network-bridge]] — 가상 브리지 설정, STP, QEMU ACL
 
 ## 가상화
 
 - [[kvm-libvirt]] — KVM/libvirt 설치, virt-install, virsh 명령어, NAT 설정
+- [[idrac-ipmi]] — Dell 서버 원격 관리, ipmitool로 iDRAC IP 설정
+
+## 시스템
+
+- [[systemd-service]] — 서비스 파일 작성, linger, SIGTSTP 문제
+- [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
+- [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
+- [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
 
 ---
 

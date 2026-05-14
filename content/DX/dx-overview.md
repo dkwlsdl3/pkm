@@ -31,3 +31,7 @@ created: 2026-05-13 (수)
 ## CI/CD & 자동화
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴
+
+## 언어 & 빌드
+
+- [[rust-cargo]] — Rust/Cargo 핵심 명령어, 크로스 컴파일, musl 빌드

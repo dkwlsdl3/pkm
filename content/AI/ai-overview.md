@@ -26,3 +26,8 @@ created: 2026-05-13 (수)
 ## 프롬프트 & 컨텍스트
 
 - [[context-engineering]] — CLAUDE.md 최적화 원칙, 비자명 정보만 넣는 컨텍스트 엔지니어링
+
+## ML 엔지니어링
+
+- [[rag-chromadb]] — RAG 개념, 벡터 DB, ChromaDB 사용법
+- [[model-drift]] — 모델 드리프트 감지, PSI/KS 지표
