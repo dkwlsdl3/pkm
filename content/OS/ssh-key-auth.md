@@ -88,6 +88,20 @@ ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no kth@30.30.30.237  # 
 
 ---
 
+## SSH Config alias
+
+반복 입력 줄이기 위해 `~/.ssh/config`에 alias 등록.
+
+```
+Host <alias> <ip>
+  HostName <ip>
+  User <username>
+```
+
+이후 `ssh <alias>`로 접속 가능.
+
+---
+
 ## 관련
 
 - SSH 키 알고리즘: ed25519 (Edwards-curve, 256bit, 현재 권장 방식)

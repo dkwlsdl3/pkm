@@ -22,3 +22,7 @@ created: 2026-05-13 (수)
 ## 로컬 LLM
 
 - [[local-llm-uncensored]] — 검열 없는 로컬 LLM 모델 종류 및 구동 도구 정리
+
+## 프롬프트 & 컨텍스트
+
+- [[context-engineering]] — CLAUDE.md 최적화 원칙, 비자명 정보만 넣는 컨텍스트 엔지니어링
