@@ -24,6 +24,10 @@ created: 2026-05-13 (수)
 - [[input-leap-setup]] — input-leap으로 Ubuntu ↔ MacBook 키보드/마우스 소프트웨어 공유
 - [[keyboard-fn-remap]] — keyd로 MacBook 키보드 미디어키 → Fn키 리매핑
 
+## 지식 관리
+
+- [[pkm-zettelkasten]] — PKM / Zettelkasten 개념, Obsidian으로 구현하는 디지털 메모 상자
+
 ## CI/CD & 자동화
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴
