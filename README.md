@@ -1,17 +1,7 @@
-# Quartz v4
+# kth's PKM
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+개인 기술 지식 베이스입니다.
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+Obsidian으로 작성된 노트를 AI 에이전트가 자동으로 동기화하여 배포합니다.
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
-
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
-
-## Sponsors
-
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+🌐 https://dkwlsdl3.github.io/pkm
