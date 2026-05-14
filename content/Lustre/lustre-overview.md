@@ -1,0 +1,48 @@
+---
+tags:
+  - tech
+  - moc
+created: 2026-05-12 (화)
+---
+
+# Lustre 파일시스템 개요 (MOC)
+
+> HPC 환경의 고성능 분산 파일시스템 — 대용량 병렬 I/O 특화
+
+---
+
+## 아키텍처
+
+```
+클라이언트
+    │  mount -t lustre <MGS_IP>@tcp:/<fsname> /mnt/lustre
+    ▼
+MGS (Management Server)  ← 파일시스템 설정 정보 저장
+MDS (Metadata Server)    ← 파일명, 디렉토리, 권한 관리
+OSS (Object Storage Server) × N  ← 실제 데이터 저장
+```
+
+### 핵심 구성요소
+
+| 구성요소 | 역할 | 타겟 디스크 타입 |
+|---------|------|----------------|
+| MGS | 파일시스템 전체 설정 관리 | MGT |
+| MDS | 메타데이터 (파일명·권한·위치) | MDT |
+| OSS | 실제 데이터 블록 저장 | OST (여러 개) |
+| 클라이언트 | 마운트해서 파일시스템으로 사용 | — |
+
+> MGS + MDS는 같은 서버에 함께 구성 가능 (`mkfs.lustre --mgs --mdt`)
+
+---
+
+## 노트
+
+- [[lustre-server-setup]] — EL8 기준 서버 설치 및 포맷 (MGS/MDT/OST)
+- [[lustre-client-setup]] — Ubuntu 클라이언트 설치 및 커널 버전 제약
+- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트
+
+---
+
+## 관련
+
+- [[kvm-libvirt]] — KVM VM 기반 Lustre 테스트 환경 구성
