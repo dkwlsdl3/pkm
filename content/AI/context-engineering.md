@@ -54,6 +54,19 @@ created: 2026-05-14 (목)
 
 ---
 
+## 실전 적용 결과
+
+keeper-gen-2 프로젝트 CLAUDE.md 슬림화:
+
+| 파일 | 이전 | 이후 | 제거 내용 |
+|---|---|---|---|
+| CLAUDE.md | 220줄 | 103줄 | Build 명령어, .env 변수 목록, DB 스키마, Frontend 세부 가이드 |
+| AGENTS.md | 105줄 | 83줄 | 동일 기준 적용 |
+
+> Frontend Guidelines는 `service/frontend/app/claude.md` 포인터 한 줄로 대체.
+
+---
+
 ## 관련
 
 - [[ai-overview]]
