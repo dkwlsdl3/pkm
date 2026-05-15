@@ -13,3 +13,4 @@ title: kth's PKM
 - [[DX/dx-overview|DX]] — 터미널, dotfiles, 키보드 설정
 - [[Lustre/lustre-overview|Lustre]] — HPC 분산 파일시스템
 - [[OS/os-overview|OS]] — KVM, SSH, 서버 관리
+- [[DesignPatterns/design-patterns-overview|Design Patterns]] — GoF 패턴, 아키텍처 패턴
