@@ -32,6 +32,7 @@ created: 2026-05-13 (수)
 ## CI/CD & 자동화
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴
+- [[playwright-e2e]] — E2E 테스트 환경 구성, storageState 인증 재사용, project 분리 패턴
 
 ## 언어 & 빌드
 
