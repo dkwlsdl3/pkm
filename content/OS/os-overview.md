@@ -17,6 +17,7 @@ created: 2026-05-13 (수)
 - [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향), SSH config alias
 - [[iptables-nat]] — NAT/MASQUERADE 설정, VM 인터넷 연결
 - [[network-bridge]] — 가상 브리지 설정, STP, QEMU ACL
+- [[vpn-tailscale]] — VPN 작동 원리, 분할/전체 터널링, Tailscale Mesh VPN
 
 ## 가상화
 
