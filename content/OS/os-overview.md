@@ -19,6 +19,10 @@ created: 2026-05-13 (수)
 - [[network-bridge]] — 가상 브리지 설정, STP, QEMU ACL
 - [[vpn-tailscale]] — VPN 작동 원리, 분할/전체 터널링, Tailscale Mesh VPN
 
+## 보안 & 인증
+
+- [[sso]] — SSO 개념, SAML / OAuth / OIDC 비교, IdP·SP 역할
+
 ## 가상화
 
 - [[kvm-libvirt]] — KVM/libvirt 설치, virt-install, virsh 명령어, NAT 설정

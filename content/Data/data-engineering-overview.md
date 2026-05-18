@@ -38,6 +38,13 @@ created: 2026-05-13 (수)
 
 ---
 
+## 저장소 & 거버넌스
+
+- [[minio]] — S3 호환 온프레미스 오브젝트 스토리지, AI 학습 데이터 특화
+- [[data-governance]] — Landing/Staging/Deepland 3단계 모델, ECM 문서 중앙화
+
+---
+
 ## 주변 개념
 
 - [[finops]] — 클라우드 비용 최적화

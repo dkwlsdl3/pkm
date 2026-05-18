@@ -32,7 +32,12 @@ created: 2026-05-13 (수)
 ## CI/CD & 자동화
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴
+- [[gitlab-cicd]] — .gitlab-ci.yml 구조, GitLab Runner, 단계별 파이프라인
 - [[playwright-e2e]] — E2E 테스트 환경 구성, storageState 인증 재사용, project 분리 패턴
+
+## 레포지토리 전략
+
+- [[monorepo]] — 모노레포 vs 멀티레포 비교, Turborepo / Nx, Git 서브모듈 방식
 
 ## 언어 & 빌드
 
