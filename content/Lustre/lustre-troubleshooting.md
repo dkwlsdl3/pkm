@@ -130,6 +130,105 @@ virsh --connect qemu:///session autostart oss2
 
 ---
 
+## LNET NIC 자동감지 오설정
+
+**증상**: `lfs df` 실행 시 MDT만 나오고 OST에서 hang. `lctl list_nids`가 외부망 NIC IP 반환.
+
+```bash
+sudo lctl list_nids
+# 30.30.30.226@tcp  ← enp4s0 (외부망, 잘못됨)
+# 올바른 값: 172.25.0.1@tcp (br-lnet)
+```
+
+**원인**: `/etc/lnet.conf`가 비어있거나 `net:` 최상위 키가 누락되면 LNET이 임의 NIC 선택. VM들이 br-lnet(172.25.0.x) 망 안에 있어서 외부망 IP로는 응답 도달 불가.
+
+VM 측 dmesg 증거:
+```
+lustrefs-OST0000: Export already connecting from 30.30.30.226@tcp
+```
+
+**해결**:
+```bash
+sudo tee /etc/lnet.conf << 'EOF'
+net:
+    - net type: tcp
+      local NI(s):
+        - nid: 172.25.0.1@tcp
+          interfaces:
+              0: br-lnet
+EOF
+# 이미 로드된 LNET에는 수동 적용
+sudo lnetctl net add --net tcp --if br-lnet
+sudo lctl list_nids  # 172.25.0.1@tcp 확인
+```
+
+> [!WARNING]
+> `net:` 최상위 키가 없으면 파싱 전체가 무시됨. yaml 들여쓰기도 정확히 맞춰야 함.
+
+---
+
+## OBD 디바이스 커널 잔존 (재부팅 필요)
+
+**증상**: `umount /mnt/lustre` 후에도 `lnetctl lnet unconfigure` 실패.
+
+```bash
+sudo lnetctl lnet unconfigure
+# errno: -16 "LNet unconfigure error: Device or resource busy"
+
+sudo lctl dl
+# MGC, LOV, LMV, MDC, OSC×2 — 모두 UP 상태
+```
+
+**원인**: `umount -l` (lazy umount)로 경로만 분리해도 OBD 디바이스들이 커널에 잔존. `kill -9`도 안 먹히는 `I (idle)` 상태 프로세스가 커널 uninterruptible wait 중.
+
+**해결**: 수동 정리 불가 → **재부팅 필요**.
+
+| 디바이스 | 역할 |
+|---------|------|
+| MGC | Management Client — MGS와 통신 |
+| MDC | Metadata Client — 파일명/권한/크기 |
+| OSC × 2 | Object Storage Client — 실제 데이터 (oss별 1개) |
+| LOV | OSC들을 하나로 묶는 집합체 |
+| LMV | MDC들을 묶는 집합체 |
+
+---
+
+## 서버 타겟 fstab `nofail` 불가
+
+**증상**: MDT/OST VM 재부팅 후 Lustre 타겟 마운트 실패.
+
+```
+LDISKFS-fs (sda): Unrecognized mount option "nofail" or missing value
+LustreError: osd_mount()) keeperfs-MDT0000-osd: can't mount /dev/sda: -22
+```
+
+**원인**: ldiskfs(OSD)는 `nofail` 옵션을 인식하지 못함. 클라이언트 fstab에는 사용 가능하지만 서버 타겟(MDT/OST) fstab에는 사용 불가.
+
+**해결**:
+```bash
+# 각 VM에서 (meta, oss1, oss2)
+sed -i 's/,nofail//' /etc/fstab
+mount -a
+```
+
+---
+
+## MDT recovery hang
+
+**증상**: 클라이언트에서 `mount /mnt/lustre` 실행 시 무한 대기.
+
+**원인**: MDT가 recovery 모드에서 클라이언트 재연결을 기다리는 중.
+
+**해결**:
+```bash
+# MDT 서버에서 recovery 강제 완료
+ssh root@172.25.0.3 "lctl set_param mdt.keeperfs-MDT0000.recovery_time_soft=0"
+# 이후 클라이언트에서 마운트 재시도
+mount /mnt/lustre
+```
+
+---
+
 ## 관련
 
 - [[lustre-overview]]

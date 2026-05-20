@@ -131,6 +131,22 @@ virsh attach-disk <vm> <disk.qcow2> vdb \
 virsh --connect qemu:///session list --all
 ```
 
+### qemu:///session vs qemu:///system
+
+virsh 기본 연결 대상은 `qemu:///system`. admin 유저로 생성한 VM은 `qemu:///session`에 등록되어 기본값으로는 안 보임.
+
+```bash
+# ~/.zshrc에 추가하면 기본값 변경
+export LIBVIRT_DEFAULT_URI=qemu:///session
+
+# 또는 매번 명시
+virsh --connect qemu:///session list --all
+```
+
+> 개발 서버처럼 root로 VM을 생성하면 `qemu:///system`에 등록되어 기본값으로 보임.
+
+---
+
 ### virsh console 활성화 (GUI 설치된 VM)
 
 GUI 모드로 설치된 VM은 virsh console 기본 불가. VM 내부에서 활성화:

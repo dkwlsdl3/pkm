@@ -89,6 +89,40 @@ sudo lfs df /mnt/lustre
 
 ---
 
+## 재부팅 후 수동 복구 절차
+
+fstab 미등록 상태에서 재부팅 후 매번 수행해야 하는 순서:
+
+```bash
+# 1. LNET 로드 및 NIC 설정
+sudo modprobe lnet
+sudo lnetctl lnet configure        # /etc/lnet.conf 적용
+sudo lctl list_nids                # 172.25.0.1@tcp 확인
+
+# lnet.conf가 파싱 실패하면 수동 추가
+sudo lnetctl net add --net tcp --if br-lnet
+
+# 2. Lustre 마운트
+sudo mount -t lustre 172.25.0.10@tcp:/lustrefs /mnt/lustre
+lfs df                             # MDT + OST 모두 출력 확인
+```
+
+> `lctl list_nids`에 아무것도 안 나오면 `/etc/lnet.conf`의 `net:` 최상위 키 확인 → [[lustre-troubleshooting]]
+
+---
+
+## fstab 자동 마운트 등록
+
+```bash
+# /etc/fstab 에 추가
+172.25.0.10@tcp:/lustrefs /mnt/lustre lustre defaults,_netdev 0 0
+```
+
+> [!WARNING]
+> 클라이언트 fstab에는 `_netdev` 사용 가능. 단, 서버 타겟(MDT/OST) fstab에는 `nofail` 사용 불가 — ldiskfs 미인식 → [[lustre-troubleshooting#서버-타겟-fstab-nofail-불가]]
+
+---
+
 ## 관련
 
 - [[lustre-overview]]
