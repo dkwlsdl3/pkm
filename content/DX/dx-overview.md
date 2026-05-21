@@ -42,3 +42,4 @@ created: 2026-05-13 (수)
 ## 언어 & 빌드
 
 - [[rust-cargo]] — Rust/Cargo 핵심 명령어, 크로스 컴파일, musl 빌드
+- [[rust-backend-troubleshooting]] — Rust/Tokio 백엔드 hung, DB 커넥션 풀 고갈, cleanup task 분리 진단
