@@ -45,7 +45,7 @@ network:
   bridges:
     br-lnet:
       addresses:
-        - 172.25.0.1/24
+        - <HOST_LNET_IP>/24
       parameters:
         stp: false
         forward-delay: 0
@@ -100,14 +100,14 @@ virt-install \
   --os-variant rhel8.0 \
   --network bridge=br-lnet,model=virtio \
   --location $HOME/iso/Rocky-8.10-x86_64-dvd1.iso \
-  --graphics vnc,listen=127.0.0.1
+  --graphics vnc,listen=localhost
 ```
 
 VNC 접속:
 ```bash
 sudo apt install -y tigervnc-viewer
 virsh vncdisplay <vm-name>   # 포트 확인
-vncviewer 127.0.0.1:5900
+vncviewer localhost:5900
 ```
 
 ---
@@ -167,7 +167,7 @@ grubby --update-kernel=ALL --args="console=ttyS0,115200n8"
 sudo sysctl -w net.ipv4.ip_forward=1
 
 # NAT 설정 (enp4s0 = 호스트 외부 인터페이스)
-sudo iptables -t nat -A POSTROUTING -s 172.25.0.0/24 -o enp4s0 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -s <LNET_CIDR> -o enp4s0 -j MASQUERADE
 sudo iptables -A FORWARD -i br-lnet -o enp4s0 -j ACCEPT
 sudo iptables -A FORWARD -i enp4s0 -o br-lnet -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
@@ -182,7 +182,7 @@ GUI 설치 후 네트워크가 저장되지 않은 경우:
 nmcli con mod enp1s0 ipv4.method manual \
   ipv4.addresses <IP>/24 \
   ipv4.gateway <GW> \
-  ipv4.dns 8.8.8.8 \
+  ipv4.dns <DNS_IP> \
   connection.autoconnect yes
 nmcli con up enp1s0
 ```

@@ -136,15 +136,15 @@ virsh --connect qemu:///session autostart oss2
 
 ```bash
 sudo lctl list_nids
-# 30.30.30.226@tcp  ← enp4s0 (외부망, 잘못됨)
-# 올바른 값: 172.25.0.1@tcp (br-lnet)
+# <UBUNTU_IP>@tcp  ← enp4s0 (외부망, 잘못됨)
+# 올바른 값: <HOST_LNET_IP>@tcp (br-lnet)
 ```
 
 **원인**: `/etc/lnet.conf`가 비어있거나 `net:` 최상위 키가 누락되면 LNET이 임의 NIC 선택. VM들이 br-lnet(172.25.0.x) 망 안에 있어서 외부망 IP로는 응답 도달 불가.
 
 VM 측 dmesg 증거:
 ```
-lustrefs-OST0000: Export already connecting from 30.30.30.226@tcp
+lustrefs-OST0000: Export already connecting from <UBUNTU_IP>@tcp
 ```
 
 **해결**:
@@ -153,13 +153,13 @@ sudo tee /etc/lnet.conf << 'EOF'
 net:
     - net type: tcp
       local NI(s):
-        - nid: 172.25.0.1@tcp
+        - nid: <HOST_LNET_IP>@tcp
           interfaces:
               0: br-lnet
 EOF
 # 이미 로드된 LNET에는 수동 적용
 sudo lnetctl net add --net tcp --if br-lnet
-sudo lctl list_nids  # 172.25.0.1@tcp 확인
+sudo lctl list_nids  # <HOST_LNET_IP>@tcp 확인
 ```
 
 > [!WARNING]
@@ -222,7 +222,7 @@ mount -a
 **해결**:
 ```bash
 # MDT 서버에서 recovery 강제 완료
-ssh root@172.25.0.3 "lctl set_param mdt.keeperfs-MDT0000.recovery_time_soft=0"
+ssh root@<MDS_IP> "lctl set_param mdt.keeperfs-MDT0000.recovery_time_soft=0"
 # 이후 클라이언트에서 마운트 재시도
 mount /mnt/lustre
 ```

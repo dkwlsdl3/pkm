@@ -15,8 +15,8 @@ created: 2026-05-13 (수)
 
 | 항목 | 내용 |
 |---|---|
-| Ubuntu PC | 30.30.30.226 (admin) |
-| MacBook Air | 30.30.30.237 (kth), macOS 14 Sonoma |
+| Ubuntu PC | <UBUNTU_IP> (admin) |
+| MacBook Air | <MAC_IP> (kth), macOS 14 Sonoma |
 
 기존에 Mac → Ubuntu 방향 SSH 키 인증은 설정되어 있었고,  
 이번에 반대 방향인 **Ubuntu → Mac** 키 인증을 추가 설정했다.
@@ -46,7 +46,7 @@ chmod 600 ~/.ssh/authorized_keys
 Ubuntu에서 Mac 호스트 키 등록:
 
 ```bash
-ssh-keyscan -H 30.30.30.237 >> ~/.ssh/known_hosts
+ssh-keyscan -H <MAC_IP> >> ~/.ssh/known_hosts
 ```
 
 ---
@@ -73,8 +73,8 @@ sudo launchctl start com.openssh.sshd
 
 ```bash
 # Ubuntu에서 테스트
-ssh -o BatchMode=yes kth@30.30.30.237 echo "키 인증 성공"   # ✅
-ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no kth@30.30.30.237  # Permission denied ✅
+ssh -o BatchMode=yes kth@<MAC_IP> echo "키 인증 성공"   # ✅
+ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no kth@<MAC_IP>  # Permission denied ✅
 ```
 
 ---

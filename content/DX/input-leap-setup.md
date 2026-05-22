@@ -42,7 +42,7 @@ created: 2026-05-12 (화)
 ```toml
 # Ubuntu: ~/.config/lan-mouse/config.toml
 [client.mac]
-hostname = "30.30.30.237"
+hostname = "<MAC_IP>"
 port = 4242
 position = "left"
 ```
@@ -50,7 +50,7 @@ position = "left"
 ```toml
 # Mac: ~/.config/lan-mouse/config.toml
 [client.ubuntu]
-hostname = "30.30.30.226"
+hostname = "<UBUNTU_IP>"
 port = 4242
 position = "right"
 ```
@@ -84,10 +84,10 @@ sudo systemctl enable --now ssh
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""
 
 # 공개키 Ubuntu에 등록
-ssh-copy-id admin@30.30.30.226
+ssh-copy-id admin@<UBUNTU_IP>
 ```
 
-이후 `ssh admin@30.30.30.226` 으로 비밀번호 없이 접속 가능.
+이후 `ssh admin@<UBUNTU_IP>` 으로 비밀번호 없이 접속 가능.
 
 ---
 
@@ -154,7 +154,7 @@ DISPLAY=:1 nohup input-leaps --config ~/.config/input-leap/input-leap.conf --no-
 ### Mac 클라이언트 실행
 
 ```bash
-input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon 30.30.30.226
+input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon <UBUNTU_IP>
 ```
 
 ### Mac 손쉬운 사용 권한
@@ -178,9 +178,9 @@ input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon 30.30.30.
 
 ```applescript
 try
-    do shell script "ssh admin@30.30.30.226 'pkill input-leaps 2>/dev/null; DISPLAY=:1 nohup /home/admin/bin/input-leaps --config ~/.config/input-leap/input-leap.conf --no-tray --disable-crypto > /tmp/input-leaps.log 2>&1 &'"
+    do shell script "ssh admin@<UBUNTU_IP> 'pkill input-leaps 2>/dev/null; DISPLAY=:1 nohup /home/admin/bin/input-leaps --config ~/.config/input-leap/input-leap.conf --no-tray --disable-crypto > /tmp/input-leaps.log 2>&1 &'"
     delay 2
-    do shell script "pkill input-leapc 2>/dev/null; /Users/kth/.local/bin/input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon 30.30.30.226 > /tmp/input-leapc.log 2>&1 &"
+    do shell script "pkill input-leapc 2>/dev/null; /Users/kth/.local/bin/input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon <UBUNTU_IP> > /tmp/input-leapc.log 2>&1 &"
     display dialog "Input Leap 시작됨 ✓" buttons {"확인"} default button "확인" with title "Input Leap"
 on error errMsg
     display dialog "오류: " & errMsg buttons {"확인"} default button "확인" with title "Input Leap"
@@ -191,7 +191,7 @@ end try
 
 ```applescript
 try
-    do shell script "pkill input-leapc 2>/dev/null; ssh admin@30.30.30.226 'pkill input-leaps 2>/dev/null'"
+    do shell script "pkill input-leapc 2>/dev/null; ssh admin@<UBUNTU_IP> 'pkill input-leaps 2>/dev/null'"
     display dialog "Input Leap 종료됨 ✓" buttons {"확인"} default button "확인" with title "Input Leap"
 on error errMsg
     display dialog "오류: " & errMsg buttons {"확인"} default button "확인" with title "Input Leap"
@@ -265,8 +265,8 @@ iBus 설정 → 한글 → 한영전환키 → Alt_R 추가
 
 | 항목 | 값 |
 |---|---|
-| Ubuntu IP | `30.30.30.226` (enp4s0) |
-| Mac IP | `30.30.30.237` (en0) |
+| Ubuntu IP | `<UBUNTU_IP>` (enp4s0) |
+| Mac IP | `<MAC_IP>` (en0) |
 | input-leap 포트 | `24800` (TCP) |
 
 ---

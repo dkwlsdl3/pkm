@@ -18,10 +18,10 @@ created: 2026-05-14 (목)
 물리 스위치 없이 호스트 내 VM/컨테이너들이 서로 통신하거나, 호스트 물리 인터페이스에 연결해 외부 네트워크와 직접 통신하게 만드는 장치.
 
 ```
-br-lnet (172.25.0.1/24)
-  ├── meta VM  (172.25.0.10)
-  ├── oss1 VM  (172.25.0.11)
-  └── oss2 VM  (172.25.0.12)
+br-lnet (<HOST_LNET_IP>/24)
+  ├── meta VM  (<MGS_IP>)
+  ├── oss1 VM  (<OSS1_IP>)
+  └── oss2 VM  (<OSS2_IP>)
 ```
 
 ---
@@ -36,7 +36,7 @@ network:
   bridges:
     br-lnet:
       addresses:
-        - 172.25.0.1/24
+        - <HOST_LNET_IP>/24
       parameters:
         stp: false       # VM 전용 내부망이므로 루프 없음 → STP 불필요
         forward-delay: 0 # STP 비활성화 시 딜레이도 0으로

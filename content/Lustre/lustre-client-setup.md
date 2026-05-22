@@ -97,13 +97,13 @@ fstab 미등록 상태에서 재부팅 후 매번 수행해야 하는 순서:
 # 1. LNET 로드 및 NIC 설정
 sudo modprobe lnet
 sudo lnetctl lnet configure        # /etc/lnet.conf 적용
-sudo lctl list_nids                # 172.25.0.1@tcp 확인
+sudo lctl list_nids                # <HOST_LNET_IP>@tcp 확인
 
 # lnet.conf가 파싱 실패하면 수동 추가
 sudo lnetctl net add --net tcp --if br-lnet
 
 # 2. Lustre 마운트
-sudo mount -t lustre 172.25.0.10@tcp:/lustrefs /mnt/lustre
+sudo mount -t lustre <MGS_IP>@tcp:/lustrefs /mnt/lustre
 lfs df                             # MDT + OST 모두 출력 확인
 ```
 
@@ -115,7 +115,7 @@ lfs df                             # MDT + OST 모두 출력 확인
 
 ```bash
 # /etc/fstab 에 추가
-172.25.0.10@tcp:/lustrefs /mnt/lustre lustre defaults,_netdev 0 0
+<MGS_IP>@tcp:/lustrefs /mnt/lustre lustre defaults,_netdev 0 0
 ```
 
 > [!WARNING]

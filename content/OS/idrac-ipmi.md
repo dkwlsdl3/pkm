@@ -31,15 +31,15 @@ created: 2026-05-14 (목)
 sudo apt install -y ipmitool
 
 sudo ipmitool lan set 1 ipsrc static
-sudo ipmitool lan set 1 ipaddr 30.30.99.201
-sudo ipmitool lan set 1 netmask 255.255.255.0
-sudo ipmitool lan set 1 defgw ipaddr 30.30.99.1
+sudo ipmitool lan set 1 ipaddr <IDRAC_IP>
+sudo ipmitool lan set 1 netmask <NETMASK>
+sudo ipmitool lan set 1 defgw ipaddr <GATEWAY_IP>
 
 # 설정 확인
 sudo ipmitool lan print 1 | grep -E "IP Address|Gateway"
 ```
 
-설정 후 브라우저에서 `http://30.30.99.201` 접속 → iDRAC 웹 인터페이스.
+설정 후 브라우저에서 `http://<IDRAC_IP>` 접속 → iDRAC 웹 인터페이스.
 
 ---
 

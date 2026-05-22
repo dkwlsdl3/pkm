@@ -15,6 +15,7 @@ created: 2026-05-13 (수)
 ## 네트워크 & 원격 접속
 
 - [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향), SSH config alias
+- [[dns-hosts-emergency-bypass]] — DNS 장애 시 hosts 파일로 사내 서비스 도메인 긴급 우회
 - [[iptables-nat]] — NAT/MASQUERADE 설정, VM 인터넷 연결
 - [[network-bridge]] — 가상 브리지 설정, STP, QEMU ACL
 - [[vpn-tailscale]] — VPN 작동 원리, 분할/전체 터널링, Tailscale Mesh VPN
