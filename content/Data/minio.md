@@ -50,7 +50,7 @@ wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
 
 # 실행
-MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password \
+MINIO_ROOT_USER=<MINIO_ROOT_USER> MINIO_ROOT_PASSWORD=<MINIO_ROOT_PASSWORD> \
   ./minio server /data --console-address ":9001"
 ```
 

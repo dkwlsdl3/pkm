@@ -144,7 +144,7 @@ const request = new RequestBuilder()
     .setUrl("https://api.example.com/users")
     .setMethod("POST")
     .setHeader("Content-Type", "application/json")
-    .setHeader("Authorization", "Bearer token123")
+    .setHeader("Authorization", "Bearer <TOKEN>")
     .setBody({ name: "홍길동", email: "hong@example.com" })
     .build();
 ```

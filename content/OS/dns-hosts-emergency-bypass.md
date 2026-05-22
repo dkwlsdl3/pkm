@@ -18,7 +18,7 @@ created: 2026-05-22 (금)
 
 - 현상: ERP, Git, Wiki 등 사내 서비스 도메인 접속 불가
 - 영향: 사내 네트워크 연결 여부와 무관하게 도메인 기반 서비스 접근 실패
-- 핵심 원인: `vazil.me` 도메인의 네임서버 또는 DNS 레코드가 잘못된 외부 호스팅 서버를 가리킴
+- 핵심 원인: `xxx.me`도메인의 네임서버 또는 DNS 레코드가 잘못된 외부 호스팅 서버를 가리킴
 - 서버 상태: 실제 웹 서버와 네트워크 인프라는 공인 IP `<SERVICE_PUBLIC_IP>`에서 정상 동작
 
 IP 직접 접속이 실패하는 이유는 Nginx가 도메인 이름과 SSL 인증서 일치를 기준으로 요청을 처리하기 때문이다. 브라우저에 IP만 입력하면 인증서 불일치 또는 virtual host 매칭 실패로 차단될 수 있다.
@@ -36,7 +36,7 @@ sudo nano /etc/hosts
 아래 매핑을 파일 하단에 추가한다.
 
 ```text
-<SERVICE_PUBLIC_IP> works.vazil.me git.vazil.me wiki.vazil.me synapse.vazil.me repo.vazil.me
+<SERVICE_PUBLIC_IP> works.xxx.me git.xxx.me wiki.xxx.me repo.xxx.me
 ```
 
 저장 후 원래 서비스 주소로 다시 접속한다.
@@ -50,7 +50,7 @@ sudo nano /etc/hosts
 3. 파일 하단에 아래 매핑을 추가하고 저장한다.
 
 ```text
-<SERVICE_PUBLIC_IP> works.vazil.me git.vazil.me wiki.vazil.me
+<SERVICE_PUBLIC_IP> works.xxx.me git.xxx.me wiki.xxx.me
 ```
 
 ---

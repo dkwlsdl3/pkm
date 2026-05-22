@@ -119,10 +119,10 @@ const result = execSync(
 ## 환경변수 (.env.test)
 
 ```bash
-KEEPER_ADMIN_EMAIL=admin@keeper.me
-KEEPER_ADMIN_PASSWORD=          # 필수
+KEEPER_ADMIN_EMAIL=<ADMIN_EMAIL>
+KEEPER_ADMIN_PASSWORD=<ADMIN_PASSWORD>
 BASE_URL=http://localhost:3000
-KEEPER_DB_URL=postgres://postgres:postgres@localhost:5432/postgres
+KEEPER_DB_URL=postgres://<DB_USER>:<DB_PASSWORD>@localhost:5432/<DB_NAME>
 ```
 
 ---

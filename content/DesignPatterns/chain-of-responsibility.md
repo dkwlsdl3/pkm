@@ -107,7 +107,7 @@ class AuthHandler(Handler):
     def _process(self, request: Request) -> Optional[Response]:
         if not request.token:
             return Response(401, "인증 토큰 없음")
-        if request.token != "valid_token":
+        if request.token != "<VALID_TOKEN>":
             return Response(401, "유효하지 않은 토큰")
         request.user = {"id": request.user_id, "role": "user"}
         return None  # 다음으로
@@ -142,7 +142,7 @@ validation = ValidationHandler()
 auth.set_next(rate_limit).set_next(validation)
 
 # 사용
-req = Request(token="valid_token", user_id="u1", body={"data": "..."})
+req = Request(token="<VALID_TOKEN>", user_id="u1", body={"data": "..."})
 response = auth.handle(req)
 print(f"{response.status}: {response.body}")
 ```
