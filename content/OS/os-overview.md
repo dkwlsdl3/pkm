@@ -35,6 +35,7 @@ created: 2026-05-13 (수)
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
+- [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
 
 ---
 

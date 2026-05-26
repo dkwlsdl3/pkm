@@ -133,7 +133,11 @@ virsh --connect qemu:///session list --all
 
 ### qemu:///session vs qemu:///system
 
-virsh 기본 연결 대상은 `qemu:///system`. admin 유저로 생성한 VM은 `qemu:///session`에 등록되어 기본값으로는 안 보임.
+| | session | system |
+|---|---|---|
+| QEMU 프로세스 권한 | 사용자 권한 | root 권한 |
+| `/dev/zvol/` 접근 | 불가 | 가능 |
+| 기본값 | X | O |
 
 ```bash
 # ~/.zshrc에 추가하면 기본값 변경
@@ -143,7 +147,39 @@ export LIBVIRT_DEFAULT_URI=qemu:///session
 virsh --connect qemu:///session list --all
 ```
 
-> 개발 서버처럼 root로 VM을 생성하면 `qemu:///system`에 등록되어 기본값으로 보임.
+### session → system 마이그레이션
+
+zvol attach 등 root 권한이 필요한 작업 시 system으로 이전 필요.
+
+```bash
+# 1. 기존 session VM XML dump
+virsh -c qemu:///session dumpxml <vm> > /tmp/<vm>.xml
+
+# 2. session VM 종료 및 제거
+virsh -c qemu:///session destroy <vm>
+virsh -c qemu:///session undefine <vm>
+
+# 3. system에 등록 및 시작
+virsh -c qemu:///system define /tmp/<vm>.xml
+virsh -c qemu:///system start <vm>
+```
+
+### qemu.conf 설정
+
+system QEMU가 사용자 홈 디렉토리의 qcow2 이미지에 접근하려면 `/etc/libvirt/qemu.conf` 수정 필요.
+
+```
+user = "admin"
+group = "libvirt"
+dynamic_ownership = 0
+```
+
+- `user = "admin"`: `/home/admin/vms/` 하위 qcow2 이미지 접근 허용
+- `dynamic_ownership = 0`: 기존 파일 소유권 변경 방지
+
+```bash
+sudo systemctl restart libvirtd
+```
 
 ---
 
@@ -189,7 +225,29 @@ nmcli con up enp1s0
 
 ---
 
+---
+
+## scsi_debug — 개발환경 가상 디스크 생성
+
+실제 디스크 없이 풀 생성 테스트 등에 사용. 커널 모듈로 가상 SCSI 디스크를 만들어 `/dev/sdX`로 노출.
+
+```bash
+# 가상 디스크 4개 생성 (각 512MB)
+sudo modprobe scsi_debug num_tgts=4 dev_size_mb=512 sector_size=512
+
+# /dev/sdX 형태로 자동 인식됨
+lsblk
+
+# 제거
+sudo modprobe -r scsi_debug
+```
+
+> monitoring-daemon이 5초 주기로 sysfs를 스캔하므로 생성/제거 시 자동 감지됨.
+
+---
+
 ## 관련
 
 - [[ssh-key-auth]]
 - [[lustre-overview]]
+- [[smartctl]]
