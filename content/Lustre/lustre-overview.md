@@ -40,7 +40,7 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 
 - [[lustre-server-setup]] — EL8 기준 서버 설치 및 포맷 (MGS/MDT/OST)
 - [[lustre-client-setup]] — Ubuntu 클라이언트 설치 및 커널 버전 제약
-- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트
+- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트, Lustre 노드 식별 컬럼 기반 전환
 
 ---
 

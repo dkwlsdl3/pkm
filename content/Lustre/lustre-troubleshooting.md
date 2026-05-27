@@ -234,3 +234,35 @@ mount /mnt/lustre
 - [[lustre-overview]]
 - [[lustre-server-setup]]
 - [[lustre-client-setup]]
+
+---
+
+## Lustre 노드 식별 — VM 이름 패턴 의존 금물
+
+**배경**: VM 이름 LIKE 패턴(`keeper-%meta%`, `keeper-%oss%`)으로 Lustre 노드를 식별하면 일반 VM 추가 시 오인식 위험.
+
+**해결**: DB 테이블에 전용 컬럼 추가로 명시적 식별.
+
+```sql
+-- migration: infra_owners_info 테이블에 컬럼 추가
+ALTER TABLE infra_owners_info
+  ADD COLUMN is_lustre_node BOOLEAN NOT NULL DEFAULT FALSE,
+  ADD COLUMN lustre_role TEXT;
+
+-- 기존 데이터 백필
+UPDATE infra_owners_info SET is_lustre_node = TRUE, lustre_role = 'mgs_mdt'
+  WHERE vm_name LIKE '%meta%';
+UPDATE infra_owners_info SET is_lustre_node = TRUE, lustre_role = 'oss'
+  WHERE vm_name LIKE '%oss%';
+```
+
+**쿼리 변경**:
+```rust
+// 변경 전 (패턴 의존 — 취약)
+WHERE vm_name LIKE 'keeper-%meta%' OR vm_name LIKE 'keeper-%oss%'
+
+// 변경 후 (컬럼 기반 — 명시적)
+WHERE is_lustre_node = TRUE
+```
+
+> 운영 서버 적용 시 migration 실행 필수 (is_lustre_node/lustre_role 컬럼 추가).

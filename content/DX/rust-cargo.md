@@ -75,3 +75,23 @@ strip = true   # 디버그 심볼 제거 → 바이너리 크기 축소
 
 - [[musl-static-binary]]
 - [[dx-overview]]
+
+---
+
+## rustfmt.toml — 포맷 설정
+
+```toml
+# rustfmt.toml (프로젝트 루트)
+edition = "2024"
+max_width = 100
+```
+
+```bash
+# 전체 적용
+cargo fmt
+
+# 확인만 (변경 없음)
+cargo fmt --check
+```
+
+> `edition = "2024"` 지정 시 최신 Rust edition 포맷 규칙 적용. `max_width = 100`은 기본값(80)보다 넓어 긴 타입 체인에 유리.

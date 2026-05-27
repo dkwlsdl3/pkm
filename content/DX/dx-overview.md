@@ -43,3 +43,9 @@ created: 2026-05-13 (수)
 
 - [[rust-cargo]] — Rust/Cargo 핵심 명령어, 크로스 컴파일, musl 빌드
 - [[rust-backend-troubleshooting]] — Rust/Tokio 백엔드 hung, DB 커넥션 풀 고갈, cleanup task 분리 진단
+
+## 패키지 매니저
+
+- [[pnpm]] — npm 대체 패키지 매니저, 하드링크 기반 디스크 절약, pnpm-workspace.yaml allowBuilds 설정
+- [[uv]] — Rust 기반 Python 패키지 매니저, pyproject.toml + uv.lock 재현성 보장
+- [[nuxt-tooling]] — Nuxt 타입체크(nuxi typecheck) · ESLint(@nuxt/eslint) · 번들 최적화 설정
