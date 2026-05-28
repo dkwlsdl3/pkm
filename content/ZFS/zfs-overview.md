@@ -15,6 +15,7 @@ created: 2026-05-18 (월)
 ## 핵심 개념
 
 - [[zfs]] — COW 원리, Snapshot, RAID-Z, 4대 운영 수칙
+- [[zfs-snapshot-clone-dependency]] — 스냅샷 삭제 전 종속 클론 확인 패턴
 
 ---
 

@@ -31,6 +31,7 @@ created: 2026-05-13 (수)
 ### 데이터베이스
 - [[duckdb]] — 로컬 환경 경량 분석 엔진
 - [[vector-db]] — LLM/AI용 벡터 데이터베이스
+- [[postgres-logical-backup]] — `pg_dump`, `psql` 기반 PostgreSQL 백업/복원 패턴
 
 ### 변환 & 오케스트레이션
 - [[dbt]] — SQL 기반 데이터 변환 표준 툴
