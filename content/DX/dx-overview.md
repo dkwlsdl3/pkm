@@ -35,6 +35,10 @@ created: 2026-05-13 (수)
 - [[gitlab-cicd]] — .gitlab-ci.yml 구조, GitLab Runner, 단계별 파이프라인
 - [[playwright-e2e]] — E2E 테스트 환경 구성, storageState 인증 재사용, project 분리 패턴
 
+## 버전 관리
+
+- [[git-workflow]] — git mv/rm 자동 staging 주의, 도메인 분리 커밋, soft reset로 섞인 커밋 풀기
+
 ## 레포지토리 전략
 
 - [[monorepo]] — 모노레포 vs 멀티레포 비교, Turborepo / Nx, Git 서브모듈 방식
