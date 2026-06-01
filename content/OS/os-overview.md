@@ -37,6 +37,10 @@ created: 2026-05-13 (수)
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
 - [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
 
+## 스토리지 & 마운트
+
+- [[fstab-uuid-mount]] — fstab은 UUID로(raw 디바이스명 금지), NVMe 디바이스명 변동·`nofail` 함정
+
 ---
 
 ## 관련

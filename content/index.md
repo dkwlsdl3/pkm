@@ -9,7 +9,9 @@ title: kth's PKM
 ## 도메인
 
 - [[AI/ai-overview|AI]] — Claude Code, LLM, 워크플로우 도구
+- [[AWS/aws-overview|AWS]] — EC2, SSM 접속, 인프라 트러블슈팅
 - [[Data/data-engineering-overview|Data Engineering]] — ETL/ELT, DW, 스트리밍, 오케스트레이션
+- [[Docker/docker-overview|Docker]] — 데몬 운영, 이미지 빌드 트러블슈팅
 - [[DX/dx-overview|DX]] — 터미널, dotfiles, 키보드 설정
 - [[Lustre/lustre-overview|Lustre]] — HPC 분산 파일시스템
 - [[OS/os-overview|OS]] — KVM, SSH, 서버 관리
