@@ -1,0 +1,24 @@
+---
+title: Rust 개요 (MOC)
+tags:
+  - tech
+  - moc
+created: 2026-06-04 (목)
+---
+
+# Rust 개요 (MOC)
+
+> Rust 언어 — 함정, 패턴, 트러블슈팅 모음
+
+---
+
+## 노트
+
+- [[sqlx-timestamptz-string-decode]] — TIMESTAMPTZ를 `Option<String>`으로 받으면 조용히 None이 되는 함정
+- [[fs-copy-self-overwrite]] — `fs::copy` src==dst 자기 덮어쓰기 위험 + `(n)` 넘버링 방어 패턴
+
+---
+
+## 관련
+
+- [[lustre-overview]] — Lustre 백엔드(actix-web)에서 만난 사례들
