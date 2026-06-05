@@ -16,6 +16,7 @@ created: 2026-06-04 (목)
 
 - [[sqlx-timestamptz-string-decode]] — TIMESTAMPTZ를 `Option<String>`으로 받으면 조용히 None이 되는 함정
 - [[fs-copy-self-overwrite]] — `fs::copy` src==dst 자기 덮어쓰기 위험 + `(n)` 넘버링 방어 패턴
+- [[embedded-script-contract-tests]] — 코드가 생성하는 셸 스크립트/systemd unit 문자열의 운영 계약을 단위테스트로 고정하는 패턴
 
 ---
 

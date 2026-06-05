@@ -40,6 +40,7 @@ created: 2026-05-13 (수)
 ## 스토리지 & 마운트
 
 - [[fstab-uuid-mount]] — fstab은 UUID로(raw 디바이스명 금지), NVMe 디바이스명 변동·`nofail` 함정
+- [[systemd-automount-watchdog]] — automount 환경 마운트 watchdog: mountpoint+timeout stat, stale 복구, hang 방어
 
 ---
 
