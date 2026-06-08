@@ -33,6 +33,7 @@ created: 2026-05-13 (수)
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴
 - [[gitlab-cicd]] — .gitlab-ci.yml 구조, GitLab Runner, 단계별 파이프라인
+- [[gitlab-npm-package-registry]] — GitLab npm package registry를 scope registry와 token 인증으로 안전하게 쓰는 패턴
 - [[playwright-e2e]] — E2E 테스트 환경 구성, storageState 인증 재사용, project 분리 패턴
 - [[playwright-mcp-session-persistence]] — Playwright MCP에서 세션 쿠키 기반 로그인을 storageState로 유지하는 패턴
 - [[agent-skill-sharing-symlink]] — Claude Code·Codex 같은 에이전트 도구가 같은 스킬을 심링크로 공유하는 방식
