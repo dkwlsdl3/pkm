@@ -60,4 +60,7 @@ created: 2026-05-13 (수)
 
 - [[pnpm]] — npm 대체 패키지 매니저, 하드링크 기반 디스크 절약, pnpm-workspace.yaml allowBuilds 설정
 - [[uv]] — Rust 기반 Python 패키지 매니저, pyproject.toml + uv.lock 재현성 보장
-- [[nuxt-tooling]] — Nuxt 타입체크(nuxi typecheck) · ESLint(@nuxt/eslint) · 번들 최적화 설정
+
+## CLI
+
+- [[keeper-transfer-cli]] — `keeper transfer push` 범용 전송 명령, 장애 대응 옵션, 대용량/다량 파일 검증 패턴
