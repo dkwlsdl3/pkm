@@ -14,7 +14,7 @@ created: 2026-05-13 (수)
 
 ## Claude Code
 
-- [[claude-code-setup]] — OMC · 전역 스킬 · Karpathy 원칙 · savelog · dotfiles 세팅 전체 가이드
+- [[claude-code-setup]] — Claude Code 전역 지침과 기본 개발 원칙 정리
 
 ## 도구 비교 & 선택
 
@@ -27,7 +27,7 @@ created: 2026-05-13 (수)
 ## 프롬프트 & 컨텍스트
 
 - [[context-engineering]] — CLAUDE.md 최적화 원칙, 비자명 정보만 넣는 컨텍스트 엔지니어링
-- [[ai-agent-spec-and-session-log-ops]] — AI agent 명세, 세션 로그, dotfiles, cass 운영 원칙과 팀원 온보딩 기준
+- [[ai-agent-spec-and-session-log-ops]] — AI agent 명세, 세션 로그, cass 운영 원칙과 팀원 온보딩 기준
 
 ## ML 엔지니어링
 

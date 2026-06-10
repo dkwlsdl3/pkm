@@ -17,7 +17,7 @@ created: 2026-06-10 (수)
 
 - **무엇인가**: AI coding agent에게 줄 명세, 작업 커서, 결정 기록, 세션 로그를 분리해서 운영하는 방식
 - **왜 쓰는가**: agent가 이전 맥락을 다시 묻거나, 이미 실패한 접근을 반복하거나, 서로 다른 규칙으로 작업하는 문제를 줄이기 위해
-- **언제 쓰는가**: Codex와 Claude Code를 함께 쓰거나, 나중에 팀원이 같은 agent 운영 체계에 합류할 때
+- **언제 쓰는가**: Codex와 Claude Code 같은 AI coding agent를 프로젝트에 도입하거나, 나중에 팀원이 같은 운영 방식에 합류할 때
 
 ---
 
@@ -68,27 +68,9 @@ AI agent 작업에서는 이 과정이 특히 중요하다.
 
 원칙:
 
-- 프로젝트 도메인 지식과 작업 상태는 dotfiles에 넣지 않는다.
+- 프로젝트 도메인 지식과 작업 상태는 개인 환경 설정에 넣지 않는다.
 - 전역 memory에만 넣으면 다른 agent나 다른 PC에서 보장되지 않는다.
 - agent가 자동으로 읽는 파일은 짧고 강하게 유지한다.
-
-### 전역 dotfiles에 둘 것
-
-전역 dotfiles는 여러 PC와 여러 agent가 공유할 기본값을 관리한다.
-
-| 위치 | 역할 |
-|---|---|
-| `dotfiles/codex/AGENTS.md` | Codex 전역 기본 규칙 |
-| `dotfiles/claude/CLAUDE.md` | Claude Code 전역 기본 규칙 |
-| `dotfiles/agents/skills/` | 공용 skill 원본 |
-| `dotfiles/agents/hooks/` | 공용 hook script |
-| `dotfiles/docs/agent-sync-map.md` | symlink map과 drift rule |
-
-원칙:
-
-- 공통 행동 규칙은 dotfiles에 둔다.
-- 특정 프로젝트의 현재 상태는 각 repo에 둔다.
-- `~/.codex`, `~/.claude`, `~/.agents`는 dotfiles 원본을 symlink로 바라보게 한다.
 
 ---
 
@@ -121,7 +103,7 @@ cass index
 
 도입 기준:
 
-- PR이나 Works 태스크에 "이 agent가 어떻게 판단했는지" 링크를 붙이고 싶다.
+- PR이나 이슈에 "이 agent가 어떻게 판단했는지" 링크를 붙이고 싶다.
 - 신규 팀원이 좋은 agent 세션을 보고 학습해야 한다.
 - 여러 사람의 세션 로그를 검색/공유해야 한다.
 - 로컬 cass 검색만으로는 협업 맥락 전달이 부족하다.
@@ -145,17 +127,9 @@ cass index
 원본 세션 검색
   -> cass
 
-전역 agent 규칙과 공용 skill 동기화
-  -> dotfiles
-
-업무/PKM용 일일 작업 정리
-  -> savelog -> obsidian-import -> Works 업무일지 참고
 ```
 
 주의할 점:
-
-- `savelog`는 세션 로그 저장 도구가 아니다.
-- `savelog`는 오늘 git 작업/커밋을 Markdown으로 정리해서 Obsidian과 업무일지에 재사용하기 위한 도구다.
 - 세션 원본 검색은 `cass`, 프로젝트 인계는 `agent-brief`, 장기 결정은 `ADR`이 맡는다.
 
 ---
@@ -164,11 +138,10 @@ cass index
 
 팀원이 추가되면 다음 순서로 공유한다.
 
-1. dotfiles private repo 접근 권한 부여
-2. `~/dotfiles/install.sh`로 Codex/Claude 전역 설정과 공용 skill symlink 구성
-3. 프로젝트 repo의 `AGENTS.md`, `CLAUDE.md`, `docs/agent-brief.md`, `TODO.md`, `docs/adr/` 읽기
-4. cass 설치 및 `cass index`로 기존 세션 검색 가능하게 만들기
-5. 세션 공유가 필요해지면 claudebin/claude-code-share 또는 viewer 계열 도구 검토
+1. 프로젝트 repo의 `AGENTS.md`, `CLAUDE.md`, `docs/agent-brief.md`, `TODO.md`, `docs/adr/` 읽기
+2. 현재 작업의 기준 branch, base commit, active task를 확인하기
+3. cass 설치 및 `cass index`로 본인 로컬 세션을 검색 가능하게 만들기
+4. 팀 차원의 세션 공유가 필요해지면 claudebin/claude-code-share 또는 viewer 계열 도구 검토
 
 ---
 
@@ -177,6 +150,5 @@ cass index
 - [[ai-overview]]
 - [[context-engineering]]
 - [[ai-workflow-tools]]
-- [[agent-skill-sharing-symlink]]
 - https://wikidocs.net/329525
 - https://wikidocs.net/329393
