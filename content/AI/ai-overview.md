@@ -27,6 +27,7 @@ created: 2026-05-13 (수)
 ## 프롬프트 & 컨텍스트
 
 - [[context-engineering]] — CLAUDE.md 최적화 원칙, 비자명 정보만 넣는 컨텍스트 엔지니어링
+- [[ai-agent-spec-and-session-log-ops]] — AI agent 명세, 세션 로그, dotfiles, cass 운영 원칙과 팀원 온보딩 기준
 
 ## ML 엔지니어링
 
