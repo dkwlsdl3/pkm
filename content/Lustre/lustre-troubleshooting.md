@@ -112,6 +112,43 @@ sudo systemctl enable lustre-mount.service
 
 **부팅 순서:** 호스트 부팅 → (VM 자동 시작) → `lustre-mount.service` → MGS ping 대기 → 마운트
 
+### 대안: fstab x-systemd.automount (스크립트 불필요)
+
+ping 대기 스크립트 없이 fstab 옵션만으로 같은 문제를 푸는 패턴 (keeper-config가 쓰는 방식):
+
+```
+<MGS_IP>@tcp:/<fsname> /mnt/lustre lustre defaults,_netdev,flock,nofail,noauto,x-systemd.automount,x-systemd.requires=lnet.service,x-systemd.mount-timeout=300 0 0
+```
+
+- `noauto` + `x-systemd.automount`: 부팅 시 즉시 마운트하지 않고 첫 접근 시 트리거, 최대 300초 대기
+- 마운트에 의존하는 서비스는 drop-in(`/etc/systemd/system/<svc>.service.d/*.conf`)에 `[Unit] RequiresMountsFor=/mnt/lustre`를 넣어 마운트 전 시작을 차단
+- 기능은 ping 대기 스크립트와 동등. 차이는 기다리는 동안 콘솔에 LustreError가 찍힌다는 것뿐
+
+---
+
+## 부팅 직후 mds_connect rc=-16/-5 노이즈 — 레이스 vs 실제 장애
+
+**증상** (MGS/MDS가 같은 호스트 위 VM일 때 부팅 직후 콘솔 폭주):
+
+```
+LustreError: 11-0: <fsname>-MDT0000-mdc-...: operation mds_connect to node <MGS_IP>@tcp failed: rc = -16
+LustreError: (super25.c:183:lustre_fill_super()) llite: Unable to mount <unknown>: rc = -5
+LustreError: 15c-8: MGC<MGS_IP>@tcp: Configuration from log <fsname>-client failed from MGS -5
+```
+
+- `rc = -16` (EBUSY): MDS가 응답은 하지만 아직 기동/recovery 중
+- `rc = -5` (EIO): MGS 설정 로그 수신 실패 — VM 또는 VM 쪽 LNet이 아직 안 떠 있음
+
+**원인**: 호스트의 자동 마운트 시도가 VM(MGS/MDS) 부팅 완료보다 빠른 레이스. 호스트 OS가 VM보다 먼저 뜨므로 매 부팅 수 분간 나올 수 있는 정상 노이즈.
+
+**판별법**: 마지막 에러 타임스탬프와 현재 상태를 비교 — 에러가 멈췄고 마운트가 살아 있으면 조치 불요(자가 회복).
+
+```bash
+journalctl -b -k | grep LustreError | tail   # 마지막 에러 시각
+mount -t lustre && lfs df                    # 현재 마운트·MDT/OST 상태
+virsh list --all                             # MGS/OSS VM 기동 여부
+```
+
 ---
 
 ## user session VM autostart (qemu:///session)

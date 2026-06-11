@@ -40,7 +40,7 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 
 - [[lustre-server-setup]] — EL8 기준 서버 설치 및 포맷 (MGS/MDT/OST)
 - [[lustre-client-setup]] — Ubuntu 클라이언트 설치 및 커널 버전 제약
-- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트, Lustre 노드 식별 컬럼 기반 전환
+- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트(ping 스크립트·automount 패턴), 부팅 레이스 rc=-16/-5 판별, Lustre 노드 식별 컬럼 기반 전환
 - [[project-quota-semantics]] — 프로젝트 쿼터 inode 집계(루트 포함)·mv 후 project ID 잔류·setquota 단위 함정
 
 ---
