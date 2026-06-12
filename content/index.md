@@ -15,6 +15,7 @@ title: kth's PKM
 - [[DX/dx-overview|DX]] — 터미널, dotfiles, 키보드 설정
 - [[Frontend/frontend-overview|Frontend]] — Vue/Nuxt, UI 패턴, 이벤트 처리
 - [[Lustre/lustre-overview|Lustre]] — HPC 분산 파일시스템
+- [[Network/network-overview|Network]] — 물리 링크·스위치·NIC 진단과 구성
 - [[OS/os-overview|OS]] — KVM, SSH, 서버 관리
 - [[Rust/rust-overview|Rust]] — 언어 함정, sqlx, 파일시스템 패턴
 - [[DesignPatterns/design-patterns-overview|Design Patterns]] — GoF 패턴, 아키텍처 패턴

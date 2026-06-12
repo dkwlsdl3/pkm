@@ -36,6 +36,7 @@ created: 2026-05-13 (수)
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
 - [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
+- [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset, r refresh, 설치 소스 의미
 
 ## 스토리지 & 마운트
 
@@ -47,4 +48,5 @@ created: 2026-05-13 (수)
 ## 관련
 
 - [[lustre-overview]] — Lustre 파일시스템 (KVM VM 기반 테스트 환경)
+- [[network-overview]] — 물리 링크·스위치·NIC 진단과 구성
 - [[dx-overview]]

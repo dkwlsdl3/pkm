@@ -15,6 +15,7 @@ created: 2026-05-13 (수)
 ## 터미널 & 에디터
 
 - [[terminal-setup]] — WezTerm · zsh · oh-my-zsh · starship · nvim(LazyVim) 전체 스택 설치 가이드
+- [[mouse-reporting-leak]] — TUI 종료 후 마우스 이스케이프 누수, reset/printf 복구
 
 ## 설정 파일 관리
 
@@ -60,7 +61,3 @@ created: 2026-05-13 (수)
 
 - [[pnpm]] — npm 대체 패키지 매니저, 하드링크 기반 디스크 절약, pnpm-workspace.yaml allowBuilds 설정
 - [[uv]] — Rust 기반 Python 패키지 매니저, pyproject.toml + uv.lock 재현성 보장
-
-## CLI
-
-- [[keeper-transfer-cli]] — `keeper transfer push` 범용 전송 명령, 장애 대응 옵션, 대용량/다량 파일 검증 패턴
