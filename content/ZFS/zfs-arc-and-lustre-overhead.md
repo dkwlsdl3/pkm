@@ -22,7 +22,7 @@ created: 2026-06-18 (목)
 
 ### 1. ARC 캐시 착시
 - ZFS ARC = RAM 캐시. **측정 데이터셋이 ARC보다 작으면 read가 메모리 성능으로 나옴**
-- 예: R740 ARC 최대 **31GB**인데 `FIO_SIZE=4G` → 통째로 캐시 → read 1~2GB/s 착시
+- 예: ARC 최대 **31GB**인 환경에서 `FIO_SIZE=4G` → 통째로 캐시 → read 대역폭이 디스크가 아닌 메모리 속도로 착시
 - 차단법(안전순): **데이터셋을 ARC보다 크게** (예: 16G/job × 4 = 64G > 31G) > direct=1 > cold/warm 분리
 - **ARC 강제 flush는 금지** — drop_caches처럼 안전한 표준이 없고, 31GB evict는 운영 영향
 
@@ -32,7 +32,7 @@ created: 2026-06-18 (목)
 
 ### 3. 다층 스택 오버헤드
 ```
-Lustre client → LNet → OSS VM → virtio → /dev/zvol/ostN → ZFS raidz1 → PERC → HDD
+Lustre client → LNet → OSS VM → virtio → /dev/zvol/ostN → ZFS raidz1 → RAID 컨트롤러(HBA) → HDD
                                           (+ VM 안에서 zvol을 또 OST로 포맷 = COW 한 겹 더)
 ```
 - zvol 자체가 ZFS COW인데 그 위 VM이 또 파일시스템 → **COW/저널 이중** 가능 → tail latency 구조적 후보

@@ -13,7 +13,7 @@ created: 2026-06-18 (목)
 ## 개요
 
 - **무엇인가**: glibc 호스트(Ubuntu)에서 Rocky 배포용 musl 정적 바이너리를 빌드할 때 C 라이브러리 의존(`*-sys` crate) 문제
-- **왜 쓰는가**: keeper 컴포넌트를 musl static으로 빌드해 glibc 버전 불일치 없이 배포
+- **왜 쓰는가**: Rust 컴포넌트를 musl static으로 빌드해 glibc 버전 불일치 없이 배포
 - **언제 쓰는가**: `cargo build --release --target x86_64-unknown-linux-musl`이 `*-sys`에서 실패할 때
 
 ---
@@ -32,7 +32,7 @@ openssl = { version = "0.10", features = ["vendored"] }
 ### 2. libzfs-sys → 로컬 musl 빌드 사실상 불가
 - `libzfs-sys`/`libzetta-zfs-core-sys`/`nvpair-sys`(ZFS 라이브러리 바인딩)는 **시스템 libzfs를 링크**
 - ZFS는 glibc 의존이 깊어 **musl 정적 크로스빌드가 사실상 불가**
-- → monitoring-daemon·node-manager처럼 ZFS 바인딩이 있는 컴포넌트는 **CI 빌드서버(전용 musl+ZFS 환경)에서 빌드**해야 함
+- → ZFS 라이브러리에 의존하는 컴포넌트는 **CI 빌드서버(전용 musl+ZFS 환경)에서 빌드**해야 함
 
 ### 3. 진단 순서
 ```bash

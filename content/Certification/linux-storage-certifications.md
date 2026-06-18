@@ -6,7 +6,7 @@ created: 2026-06-18 (목)
 
 # Linux·스토리지 엔지니어링 자격증 로드맵
 
-> **TL;DR**: Lustre/ZFS 단일노드 운영·테스트 프로젝트에 직접 도움 되는 순서 — 실습형 Linux(LFCS/RHCSA) 우선, 그다음 Linux+, RHCE/Ansible, CKA.
+> **TL;DR**: Lustre/ZFS·리눅스 서버 운영·테스트에 직접 도움 되는 순서 — 실습형 Linux(LFCS/RHCSA) 우선, 그다음 Linux+, RHCE/Ansible, CKA.
 
 ---
 
@@ -23,14 +23,14 @@ created: 2026-06-18 (목)
 ### 1순위: LFCS 또는 RHCSA (실습형 Linux 관리)
 - **LFCS** (Linux Foundation Certified SysAdmin): 벤더 중립, storage/network/troubleshooting/VM 비중 ↑, performance-based 시험. Ubuntu/Rocky 혼용 환경에 적합
 - **RHCSA** (Red Hat): RHEL/Rocky 계열에 직접 적합(파일시스템·NFS·VM·SELinux·방화벽), RHCE로 연결
-- 선택: **회사 프로젝트(Rocky/RHEL) 중심이면 RHCSA / 범용 Linux 자신감이면 LFCS**
+- 선택: **Rocky/RHEL 환경 중심이면 RHCSA / 범용 Linux 자신감이면 LFCS**
 
 ### 2순위: CompTIA Linux+
 - Linux 입문~중급 이론 정리, 객관식+performance-based로 부담 낮음
 - 단 실제 서버 운영엔 RHCSA/LFCS보다 덜 직접적
 
 ### 3순위: RHCE 또는 Ansible 계열
-- 설치 자동화·VM 배포·반복 테스트가 많은 keeper에 유용 (절차 코드화)
+- 설치 자동화·VM 배포·반복 테스트가 많은 환경에 유용 (절차 코드화)
 - 단 RHCSA/LFCS로 기초를 먼저
 
 ### 4순위: CKA (Kubernetes)
