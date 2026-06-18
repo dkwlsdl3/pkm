@@ -30,6 +30,10 @@ created: 2026-05-13 (수)
 
 - [[pkm-zettelkasten]] — PKM / Zettelkasten 개념, Obsidian으로 구현하는 디지털 메모 상자
 
+## 문서 변환
+
+- [[md-to-pdf-chrome-headless]] — pandoc 없이 Chrome headless로 md→html→pdf 변환, 한글 Noto 폰트 지정
+
 ## CI/CD & 자동화
 
 - [[github-actions]] — 크로스 레포 동기화, GitHub Pages 배포, cron 자동화 패턴

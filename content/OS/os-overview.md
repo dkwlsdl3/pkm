@@ -27,6 +27,7 @@ created: 2026-05-13 (수)
 ## 가상화
 
 - [[kvm-libvirt]] — KVM/libvirt 설치, virt-install, virsh 명령어, NAT 설정
+- [[proxmox-virtualization]] — Proxmox VE(무료 AGPL), KVM+ZFS 기반, REST API 외부 제어, 대안 지형(XCP-ng·Harvester·oVirt)
 - [[idrac-ipmi]] — Dell 서버 원격 관리, ipmitool로 iDRAC IP 설정
 
 ## 시스템
