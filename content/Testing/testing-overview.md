@@ -19,6 +19,12 @@ created: 2026-06-08 (월)
 
 ---
 
+## 스토리지 / 성능
+
+- [[storage-performance-testing]] — 지표(p99/max/CoV)·도구(fio/ior/mdtest/iperf3)·정직성 가드
+
+---
+
 ## 관련
 
 - [[dx-overview]]

@@ -20,3 +20,5 @@ title: kth's PKM
 - [[Rust/rust-overview|Rust]] — 언어 함정, sqlx, 파일시스템 패턴
 - [[DesignPatterns/design-patterns-overview|Design Patterns]] — GoF 패턴, 아키텍처 패턴
 - [[ZFS/zfs-overview|ZFS]] — COW·Snapshot·RAID-Z, 고신뢰성 파일시스템
+- [[Testing/testing-overview|Testing]] — 테스트 격리·E2E·스토리지 성능 측정
+- [[Certification/certification-overview|Certification]] — 시스템·스토리지 자격증 로드맵

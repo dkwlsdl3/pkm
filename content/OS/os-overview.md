@@ -34,6 +34,7 @@ created: 2026-05-13 (수)
 - [[systemd-service]] — 서비스 파일 작성, linger, SIGTSTP 문제
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
+- [[grub-kernel-pinning]] — GRUB 커널 고정(인덱스 vs 이름) + apt-mark hold
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
 - [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
 - [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset, r refresh, 설치 소스 의미
