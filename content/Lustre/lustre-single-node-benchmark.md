@@ -29,6 +29,7 @@ created: 2026-06-18 (목)
 - 증상: 3 iteration 중 일부가 0.0001~0.99 MB/s로 폭락 (CoV 86~172%)
 - 원인: **매 iter `drop_caches` + ZFS ARC/txg flush 타이밍**이 ior 대역폭 타이머를 오염
 - 판별: **`sar`로 "보고값 vs 실제 디스크 활동" 교차검증** — 깨진 구간도 실제 디스크는 정상(약 2초)이면 측정 아티팩트로 확정 (시스템 무죄)
+- **MMP(Multiple Mount Protection)**: MMP의 주기적 디스크 쓰기가 tail/CV를 키울 수 있음 — 단일노드(공유 스토리지·페일오버 불필요)에선 비활성 검토 시 tail 안정화 관찰됨
 
 ### 3. 내부 vs 외부 측정 분리
 - **내부 self-mount** = Lustre 자체 상한 (서버에서 직접 `/mnt/lustre`)
