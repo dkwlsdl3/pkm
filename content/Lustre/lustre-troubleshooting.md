@@ -204,6 +204,26 @@ sudo lctl list_nids  # <HOST_LNET_IP>@tcp 확인
 
 ---
 
+## lnet.service 부팅 실패 — `lnetctl export` 산출 lnet.conf의 불량 NI
+
+**증상**: 재부팅 후 `lnet.service`가 `failed`(exit-code)로 죽고 lnet이 안 올라옴 → MDT/OST·클라이언트 마운트 전부 막힘.
+
+**원인**: `lnetctl export --backup > /etc/lnet.conf`로 만든 설정에 **인터페이스 없는 NI 항목**(`local NI(s)`에 tunables/CPT만 있고 `interfaces:` 누락)이 섞여, 부팅 시 lnet.service가 import하다 실패. 설치 때 `lnetctl`로 수동 구성하면서 lnet.service를 우회했다면 재부팅에서야 표면화(앞의 'LNET NIC 자동감지 오설정'과 다른 실패 모드).
+
+**해결**: export 대신 **결정적(최소) lnet.conf를 직접 작성**.
+```yaml
+net:
+    - net type: tcp
+      local NI(s):
+        - interfaces:
+              0: <iface>   # 호스트=브리지, VM=내부 NIC
+```
+- 인터페이스명은 검증(영숫자·`._-`만, 길이 제한) 후 기록 — heredoc 셸 인젝션 방지.
+- 클라이언트 마운트 워치독은 **호스트 클라이언트만** 감시 → 서버(VM)측 lnet 실패는 못 고침. 부팅 자동복구는 서버측 lnet 기동까지 보장해야 완성.
+- 전 노드 동시 콜드부팅 시 MDT recovery 윈도우(기본 300s) 동안 클라 마운트 timeout → recovery COMPLETE 후 automount self-heal(정상, 부팅 시간에 포함).
+
+---
+
 ## OBD 디바이스 커널 잔존 (재부팅 필요)
 
 **증상**: `umount /mnt/lustre` 후에도 `lnetctl lnet unconfigure` 실패.
