@@ -35,6 +35,9 @@ ss -tlnp | grep <exporter>     # 또는 pgrep -af <exporter> 로 --web.listen-ad
 ### 해결
 exporter 실행 인자와 scrape target을 **같은 포트**로. 표준 포트(예: node_exporter 9100)에 맞추고, 한 코드/설정에서 둘 다 생성하면 어긋날 일이 없다.
 
+### 함정: "소스 fix ≠ 돌고 있는 인스턴스 fix"
+프로비저닝 코드(설치 도구·IaC)에서 포트를 통일해 고쳐도, **이미 배포·init된 노드의 exporter는 옛 포트 그대로**라 계속 down이다. 코드 수정 후 **돌고 있는 인스턴스에 실제로 적용**(unit `--web.listen-address` 변경 + 방화벽 + restart)해야 메트릭이 산다. 재프로비저닝 전까진 둘이 갈린다.
+
 ---
 
 ## 주의사항

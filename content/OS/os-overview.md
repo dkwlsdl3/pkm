@@ -39,6 +39,7 @@ created: 2026-05-13 (수)
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
 - [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
 - [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset, r refresh, 설치 소스 의미
+- [[conda-breaks-system-dnf]] — conda가 LD_LIBRARY_PATH 점유 → 시스템 dnf libsolv 충돌, `env -u LD_LIBRARY_PATH dnf` 우회
 
 ## 스토리지 & 마운트
 
