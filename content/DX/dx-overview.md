@@ -20,6 +20,7 @@ created: 2026-05-13 (수)
 ## 설정 파일 관리
 
 - [[dotfiles]] — dotfiles를 Git으로 관리해 여러 기기에서 동일 환경 유지
+- [[chezmoi]] — chezmoi 관리 파일은 타깃 직접 편집 시 apply로 소실, 소스 편집 후 apply
 
 ## 키보드 & 입력
 
