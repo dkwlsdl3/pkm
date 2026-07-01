@@ -28,6 +28,7 @@ created: 2026-05-13 (수)
 
 - [[context-engineering]] — CLAUDE.md 최적화 원칙, 비자명 정보만 넣는 컨텍스트 엔지니어링
 - [[ai-agent-spec-and-session-log-ops]] — AI agent 명세, 세션 로그, cass 운영 원칙과 팀원 온보딩 기준
+- [[subagent-delta-review]] — 서브에이전트 델타 위임(컨텍스트 절약) + 적대적 교차검증 패턴
 
 ## ML 엔지니어링
 

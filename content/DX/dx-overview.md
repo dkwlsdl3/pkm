@@ -57,6 +57,7 @@ created: 2026-05-13 (수)
 - [[rust-cargo]] — Rust/Cargo 핵심 명령어, 크로스 컴파일, musl 빌드
 - [[rust-backend-troubleshooting]] — Rust/Tokio 백엔드 hung, DB 커넥션 풀 고갈, cleanup task 분리 진단
 - [[rust-build-system-deps]] — Rust 빌드의 시스템 lib·네트워크 의존(openssl/utoipa-swagger-ui/libacl) 진단·제거
+- [[esm-bare-import-resolution]] — ESM `.mjs` bare import는 CWD 아닌 스크립트 파일 위치 기준 해석; 우회는 복사 실행
 
 ## 프론트엔드
 
