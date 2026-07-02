@@ -31,6 +31,10 @@ created: 2026-05-13 (수)
 
 - [[pkm-zettelkasten]] — PKM / Zettelkasten 개념, Obsidian으로 구현하는 디지털 메모 상자
 
+## 작업 원칙
+
+- [[redesign-check-existing-first]] — 앱 재설계 착수 전 기존 구현 확인(수정/이동=재편, 추가만 신규)
+
 ## 문서 변환
 
 - [[md-to-pdf-chrome-headless]] — pandoc 없이 Chrome headless로 md→html→pdf 변환, 한글 Noto 폰트 지정
