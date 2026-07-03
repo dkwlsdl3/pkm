@@ -34,6 +34,7 @@ created: 2026-05-13 (수)
 ## 작업 원칙
 
 - [[redesign-check-existing-first]] — 앱 재설계 착수 전 기존 구현 확인(수정/이동=재편, 추가만 신규)
+- [[adversarial-cross-review]] — 구현자≠검증자 적대적 교차검증, 하루 2회전에 실버그 11건 적발한 운용법
 
 ## 문서 변환
 
@@ -60,6 +61,7 @@ created: 2026-05-13 (수)
 
 - [[rust-cargo]] — Rust/Cargo 핵심 명령어, 크로스 컴파일, musl 빌드
 - [[rust-backend-troubleshooting]] — Rust/Tokio 백엔드 hung, DB 커넥션 풀 고갈, cleanup task 분리 진단
+- [[dev-script-restart-vs-rebuild]] — dev 스크립트 restart는 rebuild가 아니다, 바이너리 mtime 대조 진단법
 - [[rust-build-system-deps]] — Rust 빌드의 시스템 lib·네트워크 의존(openssl/utoipa-swagger-ui/libacl) 진단·제거
 - [[esm-bare-import-resolution]] — ESM `.mjs` bare import는 CWD 아닌 스크립트 파일 위치 기준 해석; 우회는 복사 실행
 

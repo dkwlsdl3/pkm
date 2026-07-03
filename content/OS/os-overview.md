@@ -27,6 +27,7 @@ created: 2026-05-13 (수)
 ## 가상화
 
 - [[kvm-libvirt]] — KVM/libvirt 설치, virt-install, virsh 명령어, NAT 설정
+- [[libvirt-guest-rename-namespaces]] — VM 리네임 시 이름 공간 4개(도메인·게스트 hostname·에이전트 env·관리 DB) 체크리스트
 - [[proxmox-virtualization]] — Proxmox VE(무료 AGPL), KVM+ZFS 기반, REST API 외부 제어, 대안 지형(XCP-ng·Harvester·oVirt)
 - [[idrac-ipmi]] — Dell 서버 원격 관리, ipmitool로 iDRAC IP 설정
 
