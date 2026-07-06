@@ -44,6 +44,7 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[project-quota-semantics]] — 프로젝트 쿼터 inode 집계(루트 포함)·mv 후 project ID 잔류·setquota 단위 함정
 - [[lustre-single-node-benchmark]] — 단일노드 Lustre 벤치 함정·측정 아티팩트·내부/외부 측정 분리
 - [[lustre-node-topology]] — 논리 노드(역할 VM) vs 물리 노드, 스케일아웃(용량)≠HA(이중화) 구분
+- [[lustre-ost-drain]] — OST 제거 전 데이터 비우기(deactivate → lfs migrate → 비움검증)
 
 ---
 

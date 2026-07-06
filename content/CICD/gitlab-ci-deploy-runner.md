@@ -77,6 +77,9 @@ gitlab-runner register --url <gitlab-url> --token <runner-token> \
 > [!WARNING]
 > shell executor 러너는 러너 유저(gitlab-runner) 권한으로 명령을 실행한다. deploy 스크립트가 `sudo systemctl/cp` 등을 쓰면 러너 유저에 (제한적) sudo NOPASSWD가 필요하며, 외부 공개 서버라면 sudo 범위를 최소화해야 한다.
 
+> [!WARNING]
+> **서버 재설치 시 러너 홈(`/home/gitlab-runner`)이 통째로 초기화된다.** 러너 등록 토큰뿐 아니라, deploy가 대상 노드(VM 등)로 접속하는 데 쓰던 `~/.ssh/id_*` + `~/.ssh/config` + 각 노드의 authorized_keys도 함께 사라진다. 러너 재등록만으론 배포가 안 되고, SSH 키 구성까지 재구축해야 한다. 이 구성은 반드시 문서/스크립트로 남겨 재설치 후 복구 가능하게 할 것.
+
 ---
 
 ## 관련

@@ -50,6 +50,23 @@ aws ssm start-session --target <INSTANCE_ID> --region <REGION>
 # 그 뒤에도 노드가 안 보이면 인스턴스 재부팅으로 SSM Agent 재기동
 ```
 
+### ssh/scp/rsync를 SSM 터널로 (키만 심으면 진짜 ssh처럼)
+Session Manager 셸만으론 조작이 불편하다. **`AWS-StartSSHSession` 문서를 ProxyCommand로** 쓰면 22번 포트 개방·퍼블릭 IP 없이 일반 `ssh`/`scp`/`rsync`가 SSM 터널로 동작한다.
+```bash
+# 1) SSM 셸(또는 send-command)로 공개키를 authorized_keys에 심는다
+#    aws ssm send-command --document-name AWS-RunShellScript \
+#      --parameters 'commands=["echo <PUBKEY> >> /home/<user>/.ssh/authorized_keys"]'
+# 2) ~/.ssh/config
+#   Host myhost
+#     HostName <INSTANCE_ID>          # i-xxxx (IP 아님)
+#     User ubuntu
+#     IdentityFile ~/.ssh/mykey
+#     ProxyCommand aws ssm start-session --target %h \
+#       --document-name AWS-StartSSHSession --parameters portNumber=%p --region <REGION>
+# → ssh myhost / scp ... myhost:/ 그대로 됨
+```
+키페어를 새로 만들어도 기존 인스턴스엔 자동 반영 안 된다(키페어=생성 시점 authorized_keys 한 줄일 뿐) → 이렇게 직접 심는 게 정석.
+
 ---
 
 ## 주의사항
