@@ -34,6 +34,7 @@ created: 2026-05-13 (수)
 ## 시스템
 
 - [[systemd-service]] — 서비스 파일 작성, linger, SIGTSTP 문제
+- [[shell-heredoc-pitfall]] — heredoc을 `&&`로 이어붙이면 종결자 오염, write 후 read-back 검증
 - [[systemd-user-timer]] — user 타이머 무인 주기 작업: Persistent(놓침 복구)+linger, XDG_RUNTIME_DIR
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
