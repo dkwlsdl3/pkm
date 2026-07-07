@@ -87,5 +87,6 @@ created: 2026-05-15 (목)
 
 ## 관련
 
+- [[compensation-saga-pitfalls]] — 비동기 프로비저닝 보상(Saga) 설계 함정 4가지(실증)
 - [[ai-overview]]
 - [[dx-overview]]

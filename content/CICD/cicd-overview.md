@@ -15,6 +15,7 @@ created: 2026-06-25 (목)
 ## 핵심 개념
 
 - [[gitlab-ci-deploy-runner]] — deploy job tag·러너 매칭, 러너 없으면 배포 안 됨(pending)
+- [[gitlab-submodule-to-monorepo]] — 서브모듈→모노레포 전환 함정(rules:changes 태그·잡명 충돌·병행 구축 체크리스트)
 
 ---
 
