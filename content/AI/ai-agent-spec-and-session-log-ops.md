@@ -50,6 +50,17 @@ AI agent 작업에서는 이 과정이 특히 중요하다.
 
 이 정보는 코드 리뷰, 장애 재현, 다음 agent에게 인계할 때 재사용 가치가 높다.
 
+### 3. 작업일지는 세션 로그와 git 증거를 함께 본다
+
+하루 작업을 정리할 때는 agent의 최종 답변만 믿지 않는다. 특히 여러 Claude/Codex 세션과 서브에이전트가 섞였을 때는 아래 순서가 안전하다.
+
+1. 오늘 수정된 `~/.claude/projects/**.jsonl` / `~/.codex/sessions/**.jsonl` 파일을 찾는다.
+2. 사용자 프롬프트, task notification, 서브에이전트 결과, rate-limit/error 메시지를 분리해 본다.
+3. `git log --since`, `git status --short --branch`, `git diff --stat`로 실제 커밋/미커밋 상태를 맞춘다.
+4. "완료", "진행 중", "검증됨", "미검증"을 분리해서 Journal이나 worklog에 남긴다.
+
+세션 로그는 "무슨 의도로 움직였는가"를 보여주고, git은 "실제로 무엇이 남았는가"를 보여준다. 둘을 같이 봐야 다음 agent에게 넘길 수 있는 기록이 된다.
+
 ---
 
 ## 운영 모델

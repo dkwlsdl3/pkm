@@ -74,6 +74,19 @@ keeper-gen-2/           ← 루트 레포 (통합 관리)
 - **장점**: 각 서브모듈은 독립 레포로 자체 히스토리 보유
 - **단점**: 서브모듈 포인터 수동 업데이트 필요, 초보자에게 복잡함
 
+## 서브모듈에서 진짜 모노레포로 전환할 때 체크리스트
+
+서브모듈 기반 레포를 새 모노레포로 옮길 때는 단순히 파일을 한곳에 복사하는 것만으로 끝나지 않는다.
+
+- **정본 선언**: 새 remote/branch/cwd를 명확히 선언하고, 기존 레포는 archive 또는 read-only로 격하시킨다.
+- **gitlink 제거 검증**: `.gitmodules`가 없고 `git submodule status --recursive`가 비며, `git ls-files -s`에 mode `160000`이 남지 않아야 한다.
+- **CI 단일화**: 컴포넌트별 CI 파일을 루트 파이프라인으로 통합하고, job 이름은 `component:job`처럼 네임스페이스를 둔다.
+- **범위 밖 레포 분리**: 한 번에 다 옮기지 않는 서비스는 "없는 디렉터리"가 아니라 "외부 레포/패키지 입력물"로 문서화한다.
+- **문서 현재화**: README, agent brief, release guide, CI docs, structure map에서 `--recursive`, `git submodule update`, root pointer 같은 표현을 제거한다.
+- **구레포 안전장치**: 기존 repo에는 push 중단, 조회 전용, 새 정본 링크를 남겨 다음 agent가 잘못된 곳에서 작업하지 않게 한다.
+
+전환 당일에는 코드보다 문서가 더 위험하게 낡는다. 특히 AI agent가 읽는 `AGENTS.md`, `CLAUDE.md`, `docs/agent-brief.md`, `TODO.md`는 새 정본을 가리키는지 먼저 확인한다.
+
 ---
 
 ## 모노레포 도구
