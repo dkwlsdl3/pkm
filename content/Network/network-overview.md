@@ -19,6 +19,7 @@ created: 2026-06-12 (금)
 ## 구성
 
 - [[nic-bonding]] — NIC 2포트 본딩: active-backup vs LACP, 단일 플로우 대역폭 한계
+- [[nginx-grpc-gateway-dedicated-port]] — 기존 443 옆 gRPC 수신: 전용 포트 server 블록 + 출발지 한정 방화벽 + 무인증 Ping 경로증명
 
 ---
 

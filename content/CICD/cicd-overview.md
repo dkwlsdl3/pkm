@@ -16,6 +16,7 @@ created: 2026-06-25 (목)
 
 - [[gitlab-ci-deploy-runner]] — deploy job tag·러너 매칭, 러너 없으면 배포 안 됨(pending)
 - [[gitlab-submodule-to-monorepo]] — 서브모듈→모노레포 전환 함정(rules:changes 태그·잡명 충돌·병행 구축 체크리스트)
+- [[deploy-env-optin-flags-and-manual-button-trap]] — 공유 env 템플릿의 opt-in 플래그(scope 변수)와 manual 배포 버튼 rules:changes 함정
 
 ---
 

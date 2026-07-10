@@ -19,6 +19,7 @@ created: 2026-06-04 (목)
 - [[embedded-script-contract-tests]] — 코드가 생성하는 셸 스크립트/systemd unit 문자열의 운영 계약을 단위테스트로 고정하는 패턴
 - [[musl-cross-compile-openssl-libzfs]] — musl 정적빌드: openssl vendored로 해결 / libzfs-sys는 한계(CI 필요)
 - [[openssl-sys-vendored-perl-deps]] — openssl-sys `vendored` 소스빌드가 요구하는 perl 모듈(RHEL/Rocky 최소 perl, `perl(모듈)` provides)
+- [[utoipa-recursive-schema-no-recursion]] — 자기참조 ToSchema는 no_recursion 없으면 기동 시 stack overflow(빌드·테스트론 안 잡힘)
 
 ---
 
