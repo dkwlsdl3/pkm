@@ -68,6 +68,7 @@ created: 2026-05-13 (수)
 ## 프론트엔드
 
 - [[vue-dead-branch]] — 상보 조건(`v-if`/`v-else`)에서 데이터상 불가능한 분기·헬퍼·i18n 키 죽은 코드 정리
+- [[live-canvas-vs-standalone-export]] — 라이브 디자인 캔버스와 내보내기 스냅샷의 버전 불일치 — 정본은 뷰어가 여는 파일
 
 ## 패키지 매니저
 

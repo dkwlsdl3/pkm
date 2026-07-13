@@ -20,6 +20,7 @@ created: 2026-06-04 (목)
 - [[musl-cross-compile-openssl-libzfs]] — musl 정적빌드: openssl vendored로 해결 / libzfs-sys는 한계(CI 필요)
 - [[openssl-sys-vendored-perl-deps]] — openssl-sys `vendored` 소스빌드가 요구하는 perl 모듈(RHEL/Rocky 최소 perl, `perl(모듈)` provides)
 - [[utoipa-recursive-schema-no-recursion]] — 자기참조 ToSchema는 no_recursion 없으면 기동 시 stack overflow(빌드·테스트론 안 잡힘)
+- [[form-urlencoded-space-plus-mangling]] — query 재직렬화가 %20→+ 변조, URL 수정은 raw 세그먼트 필터링으로
 
 ---
 
