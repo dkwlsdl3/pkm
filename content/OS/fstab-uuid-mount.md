@@ -56,8 +56,42 @@ findmnt --verify --verbose     # "Success, no errors" 확인
 
 ---
 
+## by-id도 가능 — 단, canonicalize하면 안정성이 사라진다
+
+UUID 외에 `/dev/disk/by-id/`(디스크 시리얼/WWN 기반 심링크)도 안정 식별자다. 디스크 시리얼로 장치를 찾는 코드에서 흔한 함정:
+
+```rust
+// 안티패턴: by-id 심링크를 찾아놓고 canonicalize로 /dev/sdX까지 풀어버림
+let real = std::fs::canonicalize("/dev/disk/by-id/scsi-...")?; // → "/dev/sda"
+// 이 /dev/sda를 fstab에 기록하면 재부팅 시 sda↔sdb 뒤섞임에 그대로 노출
+```
+
+- 장치를 **찾을 때** by-id를 쓰는 것과, fstab에 **기록할 때** 무엇을 쓰는지는 별개다. 안정 심링크를 손에 쥐고도 실디바이스 노드로 풀어서 저장하면 안정성이 사라진다.
+- 런타임 `mount`는 `/dev/sdX`든 by-id든 UUID든 다 동작하므로, **fstab에는 안정 식별자(by-id 심링크 경로 또는 `UUID=`) 원본을 그대로** 남겨야 한다.
+
+## systemd가 생성한 `.mount` 유닛의 수동 마운트 간섭
+
+`/etc/fstab`의 각 항목은 systemd-fstab-generator가 `<path>.mount` 유닛으로 자동 변환한다. 이때 fstab 항목이 **없는 장치**(예: 재부팅으로 뒤바뀐 `/dev/sdX`)를 가리키면 그 `.mount` 유닛은 `failed` 상태가 되고, **그 마운트포인트에 수동으로 mount하면 systemd가 즉시 걷어찬다**(유닛 정의와 불일치로 판단해 umount).
+
+```bash
+# 증상: 수동 mount가 exit 0인데 2초 뒤 사라짐. 범인 추적:
+journalctl _COMM=umount -o verbose | grep _SYSTEMD_UNIT   # → mnt-xxx.mount
+systemctl status mnt-xxx.mount                            # failed (Result: exit-code)
+
+# 해결: 잘못된 fstab 라인 제거 후 재로드 → 생성 유닛 사라져 수동 마운트가 유지됨
+sed -i '\#/mnt/xxx#d' /etc/fstab
+systemctl daemon-reload && systemctl reset-failed mnt-xxx.mount
+mount ... /mnt/xxx   # 이제 유지됨
+```
+
+근본 해결은 fstab을 안정 식별자로 고치는 것(위 참조). → [[systemd-automount-watchdog]]
+
+---
+
 ## 관련
 
 - [[dockerd-dataroot-symlink]] — 미마운트 볼륨이 유발한 도커 데몬 장애
 - [[ec2-ssm-access-no-key]] — 재부팅이 동반 장애를 드러낸 사례
+- [[systemd-automount-watchdog]] — automount watchdog / stale mount 복구
+- [[lustre-troubleshooting]] — Lustre 타겟 fstab·재부팅 마운트
 - [[smartctl]] · [[os-overview]]
