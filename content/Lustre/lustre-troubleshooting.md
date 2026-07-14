@@ -323,3 +323,26 @@ WHERE is_lustre_node = TRUE
 ```
 
 > 운영 서버 적용 시 migration 실행 필수 (is_lustre_node/lustre_role 컬럼 추가).
+
+---
+
+## 단일 OST DISCONN이 전체 서비스로 전파 — 집계 RPC hang
+
+**증상**: OSS 한 대(또는 OST 하나)가 죽었을 뿐인데 NAS/상위 서비스 전체가 마비된 것처럼 보인다. 특정 파일이 아니라 쿼터 조회·용량 표시·업로드까지 광범위하게 실패/hang.
+
+**원인**: OST가 내려가면 클라이언트 osc가 `DISCONN`(또는 `CONNECTING` 반복)으로 방치되는데, **모든 OST를 순회하는 집계성 RPC**(`lfs quota`, 쿼터 enforcement, 일부 `lfs df`)가 죽은 OST 응답을 기다리다 `-EIO`(rc=-5)로 실패하거나 무기한 hang한다. Lustre는 OST 간 복제가 없으므로 "그 OST의 파일 접근 불가"는 설계상 정상이지만, **집계 경로가 부분 장애를 전면 장애로 증폭**시킨다.
+
+```
+LustreError: ...osc_quota.c:...:osc_quotactl()) ptlrpc_queue_wait failed, rc: -5
+osc.<fs>-OST000N-osc-...state=  current_state: DISCONN
+```
+
+**판별**: `lctl get_param osc.*.state`로 어느 OST가 `FULL`이 아닌지 확인. `IDLE`은 유휴 연결 자동 격하(idle_timeout, 기본 20초)라 정상 — `DISCONN`/`CONNECTING`만 비정상.
+
+**대응**:
+1. 즉시 복구 가능하면 OSS/OST를 되살린다(자동 재연결 → `FULL`).
+2. 즉시 복구 불가면 MDS에서 **명시적 격리**: `lctl --device <OSC> deactivate`(또는 `lctl set_param osc.<...>.active=0`) — 죽은 OST를 신규 할당·집계에서 빼서 "부분 장애"로 국한. 방치(DISCONN)보다 격리가 낫다.
+3. 상위 서비스(백엔드)는 러스터 CLI 호출에 **timeout을 강제**하고, 그 호출이 커넥션 풀·워커를 오래 쥐지 않게 **격벽(bulkhead)**을 둔다 — 한 OST hang이 전체 요청 처리를 굶기지 않도록.
+
+> [!WARNING]
+> "OST 하나 죽으면 전체가 마비"는 정상 동작이 아니라 **degraded 모드 부재**다. 부분 장애를 감지→격리→상위 timeout 3단으로 막지 않으면, 단일 디스크/노드 장애가 서비스 전면 장애로 번진다.
