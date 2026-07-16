@@ -54,7 +54,7 @@ AI agent 작업에서는 이 과정이 특히 중요하다.
 
 하루 작업을 정리할 때는 agent의 최종 답변만 믿지 않는다. 특히 여러 Claude/Codex 세션과 서브에이전트가 섞였을 때는 아래 순서가 안전하다.
 
-1. 오늘 수정된 `~/.claude/projects/**.jsonl` / `~/.codex/sessions/**.jsonl` 파일을 찾는다.
+1. 대상 로컬 날짜를 UTC 경계로 변환하고 `~/.claude/projects/**.jsonl` / `~/.codex/sessions/**.jsonl`에서 해당 `timestamp` 범위를 찾는다.
 2. 사용자 프롬프트, task notification, 서브에이전트 결과, rate-limit/error 메시지를 분리해 본다.
 3. `git log --since`, `git status --short --branch`, `git diff --stat`로 실제 커밋/미커밋 상태를 맞춘다.
 4. "완료", "진행 중", "검증됨", "미검증"을 분리해서 Journal이나 worklog에 남긴다.
@@ -85,21 +85,30 @@ AI agent 작업에서는 이 과정이 특히 중요하다.
 
 ---
 
-## 세션 로그 도구 선택
+## 세션 로그 검색
 
-### 지금은 cass 우선
+현재는 별도 인덱서를 두지 않고 원본 JSONL을 `rg`와 `jq`로 직접 검색한다. 로그는 사용자 프롬프트뿐 아니라 assistant 답변, 도구 호출·결과, `cwd`, `sessionId`, `/clear`·`/exit` 이벤트도 담는다.
 
-현재 개인/소규모 운영에서는 `cass`가 우선순위가 높다.
-
-- Claude Code, Codex 등 여러 agent의 원본 로그를 검색 대상으로 묶는다.
-- "전에 이거 어떻게 했더라?"를 찾는 용도에 적합하다.
-- 실시간 저장소가 아니라, 이미 저장된 agent 로그를 나중에 인덱싱하는 검색기다.
-- 최신 세션을 검색하려면 `cass index`로 인덱스를 갱신해야 한다.
+`timestamp`는 UTC(`Z`)다. 예를 들어 KST 2026-07-16 전체는 `2026-07-15T15:00:00Z` 이상, `2026-07-16T15:00:00Z` 미만이다. 파일명이나 `2026-07-16T` 접두사만 검색하면 KST 오전 0~9시를 놓친다.
 
 ```bash
-cass status
-cass index
+# 후보 세션 파일 찾기(KST 7월 16일 예시)
+rg -l \
+  -e '"timestamp":"2026-07-15T(1[5-9]|2[0-3])' \
+  -e '"timestamp":"2026-07-16T(0[0-9]|1[0-4])' \
+  ~/.claude/projects ~/.codex/sessions -g '*.jsonl'
+
+# 사람의 사용자 프롬프트만 추출(도구 결과 배열 제외)
+jq -r '
+  select((.timestamp? // "") >= "2026-07-15T15:00:00Z"
+      and (.timestamp? // "") <  "2026-07-16T15:00:00Z")
+  | select(.type == "user")
+  | select((.message.content | type) == "string")
+  | [.timestamp, .sessionId, .cwd, .message.content] | @tsv
+' <session>.jsonl
 ```
+
+답변은 `type == "assistant"`와 `message.content[] | select(.type == "text")`를 기준으로 추출한다. 작업일지는 프롬프트만 요약하지 말고 도구 결과와 Git 커밋을 함께 대조한다.
 
 ### 팀원이 추가되면 검토할 도구
 
@@ -117,7 +126,7 @@ cass index
 - PR이나 이슈에 "이 agent가 어떻게 판단했는지" 링크를 붙이고 싶다.
 - 신규 팀원이 좋은 agent 세션을 보고 학습해야 한다.
 - 여러 사람의 세션 로그를 검색/공유해야 한다.
-- 로컬 cass 검색만으로는 협업 맥락 전달이 부족하다.
+- 로컬 JSONL 직접 검색만으로는 협업 맥락 전달이 부족하다.
 
 ---
 
@@ -136,12 +145,12 @@ cass index
   -> TODO.md, AGENTS.md
 
 원본 세션 검색
-  -> cass
+  -> rg + jq over JSONL
 
 ```
 
 주의할 점:
-- 세션 원본 검색은 `cass`, 프로젝트 인계는 `agent-brief`, 장기 결정은 `ADR`이 맡는다.
+- 세션 원본 검색은 `rg`+`jq`, 프로젝트 인계는 `agent-brief`, 장기 결정은 `ADR`이 맡는다.
 
 ---
 
@@ -151,7 +160,7 @@ cass index
 
 1. 프로젝트 repo의 `AGENTS.md`, `CLAUDE.md`, `docs/agent-brief.md`, `TODO.md`, `docs/adr/` 읽기
 2. 현재 작업의 기준 branch, base commit, active task를 확인하기
-3. cass 설치 및 `cass index`로 본인 로컬 세션을 검색 가능하게 만들기
+3. `rg`와 `jq`로 본인 로컬 JSONL 세션을 검색하는 날짜·경로 규칙 공유
 4. 팀 차원의 세션 공유가 필요해지면 claudebin/claude-code-share 또는 viewer 계열 도구 검토
 
 ---

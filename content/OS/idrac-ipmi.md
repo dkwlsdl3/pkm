@@ -5,7 +5,7 @@ tags:
 created: 2026-05-14 (목)
 ---
 
-# iDRAC / IPMI
+# iDRAC / IPMI / Redfish
 
 > **TL;DR**: OS 없이도 서버를 원격 제어할 수 있는 독립 관리 칩 — 전원 ON/OFF, BIOS 진입, 콘솔 접근
 
@@ -15,7 +15,7 @@ created: 2026-05-14 (목)
 
 **IPMI (Intelligent Platform Management Interface)** — 서버 하드웨어 관리 표준 인터페이스. 메인보드에 독립적인 관리 칩(BMC)이 있어 OS와 무관하게 동작.
 
-**iDRAC (Integrated Dell Remote Access Controller)** — Dell 서버의 IPMI 구현체. HP는 iLO, Lenovo는 XClarity.
+**iDRAC (Integrated Dell Remote Access Controller)** — Dell 서버의 BMC 구현체. HP는 iLO, Lenovo는 XClarity Controller(XCC)다.
 
 ```
 서버 전원 꺼짐 상태에서도
@@ -67,6 +67,30 @@ iDRAC 웹 → Virtual Media로 로컬 ISO를 마운트해 베어메탈에 OS 설
 | 원격 전원 관리 | 강제 재시작, 전원 ON/OFF |
 | 하드웨어 모니터링 | 온도, 팬 속도, 전력 소비 |
 | 원격 미디어 마운트 | ISO 이미지로 원격 OS 설치 |
+
+## BMC 웹 UI와 Redfish 교차검증
+
+Redfish는 서버 하드웨어 관리용 표준 HTTP API다. 전원, 부팅, 스토리지 같은 최종 상태를 구조화된 JSON으로 읽을 수 있어 웹 UI 자동화보다 검증에 유리하다.
+
+```bash
+# 시스템 전원 상태
+curl -sk -u '<USER>:<PASSWORD>' \
+  https://<BMC>/redfish/v1/Systems/1
+
+# 예시: 스토리지 컨트롤러와 물리 디스크 링크
+curl -sk -u '<USER>:<PASSWORD>' \
+  https://<BMC>/redfish/v1/Systems/1/Storage
+```
+
+웹 UI는 클라이언트 캐시, 다중선택 상태, 비동기 재조회가 꼬여 실제로 성공한 작업을 실패로 표시할 수 있다. 이때 같은 버튼을 반복해서 누르지 말고 다음 순서로 확인한다.
+
+1. UI 오류 메시지와 현재 표시 상태를 기록한다.
+2. Redfish GET으로 모든 대상 리소스의 실제 상태를 개별 조회한다.
+3. 가상 디스크 수, 물리 디스크 상태, 전원 상태처럼 서로 독립된 후조건을 확인한다.
+4. 이미 목표 상태라면 재실행하지 않는다. 목표 상태가 아니면 지원 액션과 허용값을 조회한 뒤 변경한다.
+
+> [!WARNING]
+> BMC 자격증명을 명령 이력, 문서, savelog에 남기지 않는다. 자동화에서는 제한 권한 계정과 임시 credential 전달 방식을 사용한다.
 
 ---
 
