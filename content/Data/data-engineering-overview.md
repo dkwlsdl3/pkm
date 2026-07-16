@@ -17,6 +17,7 @@ created: 2026-05-13 (수)
 - [[etl-elt]] — 데이터 파이프라인의 두 가지 패턴
 - [[data-storage]] — DB / DW / DL / Lakehouse 비교
 - [[acid]] — 데이터 안전 보장 4원칙
+- [[sql-view-silent-column-absence-trap]] — 뷰 경유 조회의 silent 컬럼 부재 함정 (실증)
 
 ---
 

@@ -88,5 +88,6 @@ created: 2026-05-15 (목)
 ## 관련
 
 - [[compensation-saga-pitfalls]] — 비동기 프로비저닝 보상(Saga) 설계 함정 4가지(실증)
+- [[external-command-timeout-bulkhead]] — 외부 명령 hang 격벽: 타임드 래퍼+락 밖 실행+후조건 검증(실증)
 - [[ai-overview]]
 - [[dx-overview]]
