@@ -46,6 +46,8 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[lustre-node-topology]] — 논리 노드(역할 VM) vs 물리 노드, 스케일아웃(용량)≠HA(이중화) 구분
 - [[lustre-ost-drain]] — OST 제거 전 데이터 비우기(deactivate → lfs migrate → 비움검증)
 - [[lustre-performance-metrics]] — proc/sysfs 기반 성능 지표 수집(누적 카운터·delta rate·소스 맵)
+- [[lustre-servicenode-failover]] — tunefs.lustre --servicenode로 OST failover 노드 사후 주입(무손실)·failover 드릴
+- [[lfs-dstate-circuit-breaker]] — hang나는 lfs 호출을 백그라운드 게이트+서킷브레이커로 격리
 
 ---
 
