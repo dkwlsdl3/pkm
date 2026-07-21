@@ -47,6 +47,8 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[lustre-ost-drain]] — OST 제거 전 데이터 비우기(deactivate → lfs migrate → 비움검증)
 - [[lustre-performance-metrics]] — proc/sysfs 기반 성능 지표 수집(누적 카운터·delta rate·소스 맵)
 - [[lustre-servicenode-failover]] — tunefs.lustre --servicenode로 OST failover 노드 사후 주입(무손실)·failover 드릴
+- [[lustre-ha-drbd-zfs]] — 공유스토리지 없는 2노드 HA: DRBD 블록복제 + Pacemaker + ZFS OSD(patchless), split-brain/tiebreaker/펜싱 급소
+- [[el-kernel-swap-safety]] — 벤더 패치커널(ldiskfs 등) 스왑 함정: kernel-modules·initramfs·fallback 확인(안 하면 dracut emergency)
 - [[lfs-dstate-circuit-breaker]] — hang나는 lfs 호출을 백그라운드 게이트+서킷브레이커로 격리
 
 ---
