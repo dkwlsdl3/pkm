@@ -14,6 +14,7 @@ title: kth's PKM
 - [[Docker/docker-overview|Docker]] — 데몬 운영, 이미지 빌드 트러블슈팅
 - [[DX/dx-overview|DX]] — 터미널, dotfiles, 키보드 설정
 - [[Frontend/frontend-overview|Frontend]] — Vue/Nuxt, UI 패턴, 이벤트 처리
+- [[HA/ha-overview|HA]] — 고가용성 클러스터(Pacemaker/Corosync/DRBD), 정족수·페일오버
 - [[Lustre/lustre-overview|Lustre]] — HPC 분산 파일시스템
 - [[Network/network-overview|Network]] — 물리 링크·스위치·NIC 진단과 구성
 - [[Monitoring/monitoring-overview|Monitoring]] — Grafana/Prometheus 관측성

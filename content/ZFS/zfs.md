@@ -58,7 +58,7 @@ zfs destroy tank/data@2026-05-18
 
 ### 1. HW RAID 컨트롤러 금지 — JBOD(Pass-through) 모드 사용
 
-ZFS는 디스크를 직접 제어해야 체크섬·RAID-Z가 정상 동작. HW RAID가 끼어들면 ZFS가 오류를 감지 못함.
+ZFS는 디스크를 직접 제어해야 체크섬·RAID-Z가 정상 동작. HW RAID가 끼어들면 ZFS가 오류를 감지 못함. → 자세히: [[zfs-hba-vs-hwraid]]
 
 ### 2. ECC 메모리 사용
 

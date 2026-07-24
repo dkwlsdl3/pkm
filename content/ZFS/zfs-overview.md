@@ -18,6 +18,7 @@ created: 2026-05-18 (월)
 - [[zfs-snapshot-clone-dependency]] — 스냅샷 삭제 전 종속 클론 확인 패턴
 - [[zfs-arc-and-lustre-overhead]] — ARC 캐시 착시·Lustre+VM+zvol 계층 오버헤드·sync write 약점
 - [[zfs-file-vdev-recovery]] — 파일/loop vdev zpool 재부팅 복구 (losetup 재연결 필수)
+- [[zfs-hba-vs-hwraid]] — 하드웨어 RAID vs HBA/JBOD 패스스루, ZFS가 패스스루여야 하는 이유
 
 ---
 
