@@ -24,11 +24,12 @@ created: 2026-06-18 (목)
 ### 1. openssl-sys → vendored로 해결 가능
 - 증상: musl 타겟 빌드 시 `openssl-sys`가 시스템 openssl을 pkg-config로 못 찾아 실패
 - 원인: 로컬에 musl용 openssl 크로스 환경이 없음 (간접 의존 — 예: `webauthn-rs`가 openssl을 끌어옴)
-- 해결: **openssl `vendored` feature**로 소스에서 정적 빌드 (perl·make 필요)
+- 해결: **openssl `vendored` feature**로 소스에서 정적 빌드
 ```toml
 # Cargo.toml [dependencies] — 코드에서 직접 안 써도 feature unification으로 적용
 openssl = { version = "0.10", features = ["vendored"] }
 ```
+- 단, vendored는 OpenSSL을 소스에서 컴파일하므로 빌드머신에 perl·make가 필요 — RHEL/Rocky 최소 이미지에서는 perl 모듈 누락으로 실패할 수 있다. 자세한 증상/해결은 [[openssl-sys-vendored-perl-deps]] 참고.
 
 ### 2. libzfs-sys → 로컬 musl 빌드 사실상 불가
 - `libzfs-sys`/`libzetta-zfs-core-sys`/`nvpair-sys`(ZFS 라이브러리 바인딩)는 **시스템 libzfs를 링크**
@@ -57,3 +58,4 @@ rustup target list --installed | grep musl
 
 - [[rust-overview]] — Rust 언어 함정·패턴
 - [[zfs-overview]] — ZFS(libzfs 의존 배경)
+- [[openssl-sys-vendored-perl-deps]] — vendored openssl 소스빌드 시 perl 모듈 의존성

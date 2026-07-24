@@ -61,18 +61,7 @@ uname -r  # 예: 4.18.0-553.82.1.el8_lustre.x86_64
 
 ## 2. Lustre 전용 디스크 추가
 
-OS 디스크와 Lustre 데이터 디스크를 분리하는 이유: I/O 격리, 독립 확장, 운영환경 표준.
-
-KVM 환경 예시:
-```bash
-# MDT용 디스크 추가
-qemu-img create -f qcow2 ~/vms/meta-mdt.qcow2 20G
-virsh attach-disk meta ~/vms/meta-mdt.qcow2 vdb --driver qemu --subdriver qcow2 --persistent
-
-# OST용 디스크 추가 (OSS 서버마다)
-qemu-img create -f qcow2 ~/vms/oss1-ost0.qcow2 50G
-virsh attach-disk oss1 ~/vms/oss1-ost0.qcow2 vdb --driver qemu --subdriver qcow2 --persistent
-```
+OS 디스크와 Lustre 데이터 디스크를 분리하는 이유: I/O 격리, 독립 확장, 운영환경 표준. KVM 환경에서 디스크를 추가하는 방법(`virsh attach-disk` 등)은 [[kvm-libvirt]] 참고.
 
 ---
 

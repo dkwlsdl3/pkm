@@ -47,52 +47,19 @@ SSO는 **사용자 경험**. SAML / OAuth / OIDC는 SSO를 구현하는 **기술
 
 ## SAML 흐름
 
-```
-사용자 → SP 접근
-            │ "이 사람 누구야?"
-            ▼
-          IdP로 리다이렉트
-            │ 로그인
-            ▼
-   IdP → SAML Assertion(XML) 발급
-            │
-            ▼
-   SP → Assertion 검증 → 접속 허용
-```
-
-엔터프라이즈 환경(Active Directory, LDAP 연동)에 20년간 표준.
+XML 기반 Assertion으로 SP가 IdP 인증 결과를 검증하는 엔터프라이즈 표준 흐름 — [[saml]] 참고.
 
 ---
 
 ## OIDC 흐름
 
-```
-사용자 → "Google로 로그인" 클릭
-            │
-            ▼
-   Google(IdP) → 인증 → ID Token(JWT) 발급
-            │
-            ▼
-   앱 → JWT 검증 → 사용자 정보 확인 → 접속 허용
-```
-
-OAuth 2.0 위에 **인증 레이어**를 추가한 것. 현대 앱의 사실상 표준.
+OAuth 2.0 위에 인증 레이어를 얹어 ID Token(JWT)으로 로그인 처리하는 흐름 — [[oidc]] 참고.
 
 ---
 
 ## OAuth 2.0 — 인가(Authorization)
 
-인증이 아닌 **권한 위임** 목적. "이 앱이 내 구글 드라이브에 접근해도 됨"
-
-```
-사용자 → 앱에 구글 드라이브 접근 허용
-            │
-            ▼
-  구글 → Access Token 발급 (제한된 권한)
-            │
-            ▼
-   앱 → Access Token으로 구글 API 호출
-```
+인증이 아닌 권한 위임 목적으로 Access Token을 발급·사용하는 흐름 — [[oauth2]] 참고.
 
 ---
 
@@ -118,5 +85,8 @@ OAuth 2.0 위에 **인증 레이어**를 추가한 것. 현대 앱의 사실상 
 
 ## 관련
 
+- [[saml]]
+- [[oidc]]
+- [[oauth2]]
 - [[linux-permissions]]
 - [[os-overview]]

@@ -22,15 +22,10 @@ created: 2026-06-18 (목)
 ## 핵심 개념
 
 ### 1. ior 측정 3대 함정
-- **`-B`(O_DIRECT) 미지원**: 설치된 ior 버전에서 미지원 → 제외
-- **read open이 직전 write flush를 대기**: `write+read`를 한 실행에 묶으면 read가 ~1000배 느린 착시 → **write/read 단계 분리**
-- **`O_DIRECT`가 ZFS에 부적합** → direct 기본 비활성
+IOR로 대역폭을 잴 때 결과를 착시로 만드는 3가지 함정(O_DIRECT 미지원, write/read 미분리, ZFS 부적합) → [[lustre-ior-measurement-pitfalls]]
 
 ### 2. 측정 아티팩트 (CoV 폭발)
-- 증상: 3 iteration 중 일부가 0.0001~0.99 MB/s로 폭락 (CoV 86~172%)
-- 원인: **매 iter `drop_caches` + ZFS ARC/txg flush 타이밍**이 ior 대역폭 타이머를 오염
-- 판별: **`sar`로 "보고값 vs 실제 디스크 활동" 교차검증** — 깨진 구간도 실제 디스크는 정상(약 2초)이면 측정 아티팩트로 확정 (시스템 무죄)
-- **MMP(Multiple Mount Protection)**: MMP의 주기적 디스크 쓰기가 tail/CV를 키울 수 있음 — 단일노드(공유 스토리지·페일오버 불필요)에선 비활성 검토 시 tail 안정화 관찰됨
+매 iter `drop_caches`·ZFS ARC/txg flush가 대역폭 타이머를 오염시켜 CoV가 폭발하는 현상과 `sar` 판별법, MMP 영향 → [[lustre-benchmark-cache-artifact]]
 
 ### 3. 내부 vs 외부 측정 분리
 - **내부 self-mount** = Lustre 자체 상한 (서버에서 직접 `/mnt/lustre`)
@@ -56,9 +51,6 @@ created: 2026-06-18 (목)
 # stripe 배치 확인 (반복 OST 분산이 CoV를 키울 수 있음)
 lfs getstripe -d /mnt/lustre/bench
 lfs setstripe -c 4 -S 1M <dir>   # OST 4개 분산
-
-# 측정 아티팩트 판별: 깨진 구간 시각의 실제 디스크 활동 확인
-sar -f <monitor>.sa -b
 ```
 
 ---
@@ -77,3 +69,5 @@ sar -f <monitor>.sa -b
 - [[lustre-overview]] — Lustre 아키텍처 개요
 - [[zfs-arc-and-lustre-overhead]] — ARC 착시·계층 오버헤드
 - [[storage-performance-testing]] — 성능테스트 정직성·지표·도구
+- [[lustre-ior-measurement-pitfalls]] — IOR 측정 3대 함정
+- [[lustre-benchmark-cache-artifact]] — 벤치마크 캐시 아티팩트 (drop_caches·ZFS ARC/txg)

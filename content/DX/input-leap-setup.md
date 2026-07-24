@@ -73,21 +73,7 @@ rm -rf ~/.config/lan-mouse
 
 ## 3. SSH 연결 설정
 
-Mac에서 Ubuntu로 SSH 접속 필요 (원격 명령 실행, input-leap 서버 제어 등).
-
-```bash
-# Ubuntu: openssh-server 설치
-sudo apt install openssh-server
-sudo systemctl enable --now ssh
-
-# Mac: SSH 키 생성
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""
-
-# 공개키 Ubuntu에 등록
-ssh-copy-id admin@<UBUNTU_IP>
-```
-
-이후 `ssh admin@<UBUNTU_IP>` 으로 비밀번호 없이 접속 가능.
+Mac에서 Ubuntu로 SSH 접속 필요 (원격 명령 실행, input-leap 서버 제어 등). 키 생성 및 등록 절차는 [[ssh-key-auth]] 참고.
 
 ---
 
@@ -207,43 +193,7 @@ osacompile -o ~/Desktop/InputLeap종료.app stop-input-leap.applescript
 
 ## 7. Ubuntu ↔ Mac 한/영 전환 설정
 
-### 문제
-
-input-leap으로 Mac을 제어할 때 Ubuntu의 한성 키보드에서 Alt_R(한/영 키)을 눌러도 Mac에서 한/영 전환이 안 됨.
-
-**원인**: Karabiner-Elements는 물리 키보드 이벤트만 처리하고, input-leap이 주입하는 가상 키보드 이벤트는 인식하지 못함 (EventViewer에서 아무것도 안 잡힘으로 확인).
-
-### 해결
-
-**Step 1**: Mac 한/영 전환 단축키 확인
-```
-시스템 설정 → 키보드 → 키보드 단축키 → 입력 소스
-→ "이전 입력 소스 선택" = Left Option + Q
-```
-
-**Step 2**: Ubuntu에 xcape 설치
-```bash
-sudo apt install xcape
-```
-
-**Step 3**: Alt_R 단독 입력 → Left Option + Q 변환
-```bash
-xcape -e 'Alt_R=Alt_L|q'
-```
-
-동작 흐름: Ubuntu Alt_R 단독 입력 → xcape가 Alt_L+Q로 변환 → input-leap이 Mac으로 전달 → Mac 한/영 전환
-
-**Step 4**: 로그인 시 자동 실행
-```bash
-echo 'xcape -e "Alt_R=Alt_L|q"' >> ~/.xprofile
-```
-
-### Ubuntu 자체 한/영 전환
-
-iBus 설정에서 Alt_R을 한/영 전환키로 등록:
-```
-iBus 설정 → 한글 → 한영전환키 → Alt_R 추가
-```
+input-leap으로 Mac을 제어할 때 Ubuntu Alt_R(한/영 키) 입력이 Mac에 전달되지 않는 문제를 xcape로 해결. 상세 절차는 [[xcape-hangul-toggle]] 참고.
 
 ---
 
@@ -274,5 +224,6 @@ iBus 설정 → 한글 → 한영전환키 → Alt_R 추가
 ## 관련
 
 - [[ssh-key-auth]]
+- [[xcape-hangul-toggle]]
 - [[keyboard-fn-remap]]
 - [[dx-overview]]

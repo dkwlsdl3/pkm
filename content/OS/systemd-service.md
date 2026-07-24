@@ -47,25 +47,13 @@ journalctl -u my.service -f           # 로그 실시간 확인
 
 ## User linger
 
-일반 사용자의 systemd 서비스는 **해당 유저 로그인 중에만** 실행됨. 로그아웃 시 종료.
-
-```bash
-loginctl enable-linger admin   # 로그아웃 후에도 user 서비스 유지
-```
-
-KVM autostart처럼 부팅 시 유저 세션 없이도 서비스 실행이 필요한 경우 필수.
+일반 사용자의 systemd 서비스는 기본적으로 해당 유저 로그인 중에만 실행됨. 로그아웃 후에도 유지하려면 linger 설정이 필요 — 자세한 내용은 [[systemd-user-timer]] 참고.
 
 ---
 
 ## SIGTSTP 문제
 
-터미널에서 `./binary &`로 백그라운드 실행 시, 터미널 종료 시 `SIGTSTP`(정지 신호) 받아 프로세스가 T(Stopped) 상태로 멈춤.
-
-```bash
-# 올바른 방법
-nohup ./binary > /tmp/binary.log 2>&1 &
-# 또는 systemd 서비스로 등록
-```
+터미널에서 백그라운드로 실행한 프로세스가 터미널 종료 시 멈추는 문제와 해결법은 [[shell-sigtstp-background]] 참고.
 
 ---
 
@@ -73,3 +61,5 @@ nohup ./binary > /tmp/binary.log 2>&1 &
 
 - [[os-overview]]
 - [[kvm-libvirt]]
+- [[systemd-user-timer]]
+- [[shell-sigtstp-background]]

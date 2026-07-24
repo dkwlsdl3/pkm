@@ -43,17 +43,7 @@ Corosync·Pacemaker는 **모든 데이터 노드에 각각** 설치돼 돌고, �
 
 ## 정족수(quorum)와 witness — 홀수 규칙
 
-정족수 = 과반(총표의 절반 초과). 짝수면 반반 분할로 동점 위험 → **witness(투표권 1표)로 총합을 홀수로** 만든다.
-
-| 노드 수 | 과반(필요표) | 견딜 수 있는 사망 | 반반 분할 위험 | witness |
-|---|---|---|---|---|
-| 2 | 2 | 0대 | 1:1 위험 | ✅ 필요 → 3표 |
-| 3 | 2 | 1대 | 없음 | ❌ 불필요 |
-| 4 | 3 | 1대 | 2:2 위험 | ✅ 필요 → 5표 |
-| 5 | 3 | 2대 | 없음 | ❌ 불필요 |
-
-- 설계 정석: **3 → 5 → 7 홀수로** 늘림(짝수 4·6은 건너뜀 — 4는 3보다 사망 견딤이 안 늘고 분할 위험만 추가).
-- witness엔 보통 **Corosync(또는 corosync-qdevice)만** 올린다. DRBD·서비스·데이터는 안 올림 → 사양 낮아도 됨. **클러스터 노드 위의 VM은 중재자 자격 없음**(독립 장비여야).
+정족수는 과반 표결이며 짝수 노드는 반반 분할 위험이 있어 witness로 홀수를 맞춘다. 노드 수별 설계표와 witness 배치 규칙은 [[quorum-witness-odd-rule]] 참고.
 
 ## STONITH / split-brain
 
@@ -62,4 +52,5 @@ Corosync·Pacemaker는 **모든 데이터 노드에 각각** 설치돼 돌고, �
 - 펜싱은 **실검증 필요**(`pcs stonith fence <peer>`). status=ON은 검증이 아니다.
 
 ## 관련
+- [[quorum-witness-odd-rule]]
 - [[lustre-ha-drbd-zfs]] · [[lustre-servicenode-failover]]

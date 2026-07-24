@@ -14,7 +14,9 @@ created: 2026-06-25 (목)
 
 ## 핵심 개념
 
-- [[grafana-panels-and-storage]] — status-history vs state timeline, 대시보드 DB/provisioning 저장 방식
+- [[grafana-panels-and-storage]] — Grafana 패널·저장 방식 개요(인덱스)
+- [[grafana-panel-status-history-vs-state-timeline]] — 상태 시계열은 state timeline을 써야 하는 이유
+- [[grafana-dashboard-storage-provisioning-vs-db]] — 대시보드 provisioning vs grafana.db 저장, json 미반영
 - [[prometheus-exporter-port]] — exporter listen 포트 vs scrape target 정합성
 
 ---

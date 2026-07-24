@@ -41,18 +41,6 @@ deploy:dev:
 - 해결: 러너를 대상 프로젝트들에 enable(`POST /projects/:id/runners {runner_id}`) — 대상 프로젝트 **Maintainer** 권한 필요. 또는 **그룹 레벨**에 러너/멤버십을 두면 그룹 내 모든 프로젝트로 상속(그룹 변수·러너 관리엔 Owner 필요할 수 있음).
 - 권한 함정: 루트 프로젝트 Maintainer ≠ 서브모듈 프로젝트 Maintainer. "권한 줬는데 안 됨"은 잘못된 스코프에 준 것일 때가 많다.
 
-### 환경별 시크릿 — environment_scope + `environment:`
-같은 키(`DB_PASSWORD` 등)를 대상별로 다른 값으로 주려면 **environment_scope**를 쓴다.
-```yaml
-deploy:prod:
-  environment:
-    name: prod          # 이 잡은 prod 환경
-  # → scope=prod 변수가 scope=* 보다 우선 적용
-```
-- 변수는 `(key, environment_scope)` 조합이 유니크 → 같은 이름 + 다른 scope 공존 가능. `*`(공용)와 `prod`(특정)를 같이 두면 잡의 `environment`에 맞는 게 선택됨.
-- **함정**: scope=`*` 변수(예: dev용 DB 비번)만 있는 채로 다른 대상에 그대로 배포하면 그 대상 설정을 dev 값으로 **덮어쓴다**. 안전 가드(`if [ "$DEPLOY_TARGET" != "..." ]; then exit 1`)로 미설정 시 중단시키면 사고 방지.
-- 변수 플래그: **Masked**(로그 가림, 값이 8자+·charset 조건 충족해야), **Protected**(protected 브랜치/태그에서만 노출 — develop이 비보호면 켜면 안 됨), **Expand variable reference**(값의 `$`를 다른 변수 참조로 해석 — 시크릿에 `$` 있으면 꺼서 literal 보존).
-
 ### 확인
 ```bash
 # 대상 서버에 러너가 있나
@@ -85,4 +73,5 @@ gitlab-runner register --url <gitlab-url> --token <runner-token> \
 
 ## 관련
 
+- [[gitlab-ci-environment-scoped-secrets]] — 대상별 시크릿 분리(environment_scope)
 - [[cicd-overview]]

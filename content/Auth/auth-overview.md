@@ -19,7 +19,8 @@ created: 2026-06-08 (월)
 
 ## 세션 유지
 
-- [[session-keepalive-refresh-vs-relogin]] — authToken은 refresh, refreshToken은 재로그인으로 리셋; write 인증실패가 200+success:false로 위장되는 함정
+- [[session-keepalive-refresh-vs-relogin]] — authToken은 refresh, refreshToken은 재로그인으로 리셋
+- [[http-200-fake-write-failure]] — write 인증실패가 HTTP 200+success:false로 위장되는 함정
 
 ---
 

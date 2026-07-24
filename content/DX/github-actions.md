@@ -13,67 +13,13 @@ created: 2026-05-14 (목)
 
 ## GitHub Pages 배포
 
-`actions/upload-pages-artifact` + `actions/deploy-pages` 조합. 레포 Settings → Pages → Source를 **GitHub Actions**로 설정해야 동작.
-
-```yaml
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build
-        run: npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: public   # 빌드 결과물 디렉토리
-
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/deploy-pages@v4
-```
+`upload-pages-artifact` + `deploy-pages` 조합으로 배포하는 표준 워크플로우는 [[github-actions-pages-deploy]] 참고.
 
 ---
 
 ## 크로스 레포 동기화
 
-PAT(Personal Access Token)을 secret으로 등록 후 타 레포 checkout.
-
-```yaml
-- uses: actions/checkout@v4
-  with:
-    repository: username/target-repo
-    ref: main
-    token: ${{ secrets.PAT_TOKEN }}
-    path: target
-
-- name: Sync files
-  run: rsync -av --delete source/ target/content/
-
-- name: Commit and push
-  working-directory: target
-  run: |
-    git config user.name "github-actions[bot]"
-    git config user.email "github-actions[bot]@users.noreply.github.com"
-    git add -A
-    if git diff --cached --quiet; then
-      echo "No changes."
-    else
-      git commit -m "sync: $(date +'%Y-%m-%d %H:%M')"
-      git push
-    fi
-```
-
-**PAT 최소 권한**: `repo` (private repo 접근 시), `public_repo` (public repo만)
+PAT로 타 레포를 checkout해 동기화·커밋·푸시하는 패턴은 [[github-actions-cross-repo-sync]] 참고.
 
 ---
 
@@ -129,3 +75,5 @@ gh run rerun <run-id> --repo owner/repo
 ## 관련
 
 - [[dx-overview]]
+- [[github-actions-pages-deploy]]
+- [[github-actions-cross-repo-sync]]

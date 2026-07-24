@@ -23,23 +23,11 @@ created: 2026-06-01 (월)
 
 ### 1. openssl — `vendored`는 소스 컴파일, 시스템 링크가 가볍다
 
-- `openssl = { features = ["vendored"] }`는 OpenSSL을 **소스에서 컴파일**한다 → perl(`IPC::Cmd` 등)이 없는 이미지에서 실패.
-- 코드가 openssl을 직접 안 쓰고 전이 의존(예: `webauthn-rs`)일 뿐이고, 이미지에 `openssl-devel` + `pkg-config`가 있으면 **`vendored`를 제거**해 시스템 openssl에 링크하는 편이 가볍고 안전하다.
-
-```toml
-# Before
-openssl = { version = "0.10", features = ["vendored"] }
-# After: 줄 제거 → 시스템 openssl-devel 링크 (pkg-config 필요)
-```
+`vendored` feature가 왜 슬림 이미지에서 실패하는지, 언제 제거해야 하는지는 [[rust-openssl-vendored-build]] 참고.
 
 ### 2. utoipa-swagger-ui — 빌드 시 다운로드 → `vendored`로 제거
 
-- `utoipa-swagger-ui`의 `build.rs`는 Swagger UI zip을 **다운로드**한다. 이미지의 `curl-minimal`은 기능이 부족해 `curl: (4)`로 실패.
-- `features = ["vendored"]`를 켜면 정적 자산을 번들해 **다운로드 자체가 사라진다**. (openssl의 vendored와는 무관한 별개 feature — 이름만 같다.)
-
-```toml
-utoipa-swagger-ui = { version = "...", features = ["vendored"] }
-```
+빌드 시점 다운로드 문제와 `vendored` feature로 없애는 방법은 [[rust-utoipa-swagger-ui-vendored]] 참고.
 
 ### 3. exacl → `-lacl` (libacl)
 
@@ -62,6 +50,8 @@ utoipa-swagger-ui = { version = "...", features = ["vendored"] }
 
 ## 관련
 
+- [[rust-openssl-vendored-build]] — openssl vendored 소스 컴파일 vs 시스템 링크
+- [[rust-utoipa-swagger-ui-vendored]] — utoipa-swagger-ui 빌드 시 다운로드 제거
 - [[rust-cargo]] — Cargo 기본·크로스 컴파일
 - [[rust-backend-troubleshooting]] — 런타임 hang 진단
 - [[dockerfile-dnf-before-conda]] — 시스템 lib을 이미지에 추가하는 순서

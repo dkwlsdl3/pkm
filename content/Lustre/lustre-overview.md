@@ -40,14 +40,21 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 
 - [[lustre-server-setup]] — EL8 기준 서버 설치 및 포맷 (MGS/MDT/OST)
 - [[lustre-client-setup]] — Ubuntu 클라이언트 설치 및 커널 버전 제약
-- [[lustre-troubleshooting]] — identity_upcall, 재부팅 자동 마운트(ping 스크립트·automount 패턴), 부팅 레이스 rc=-16/-5 판별, Lustre 노드 식별 컬럼 기반 전환
+- [[lustre-troubleshooting]] — 서버 fstab nofail·MDT recovery·OBD 잔존·노드 식별 등 이슈 인덱스
+- [[lustre-identity-upcall]] — 비root 클라이언트 Permission denied(MDT identity_upcall)
+- [[lustre-client-automount-systemd]] — 재부팅 자동 마운트·부팅 레이스 rc=-16/-5 판별
+- [[lustre-lnet-nic-misdetection]] — LNET NIC 오설정·lnet.service 부팅 실패
 - [[project-quota-semantics]] — 프로젝트 쿼터 inode 집계(루트 포함)·mv 후 project ID 잔류·setquota 단위 함정
-- [[lustre-single-node-benchmark]] — 단일노드 Lustre 벤치 함정·측정 아티팩트·내부/외부 측정 분리
+- [[lustre-single-node-benchmark]] — 단일노드 Lustre 벤치 방법론 개요
+- [[lustre-ior-measurement-pitfalls]] — IOR 측정 3대 함정(O_DIRECT·write/read·ZFS)
+- [[lustre-benchmark-cache-artifact]] — drop_caches·ZFS ARC/txg가 만드는 CoV 아티팩트·sar 판별
 - [[lustre-node-topology]] — 논리 노드(역할 VM) vs 물리 노드, 스케일아웃(용량)≠HA(이중화) 구분
 - [[lustre-ost-drain]] — OST 제거 전 데이터 비우기(deactivate → lfs migrate → 비움검증)
+- [[lustre-ost-permanent-removal]] — OST 영구 제거(conf_param vs writeconf)·인덱스 재사용
 - [[lustre-performance-metrics]] — proc/sysfs 기반 성능 지표 수집(누적 카운터·delta rate·소스 맵)
 - [[lustre-servicenode-failover]] — tunefs.lustre --servicenode로 OST failover 노드 사후 주입(무손실)·failover 드릴
-- [[lustre-ha-drbd-zfs]] — 공유스토리지 없는 2노드 HA: DRBD 블록복제 + Pacemaker + ZFS OSD(patchless), split-brain/tiebreaker/펜싱 급소
+- [[lustre-ha-drbd-zfs]] — 공유스토리지 없는 2노드 베어메탈 HA: DRBD + Pacemaker + ZFS OSD
+- [[lustre-ha-vm-virtualdomain]] — VM 기반 Lustre HA(Pacemaker VirtualDomain) 변형
 - [[el-kernel-swap-safety]] — 벤더 패치커널(ldiskfs 등) 스왑 함정: kernel-modules·initramfs·fallback 확인(안 하면 dracut emergency)
 - [[lfs-dstate-circuit-breaker]] — hang나는 lfs 호출을 백그라운드 게이트+서킷브레이커로 격리
 

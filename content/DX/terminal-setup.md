@@ -79,23 +79,7 @@ cp /tmp/fastfetch-linux-amd64/usr/bin/fastfetch ~/.local/bin/
 
 ## 4. oh-my-zsh + 플러그인
 
-```bash
-sudo apt install -y zsh
-chsh -s $(which zsh)
-
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# 플러그인
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/Aloxaf/fzf-tab \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
-git clone https://github.com/MichaelAquilina/zsh-you-should-use \
-  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
-```
+zsh 설치, oh-my-zsh, 핵심 플러그인 4종 설치 절차는 → [[zsh-oh-my-zsh-plugins]]
 
 ---
 
@@ -194,94 +178,13 @@ fastfetch
 
 ## 6. starship 설정
 
-**`~/.config/starship.toml`**
-```toml
-palette = "tokyonight_storm"
-command_timeout = 2000
-
-format = """
-$os\
-$directory\
-$git_branch\
-$git_status\
-$nodejs$bun$python$rust$golang$java\
-$cmd_duration
-$character"""
-
-[palettes.tokyonight_storm]
-blue    = "#7aa2f7"
-purple  = "#bb9af7"
-red     = "#f7768e"
-orange  = "#ff9e64"
-yellow  = "#e0af68"
-green   = "#9ece6a"
-teal    = "#73daca"
-cyan    = "#7dcfff"
-fg      = "#c0caf5"
-dark    = "#1a1b26"
-
-[os]
-disabled = false
-format = "[](fg:purple)[$symbol ](bg:purple fg:dark)"
-
-[os.symbols]
-Macos   = " "
-Linux   = " "
-Windows = " "
-
-[directory]
-truncation_length = 3
-truncate_to_repo  = true
-format = "[](fg:purple bg:blue)[ $path$read_only ](bg:blue fg:dark)"
-
-[git_branch]
-symbol = " "
-format = "[](fg:blue bg:teal)[ $symbol$branch ](bg:teal fg:dark)"
-
-[git_status]
-format    = "[$all_status$ahead_behind](bg:teal fg:dark)[](fg:teal) "
-
-[character]
-success_symbol = "[❯](bold green)"
-error_symbol   = "[❯](bold red)"
-
-[cmd_duration]
-min_time = 2000
-format   = "[ ⏱ $duration ](fg:yellow)"
-```
+tokyonight 팔레트 기반 `starship.toml` 전체 설정은 → [[starship-prompt-config]]
 
 ---
 
 ## 7. Neovim + LazyVim
 
-```bash
-# neovim 최신 버전
-curl -L "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz" \
-  | tar -xz -C /tmp/
-cp /tmp/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
-
-# LazyVim starter
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-rm -f ~/.config/nvim/lua/plugins/example.lua
-```
-
-**`~/.config/nvim/lua/config/options.lua`**
-```lua
-vim.opt.relativenumber = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-```
-
-**`~/.config/nvim/lua/plugins/tokyonight.lua`**
-```lua
-return {
-  { "folke/tokyonight.nvim", opts = { style = "storm" } },
-}
-```
-
-첫 실행 시 플러그인 자동 설치. 완료 후 `:Lazy sync` 실행.
+neovim 바이너리 설치, LazyVim starter clone, 기본 옵션/테마 설정은 → [[nvim-lazyvim-setup]]
 
 ---
 
@@ -320,20 +223,7 @@ return {
 
 ## ⚠️ Ubuntu 22.04 전용 — nvim-treesitter 파서 오류 수정
 
-> [!WARNING]
-> 최신 tree-sitter 바이너리(v0.26+)는 GLIBC 2.39 필요 → Ubuntu 22.04(GLIBC 2.35)에서 실행 불가.
-> GLIBC 2.35 호환 버전(v0.25.6)을 `~/bin`에 직접 설치해야 함.
-
-```bash
-curl -L "https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.6/tree-sitter-linux-x64.gz" \
-  -o /tmp/tree-sitter.gz
-gunzip /tmp/tree-sitter.gz
-chmod +x /tmp/tree-sitter
-cp /tmp/tree-sitter ~/bin/tree-sitter
-```
-
-`~/bin`이 PATH에 포함되어 있으면 nvim이 자동으로 이 바이너리를 사용.  
-이후 nvim 열고 `:Lazy sync` 실행.
+GLIBC 버전 불일치로 tree-sitter 바이너리가 실행되지 않는 문제와 해결법은 → [[nvim-treesitter-glibc-mismatch]]
 
 ---
 
@@ -356,3 +246,7 @@ cp /tmp/tree-sitter ~/bin/tree-sitter
 
 - [[dotfiles]]
 - [[dx-overview]]
+- [[zsh-oh-my-zsh-plugins]]
+- [[starship-prompt-config]]
+- [[nvim-lazyvim-setup]]
+- [[nvim-treesitter-glibc-mismatch]]

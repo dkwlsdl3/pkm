@@ -37,13 +37,7 @@ created: 2026-05-14 (목)
 
 ## Niklas Luhmann
 
-가장 유명한 Zettelkasten 사용자. 독일 사회학자.
-
-- 평생 **90,000개** 카드 작성
-- **70권**의 책과 **400편**의 논문 출판
-- "내 Zettelkasten은 내 파트너다"
-
-카드가 쌓일수록 카드끼리 새로운 연결이 생겨 예상치 못한 아이디어가 나온다고 설명.
+Zettelkasten을 대표하는 인물의 생애와 성과는 별도 노트 참고: [[niklas-luhmann]]
 
 ---
 
@@ -81,3 +75,4 @@ Zettelkasten의 현대적 확장 개념. 디지털 도구로 구현.
 
 - [[dx-overview]]
 - [[dotfiles]]
+- [[niklas-luhmann]]

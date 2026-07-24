@@ -15,7 +15,11 @@ created: 2026-05-13 (수)
 ## 핵심 개념
 
 - [[etl-elt]] — 데이터 파이프라인의 두 가지 패턴
-- [[data-storage]] — DB / DW / DL / Lakehouse 비교
+- [[data-storage]] — DB / DW / DL / Lakehouse 진화 타임라인 허브
+- [[db-oltp]] — OLTP 서비스 데이터베이스
+- [[data-warehouse]] — DW(OLAP 분석용 창고)
+- [[data-lake]] — DL(원시 데이터 저장)
+- [[lakehouse]] — 레이크하우스(DL 유연성 + DW 쿼리)
 - [[acid]] — 데이터 안전 보장 4원칙
 - [[sql-view-silent-column-absence-trap]] — 뷰 경유 조회의 silent 컬럼 부재 함정 (실증)
 
@@ -43,7 +47,8 @@ created: 2026-05-13 (수)
 ## 저장소 & 거버넌스
 
 - [[minio]] — S3 호환 온프레미스 오브젝트 스토리지, AI 학습 데이터 특화
-- [[data-governance]] — Landing/Staging/Deepland 3단계 모델, ECM 문서 중앙화
+- [[data-governance]] — Landing/Staging/Deepland 3단계 거버넌스 모델
+- [[ecm]] — ECM 기업 문서 중앙화 관리 체계
 
 ---
 

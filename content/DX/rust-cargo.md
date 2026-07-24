@@ -62,17 +62,13 @@ strip = true   # 디버그 심볼 제거 → 바이너리 크기 축소
 
 ## 왜 Rust인가
 
-| 특징 | 설명 |
-|---|---|
-| 메모리 안전성 | GC 없이 컴파일러가 메모리 버그 방지 |
-| 성능 | C/C++ 수준 |
-| 동시성 | data race를 컴파일 타임에 차단 |
-| 에러 처리 | `Result<T, E>` 타입으로 명시적 처리 |
+언어 특징 비교는 [[rust-language-features]] 참고.
 
 ---
 
 ## 관련
 
+- [[rust-language-features]]
 - [[musl-static-binary]]
 - [[dx-overview]]
 

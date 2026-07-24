@@ -32,54 +32,9 @@ smartctl -l selftest /dev/sda
 
 ---
 
-## SATA Direct (-d sat)
+디스크 컨트롤러별로 `-d` 옵션을 다르게 지정해야 하는 경우(AHCI `-d sat` vs smartpqi `-d cciss,N`)는 [[smartctl-device-type-sat-cciss]] 참고.
 
-Ubuntu 22.04 + AHCI 컨트롤러 환경에서 SG_IO ioctl 방식은 SAT(SCSI-ATA Translation) 레이어를 통과하지 못해 실패. `-d sat` 옵션으로 SAT 레이어를 명시적으로 지정.
-
-```bash
-smartctl -d sat -i /dev/sda
-smartctl -d sat -A -H /dev/sda
-smartctl -d sat -t short /dev/sda
-```
-
----
-
-## SmartPQI 컨트롤러 (-d cciss,N)
-
-Microchip SmartRAID 9350-8i 등 smartpqi 드라이버 환경에서는 `-d scsi`가 아닌 `-d cciss,N`만 동작.
-
-```bash
-# 컨트롤러 감지
-cat /sys/class/scsi_host/host*/proc_name   # "smartpqi" 출력 확인
-
-# 디스크별 조회 (N = 0, 1, 2, ...)
-smartctl -d cciss,0 -i /dev/sda
-smartctl -d cciss,0 -A -H /dev/sda
-smartctl -d cciss,0 -t short /dev/sda
-smartctl -d cciss,0 -l selftest /dev/sda
-```
-
-> `smartctl --scan`이 `-d scsi`로 반환해도 실제로는 `-d cciss,N`만 동작하는 경우 있음.
-
----
-
-## raw_value 파싱 주의
-
-`smartctl -A` 출력의 RAW_VALUE는 **9번째 컬럼(parts[9])**. 뒤에 괄호 부가정보가 붙는 경우 last index 파싱은 실패.
-
-```
-ID# ATTRIBUTE_NAME  FLAG  VALUE WORST THRESH TYPE    UPDATED WHEN_FAILED RAW_VALUE
-194 Temperature     0x22  038   046   000    Old_age Always  -           38 (0 15 0 0 0)
-  9 Power_On_Hours  0x32  080   080   000    Old_age Always  -           18216 (42 215 0)
-```
-
-```rust
-// 올바른 파싱
-let raw_value = parts[9].replace(',', "").parse::<u64>().unwrap_or(0);
-
-// 잘못된 파싱 — "0)" → parse 실패 → 0
-let raw_value = parts[parts.len() - 1].parse::<u64>().unwrap_or(0);
-```
+RAW_VALUE 컬럼 파싱 시 last index 파싱이 실패하는 이유는 [[smartctl-raw-value-parsing]] 참고.
 
 ---
 
@@ -99,5 +54,7 @@ echo "admin ALL=(ALL) NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/sm
 
 ## 관련
 
+- [[smartctl-device-type-sat-cciss]]
+- [[smartctl-raw-value-parsing]]
 - [[kvm-libvirt]]
 - [[os-overview]]

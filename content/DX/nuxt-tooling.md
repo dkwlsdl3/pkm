@@ -62,19 +62,7 @@ export default withNuxt({
 
 ## 번들 최적화
 
-### xlsx 지연 로딩
-
-```js
-// 변경 전
-import * as XLSX from 'xlsx'
-
-// 변경 후
-const XLSX = await import('xlsx')
-```
-
-### 미사용 차트 라이브러리 제거
-
-ApexCharts 등 사용처 없는 패키지 제거 후 `app/plugins/` 파일도 함께 삭제.
+xlsx 지연 로딩, 미사용 차트 라이브러리 제거는 [[nuxt-bundle-optimization]] 참고.
 
 ---
 
@@ -86,5 +74,6 @@ ApexCharts 등 사용처 없는 패키지 제거 후 `app/plugins/` 파일도 �
 
 ## 관련
 
+- [[nuxt-bundle-optimization]]
 - [[gitlab-cicd]]
 - [[dx-overview]]

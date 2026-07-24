@@ -15,6 +15,7 @@ created: 2026-06-01 (월)
 ## 접속 & 관리
 
 - [[ec2-ssm-access-no-key]] — 키페어 분실 시 SSM Session Manager로 SSH 키 없이 EC2 접속 (IAM 역할 + 에이전트 재기동)
+- [[ssm-ssh-proxycommand-tunnel]] — SSM 터널 위에서 표준 ssh/scp/rsync (AWS-StartSSHSession ProxyCommand)
 
 ---
 

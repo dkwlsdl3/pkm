@@ -21,27 +21,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ## pip → uv 마이그레이션
 
-### pyproject.toml 생성
-
-```bash
-uv init --no-workspace   # 기존 프로젝트에 pyproject.toml 추가
-uv add $(cat requirements.txt | grep -v '^#')
-```
-
-**서비스 설정** (`package = false`):
-```toml
-[tool.uv]
-package = false  # 라이브러리가 아닌 서비스 → wheel 빌드 불필요
-```
-
-### Python 버전 고정
-
-```
-# .python-version
-3.11
-```
-
-> pyenv 기본 버전이 높으면(3.14 등) wheel 없는 패키지 소스 빌드 실패 위험. `.python-version`으로 명시.
+기존 pip/requirements.txt 프로젝트 전환 절차는 [[uv-pip-migration]] 참고.
 
 ---
 
@@ -61,22 +41,13 @@ uv run <script>              # venv 없이 실행
 
 ### scikit-learn 버전 주의
 
-`scikit-learn>=1.4,<2.0` 지정 시 uv sync 실패.
-
-**원인**: 1.4.x 빌드 의존성이 `numpy==2.0.0rc1`(RC 버전) 요구 → PyPI에서 삭제됨.
-
-**해결**: `scikit-learn>=1.5,<2.0`으로 변경.
+`scikit-learn>=1.4,<2.0` 지정 시 uv sync 실패 원인과 해결은 [[uv-scikit-learn-numpy-rc-conflict]] 참고.
 
 ---
 
 ## RPM 빌드 — venv 경로 지정
 
-```bash
-# UV_PROJECT_ENVIRONMENT로 venv 위치 강제 지정
-UV_PROJECT_ENVIRONMENT="${STAGE_VENV}" uv sync \
-  --frozen --no-dev --no-install-project \
-  --project "${REPO_ROOT}"
-```
+`UV_PROJECT_ENVIRONMENT`로 venv 위치를 강제 지정하는 방법은 [[uv-rpm-build-venv-path]] 참고.
 
 ---
 
@@ -108,6 +79,9 @@ fi
 
 ## 관련
 
+- [[uv-pip-migration]]
+- [[uv-scikit-learn-numpy-rc-conflict]]
+- [[uv-rpm-build-venv-path]]
 - [[pnpm]]
 - [[gitlab-cicd]]
 - [[dx-overview]]

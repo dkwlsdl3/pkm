@@ -21,7 +21,10 @@ created: 2026-06-08 (월)
 
 ## 스토리지 / 성능
 
-- [[storage-performance-testing]] — 지표(p99/max/CoV)·도구(fio/ior/mdtest/iperf3)·정직성 가드
+- [[storage-performance-testing]] — 스토리지 성능 측정 개요(세 축 인덱스)
+- [[storage-perf-latency-percentiles]] — 레이턴시 avg/p95/p99/max·CoV 읽는 순서
+- [[storage-perf-tool-roles]] — fio/ior/mdtest/iperf3 도구별 역할 분리
+- [[storage-perf-reporting-honesty]] — 결과서 정직성 가드(cherry-pick 금지)
 
 ---
 

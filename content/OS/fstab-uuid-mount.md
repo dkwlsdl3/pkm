@@ -59,16 +59,7 @@ findmnt --verify --verbose     # "Success, no errors" 확인
 
 ## by-id도 가능 — 단, canonicalize하면 안정성이 사라진다
 
-UUID 외에 `/dev/disk/by-id/`(디스크 시리얼/WWN 기반 심링크)도 안정 식별자다. 디스크 시리얼로 장치를 찾는 코드에서 흔한 함정:
-
-```rust
-// 안티패턴: by-id 심링크를 찾아놓고 canonicalize로 /dev/sdX까지 풀어버림
-let real = std::fs::canonicalize("/dev/disk/by-id/scsi-...")?; // → "/dev/sda"
-// 이 /dev/sda를 fstab에 기록하면 재부팅 시 sda↔sdb 뒤섞임에 그대로 노출
-```
-
-- 장치를 **찾을 때** by-id를 쓰는 것과, fstab에 **기록할 때** 무엇을 쓰는지는 별개다. 안정 심링크를 손에 쥐고도 실디바이스 노드로 풀어서 저장하면 안정성이 사라진다.
-- 런타임 `mount`는 `/dev/sdX`든 by-id든 UUID든 다 동작하므로, **fstab에는 안정 식별자(by-id 심링크 경로 또는 `UUID=`) 원본을 그대로** 남겨야 한다.
+UUID 외에 `/dev/disk/by-id/`(디스크 시리얼/WWN 기반 심링크)도 안정 식별자다. 단, 코드에서 이 심링크를 canonicalize로 풀어 실디바이스 노드를 저장하면 안정성이 사라지는 함정이 있다 → [[disk-by-id-canonicalize-pitfall]]
 
 ## systemd가 생성한 `.mount` 유닛의 수동 마운트 간섭
 
@@ -99,6 +90,7 @@ mount ... /mnt/xxx   # 이제 유지됨
 
 ## 관련
 
+- [[disk-by-id-canonicalize-pitfall]] — by-id 심링크 canonicalize 안티패턴
 - [[dockerd-dataroot-symlink]] — 미마운트 볼륨이 유발한 도커 데몬 장애
 - [[ec2-ssm-access-no-key]] — 재부팅이 동반 장애를 드러낸 사례
 - [[systemd-automount-watchdog]] — automount watchdog / stale mount 복구

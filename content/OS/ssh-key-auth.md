@@ -89,17 +89,7 @@ ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no <user>@<MAC_IP>  # P
 
 ---
 
-## SSH Config alias
-
-반복 입력 줄이기 위해 `~/.ssh/config`에 alias 등록.
-
-```
-Host <alias> <ip>
-  HostName <ip>
-  User <username>
-```
-
-이후 `ssh <alias>`로 접속 가능.
+반복 접속 시 alias 등록으로 입력을 줄일 수 있다 — [[ssh-config-alias]] 참고.
 
 ---
 
@@ -107,4 +97,5 @@ Host <alias> <ip>
 
 - SSH 키 알고리즘: ed25519 (Edwards-curve, 256bit, 현재 권장 방식)
 - Mac `전체 디스크 접근 허용` OFF 상태: Unix 권한 기준으로 접근 가능, TCC 보호 경로(타 사용자 Documents 등)는 접근 불가
+- [[ssh-config-alias]]
 - [[input-leap-setup]]

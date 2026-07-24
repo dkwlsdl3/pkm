@@ -49,32 +49,8 @@ firewall-cmd --reload
 nginx 502 + 로그 `connect() failed (113)` / `No route to host`면 대부분 이
 업스트림 방화벽이 원인(포트 리스닝은 확인됐는데 중계만 실패하는 패턴).
 
-## 경로 검증 트릭 — 데이터 없이 전 구간 증명
-
-토큰 인증이 있는 gRPC 서버라면 **무인증 Ping 한 방**으로 충분하다:
-서버가 `UNAUTHENTICATED(16)`를 돌려주면 TCP → TLS(인증서 검증) → 프록시
-grpc_pass → 백엔드 인증 게이트까지 전 구간이 통과됐다는 뜻. 운영 서버에
-아무 데이터도 쓰지 않고 경로를 실증할 수 있다.
-
-- `DEADLINE_EXCEEDED` + "Waiting for LB pick" = TCP 연결 자체가 안 됨(방화벽/NAT 포워딩)
-- `UNAVAILABLE` + "HTTP status code 502" = TLS·프록시는 통과, 업스트림 연결 실패
-- `UNAUTHENTICATED` = 전 구간 OK
-
-## SSH 터널로 내부 경로 검증 (grpc-js)
-
-공인망에 포트가 안 열려 있어도(NAT 포워딩 없음) 내부 경로를 그대로 검증하려면
-터널 + SNI 오버라이드:
-
-```bash
-ssh -f -N -L 18443:127.0.0.1:8443 proxy-host
-```
-```js
-const opts = {
-  'grpc.ssl_target_name_override': 'api.example.com',  // 인증서 hostname 검증용
-  'grpc.default_authority': 'api.example.com',
-};
-new Service('127.0.0.1:18443', grpc.credentials.createSsl(), opts);
-```
+배포 후 데이터 없이 경로 전 구간을 검증하는 방법(무인증 Ping 에러 코드 매핑,
+공인망 미개방 시 SSH 터널 + SNI 오버라이드)은 [[grpc-connectivity-verification]] 참고.
 
 ---
 
@@ -82,3 +58,4 @@ new Service('127.0.0.1:18443', grpc.credentials.createSsl(), opts);
 
 - [[network-overview]]
 - [[gitlab-ci-deploy-runner]]
+- [[grpc-connectivity-verification]]

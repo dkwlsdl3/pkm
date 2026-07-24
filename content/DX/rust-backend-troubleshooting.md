@@ -36,55 +36,11 @@ created: 2026-05-21 (목)
 
 ### DB 커넥션 풀 고갈
 
-API 핸들러, scheduler, WebSocket handler, cleanup task가 같은 pool을 공유하면 주기 작업이 순간적으로 풀을 잠식할 수 있다. 특히 대량 DELETE, N+1 쿼리, 외부 명령을 포함한 점검 task가 같은 시간대에 몰리면 health check까지 timeout될 수 있다.
+API 핸들러, scheduler, cleanup task가 같은 DB 커넥션 풀을 공유하면 주기 작업이 순간적으로 풀을 잠식해 health check까지 timeout될 수 있다. 원인, 완화 코드, cleanup task 분리 방법은 [[db-connection-pool-exhaustion]] 참고.
 
-```rust
-PgPoolOptions::new()
-    .max_connections(50)
-    .acquire_timeout(Duration::from_secs(30))
-    .connect(database_url)
-    .await?;
-```
+### Blocking I/O 가설
 
-풀 크기를 늘리는 것은 완화책이다. 근본적으로는 무거운 작업을 분리하고, 오래 잡는 트랜잭션과 N+1 쿼리를 줄여야 한다.
-
-### Cleanup task 분리
-
-인증 토큰 정리, quota alert, storage capacity 점검, time-series DELETE를 한 루프에 몰아넣으면 장애 시 영향 범위가 커진다. 무거운 time-series 정리는 별도 task로 분리한다.
-
-```rust
-let ts_cleanup_pool = pool.clone();
-tokio::spawn(async move {
-    let mut interval = tokio::time::interval(tokio::time::Duration::from_secs(3600));
-    interval.tick().await;
-
-    loop {
-        interval.tick().await;
-
-        if let Err(error) = sqlx::query(
-            "DELETE FROM system_cpu_data WHERE collected_at < NOW() - INTERVAL '30 days'",
-        )
-        .execute(&ts_cleanup_pool)
-        .await
-        {
-            tracing::warn!("Failed to cleanup old cpu data: {}", error);
-        }
-    }
-});
-```
-
-### Blocking I/O 가설 검증
-
-`std::path::Path::exists()` 같은 동기 파일시스템 호출은 Lustre/NFS 같은 네트워크 파일시스템에서 위험할 수 있다. 다만 실제 원인인지 확인하려면 로그, task 구조, 호출 빈도, worker 점유 범위를 같이 봐야 한다.
-
-```rust
-let path_owned = path.to_string();
-let exists = tokio::task::spawn_blocking(move || {
-    std::path::Path::new(&path_owned).exists()
-})
-.await
-.unwrap_or(false);
-```
+동기 파일시스템 호출이 Lustre/NFS 같은 네트워크 파일시스템에서 Tokio worker를 막아 hung을 유발할 수 있다. 위험 조건과 `spawn_blocking` 격리 예시는 [[tokio-blocking-io-hazard]] 참고.
 
 ---
 
@@ -92,17 +48,14 @@ let exists = tokio::task::spawn_blocking(move || {
 
 1. `health` API를 timeout 포함해서 호출한다.
 2. 백엔드 로그에서 panic, timeout, pool error, 외부 명령 지연을 찾는다.
-3. scheduler와 cleanup task가 같은 pool을 공유하는지 확인한다.
+3. scheduler와 cleanup task가 같은 pool을 공유하는지 확인한다 ([[db-connection-pool-exhaustion]]).
 4. 대량 DELETE/UPDATE에 인덱스가 있는지 확인한다.
-5. Tokio task 안의 동기 I/O와 외부 명령 실행 경로를 확인한다.
+5. Tokio task 안의 동기 I/O와 외부 명령 실행 경로를 확인한다 ([[tokio-blocking-io-hazard]]).
 6. 풀 크기 조정은 임시 완화로 보고, 무거운 작업 분리와 쿼리 개선을 우선한다.
 
 ---
 
 ## 주의사항
-
-> [!WARNING]
-> `max_connections`만 늘리면 증상이 잠시 줄어들 수 있지만, 느린 쿼리와 장시간 트랜잭션이 그대로라면 DB 부하만 커질 수 있다.
 
 > [!NOTE]
 > 이전 가설이 그럴듯해 보여도 실제 로그의 1차 에러가 무엇인지 먼저 고정해야 한다. `pool timed out while waiting for an open connection`이 반복된다면 DB pool 경합을 우선 검증한다.
@@ -111,6 +64,8 @@ let exists = tokio::task::spawn_blocking(move || {
 
 ## 관련
 
+- [[db-connection-pool-exhaustion]]
+- [[tokio-blocking-io-hazard]]
 - [[rust-cargo]]
 - [[systemd-service]]
 - [[playwright-e2e]]

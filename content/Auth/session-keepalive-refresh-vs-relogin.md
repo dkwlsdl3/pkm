@@ -24,10 +24,6 @@ created: 2026-07-01 (수)
 
 → 진짜 "무인 무한 유지"는 refresh만으론 불가능. **refreshToken 만료 전에 주기적으로 재로그인**해 refreshToken 자체를 새로 받아야 한다(예: 매일 1회, id/pw를 로컬 secret 파일에서 읽어 로그인 API 호출 → 새 쿠키 저장).
 
-## 또 다른 함정 — write 인증실패가 200으로 위장
-
-일부 API는 인증 만료 시 **GET은 관대**(200)하지만 **write(POST/PUT)는 401이 아니라 `HTTP 200 + {success:false}`("수정 중 오류" 등)로 위장**한다. 401만 감지하면 write 자동복구를 놓친다. → write 응답의 `success:false`도 인증신호 후보로 보고 refresh+재시도.
-
 ## 자동화 레시피
 
 1. **on-demand refresh**: API 호출 직전/인증실패 시 refresh 1회 후 재시도(authToken 신선도 유지).
@@ -36,5 +32,6 @@ created: 2026-07-01 (수)
 
 ## 관련
 - [[auth-overview]]
+- [[http-200-fake-write-failure]] — write 인증실패가 200+success:false로 위장되는 함정
 - [[playwright-mcp-session-persistence]] — 저장된 storageState로 브라우저 세션 재주입
 - [[systemd-user-timer]]

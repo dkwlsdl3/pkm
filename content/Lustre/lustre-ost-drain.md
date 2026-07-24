@@ -57,16 +57,7 @@ lfs find /mnt/lustre --ost <fsname>-OST<idx>_UUID   # 0건이면 완료
 
 ### 영구 제거와 등록 이력
 
-Lustre에서 OST 축소는 일반 데이터베이스 행 삭제처럼 "이름을 완전히 없애는 작업"이 아니다. 운영상 안전한 기본값은 다음과 같다.
-
-1. 데이터를 다른 OST로 드레인한다.
-2. MGS `conf_param`으로 대상 OST를 영구 비활성화한다.
-3. OST 등록 이력과 사용한 인덱스는 유지한다.
-4. 새 OST 생성 시 현재 인벤토리뿐 아니라 과거 등록 이력까지 합쳐 다음 인덱스를 선택한다.
-
-`writeconf`는 전체 설정 로그를 다시 쓰는 고위험 유지보수 작업이지, 실행 중인 파일시스템에서 OST 하나를 간단히 삭제하는 API가 아니다. 비활성 엔트리를 완전히 제거하려고 전체 파일시스템을 중단하는 것보다, 비활성 상태를 정상 운영 상태로 취급하는 편이 안전하다.
-
-등록 이력 소스를 자동화할 때는 클라이언트의 OSC 목록만 믿으면 안 된다. 클라이언트 전파가 늦으면 방금 사용한 인덱스가 아직 보이지 않아 재사용할 수 있다. 생성 직후에도 일관된 MGS 설정 로그를 기준으로 확인하고, 조회 실패 시에는 새 OST 생성을 중단하는 fail-closed가 적합하다.
+드레인 후 OST를 영구히 빼려면 런타임 설정이 아닌 MGS `conf_param`을 쓴다. `writeconf`와의 차이, 인덱스 재사용 규칙은 별도 노트 참고: [[lustre-ost-permanent-removal]].
 
 ---
 
@@ -90,5 +81,6 @@ Lustre에서 OST 축소는 일반 데이터베이스 행 삭제처럼 "이름을
 ## 관련
 
 - [[lustre-overview]]
+- [[lustre-ost-permanent-removal]] — 영구 비활성화(conf_param vs writeconf), 인덱스 재사용
 - [[lustre-node-topology]] — 스케일아웃/축소 시 논리 노드 구성
 - [[lustre-troubleshooting]] — 마운트·부팅 레이스

@@ -14,7 +14,8 @@ tags:
 
 ## 핵심 개념
 
-- [[ha-cluster-fundamentals]] — Pacemaker/Corosync/DRBD 3대 요소, 정족수 홀수 규칙, STONITH/split-brain (입문)
+- [[ha-cluster-fundamentals]] — Pacemaker/Corosync/DRBD 3대 요소 (입문)
+- [[quorum-witness-odd-rule]] — 정족수(과반)와 witness 홀수화 규칙
 
 ---
 

@@ -33,40 +33,9 @@ sudo virsh list --all
 
 ---
 
-## 네트워크 브리지 설정 (netplan)
+## 네트워크 브리지 설정
 
-VM들이 호스트 내부에서 통신하기 위한 가상 스위치.
-
-```yaml
-# /etc/netplan/01-network-manager-all.yaml
-network:
-  version: 2
-  renderer: NetworkManager
-  bridges:
-    br-lnet:
-      addresses:
-        - <HOST_LNET_IP>/24
-      parameters:
-        stp: false
-        forward-delay: 0
-```
-
-```bash
-sudo chmod 600 /etc/netplan/01-network-manager-all.yaml
-sudo netplan apply
-ip addr show br-lnet
-```
-
-### qemu-bridge-helper 권한 설정
-
-브리지 사용 VM 생성 전 반드시 설정. 없으면 `failed to parse default acl file` 오류 발생.
-
-```bash
-sudo mkdir -p /etc/qemu
-echo "allow br-lnet" | sudo tee /etc/qemu/bridge.conf
-sudo chmod 644 /etc/qemu/bridge.conf
-sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
-```
+VM들이 호스트 내부에서 통신하기 위한 가상 스위치 구성과 qemu-bridge-helper 권한 설정은 [[network-bridge]] 참고.
 
 ---
 
@@ -133,53 +102,7 @@ virsh --connect qemu:///session list --all
 
 ### qemu:///session vs qemu:///system
 
-| | session | system |
-|---|---|---|
-| QEMU 프로세스 권한 | 사용자 권한 | root 권한 |
-| `/dev/zvol/` 접근 | 불가 | 가능 |
-| 기본값 | X | O |
-
-```bash
-# ~/.zshrc에 추가하면 기본값 변경
-export LIBVIRT_DEFAULT_URI=qemu:///session
-
-# 또는 매번 명시
-virsh --connect qemu:///session list --all
-```
-
-### session → system 마이그레이션
-
-zvol attach 등 root 권한이 필요한 작업 시 system으로 이전 필요.
-
-```bash
-# 1. 기존 session VM XML dump
-virsh -c qemu:///session dumpxml <vm> > /tmp/<vm>.xml
-
-# 2. session VM 종료 및 제거
-virsh -c qemu:///session destroy <vm>
-virsh -c qemu:///session undefine <vm>
-
-# 3. system에 등록 및 시작
-virsh -c qemu:///system define /tmp/<vm>.xml
-virsh -c qemu:///system start <vm>
-```
-
-### qemu.conf 설정
-
-system QEMU가 사용자 홈 디렉토리의 qcow2 이미지에 접근하려면 `/etc/libvirt/qemu.conf` 수정 필요.
-
-```
-user = "admin"
-group = "libvirt"
-dynamic_ownership = 0
-```
-
-- `user = "admin"`: `/home/admin/vms/` 하위 qcow2 이미지 접근 허용
-- `dynamic_ownership = 0`: 기존 파일 소유권 변경 방지
-
-```bash
-sudo systemctl restart libvirtd
-```
+session/system 연결 차이와 zvol 접근 등을 위한 system 전환·마이그레이션 절차는 [[qemu-session-vs-system]] 참고.
 
 ---
 
@@ -194,19 +117,9 @@ grubby --update-kernel=ALL --args="console=ttyS0,115200n8"
 
 ---
 
-## VM 인터넷 연결 (iptables NAT)
+## VM 인터넷 연결
 
-내부 네트워크의 VM이 외부 인터넷에 접근해야 할 때.
-
-```bash
-# IP 포워딩 활성화
-sudo sysctl -w net.ipv4.ip_forward=1
-
-# NAT 설정 (enp4s0 = 호스트 외부 인터페이스)
-sudo iptables -t nat -A POSTROUTING -s <LNET_CIDR> -o enp4s0 -j MASQUERADE
-sudo iptables -A FORWARD -i br-lnet -o enp4s0 -j ACCEPT
-sudo iptables -A FORWARD -i enp4s0 -o br-lnet -m state --state RELATED,ESTABLISHED -j ACCEPT
-```
+내부 네트워크의 VM이 외부 인터넷에 접근하기 위한 iptables NAT 설정은 [[iptables-nat]] 참고.
 
 ---
 
@@ -248,6 +161,9 @@ sudo modprobe -r scsi_debug
 
 ## 관련
 
+- [[network-bridge]]
+- [[iptables-nat]]
+- [[qemu-session-vs-system]]
 - [[ssh-key-auth]]
 - [[lustre-overview]]
 - [[smartctl]]
