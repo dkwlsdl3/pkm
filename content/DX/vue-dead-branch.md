@@ -1,4 +1,5 @@
 ---
+title: 상보 조건의 죽은 분기 탐지
 tags:
   - tech
 created: 2026-06-01 (월)

@@ -1,4 +1,5 @@
 ---
+title: 외부 명령 Hang 격벽 (Timeout Bulkhead)
 tags:
   - tech
   - design-pattern

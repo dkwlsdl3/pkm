@@ -1,4 +1,5 @@
 ---
+title: fstab은 UUID로 (raw 디바이스명 금지)
 tags:
   - tech
 created: 2026-06-01 (월)

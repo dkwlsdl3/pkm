@@ -1,4 +1,5 @@
 ---
+title: "std::fs::copy 자기 덮어쓰기 위험"
 tags:
   - tech
 created: 2026-06-04 (목)

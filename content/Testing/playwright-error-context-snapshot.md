@@ -1,4 +1,5 @@
 ---
+title: Playwright Error Context Snapshot
 tags:
   - tech
 created: 2026-06-08 (월)

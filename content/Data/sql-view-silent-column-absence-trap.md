@@ -1,4 +1,5 @@
 ---
+title: SQL 뷰 경유 조회의 silent 컬럼 부재 함정
 tags:
   - tech
 created: 2026-07-16 (수)

@@ -1,4 +1,5 @@
 ---
+title: utoipa 자기참조 스키마 — 기동 시 stack overflow
 tags:
   - rust
   - utoipa
@@ -55,3 +56,10 @@ fn tree_node_schema_generation_terminates() {
 초기화가 있는 프레임워크는 기동 경로도 검증 대상.
 
 관련: [[rust-overview]]
+
+---
+
+## 관련
+
+- [[rust-overview]]
+- [[rust-build-system-deps]]

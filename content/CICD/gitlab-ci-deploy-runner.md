@@ -1,4 +1,5 @@
 ---
+title: "GitLab CI deploy 러너 & tag 매칭"
 tags:
   - tech
 created: 2026-06-25 (목)

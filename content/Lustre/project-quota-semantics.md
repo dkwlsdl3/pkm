@@ -1,4 +1,5 @@
 ---
+title: Lustre 프로젝트 쿼터 의미론 — inode 집계와 project ID 잔류
 tags:
   - tech
 created: 2026-06-04 (목)

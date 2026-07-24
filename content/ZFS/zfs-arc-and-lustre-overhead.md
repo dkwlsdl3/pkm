@@ -1,4 +1,5 @@
 ---
+title: ZFS ARC 캐시 착시와 Lustre+ZFS 계층 오버헤드
 tags:
   - tech
 created: 2026-06-18 (목)

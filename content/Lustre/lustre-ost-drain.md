@@ -1,4 +1,5 @@
 ---
+title: Lustre OST 드레인 (제거 전 데이터 비우기)
 tags:
   - tech
 created: 2026-07-06 (월)

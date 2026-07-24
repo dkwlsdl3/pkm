@@ -1,4 +1,5 @@
 ---
+title: Agent Skill Sharing Symlink
 tags:
   - tech
   - dx

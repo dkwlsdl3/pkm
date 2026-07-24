@@ -1,4 +1,5 @@
 ---
+title: ZFS 파일/loop vdev 재부팅 복구
 tags:
   - tech
 created: 2026-06-25 (목)

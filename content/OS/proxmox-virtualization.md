@@ -1,4 +1,5 @@
 ---
+title: Proxmox VE
 tags:
   - tech
 created: 2026-06-18 (목)

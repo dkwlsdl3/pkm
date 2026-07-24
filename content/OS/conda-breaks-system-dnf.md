@@ -1,4 +1,5 @@
 ---
+title: conda가 시스템 dnf를 깨뜨림 (libsolv 충돌)
 tags:
   - tech
 created: 2026-06-26 (금)

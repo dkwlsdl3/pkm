@@ -1,3 +1,9 @@
+---
+title: "form_urlencoded 재직렬화가 %20을 +로 바꾼다"
+tags:
+  - tech
+created: 2026-07-13 (월)
+---
 # form_urlencoded 재직렬화가 %20을 +로 바꾼다
 
 ## 증상

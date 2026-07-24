@@ -1,4 +1,5 @@
 ---
+title: GitLab 서브모듈 → 모노레포 전환 함정 모음
 tags:
   - cicd
   - gitlab
@@ -36,3 +37,10 @@ tags:
 - 스위치 직전 기준 커밋 고정 후 스냅샷 재동기화 (병행 기간에 기존 레포에 쌓인 커밋 유실 방지)
 
 관련: [[cicd-overview]] [[gitlab-ci-deploy-runner]]
+
+---
+
+## 관련
+
+- [[cicd-overview]]
+- [[monorepo]]

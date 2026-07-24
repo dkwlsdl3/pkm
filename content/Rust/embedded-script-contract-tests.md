@@ -1,4 +1,5 @@
 ---
+title: Embedded Script Contract Tests
 tags:
   - tech
 created: 2026-06-05 (금)

@@ -1,4 +1,5 @@
 ---
+title: systemd automount watchdog
 tags:
   - tech
 created: 2026-06-05 (금)

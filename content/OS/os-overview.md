@@ -23,6 +23,7 @@ created: 2026-05-13 (수)
 ## 보안 & 인증
 
 - [[sso]] — SSO 개념, SAML / OAuth / OIDC 비교, IdP·SP 역할
+- [[selinux-confined-daemon-ocf-ra]] — confined SELinux 도메인이 실행하는 OCF/RA가 rc=1 실패(수동은 성공): 도메인 전이·정책 진단
 
 ## 가상화
 
@@ -43,6 +44,8 @@ created: 2026-05-13 (수)
 - [[smartctl]] — SMART 수집, -d sat / -d cciss,N, raw_value 파싱, sudoers 경로
 - [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset, r refresh, 설치 소스 의미
 - [[conda-breaks-system-dnf]] — conda가 LD_LIBRARY_PATH 점유 → 시스템 dnf libsolv 충돌, `env -u LD_LIBRARY_PATH dnf` 우회
+- [[el-kernel-swap-safety]] — 벤더 패치커널 스왑 전 확인(kernel-modules·initramfs·fallback), 안 하면 dracut emergency
+- [[server-fan-noise-bmc-diagnosis]] — 서버 팬 폭음 진단: 온도+BMC 팬정책 기준, 실물 확인, 1U baseline(≈6000 RPM) 오해 주의
 
 ## 스토리지 & 마운트
 

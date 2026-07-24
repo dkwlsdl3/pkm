@@ -1,4 +1,5 @@
 ---
+title: EL8/9 커널 스왑 안전수칙 (벤더 패치커널 함정)
 tags:
   - os
   - kernel

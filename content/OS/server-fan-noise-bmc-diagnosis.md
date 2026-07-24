@@ -1,4 +1,5 @@
 ---
+title: 서버 팬 폭음 진단
 tags:
   - os
   - hardware

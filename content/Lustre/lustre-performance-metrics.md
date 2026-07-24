@@ -1,4 +1,5 @@
 ---
+title: Lustre 성능 지표 수집 (proc/sysfs 기반, 에이전트리스)
 tags:
   - lustre
   - monitoring
@@ -51,3 +52,11 @@ write                     13 samples [usecs] 3124 10285 63814
 - 클러스터 뷰가 필요하면 각 노드 수집분을 집계 계층에서 팬아웃 병합 (OST active는 MDS의 osp 맵을 조인)
 
 관련: [[lustre-overview]] [[lustre-ost-drain]] [[lustre-node-topology]]
+
+---
+
+## 관련
+
+- [[lustre-overview]]
+- [[lustre-single-node-benchmark]]
+- [[storage-performance-testing]]

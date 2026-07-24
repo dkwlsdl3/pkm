@@ -1,4 +1,5 @@
 ---
+title: 공유 배포 env 템플릿의 opt-in 플래그 + manual 버튼 함정
 tags:
   - gitlab-ci
   - deployment
@@ -52,3 +53,11 @@ deploy:prod:
 수동 파이프라인 실행으로 새로 빌드.
 
 관련: [[cicd-overview]], [[gitlab-ci-deploy-runner]]
+
+---
+
+## 관련
+
+- [[cicd-overview]]
+- [[gitlab-ci-deploy-runner]]
+- [[provisioning-tool-antipatterns]]

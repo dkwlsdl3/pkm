@@ -1,4 +1,5 @@
 ---
+title: 터미널 마우스 트래킹 누수
 tags:
   - tech
 created: 2026-06-12 (금)

@@ -1,4 +1,5 @@
 ---
+title: 하드웨어 RAID vs HBA/JBOD 패스스루 (ZFS 스토리지)
 tags:
   - zfs
   - storage

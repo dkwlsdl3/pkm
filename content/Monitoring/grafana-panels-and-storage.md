@@ -1,4 +1,5 @@
 ---
+title: "Grafana 패널 타입 & 대시보드 저장 방식"
 tags:
   - tech
 created: 2026-06-25 (목)

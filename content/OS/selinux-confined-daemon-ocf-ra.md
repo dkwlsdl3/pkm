@@ -1,4 +1,5 @@
 ---
+title: confined SELinux 도메인이 실행하는 OCF/RA가 rc=1로 실패할 때
 tags:
   - os
   - selinux

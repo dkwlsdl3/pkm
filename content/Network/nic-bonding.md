@@ -1,4 +1,5 @@
 ---
+title: NIC 본딩 — active-backup vs LACP
 tags:
   - tech
 created: 2026-06-12 (금)

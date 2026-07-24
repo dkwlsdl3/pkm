@@ -1,4 +1,5 @@
 ---
+title: ESM bare import는 스크립트 파일 위치 기준으로 해석된다
 tags:
   - dx
 created: 2026-07-01 (수)

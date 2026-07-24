@@ -1,4 +1,5 @@
 ---
+title: Playwright MCP Session Persistence
 tags:
   - tech
   - dx

@@ -1,4 +1,5 @@
 ---
+title: 단일노드 Lustre 벤치마크 방법론
 tags:
   - tech
 created: 2026-06-18 (목)

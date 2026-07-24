@@ -1,4 +1,5 @@
 ---
+title: Anaconda 텍스트 모드 설치 (Rocky/RHEL)
 tags:
   - tech
 created: 2026-06-12 (금)

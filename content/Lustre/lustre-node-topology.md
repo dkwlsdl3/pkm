@@ -1,4 +1,5 @@
 ---
+title: Lustre 노드 토폴로지 — 논리 노드 vs 물리 노드, 스케일아웃 vs HA
 tags:
   - tech
 created: 2026-06-22 (월)

@@ -1,4 +1,5 @@
 ---
+title: Rust musl 크로스빌드 — openssl vendored / libzfs 한계
 tags:
   - tech
 created: 2026-06-18 (목)

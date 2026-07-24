@@ -1,4 +1,5 @@
 ---
+title: GRUB 커널 고정 — 인덱스 vs 이름
 tags:
   - tech
 created: 2026-06-18 (목)

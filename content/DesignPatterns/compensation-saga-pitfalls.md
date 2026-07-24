@@ -1,4 +1,5 @@
 ---
+title: 보상(Compensation/Saga) 설계 함정 — 프로비저닝 Job에서 실증된 4가지
 tags:
   - design-pattern
   - distributed
@@ -40,3 +41,10 @@ tags:
 - 이런 결함은 **컴파일·단위테스트 전부 통과한 상태**에서 실기기 첫 리허설과 적대적 리뷰("이 코드가 틀렸다고 가정하고 반박하라")에서만 드러났다. 상태기계 + 외부 에이전트 조합은 리허설·적대검증을 기본으로.
 
 관련: [[design-patterns-overview]] [[command]] [[chain-of-responsibility]]
+
+---
+
+## 관련
+
+- [[design-patterns-overview]]
+- [[external-command-timeout-bulkhead]]

@@ -1,4 +1,5 @@
 ---
+title: 기존 웹 프록시 옆에 gRPC 수신 붙이기 — 전용 포트 패턴
 tags:
   - nginx
   - grpc
@@ -75,4 +76,9 @@ const opts = {
 new Service('127.0.0.1:18443', grpc.credentials.createSsl(), opts);
 ```
 
-관련: [[network-overview]], [[gitlab-ci-deploy-runner]]
+---
+
+## 관련
+
+- [[network-overview]]
+- [[gitlab-ci-deploy-runner]]

@@ -1,4 +1,5 @@
 ---
+title: EC2 SSM 접속 (키페어 분실)
 tags:
   - tech
 created: 2026-06-01 (월)

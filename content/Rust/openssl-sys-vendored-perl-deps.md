@@ -1,4 +1,5 @@
 ---
+title: openssl-sys vendored 빌드의 perl 의존성
 tags:
   - tech
 created: 2026-06-26 (금)

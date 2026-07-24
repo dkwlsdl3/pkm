@@ -1,4 +1,5 @@
 ---
+title: "heredoc 조립 오염 & read-back 검증"
 tags:
   - tech
 created: 2026-07-06 (월)

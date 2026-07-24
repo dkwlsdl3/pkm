@@ -1,4 +1,5 @@
 ---
+title: 링크 레이어 단계 진단 (L1→L2→L3)
 tags:
   - tech
 created: 2026-06-12 (금)

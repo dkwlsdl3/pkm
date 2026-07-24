@@ -1,4 +1,5 @@
 ---
+title: 쿠키 세션 무인 유지 — refresh vs 재로그인
 tags:
   - auth
 created: 2026-07-01 (수)

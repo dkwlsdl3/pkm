@@ -1,4 +1,5 @@
 ---
+title: GitLab npm Package Registry
 tags:
   - tech
 created: 2026-06-08 (월)

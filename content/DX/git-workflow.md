@@ -1,4 +1,5 @@
 ---
+title: Git 워크플로우
 tags:
   - tech
 created: 2026-05-29 (금)

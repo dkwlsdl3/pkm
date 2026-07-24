@@ -1,4 +1,5 @@
 ---
+title: "모달 @click.stop × click-outside 충돌 — capture 단계 리스너"
 tags:
   - tech
 created: 2026-06-04 (목)

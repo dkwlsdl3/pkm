@@ -1,4 +1,5 @@
 ---
+title: Linux·스토리지 엔지니어링 자격증 로드맵
 tags:
   - tech
 created: 2026-06-18 (목)
