@@ -1,13 +1,13 @@
 ---
-title: RAG / ChromaDB
+title: RAG (검색 기반 생성)
 tags:
   - tech
 created: 2026-05-14 (목)
 ---
 
-# RAG / ChromaDB
+# RAG (검색 기반 생성)
 
-> **TL;DR**: LLM이 모르는 내 데이터를 검색해서 답변에 활용하는 기법 — ChromaDB는 그 검색을 담당하는 벡터 DB
+> **TL;DR**: LLM이 모르는 내 데이터를 벡터 유사도로 검색해 컨텍스트에 넣어주는 기법. 검색 계층 구현은 [[chromadb]] 참고.
 
 ---
 
@@ -43,31 +43,6 @@ LLM은 학습 데이터 이후의 정보나 내부 문서를 모름. RAG는 질�
 
 ---
 
-## ChromaDB
-
-오픈소스 벡터 데이터베이스. 로컬 실행 가능, 별도 서버 불필요.
-
-```python
-import chromadb
-
-client = chromadb.Client()
-collection = client.create_collection("my_docs")
-
-# 문서 저장
-collection.add(
-    documents=["Lustre는 HPC 분산 파일시스템이다"],
-    ids=["doc1"]
-)
-
-# 유사 문서 검색
-results = collection.query(
-    query_texts=["분산 스토리지 시스템"],
-    n_results=3
-)
-```
-
----
-
 ## 키워드 폴백
 
 벡터 검색 결과가 없거나 신뢰도 낮을 때 일반 키워드 검색으로 fallback하는 패턴. 안정성 확보.
@@ -77,4 +52,5 @@ results = collection.query(
 ## 관련
 
 - [[ai-overview]]
-- [[local-llm-uncensored]]
+- [[chromadb]]
+- [[vector-db]]

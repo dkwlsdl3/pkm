@@ -80,14 +80,7 @@ rm -rf ~/.agents/skills/triage
 
 ## Karpathy 4원칙
 
-`~/.claude/CLAUDE.md`에 전역 적용 중.
-
-1. **Think Before Coding** — 구현 전 트레이드오프 명시, 모호함 먼저 해소
-2. **Simplicity First** — 최소한의 코드만, 투기적 구현 금지
-3. **Surgical Changes** — 요청된 것만 수정, 불필요한 정리 금지
-4. **Goal-Driven Execution** — 명령이 아닌 성공 기준으로 실행
-
-참고: https://discuss.pytorch.kr/t/karpathy-inspired-claude-code-guidelines-andrej-karpathy-llm-claude-code/9912
+`~/.claude/CLAUDE.md`에 전역 적용 중. 원칙 상세는 [[karpathy-coding-principles]] 참고.
 
 ---
 
@@ -136,3 +129,4 @@ cd ~/dotfiles && git pull
 
 - [[dotfiles]]
 - [[ai-workflow-tools]]
+- [[karpathy-coding-principles]]

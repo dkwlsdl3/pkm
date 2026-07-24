@@ -29,14 +29,7 @@ created: 2026-05-12 (화)
 *   **Hermes 3**: 복잡한 지시 이행 능력이 좋아 보안 시나리오 설계 및 보고서 작성에 유용합니다.
 *   **Uncensored 태그 모델**: Hugging Face에서 `Uncensored` 혹은 `Security` 태그로 공유되는 모델들은 페이로드 생성 등 보안 테스트 시 거절이 거의 없습니다.
 
-## 3. 주요 구동 도구 및 인터페이스
-*   **LM Studio**: 초보자가 사용하기 가장 쉬운 GUI 도구입니다. 내부 검색창에서 모델을 바로 받아 실행할 수 있습니다.
-*   **Ollama**: 터미널 기반으로 가볍고 빠르게 모델을 실행할 때 사용합니다.
-*   **SillyTavern**: 캐릭터 설정 및 성인용 역할극(RP)에 최적화된 전문 인터페이스(UI)입니다.
-
-## 4. 하드웨어 권장 사항
-*   **8B(80억 파라미터) 모델**: VRAM 8GB ~ 12GB (RTX 3060/4060 등)
-*   **30B~70B 모델**: VRAM 24GB 이상 (RTX 3090/4090 혹은 멀티 GPU)
+> 구동 도구(LM Studio·Ollama·SillyTavern)와 모델 크기별 VRAM 권장 사양은 [[local-llm-tools]]로 분리.
 
 ---
 
@@ -48,4 +41,4 @@ created: 2026-05-12 (화)
 ## 관련
 
 - [[ai-overview]]
-- [[claude-code-setup]]
+- [[local-llm-tools]]

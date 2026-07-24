@@ -69,46 +69,12 @@ created: 2026-05-13 (수)
 > 현재 세팅(Matt Pocock + Karpathy)으로 일상 작업 충분히 커버.
 > 개인 프로젝트에서 팀 시뮬레이션이 필요해지면 gstack 일부 스킬 추가 검토.
 
-### Matt Pocock 스킬 한국어 트리거 추가
-
-**목적/배경**  
-`~/.agents/skills/`에 설치된 10개 스킬의 description 필드에 한국어 트리거를 추가해 자연스러운 한국어 표현으로도 스킬이 자동 로드되도록 함.  
-스킬 description은 exact string matching이 아니라 LLM이 의미적으로 판단하므로 비슷한 뉘앙스도 인식됨.
-
-**추가된 한국어 트리거**
-
-| 스킬                            | 한국어 트리거                               |
-| ----------------------------- | ------------------------------------- |
-| caveman                       | 토큰 절약, 짧게 말해, 간단하게, 케이브맨 모드, 압축 모드    |
-| diagnose                      | 진단해줘, 버그 찾아줘, 왜 안되지, 오류 원인 찾아줘, 디버그해줘 |
-| grill-me                      | 나 검토해줘, 내 계획 검토, 질문해줘, 설계 피드백, 인터뷰해줘  |
-| grill-with-docs               | 문서 기반으로 검토, 도메인 언어로 검토, 아키텍처 검토       |
-| handoff                       | 핸드오프, 다음 에이전트에 넘겨, 대화 압축해서 넘겨         |
-| improve-codebase-architecture | 아키텍처 개선, 리팩토링 기회 찾아줘, 코드 구조 개선        |
-| prototype                     | 프로토타입 만들어줘, 빠르게 만들어봐, UI 시안, 대충 만들어봐  |
-| tdd                           | TDD로 해줘, 테스트 먼저 작성, 테스트 주도 개발         |
-| write-a-skill                 | 새 스킬 만들어줘, 스킬 작성해줘                    |
-| zoom-out                      | 전체 그림 보여줘, 큰 그림에서 설명해줘, 맥락 설명해줘       |
-
----
-
-### Karpathy 4원칙 전역 CLAUDE.md 추가
-
-**목적/배경**  
-Andrej Karpathy LLM 코딩 원칙을 CLAUDE.md에 추가해 모든 프로젝트에서 상시 적용.  
-`<!-- OMC:END -->` 아래에 추가해 OMC 업데이트 시 덮어쓰이지 않도록 배치.
-
-**4가지 원칙**
-1. Think Before Coding — 구현 전 트레이드오프 명시, 모호함 해소
-2. Simplicity First — 최소한의 코드, 투기적 구현 금지
-3. Surgical Changes — 요청된 것만 수정
-4. Goal-Driven Execution — 성공 기준으로 실행
-
-참고: https://discuss.pytorch.kr/t/karpathy-inspired-claude-code-guidelines-andrej-karpathy-llm-claude-code/9912
+> 스킬 description에 한국어 트리거를 넣어 자동 로드되게 하는 세팅은 [[claude-code-setup]], Karpathy 원칙 자체는 [[karpathy-coding-principles]] 참고.
 
 ---
 
 ## 관련
 
 - [[claude-code-setup]]
+- [[karpathy-coding-principles]]
 - [[dotfiles]]
