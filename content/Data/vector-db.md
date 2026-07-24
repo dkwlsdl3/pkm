@@ -29,7 +29,7 @@ created: 2026-05-13 (수)
 | **Milvus** | 오픈소스, 대규모 처리에 강함 |
 | **pgvector** | PostgreSQL 확장, 기존 RDB에 벡터 기능 추가 |
 
-> Keeper Gen2 백엔드에도 pgvector 사용 중 → [[Project/keeper-docs-summary_2026-05-14]]
+> 사내 서비스 백엔드에서도 기존 PostgreSQL에 pgvector를 얹어 벡터 기능을 추가하는 사례가 있다.
 
 ---
 

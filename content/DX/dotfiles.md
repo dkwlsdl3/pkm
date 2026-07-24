@@ -9,7 +9,7 @@ created: 2026-05-13 (수)
 
 > **TL;DR**: dotfiles를 Git으로 관리해 여러 기기에서 동일한 개발 환경 유지
 
-> GitHub: `git@github.com:dkwlsdl3/dotfiles.git`  
+> GitHub: `git@github.com:<YOUR_GITHUB_USER>/dotfiles.git`  
 > 로컬 위치: `~/dotfiles/`
 
 ---
@@ -53,7 +53,7 @@ created: 2026-05-13 (수)
 
 ```bash
 # 1. 레포 클론
-git clone git@github.com:dkwlsdl3/dotfiles.git ~/dotfiles
+git clone git@github.com:<YOUR_GITHUB_USER>/dotfiles.git ~/dotfiles
 
 # 2. 심볼릭 링크 자동 연결
 bash ~/dotfiles/install.sh

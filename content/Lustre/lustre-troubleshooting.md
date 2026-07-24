@@ -114,7 +114,7 @@ sudo systemctl enable lustre-mount.service
 
 ### 대안: fstab x-systemd.automount (스크립트 불필요)
 
-ping 대기 스크립트 없이 fstab 옵션만으로 같은 문제를 푸는 패턴 (keeper-config가 쓰는 방식):
+ping 대기 스크립트 없이 fstab 옵션만으로 같은 문제를 푸는 패턴 (일부 운영 환경에서 쓰는 방식):
 
 ```
 <MGS_IP>@tcp:/<fsname> /mnt/lustre lustre defaults,_netdev,flock,nofail,noauto,x-systemd.automount,x-systemd.requires=lnet.service,x-systemd.mount-timeout=300 0 0
@@ -177,7 +177,7 @@ sudo lctl list_nids
 # 올바른 값: <HOST_LNET_IP>@tcp (br-lnet)
 ```
 
-**원인**: `/etc/lnet.conf`가 비어있거나 `net:` 최상위 키가 누락되면 LNET이 임의 NIC 선택. VM들이 br-lnet(172.25.0.x) 망 안에 있어서 외부망 IP로는 응답 도달 불가.
+**원인**: `/etc/lnet.conf`가 비어있거나 `net:` 최상위 키가 누락되면 LNET이 임의 NIC 선택. VM들이 br-lnet(<VM_CIDR>) 망 안에 있어서 외부망 IP로는 응답 도달 불가.
 
 VM 측 dmesg 증거:
 ```
@@ -256,7 +256,7 @@ sudo lctl dl
 
 ```
 LDISKFS-fs (sda): Unrecognized mount option "nofail" or missing value
-LustreError: osd_mount()) keeperfs-MDT0000-osd: can't mount /dev/sda: -22
+LustreError: osd_mount()) <fsname>-MDT0000-osd: can't mount /dev/sda: -22
 ```
 
 **원인**: ldiskfs(OSD)는 `nofail` 옵션을 인식하지 못함. 클라이언트 fstab에는 사용 가능하지만 서버 타겟(MDT/OST) fstab에는 사용 불가.
@@ -279,7 +279,7 @@ mount -a
 **해결**:
 ```bash
 # MDT 서버에서 recovery 강제 완료
-ssh root@<MDS_IP> "lctl set_param mdt.keeperfs-MDT0000.recovery_time_soft=0"
+ssh root@<MDS_IP> "lctl set_param mdt.<fsname>-MDT0000.recovery_time_soft=0"
 # 이후 클라이언트에서 마운트 재시도
 mount /mnt/lustre
 ```
@@ -296,27 +296,27 @@ mount /mnt/lustre
 
 ## Lustre 노드 식별 — VM 이름 패턴 의존 금물
 
-**배경**: VM 이름 LIKE 패턴(`keeper-%meta%`, `keeper-%oss%`)으로 Lustre 노드를 식별하면 일반 VM 추가 시 오인식 위험.
+**배경**: VM 이름 LIKE 패턴(`<prefix>-%meta%`, `<prefix>-%oss%`)으로 Lustre 노드를 식별하면 일반 VM 추가 시 오인식 위험.
 
 **해결**: DB 테이블에 전용 컬럼 추가로 명시적 식별.
 
 ```sql
--- migration: infra_owners_info 테이블에 컬럼 추가
-ALTER TABLE infra_owners_info
+-- migration: VM 인벤토리 테이블에 컬럼 추가
+ALTER TABLE <vm_inventory>
   ADD COLUMN is_lustre_node BOOLEAN NOT NULL DEFAULT FALSE,
   ADD COLUMN lustre_role TEXT;
 
 -- 기존 데이터 백필
-UPDATE infra_owners_info SET is_lustre_node = TRUE, lustre_role = 'mgs_mdt'
+UPDATE <vm_inventory> SET is_lustre_node = TRUE, lustre_role = 'mgs_mdt'
   WHERE vm_name LIKE '%meta%';
-UPDATE infra_owners_info SET is_lustre_node = TRUE, lustre_role = 'oss'
+UPDATE <vm_inventory> SET is_lustre_node = TRUE, lustre_role = 'oss'
   WHERE vm_name LIKE '%oss%';
 ```
 
 **쿼리 변경**:
 ```rust
 // 변경 전 (패턴 의존 — 취약)
-WHERE vm_name LIKE 'keeper-%meta%' OR vm_name LIKE 'keeper-%oss%'
+WHERE vm_name LIKE '<prefix>-%meta%' OR vm_name LIKE '<prefix>-%oss%'
 
 // 변경 후 (컬럼 기반 — 명시적)
 WHERE is_lustre_node = TRUE

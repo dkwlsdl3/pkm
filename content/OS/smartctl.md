@@ -90,7 +90,7 @@ let raw_value = parts[parts.len() - 1].parse::<u64>().unwrap_or(0);
 which smartctl   # → /usr/sbin/smartctl
 
 # sudoers 등록
-echo "admin ALL=(ALL) NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/keeper-smartctl
+echo "admin ALL=(ALL) NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/smartctl-nopasswd
 ```
 
 > `/usr/bin/smartctl`과 `/usr/sbin/smartctl` 경로가 다르면 NOPASSWD가 적용되지 않음.

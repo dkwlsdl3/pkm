@@ -16,7 +16,7 @@ created: 2026-05-13 (수)
 | 항목 | 내용 |
 |---|---|
 | Ubuntu PC | <UBUNTU_IP> (admin) |
-| MacBook Air | <MAC_IP> (kth), macOS 14 Sonoma |
+| MacBook Air | <MAC_IP> (<user>), macOS 14 Sonoma |
 
 기존에 Mac → Ubuntu 방향 SSH 키 인증은 설정되어 있었고,  
 이번에 반대 방향인 **Ubuntu → Mac** 키 인증을 추가 설정했다.
@@ -73,8 +73,8 @@ sudo launchctl start com.openssh.sshd
 
 ```bash
 # Ubuntu에서 테스트
-ssh -o BatchMode=yes kth@<MAC_IP> echo "키 인증 성공"   # ✅
-ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no kth@<MAC_IP>  # Permission denied ✅
+ssh -o BatchMode=yes <user>@<MAC_IP> echo "키 인증 성공"   # ✅
+ssh -o PasswordAuthentication=no -o PubkeyAuthentication=no <user>@<MAC_IP>  # Permission denied ✅
 ```
 
 ---

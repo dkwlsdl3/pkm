@@ -110,7 +110,7 @@ context.storageState({ path: '.auth/admin.json' }) 저장
 import { execSync } from 'child_process';
 
 const result = execSync(
-  `psql "${process.env.KEEPER_DB_URL}" -t -c "SELECT code FROM auth_otp_codes WHERE id = '${otpId}' LIMIT 1;"`
+  `psql "${process.env.DB_URL}" -t -c "SELECT code FROM auth_otp_codes WHERE id = '${otpId}' LIMIT 1;"`
 ).toString().trim();
 ```
 
@@ -119,10 +119,10 @@ const result = execSync(
 ## 환경변수 (.env.test)
 
 ```bash
-KEEPER_ADMIN_EMAIL=<ADMIN_EMAIL>
-KEEPER_ADMIN_PASSWORD=<ADMIN_PASSWORD>
+ADMIN_EMAIL=<ADMIN_EMAIL>
+ADMIN_PASSWORD=<ADMIN_PASSWORD>
 BASE_URL=http://localhost:3000
-KEEPER_DB_URL=postgres://<DB_USER>:<DB_PASSWORD>@localhost:5432/<DB_NAME>
+DB_URL=postgres://<DB_USER>:<DB_PASSWORD>@localhost:5432/<DB_NAME>
 ```
 
 ---
@@ -146,7 +146,7 @@ npm run test:report      # HTML 리포트 열기
 |---|---|---|
 | `Cannot find name 'process'` | `@types/node` 미설치 | `npm i -D @types/node` + tsconfig에 `"types": ["node", ...]` |
 | `storageState` 인증 만료 | refresh token 만료 | global-setup 재실행 (`npx playwright test --global-setup`) |
-| OTP 조회 실패 | DB URL 잘못됨 | `.env.test`의 `KEEPER_DB_URL` 확인 |
+| OTP 조회 실패 | DB URL 잘못됨 | `.env.test`의 `DB_URL` 확인 |
 
 ---
 

@@ -57,12 +57,12 @@ created: 2026-05-18 (월)
 
 ---
 
-## Git 서브모듈 방식 (keeper-gen-2 사례)
+## Git 서브모듈 방식 (사내 프로젝트 사례)
 
 모노레포의 변형 — 루트 레포가 각 서비스를 서브모듈로 관리:
 
 ```
-keeper-gen-2/           ← 루트 레포 (통합 관리)
+<project-root>/         ← 루트 레포 (통합 관리)
 ├── .gitmodules
 ├── version.yaml        ← 전체 버전 일관성 관리
 ├── packaging/          ← RPM 메타 패키지

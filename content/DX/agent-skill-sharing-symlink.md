@@ -69,4 +69,3 @@ readlink -f ~/.codex/skills/example-skill
 
 - [[playwright-mcp-session-persistence]]
 - [[dotfiles]]
-- [[2026-06-02]]

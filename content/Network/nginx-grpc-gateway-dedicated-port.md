@@ -29,7 +29,7 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
     grpc_read_timeout  300s;
     grpc_send_timeout  300s;
-    location / { grpc_pass grpc://10.0.0.50:8086; }   # 백엔드는 평문 gRPC
+    location / { grpc_pass grpc://<BACKEND_IP>:8086; }   # 백엔드는 평문 gRPC
 }
 ```
 

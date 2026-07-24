@@ -101,11 +101,11 @@ rm -rf ~/.agents/skills/triage
 
 ## dotfiles 동기화
 
-GitHub: `git@github.com:dkwlsdl3/dotfiles.git`
+GitHub: `git@github.com:<YOUR_GITHUB_USER>/dotfiles.git`
 
 **새 기기 세팅:**
 ```bash
-git clone git@github.com:dkwlsdl3/dotfiles.git ~/dotfiles
+git clone git@github.com:<YOUR_GITHUB_USER>/dotfiles.git ~/dotfiles
 bash ~/dotfiles/install.sh
 # Claude 열고
 /plugin install oh-my-claudecode

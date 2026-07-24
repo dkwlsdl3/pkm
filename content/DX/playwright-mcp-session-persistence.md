@@ -84,4 +84,3 @@ chmod 600 /secure/path/auth-state.json
 
 - [[playwright-e2e]]
 - [[agent-skill-sharing-symlink]]
-- [[2026-06-02]]

@@ -242,7 +242,7 @@ lsblk
 sudo modprobe -r scsi_debug
 ```
 
-> monitoring-daemon이 5초 주기로 sysfs를 스캔하므로 생성/제거 시 자동 감지됨.
+> 모니터링 데몬이 주기적으로 sysfs를 스캔하는 경우 디바이스 생성/제거가 자동 감지된다.
 
 ---
 

@@ -69,4 +69,3 @@ PGPASSWORD="<DB_PASSWORD>" psql \
 
 - [[data-engineering-overview]]
 - [[data-storage]]
-- [[keeper-snapshot-backup-fixes-2026-05-28]]

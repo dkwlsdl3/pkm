@@ -59,4 +59,3 @@ zfs list -H -o clones <pool>/<dataset>@<snapshot>
 
 - [[zfs]]
 - [[zfs-overview]]
-- [[keeper-snapshot-backup-fixes-2026-05-28]]

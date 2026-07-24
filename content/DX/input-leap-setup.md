@@ -25,7 +25,7 @@ created: 2026-05-12 (화)
 | MacBook Air | 2018 인텔, macOS 14 Sonoma, JIS 배열 |
 | 키보드         | 한성 87키, USB동글로 Ubuntu에 연결        |
 | 마우스         | 로지텍 M650L, USB 동글로 Ubuntu에 연결    |
-| 네트워크        | 같은 공유기 (30.30.30.x 대역)           |
+| 네트워크        | 같은 공유기 (<INTERNAL_CIDR> 대역)       |
 
 ---
 
@@ -128,13 +128,13 @@ mkdir -p ~/.config/input-leap
 cat > ~/.config/input-leap/input-leap.conf << EOF
 section: screens
     skl-System-Product-Name:
-    kthui-MacBookAir.local:
+    <MAC_HOSTNAME>:
 end
 
 section: links
     skl-System-Product-Name:
-        left = kthui-MacBookAir.local
-    kthui-MacBookAir.local:
+        left = <MAC_HOSTNAME>
+    <MAC_HOSTNAME>:
         right = skl-System-Product-Name
 end
 EOF
@@ -154,7 +154,7 @@ DISPLAY=:1 nohup input-leaps --config ~/.config/input-leap/input-leap.conf --no-
 ### Mac 클라이언트 실행
 
 ```bash
-input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon <UBUNTU_IP>
+input-leapc --name <MAC_HOSTNAME> --disable-crypto --no-daemon <UBUNTU_IP>
 ```
 
 ### Mac 손쉬운 사용 권한
@@ -180,7 +180,7 @@ input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon <UBUNTU_I
 try
     do shell script "ssh admin@<UBUNTU_IP> 'pkill input-leaps 2>/dev/null; DISPLAY=:1 nohup /home/admin/bin/input-leaps --config ~/.config/input-leap/input-leap.conf --no-tray --disable-crypto > /tmp/input-leaps.log 2>&1 &'"
     delay 2
-    do shell script "pkill input-leapc 2>/dev/null; /Users/kth/.local/bin/input-leapc --name kthui-MacBookAir.local --disable-crypto --no-daemon <UBUNTU_IP> > /tmp/input-leapc.log 2>&1 &"
+    do shell script "pkill input-leapc 2>/dev/null; /Users/<user>/.local/bin/input-leapc --name <MAC_HOSTNAME> --disable-crypto --no-daemon <UBUNTU_IP> > /tmp/input-leapc.log 2>&1 &"
     display dialog "Input Leap 시작됨 ✓" buttons {"확인"} default button "확인" with title "Input Leap"
 on error errMsg
     display dialog "오류: " & errMsg buttons {"확인"} default button "확인" with title "Input Leap"
