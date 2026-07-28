@@ -15,6 +15,7 @@ created: 2026-06-12 (금)
 ## 진단
 
 - [[link-layer-debugging]] — sysfs speed·RX 카운터·ip neigh로 L1→L2→L3 단계 진단, 스위치 LED 읽는 법
+- [[bond-bridge-topology-verification]] — 본딩/브리지 토폴로지는 문서가 아니라 4종 명령 실측이 정본
 
 ## 구성
 

@@ -68,6 +68,7 @@ created: 2026-05-13 (수)
 - [[fstab-uuid-mount]] — fstab은 UUID로(raw 디바이스명 금지), NVMe 변동·`nofail` 함정
 - [[disk-by-id-canonicalize-pitfall]] — by-id 심링크를 canonicalize로 풀어버리는 안티패턴
 - [[systemd-automount-watchdog]] — automount 마운트 watchdog: stale 복구·hang 방어
+- [[storcli-eall-sall-boot-disk]] — 컨트롤러 일괄 범위(eall/sall) 명령이 부팅 디스크까지 전환하는 함정
 
 ---
 

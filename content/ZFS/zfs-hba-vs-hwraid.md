@@ -51,6 +51,8 @@ ZFS(및 소프트웨어 RAID 일반)에서 스토리지 컨트롤러는 **디스
 - **모드 전환 시 기존 데이터 삭제**(RAID 메타데이터 구조가 바뀜). 신규 세팅 순서 = **컨트롤러 패스스루 먼저 → 그 다음 ZFS 풀 생성**.
 - 일부 컨트롤러는 순수 HBA 미지원 → "디스크마다 RAID0 가상디스크" 우회는 SMART 직접조회 불가·핫스왑 불편. **진짜 패스스루(eHBA) 모드가 있으면 그걸 사용**.
 - RAID 컨트롤러(MegaRAID 계열) 뒤 물리 디스크 SMART: `smartctl -d megaraid,N -H /dev/sdX`.
+- **반납/원복 시에는 공장 기본값으로 되돌린다** — 보통 RAID 모드 + JBOD off, 디스크는 `UGood`. 즉 운용 중 상태(eHBA/JBOD)와 반납 상태가 다르므로, 원복은 "풀 파괴"가 아니라 **컨트롤러 모드 복원까지** 포함한 작업이다. 이때 일괄 범위 명령이 부팅 디스크를 함께 휩쓰는 함정 주의 → [[storcli-eall-sall-boot-disk]].
 
 ## 관련
 - [[zfs]] · [[zfs-overview]] · [[zfs-arc-and-lustre-overhead]] · [[lustre-ha-drbd-zfs]]
+- [[storcli-eall-sall-boot-disk]] — 컨트롤러 일괄 명령의 부팅 디스크 함정
