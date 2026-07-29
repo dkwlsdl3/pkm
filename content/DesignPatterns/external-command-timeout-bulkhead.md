@@ -3,7 +3,7 @@ title: 외부 명령 Hang 격벽 (Timeout Bulkhead)
 tags:
   - tech
   - design-pattern
-created: 2026-07-16 (수)
+created: 2026-07-16 (목)
 ---
 
 # 외부 명령 Hang 격벽 (Timeout Bulkhead)

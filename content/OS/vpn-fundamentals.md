@@ -4,7 +4,7 @@ tags:
   - tech
   - network
   - vpn
-created: 2026-05-18 (일)
+created: 2026-05-18 (월)
 ---
 
 # VPN 기본 원리

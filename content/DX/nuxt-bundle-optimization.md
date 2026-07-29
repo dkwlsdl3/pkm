@@ -2,7 +2,7 @@
 title: Nuxt 번들 최적화
 tags:
   - tech
-created: 2026-05-27 (화)
+created: 2026-05-27 (수)
 ---
 
 # Nuxt 번들 최적화

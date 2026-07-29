@@ -3,7 +3,7 @@ title: 디자인 패턴 개요
 tags:
   - tech
   - design-pattern
-created: 2026-05-15 (목)
+created: 2026-05-15 (금)
 ---
 
 # 디자인 패턴 개요

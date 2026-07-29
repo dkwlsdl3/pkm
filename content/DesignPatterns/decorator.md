@@ -4,7 +4,7 @@ tags:
   - tech
   - design-pattern
   - structural
-created: 2026-05-15 (목)
+created: 2026-05-15 (금)
 ---
 
 # Decorator

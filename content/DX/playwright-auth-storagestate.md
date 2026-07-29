@@ -4,7 +4,7 @@ tags:
   - tech
   - dx
   - testing
-created: 2026-05-18 (일)
+created: 2026-05-18 (월)
 ---
 
 # Playwright storageState 인증 아키텍처

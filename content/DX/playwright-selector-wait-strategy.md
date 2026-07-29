@@ -4,7 +4,7 @@ tags:
   - tech
   - dx
   - testing
-created: 2026-05-18 (일)
+created: 2026-05-18 (월)
 ---
 
 # Playwright 셀렉터와 초기 로딩 대기 전략

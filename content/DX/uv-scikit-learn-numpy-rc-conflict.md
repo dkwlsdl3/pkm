@@ -2,7 +2,7 @@
 title: uv scikit-learn numpy RC 버전 충돌
 tags:
   - tech
-created: 2026-05-27 (화)
+created: 2026-05-27 (수)
 ---
 
 # uv scikit-learn numpy RC 버전 충돌

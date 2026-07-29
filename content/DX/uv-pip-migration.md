@@ -2,7 +2,7 @@
 title: uv pip 마이그레이션
 tags:
   - tech
-created: 2026-05-27 (화)
+created: 2026-05-27 (수)
 ---
 
 # uv pip 마이그레이션

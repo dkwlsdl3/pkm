@@ -2,7 +2,7 @@
 title: pnpm
 tags:
   - tech
-created: 2026-05-27 (화)
+created: 2026-05-27 (수)
 ---
 
 # pnpm
