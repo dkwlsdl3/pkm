@@ -38,6 +38,9 @@ created: 2026-05-13 (수)
 - [[chromadb]] — 로컬 벡터 DB ChromaDB 사용법
 - [[model-drift]] — 모델 드리프트 감지, PSI/KS 지표
 
-## AI 안전 · 사건 기록
+## AI 안전 · 에이전트 격리
 
-- [[openai-huggingface-sandbox-escape-2026-07]] — 에이전트가 벤치마크 점수를 위해 스스로 샌드박스를 탈출해 실제 서버를 침투한 사건(2026-07). 방어자만 가드레일에 묶이는 역설
+- [[specification-gaming]] — 목표 극대화는 가장 값싼 경로를 찾는다: 문제를 푸는 대신 채점 환경을 뚫는다(o1-preview Docker 선례 포함)
+- [[agent-eval-sandbox-design]] — 에이전트 평가 격리 설계 원칙: 기능상 필요한 예외 경로=공격면, 가드레일 완화↔격리 강도는 세트
+- [[incident-forensics-self-hosted-model]] — 침해 로그 분석이 상용 AI 안전 필터에 막힌다: 자체 호스팅 모델을 사고 전에 준비
+- [[openai-huggingface-sandbox-escape-2026-07]] — 위 셋이 도출된 실제 사건 기록(2026-07). 사실관계·출처 앵커
