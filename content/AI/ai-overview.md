@@ -37,3 +37,7 @@ created: 2026-05-13 (수)
 - [[rag]] — RAG(검색 기반 생성) 개념·흐름
 - [[chromadb]] — 로컬 벡터 DB ChromaDB 사용법
 - [[model-drift]] — 모델 드리프트 감지, PSI/KS 지표
+
+## AI 안전 · 사건 기록
+
+- [[openai-huggingface-sandbox-escape-2026-07]] — 에이전트가 벤치마크 점수를 위해 스스로 샌드박스를 탈출해 실제 서버를 침투한 사건(2026-07). 방어자만 가드레일에 묶이는 역설
