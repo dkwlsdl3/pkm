@@ -22,6 +22,13 @@ created: 2026-05-13 (수)
 - [[lakehouse]] — 레이크하우스(DL 유연성 + DW 쿼리)
 - [[acid]] — 데이터 안전 보장 4원칙
 - [[sql-view-silent-column-absence-trap]] — 뷰 경유 조회의 silent 컬럼 부재 함정 (실증)
+- [[postgres-write-skew-serialization-row]] — `NOT EXISTS`로는 write skew를 못 막는다, guard 행 `FOR UPDATE` 직렬화 (실증)
+
+---
+
+## 스키마 마이그레이션
+
+- [[migrations-replayed-in-full]] — 전량 재실행 모델에서 앞 파일이 뒤 파일 효과를 조용히 되돌리는 함정 (실증)
 
 ---
 

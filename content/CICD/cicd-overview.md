@@ -19,6 +19,7 @@ created: 2026-06-25 (목)
 - [[gitlab-submodule-to-monorepo]] — 서브모듈→모노레포 전환 함정 모음(마이그레이션 플레이북)
 - [[deploy-env-optin-flags-and-manual-button-trap]] — 공유 env 템플릿 opt-in 플래그(environment_scope 변수, fail-safe 기본값)
 - [[gitlab-manual-deploy-rules-changes]] — manual 배포 버튼이 빌드 없는 파이프라인에도 뜨는 rules:changes 함정
+- [[gitlab-rules-first-match-wins]] — `rules:`는 먼저 맞는 하나만 적용, 뒤의 `when: manual`은 죽은 규칙(승인 없이 자동 배포)
 - [[provisioning-tool-antipatterns]] — 설치/프로비저닝 자동화 CLI 안티패턴 4종(--help 오실행·대상 하드코딩·BatchMode 누락 hang·태그부재 stale)
 
 ---

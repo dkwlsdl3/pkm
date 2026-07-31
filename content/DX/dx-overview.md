@@ -41,6 +41,7 @@ created: 2026-05-13 (수)
 
 - [[redesign-check-existing-first]] — 앱 재설계 착수 전 기존 구현 확인(수정/이동=재편, 추가만 신규)
 - [[adversarial-cross-review]] — 구현자≠검증자 적대적 교차검증, 하루 2회전에 실버그 11건 적발한 운용법
+- [[unknown-is-not-absent]] — "모름"을 "없음·정상"으로 접지 말 것: 3값 outcome과 "확인 불가" 표시(실증 6사례)
 
 ## 문서 변환
 

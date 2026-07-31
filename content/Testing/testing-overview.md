@@ -12,6 +12,12 @@ created: 2026-06-08 (월)
 
 ---
 
+## 테스트 실효성
+
+- [[mutation-check-test-effectiveness]] — 구현을 되돌려 테스트가 실제로 FAIL하는지 확인(green은 주장일 뿐)
+
+---
+
 ## Playwright / E2E
 
 - [[playwright-shared-account-hazards]] — 공유 계정을 변경하는 E2E가 dev/test 환경을 오염시키는 패턴과 복구 전략

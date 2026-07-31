@@ -50,8 +50,11 @@ created: 2026-05-13 (수)
 - [[systemd-service]] — 서비스 파일 작성·주요 명령어
 - [[shell-sigtstp-background]] — 터미널 SIGTSTP로 백그라운드 프로세스가 정지되는 문제
 - [[shell-heredoc-pitfall]] — heredoc을 `&&`로 이어붙이면 종결자 오염, write 후 read-back 검증
+- [[pipefail-grep-q-sigpipe]] — `producer | grep -q`가 pipefail+SIGPIPE로 "찾았을 때 실패"하는 역전
+- [[cli-output-locale-translated-header]] — CLI 출력 헤더는 로케일 번역됨, 컬럼명 매칭 금지 · 위치 파싱
 - [[systemd-user-timer]] — user 타이머 무인 주기 작업: Persistent+linger, XDG_RUNTIME_DIR
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
+- [[backup-strips-source-permissions]] — 백업 아카이브가 원본 640 보호를 벗겨 secret을 world-readable로 남기는 유출
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
 - [[grub-kernel-pinning]] — GRUB 커널 고정(인덱스 vs 이름) + apt-mark hold
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
