@@ -53,6 +53,7 @@ created: 2026-05-13 (수)
 - [[pipefail-grep-q-sigpipe]] — `producer | grep -q`가 pipefail+SIGPIPE로 "찾았을 때 실패"하는 역전
 - [[cli-output-locale-translated-header]] — CLI 출력 헤더는 로케일 번역됨, 컬럼명 매칭 금지 · 위치 파싱
 - [[systemd-user-timer]] — user 타이머 무인 주기 작업: Persistent+linger, XDG_RUNTIME_DIR
+- [[systemd-unit-name-distro-variance]] — 유닛명이 배포판마다 다름(smb/smbd), `is-active`의 inactive가 "유닛 없음"을 숨긴다
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
 - [[backup-strips-source-permissions]] — 백업 아카이브가 원본 640 보호를 벗겨 secret을 world-readable로 남기는 유출
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드

@@ -66,6 +66,7 @@ created: 2026-05-13 (수)
 
 - [[git-workflow]] — git mv/rm 자동 staging 주의, 도메인 분리 커밋, soft reset로 섞인 커밋 풀기
 - [[git-submodule-push]] — 슈퍼프로젝트 push가 서브모듈 새 커밋을 안 올리는 함정, push.recurseSubmodules
+- [[shared-worktree-parallel-agents]] — 에이전트 세션 병렬 운용: 경로 지정 커밋은 공유 파일을 못 막고, 경로 없는 stash는 옆 세션 작업을 걷어간다
 
 ## 레포지토리 전략
 

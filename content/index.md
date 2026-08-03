@@ -9,6 +9,7 @@ title: kth's PKM
 ## 도메인
 
 - [[AI/ai-overview|AI]] — Claude Code, LLM, 워크플로우 도구
+- [[Auth/auth-overview|Auth]] — 인증·인가, 세션·토큰, SSO/OAuth 함정
 - [[AWS/aws-overview|AWS]] — EC2, SSM 접속, 인프라 트러블슈팅
 - [[Data/data-engineering-overview|Data Engineering]] — ETL/ELT, DW, 스트리밍, 오케스트레이션
 - [[Docker/docker-overview|Docker]] — 데몬 운영, 이미지 빌드 트러블슈팅

@@ -22,6 +22,7 @@ created: 2026-06-04 (목)
 - [[utoipa-recursive-schema-no-recursion]] — 자기참조 ToSchema는 no_recursion 없으면 기동 시 stack overflow(빌드·테스트론 안 잡힘)
 - [[form-urlencoded-space-plus-mangling]] — query 재직렬화가 %20→+ 변조, URL 수정은 raw 세그먼트 필터링으로
 - [[route-inventory-syn-ast]] — 라우트 인벤토리를 정규식 대신 syn AST로 파싱, 표↔실등록 exact-set 비교로 CI 차단
+- [[uds-http-shutdown-truncates-response]] — 유닉스 소켓에 HTTP를 직접 조립할 때 `shutdown(SHUT_WR)`을 부르면 hyper가 응답 전에 연결을 끊는다
 
 ---
 

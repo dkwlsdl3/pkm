@@ -26,6 +26,7 @@ created: 2026-05-18 (월)
 - [[lustre-zvol-vm-layering-overhead]] — Lustre+zvol+VM 다층 스택 오버헤드·tail latency
 - [[zfs-file-vdev-recovery]] — 파일/loop vdev zpool 재부팅 복구 (losetup 재연결 필수)
 - [[zfs-hba-vs-hwraid]] — 하드웨어 RAID vs HBA/JBOD 패스스루, ZFS가 패스스루여야 하는 이유
+- [[zpool-vs-zfs-capacity-basis]] — `zpool list`(패리티 포함·예약 미반영)와 `zfs list`(차감 후) 용량 기준 차이, 섞으면 화면끼리 모순
 
 ---
 

@@ -24,6 +24,8 @@ created: 2026-07-31 (금)
 | 목록에 상세 없음 | 상세 컬럼을 전부 `N/A`로 표시 | **"값이 비었다"와 "보고가 아직 없다"**를 구분 불가 |
 | 관찰·shadow 로그 | "경고 0건"을 곧 안전으로 해석 | 관찰 지점이 닿지 않는 범위는 **미관찰인데 무경고로 보인다** |
 | 자료 조사 | "검색해서 안 나왔다"를 "존재하지 않는다"로 판정 | 진행 중인 사건은 **날짜별로 수치가 갱신**되는데, 초기 보도만 보고 후속 수치를 "출처 없음"이라 단정 |
+| 기능 활성 여부 조회 | `.ok().flatten()` 으로 **조회 실패와 "설정 행 없음"을 뭉개고** 환경변수 기본값으로 폴백 | 환경변수를 켜둔 배포에서는 관리자가 DB에서 끈 뒤에도 조회가 한 번 삐끗하면 **"켜짐"으로 읽혀 그대로 진행**된다(fail-open). "env 폴백이니 fail-closed"라는 주석 자체가 틀렸다 |
+| 서비스 활성 판정 | `systemctl is-active <없는 유닛>` 이 돌려주는 `inactive` 를 "꺼짐"으로 해석 | **"유닛 없음"과 "꺼짐"이 구분되지 않아** 화면이 "돌고 있는데 비활성"이라 거짓을 말한다 → [[systemd-unit-name-distro-variance]] |
 
 ### 조사·검증에도 같은 함정이 있다
 
@@ -89,4 +91,7 @@ MetadataMissing    error  "라우트 메타데이터 없음"
 - [[pipefail-grep-q-sigpipe]] · [[migrations-replayed-in-full]]
 - [[dev-script-restart-vs-rebuild]] — 종료·재기동 스크립트의 거짓 성공 보고
 - [[http-200-fake-write-failure]] — 실패를 200으로 내려보내는 같은 계열
+- [[systemd-unit-name-distro-variance]] — "유닛 없음"을 "꺼짐"으로 읽는 사례
+- [[csrf-double-submit-sibling-subdomain]] — "값이 없으면 통과"는 검증이 아니다
+- [[zpool-vs-zfs-capacity-basis]] — 값의 기준을 확인하지 않고 섞어 쓰는 사례
 - [[dx-overview]]

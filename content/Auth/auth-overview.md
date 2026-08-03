@@ -28,6 +28,7 @@ created: 2026-06-08 (월)
 - [[api-key-derived-token-scope]] — API 키 파생 토큰에 스코프 강제(전권 발급 = 권한 상승)
 - [[session-keepalive-refresh-vs-relogin]] — authToken은 refresh, refreshToken은 재로그인으로 리셋
 - [[http-200-fake-write-failure]] — write 인증실패가 HTTP 200+success:false로 위장되는 함정
+- [[csrf-double-submit-sibling-subdomain]] — OAuth `state`의 double-submit 쿠키를 형제 서브도메인이 우회, `__Host-` 접두사로 차단
 
 ---
 
