@@ -37,3 +37,6 @@ created: 2026-07-20 (월)
 
 - [[lustre-performance-metrics]] — proc/sysfs 기반 비블로킹 지표 수집
 - [[lustre-troubleshooting]] — 마운트/네트워크 이슈로 인한 hang 원인
+- [[tokio-blocking-io-hazard]] — 비동기 실행기 안에서 blocking 호출을 돌리는 문제
+- [[unmounted-path-looks-absent]] — 반대 상태: 저장소가 응답하지 않는 게 아니라 아예 빠진 경우
+- [[external-command-timeout-bulkhead]] — 격벽·상한 패턴. **상한은 취소 상한이 아니다** — 진행 중 경로 재진입을 별도로 막아야 한다

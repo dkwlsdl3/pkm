@@ -67,4 +67,10 @@ created: 2026-07-31 (금)
 - [[playwright-e2e]] · [[playwright-shared-account-hazards]]
 - [[adversarial-cross-review]] — 주장을 반증하는 교차검증
 - [[unknown-is-not-absent]] · [[pipefail-grep-q-sigpipe]]
+- [[handwritten-schema-fixture-rot]] — 픽스처가 썩어 테스트가 아무것도 검증하지 않게 되는 경로
 - [[testing-overview]]
+
+> [!NOTE]
+> **표본이 한쪽으로 몰린 테스트는 뮤테이션을 통과시킨다.** 임계값 알림 회귀 9건이 전부 critical 수준만
+> 넣었더니 "낮은 단계 경고를 통째로 삭제"·"억제 조건 삭제"·"저장값을 NULL 로"·"읽음 플래그를 true 로"가
+> **전부 통과**했다. 케이스 수가 아니라 **경계·단계·저장 행 전량 대조**가 실효성을 만든다.

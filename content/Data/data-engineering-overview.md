@@ -29,6 +29,8 @@ created: 2026-05-13 (수)
 ## 스키마 마이그레이션
 
 - [[migrations-replayed-in-full]] — 전량 재실행 모델에서 앞 파일이 뒤 파일 효과를 조용히 되돌리는 함정 (실증)
+- [[psql-exit-code-zero-on-partial-restore]] — `psql -f`는 문장 실패에도 exit 0, 반쪽 복원이 "성공"으로 보고된다
+- [[is-not-distinct-from-index-pushout]] — NULL 안전 비교가 인덱스를 필터로 밀어내 순차 스캔이 된다(실측 1.357ms→0.013ms)
 
 ---
 

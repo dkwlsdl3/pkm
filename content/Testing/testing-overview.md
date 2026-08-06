@@ -15,6 +15,7 @@ created: 2026-06-08 (월)
 ## 테스트 실효성
 
 - [[mutation-check-test-effectiveness]] — 구현을 되돌려 테스트가 실제로 FAIL하는지 확인(green은 주장일 뿐)
+- [[handwritten-schema-fixture-rot]] — 손으로 쓴 축소 스키마 픽스처는 조용히 썩고 `#[ignore]`가 그것을 감춘다
 
 ---
 

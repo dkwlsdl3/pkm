@@ -33,3 +33,6 @@ lctl conf_param <fsname>-MDT0000.mdt.identity_upcall=NONE   # 재부팅 후도 �
 ## 관련
 
 - [[lustre-troubleshooting]]
+- [[selinux-unlabeled-mount-no-avc]] — 같은 증상(접속 순간 거부)이 SELinux 때문일 때. 둘이 겹치면 하나만 고쳐서는 증상이 안 바뀐다
+- [[unknown-is-not-absent]] — 신원 존재 여부만 보면 uid 가 옛 계정에 붙어 있어도 통과한다(이름→id·id→이름 양방향 대조 필요)
+- [[linux-permissions]]

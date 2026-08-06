@@ -18,6 +18,7 @@ created: 2026-06-25 (목)
 - [[grafana-panel-status-history-vs-state-timeline]] — 상태 시계열은 state timeline을 써야 하는 이유
 - [[grafana-dashboard-storage-provisioning-vs-db]] — 대시보드 provisioning vs grafana.db 저장, json 미반영
 - [[prometheus-exporter-port]] — exporter listen 포트 vs scrape target 정합성
+- [[prometheus-file-sd-stale-on-read-failure]] — file_sd 읽기 실패 시 직전 목록 유지 → 새 대상만 조용히 누락
 
 ---
 

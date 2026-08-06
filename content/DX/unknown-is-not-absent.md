@@ -94,4 +94,10 @@ MetadataMissing    error  "라우트 메타데이터 없음"
 - [[systemd-unit-name-distro-variance]] — "유닛 없음"을 "꺼짐"으로 읽는 사례
 - [[csrf-double-submit-sibling-subdomain]] — "값이 없으면 통과"는 검증이 아니다
 - [[zpool-vs-zfs-capacity-basis]] — 값의 기준을 확인하지 않고 섞어 쓰는 사례
+- [[path-exists-conflates-stat-failure]] — `exists()`가 stat 실패를 "없음"으로 접는다
+- [[unmounted-path-looks-absent]] — 마운트가 빠지면 하위 전체가 "없음"이 된다
+- [[sqlx-integer-i64-decode-mismatch]] — 디코딩 실패를 `unwrap_or(0)`이 삼킨다
+- [[psql-exit-code-zero-on-partial-restore]] — 반쪽 복원이 exit 0 으로 "성공"이 된다
+- [[prometheus-file-sd-stale-on-read-failure]] — 읽기 실패를 "직전 값 유지"로 접는다
+- [[selinux-unlabeled-mount-no-avc]] — 로그가 없다고 원인이 아닌 것은 아니다
 - [[dx-overview]]

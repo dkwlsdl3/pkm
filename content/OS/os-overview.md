@@ -33,6 +33,7 @@ created: 2026-05-13 (수)
 - [[oidc]] — OIDC ID Token(JWT) 로그인 흐름
 - [[oauth2]] — OAuth 2.0 Access Token 위임 흐름
 - [[selinux-confined-daemon-ocf-ra]] — confined SELinux 도메인이 실행하는 OCF/RA rc=1 실패 진단
+- [[selinux-unlabeled-mount-no-avc]] — `unlabeled_t` 마운트 접근 차단이 AVC 로그를 안 남긴다, 경로만 바꿔 가르는 분리 실험
 
 ## 가상화
 
@@ -55,7 +56,12 @@ created: 2026-05-13 (수)
 - [[systemd-user-timer]] — user 타이머 무인 주기 작업: Persistent+linger, XDG_RUNTIME_DIR
 - [[systemd-unit-name-distro-variance]] — 유닛명이 배포판마다 다름(smb/smbd), `is-active`의 inactive가 "유닛 없음"을 숨긴다
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
+- [[systemd-umask-file-permission-drift]] — 서비스 umask(0077)와 대화형 셸(0022)이 달라 같은 코드가 다른 권한 파일을 만든다
 - [[backup-strips-source-permissions]] — 백업 아카이브가 원본 640 보호를 벗겨 secret을 world-readable로 남기는 유출
+- [[tar-root-restores-archived-modes]] — root 의 GNU tar 는 `-p`·`--same-owner` 가 기본이라 해제 전 하드닝이 되돌아간다
+- [[rsync-delete-path-normalization]] — `--delete` 보호 목록은 경로 정규화 없이 뚫린다 + 원격 와일드카드는 셸에서 확장
+- [[rsync-checksum-verify-cost]] — `--checksum` 은 전량 읽기, 안전 확인은 원본 삭제 직전 dry-run 패스에만
+- [[binary-vs-decimal-byte-units]] — 1024 로 나눈 값에 TB 라벨을 붙이면 디스크 스펙과 어긋난다
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
 - [[grub-kernel-pinning]] — GRUB 커널 고정(인덱스 vs 이름) + apt-mark hold
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드
@@ -72,6 +78,7 @@ created: 2026-05-13 (수)
 - [[fstab-uuid-mount]] — fstab은 UUID로(raw 디바이스명 금지), NVMe 변동·`nofail` 함정
 - [[disk-by-id-canonicalize-pitfall]] — by-id 심링크를 canonicalize로 풀어버리는 안티패턴
 - [[systemd-automount-watchdog]] — automount 마운트 watchdog: stale 복구·hang 방어
+- [[unmounted-path-looks-absent]] — 마운트가 빠지면 하위 전 경로가 "없음"으로 보인다, 정리 작업은 fail-closed 로
 - [[storcli-eall-sall-boot-disk]] — 컨트롤러 일괄 범위(eall/sall) 명령이 부팅 디스크까지 전환하는 함정
 
 ---

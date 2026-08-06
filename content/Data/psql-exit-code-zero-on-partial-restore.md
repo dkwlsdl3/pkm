@@ -1,0 +1,87 @@
+---
+title: psql -f 는 문장이 실패해도 종료 코드 0 을 준다
+tags:
+  - tech
+  - troubleshooting
+created: 2026-08-05 (수)
+---
+
+# psql -f 는 문장이 실패해도 종료 코드 0 을 준다
+
+> **TL;DR**: `psql -f dump.sql` 은 SQL 문장이 실패해도 **다음 문장을 계속 실행하고 exit 0** 을 돌려준다. 종료 코드만 보는 복원 코드는 **반쪽 복원을 "복원 성공"으로 보고**한다. 덤프가 `--clean --if-exists` 라면 DROP 이 먼저 도는 이상 **남는 것은 빈 스키마**다. `ON_ERROR_STOP=1 --single-transaction --no-psqlrc` 세 개를 함께 써야 한다.
+
+## 증상
+
+- 복원이 "성공"으로 끝났는데 **데이터가 없거나 일부 테이블만 있다**
+- 로그에는 `ERROR:` 줄이 여럿 있는데 종료 코드는 0 이라 아무도 못 봤다
+- 복원 전 상태로도 못 돌아간다(DROP 이 이미 돌았다)
+
+## 원인
+
+`psql` 의 기본 `ON_ERROR_STOP` 은 `off` 다. 스크립트 실행 중 오류가 나면 그 문장만 건너뛰고 진행한다.
+종료 코드는 **"psql 이 스크립트를 끝까지 읽었는가"** 를 뜻하지 "전부 성공했는가"가 아니다.
+
+```bash
+$ psql -d app -f dump.sql   # 중간에 ERROR 여럿
+$ echo $?
+0                            # ← 성공으로 보인다
+```
+
+`pg_dump --clean --if-exists` 로 뜬 덤프는 앞머리가 전부 `DROP … IF EXISTS` 다. 그래서 **DROP 은 성공하고
+이후 CREATE/COPY 가 실패**하면 결과는 "복원 전보다 나쁜 상태"다.
+
+★**함정 2 — 옵션을 넣어도 psqlrc 한 줄로 무력화된다.** psql 은 `-f` 보다 **먼저** 시작 파일을 읽는다.
+복원을 실행하는 프로세스가 root 로 돌면 `/root/.psqlrc` 가 적용된다.
+
+```
+# /root/.psqlrc 에 이 한 줄만 있으면
+\set ON_ERROR_STOP off
+```
+
+→ 명령줄로 켠 `ON_ERROR_STOP=1` 이 덮여, 전량 롤백된 복원이 **exit 0 = "복원 완료"** 로 보고된다(실측 확인).
+
+★**함정 3 — 무한 대기.** 덤프 preamble 이 스스로 `SET lock_timeout = 0;` 을 넣는다. `--single-transaction`
+의 첫 `DROP` 이 다른 세션의 락 뒤에 줄을 서면 **영원히 기다리고**, 그 뒤로 신규 락 요청이 쌓여 서비스
+전체가 멈춘다.
+
+## 해결
+
+```bash
+psql \
+  --no-psqlrc \                       # 시작 파일이 설정을 덮지 못하게
+  -v ON_ERROR_STOP=1 \                # 첫 오류에서 중단
+  --single-transaction \              # 실패 시 전량 롤백 → 복원 전 상태
+  -d "$DB" -f "$DUMP"
+rc=$?
+[ "$rc" -eq 0 ] || { echo "복원 실패 (exit $rc)"; exit "$rc"; }
+```
+
+- **세 옵션은 세트다.** `ON_ERROR_STOP` 만으로는 중단 시점까지의 변경이 남고, `--single-transaction`
+  만으로는 오류가 무시되어 롤백 트리거가 안 걸리며, `--no-psqlrc` 가 없으면 앞의 둘이 덮인다.
+- **벽시계 상한을 별도로 둔다.** 덤프가 `lock_timeout = 0` 을 넣으므로 SQL 차원 타임아웃은 믿을 수 없다.
+
+```bash
+timeout 30m psql --no-psqlrc -v ON_ERROR_STOP=1 --single-transaction -d "$DB" -f "$DUMP"
+```
+
+- **복원 전 안전 백업이 실패하면 복원을 시작하지 않는다.** 경고만 남기고 진행하면 **되돌릴 수단 없이
+  DROP 으로 들어간다.** 단, **DB 에 접속조차 못 하는 상황은 예외**다 — 그게 바로 복원으로 되살려야 하는
+  상황이고, 잃을 것도 없다.
+
+> [!WARNING]
+> **부분 실패를 모아서 보고하라.** DB 복원만 고치고 설정 파일 복사(`cp`) 실패를 로그로만 남기면, 같은
+> 함수 안에 같은 유형의 결함이 그대로 남는다. "무엇이 성공하고 무엇이 실패했는지"를 응답 본문에 담아라.
+
+> [!NOTE]
+> `pg_restore`(커스텀·디렉터리 포맷)는 `--exit-on-error` 와 `--single-transaction` 이 대응 옵션이다.
+> 기본값은 마찬가지로 "계속 진행"이다.
+
+---
+
+## 관련
+
+- [[postgres-logical-backup]] — 덤프·복원 기본 절차
+- [[http-200-fake-write-failure]] — 성공 코드가 성공을 뜻하지 않는 같은 계열
+- [[unknown-is-not-absent]]
+- [[tar-root-restores-archived-modes]] — 같은 복원 경로의 다른 함정
+- [[acid]]
