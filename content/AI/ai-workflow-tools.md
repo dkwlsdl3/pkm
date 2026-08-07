@@ -3,11 +3,12 @@ title: AI 워크플로우 도구 비교
 tags:
   - tech
 created: 2026-05-13 (수)
+updated: 2026-08-07 (금)
 ---
 
 # AI 워크플로우 도구 비교
 
-> **TL;DR**: Claude Code에서 사용 가능한 AI 워크플로우 강화 도구 비교 — 현재 Matt Pocock + Karpathy 조합으로 일상 작업 충분히 커버
+> **TL;DR**: 외부 워크플로우 프레임워크를 비교한 뒤 무거운 것들을 걷어내고, 가벼운 외부 스킬셋 위에 직접 만든 스킬을 얹는 쪽으로 정착했다.
 
 ---
 
@@ -64,17 +65,21 @@ created: 2026-05-13 (수)
 
 ---
 
-## 결론
+## 결론 (2026-08 갱신)
 
-> 현재 세팅(Matt Pocock + Karpathy)으로 일상 작업 충분히 커버.
-> 개인 프로젝트에서 팀 시뮬레이션이 필요해지면 gstack 일부 스킬 추가 검토.
+외부 프레임워크를 얹는 방향은 접었다. 남긴 것은 가벼운 외부 스킬셋(Matt Pocock 기반)과 CLAUDE.md 상시 원칙이고, 그 위에 필요할 때마다 직접 스킬을 만들어 붙이는 쪽이 더 잘 맞았다. 지금은 자체 제작 스킬이 절반을 넘는다.
 
-> 스킬 description에 한국어 트리거를 넣어 자동 로드되게 하는 세팅은 [[claude-code-setup]], Karpathy 원칙 자체는 [[karpathy-coding-principles]] 참고.
+- **무겁다고 판단해 도입하지 않음**: Ouroboros, Superpowers
+- **팀 시뮬레이션은 다른 방식으로 해결**: gstack의 역할 기반 스킬 대신, 서로 다른 모델을 역할별로 세우는 방식을 쓴다 → [[hetero-model-review-loop]]
+- **OMC(oh-my-claudecode)**: 도입했다가 제거. Claude Code의 서브에이전트·스킬·훅으로 대체됨 → [[claude-code-setup]]
+
+> 위 표의 "현재 사용" 행은 2026-05 시점 기준이다. 지금의 실제 세팅 목록은 [[claude-code-setup]]을 보는 게 정확하다.
 
 ---
 
 ## 관련
 
 - [[claude-code-setup]]
+- [[hetero-model-review-loop]]
 - [[karpathy-coding-principles]]
 - [[dotfiles]]

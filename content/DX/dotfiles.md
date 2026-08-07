@@ -1,102 +1,97 @@
 ---
-title: Dotfiles 관리
+title: Dotfiles 관리 (chezmoi)
 tags:
   - tech
 created: 2026-05-13 (수)
+updated: 2026-08-07 (금)
 ---
 
-# Dotfiles 관리
+# Dotfiles 관리 (chezmoi)
 
-> **TL;DR**: dotfiles를 Git으로 관리해 여러 기기에서 동일한 개발 환경 유지
-
-> GitHub: `git@github.com:<YOUR_GITHUB_USER>/dotfiles.git`  
-> 로컬 위치: `~/dotfiles/`
-
----
-
-## 개념
-
-설정 파일(dotfiles)을 Git으로 관리해 여러 기기에서 동일한 환경 유지.  
-진짜 파일은 `~/dotfiles/`에 두고, 원래 위치엔 **심볼릭 링크**를 만들어 연결.
-
-```
-~/.claude/CLAUDE.md  →  ~/dotfiles/claude/CLAUDE.md  (진짜 파일)
-```
-
-프로그램은 `~/.claude/CLAUDE.md`를 읽지만 실제로는 `~/dotfiles/`의 파일을 읽음.  
-`~/dotfiles/`가 Git 레포이므로 변경사항이 자동으로 추적됨.
+> **TL;DR**: dotfiles를 chezmoi로 관리한다. 소스 레포의 파일이 진짜이고 홈 디렉토리의 파일은 `chezmoi apply`가 매번 다시 써 내는 생성물이다 — 라이브 파일을 직접 고치면 사라진다.
 
 ---
 
-## 레포 구조
+## 심볼릭 링크 방식과의 차이
 
-```
-~/dotfiles/
-  install.sh              ← 새 기기 세팅 스크립트
-  .gitignore
-  claude/
-    CLAUDE.md             ← 전역 AI 지침 (OMC + Karpathy 원칙)
-    settings.json         ← Claude Code 설정
-    commands/
-      savelog.md          ← /savelog 커맨드
-  agents/
-    skills/               ← Matt Pocock 기반 10개 스킬
-      caveman/
-      diagnose/
-      grill-me/
-      ...
+| | 심볼릭 링크 (이전) | chezmoi (현재) |
+|---|---|---|
+| 홈의 파일 | 레포를 가리키는 링크 | 레포에서 생성된 실제 파일 |
+| 라이브 편집 | 곧 레포 편집 (그대로 추적됨) | 다음 apply에 덮어써짐 |
+| 기기별 차이 | 분기 처리 어려움 | 템플릿·변수로 처리 |
+| 부분 공유 | 파일 단위 복사 | `includeTemplate`으로 조각 공유 |
+
+링크 방식은 편집이 곧 추적이라 편했지만, 기기마다 다른 값(경로·토큰 유무·OS)을 넣을 자리가 없었다. chezmoi는 템플릿을 거치는 대신 "라이브 파일은 생성물"이라는 제약이 붙는다.
+
+## 소스 위치
+
+```bash
+chezmoi source-path   # 현재: ~/Projects/dotfiles-chezmoi
 ```
 
----
+소스 파일명이 타깃 경로를 결정한다.
+
+| 소스 접두어 | 의미 |
+|---|---|
+| `dot_claude/` | `~/.claude/` |
+| `private_dot_config/` | `~/.config/` (권한 600) |
+| `executable_*` | 실행 권한 부여 |
+| `*.tmpl` | 템플릿으로 렌더링 |
+| `run_once_*`, `run_onchange_*`, `run_after_*` | 스크립트 훅 |
+
+## 관리 대상
+
+```text
+.chezmoitemplates/    ← 공유 조각 (에이전트 공통 규칙, 스킬 본문)
+dot_claude/           ← Claude Code 지침·설정·스킬·훅
+dot_codex/            ← Codex 지침·설정·스킬·훅
+private_dot_config/   ← nvim, wezterm, starship, VSCode
+private_dot_local/    ← bin(copen 등), libexec(훅 스크립트)
+dot_zshrc, dot_zprofile, dot_tmux.conf
+tests/                ← 훅 스크립트 테스트
+docs/adr/             ← 세팅 결정 기록
+```
+
+에이전트 세팅의 구조는 [[claude-code-setup]] 참고.
+
+## 일상 작업
+
+```bash
+chezmoi edit ~/.zshrc      # 소스를 열어 편집
+chezmoi diff               # 적용 전 차이 확인
+chezmoi apply              # 홈에 반영
+chezmoi cd && git push     # 소스 레포 푸시
+
+# 다른 기기에서
+chezmoi update             # git pull + apply
+```
 
 ## 새 기기 세팅
 
 ```bash
-# 1. 레포 클론
-git clone git@github.com:<YOUR_GITHUB_USER>/dotfiles.git ~/dotfiles
-
-# 2. 심볼릭 링크 자동 연결
-bash ~/dotfiles/install.sh
-
-# 3. Claude 열고 OMC 플러그인 설치
-/plugin install oh-my-claudecode
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply \
+  git@github.com:<YOUR_GITHUB_USER>/dotfiles-chezmoi.git
 ```
 
-`install.sh`가 하는 일:
-- `~/.claude/`, `~/.agents/skills/` 디렉토리 생성
-- 기존 파일이 있으면 `.backup`으로 이름 바꿔 보존
-- 모든 항목을 `~/dotfiles/`로 심볼릭 링크 연결
+`run_once_*` 스크립트가 도구 설치까지 처리한다.
 
----
+> 사용자명만 넘기는 `chezmoi init <user>` 축약형은 `<user>/dotfiles` 레포를 찾는다. 레포명이 `dotfiles`가 아니면 위처럼 URL을 전부 적어야 한다.
 
-## 동기화
+## 주의
 
-```bash
-# 설정 변경 후 푸시
-cd ~/dotfiles
-git add .
-git commit -m "update: 변경 내용"
-git push
+> [!WARNING]
+> `~/.claude/CLAUDE.md`처럼 chezmoi가 관리하는 파일을 직접 편집하면 다음 `chezmoi apply`에 날아간다. `chezmoi edit`을 쓰거나 소스를 고친 뒤 apply 한다. 관리 대상인지 확인은 `chezmoi managed | rg <경로>`.
 
-# 다른 기기에서 최신 반영
-cd ~/dotfiles
-git pull
-```
+> [!WARNING]
+> `~/.zshrc`에 토큰 같은 비밀값을 하드코딩한 채 소스에 넣으면 레포에 그대로 커밋된다. 비밀값은 별도 파일로 분리해 chezmoi 관리에서 제외한다.
 
----
+## 폐기된 방식
 
-## 관리 대상 파일
-
-| 파일 | 설명 |
-|------|------|
-| `claude/CLAUDE.md` | 전역 AI 지침 (OMC + Karpathy 4원칙) |
-| `claude/settings.json` | Claude Code 테마, HUD, 플러그인 설정 |
-| `claude/commands/savelog.md` | `/savelog` 커스텀 커맨드 |
-| `agents/skills/*/` | Matt Pocock 기반 스킬 10개 (한국어 트리거 포함) |
+`~/dotfiles` 레포 + `install.sh`로 심볼릭 링크를 걸던 구조는 chezmoi로 이전했다. `~/dotfiles` 디렉토리는 지금 존재하지 않으며, 그 시절 링크(`~/.agents/skills/*`)는 끊어진 채 남아 있다.
 
 ---
 
 ## 관련
 
+- [[claude-code-setup]] — 에이전트 지침·스킬·훅 구조
 - [[terminal-setup]] — zsh, starship, nvim 세팅
-- [[claude-code-setup]] — OMC, 스킬, Karpathy 원칙 상세

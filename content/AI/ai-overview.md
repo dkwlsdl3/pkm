@@ -14,9 +14,14 @@ created: 2026-05-13 (수)
 
 ## Claude Code
 
-- [[claude-code-setup]] — Claude Code 전역 지침과 기본 개발 원칙 정리
+- [[claude-code-setup]] — 전역 지침·스킬·훅의 chezmoi 단일 소스 관리 구조
 - [[karpathy-coding-principles]] — CLAUDE.md에 상시 적용하는 Karpathy 코딩 4원칙
-- [[ai-workflow-tools]] — Matt Pocock Skills · Karpathy · Ouroboros · Superpowers · gstack 비교
+- [[ai-workflow-tools]] — 외부 워크플로우 프레임워크 비교와 도입/제거 판단 이력
+
+## 에이전트 운용 방식
+
+- [[hetero-model-review-loop]] — 설계·구현·검증을 다른 모델에 나눠 맡기는 이유와 패턴
+- [[single-window-multi-session-worktree]] — 병렬 세션을 한 창에 모으고 충돌은 worktree로 물리 분리
 
 ## 로컬 LLM
 

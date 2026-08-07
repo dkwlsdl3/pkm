@@ -1,132 +1,106 @@
 ---
-title: Claude Code 세팅 및 워크플로우
+title: Claude Code 전역 세팅
 tags:
   - tech
+  - ai
 created: 2026-05-13 (수)
+updated: 2026-08-07 (금)
 ---
 
-# Claude Code 세팅 및 워크플로우
+# Claude Code 전역 세팅
 
-> **TL;DR**: OMC + Matt Pocock 스킬 + Karpathy 원칙 + dotfiles 관리로 구성된 Claude Code 전역 세팅
+> **TL;DR**: 전역 지침·스킬·훅을 chezmoi 단일 소스로 관리하고, 공통 규칙을 Claude/Codex 양쪽에 같은 템플릿으로 주입한다. 라이브 파일(`~/.claude/*`)을 직접 고치면 다음 `chezmoi apply`에 덮어써진다.
 
 ---
 
-## 전체 구조
+## 개요
 
-```
+- **무엇**: `~/.claude/` 전역 세팅의 구성 요소와 관리 소스
+- **왜 / 언제**: 기기를 옮기거나 세팅이 깨졌을 때, 어떤 파일이 진짜 소스인지 판단해야 할 때
+
+## 구성
+
+```text
 ~/.claude/
-  CLAUDE.md          ← 전역 지침 (OMC + Karpathy 원칙)
-  settings.json      ← HUD, 플러그인, 환경변수 설정
-  commands/
-    savelog.md       ← /savelog 커스텀 커맨드
-  hud/
-    omc-hud.mjs      ← OMC HUD 스크립트
-  plugins/           ← 플러그인 캐시 (OMC 등)
-
-~/.agents/
-  skills/            ← 전역 스킬 (Matt Pocock 기반)
+  CLAUDE.md          ← 전역 지침 (공통 규칙 + Claude 전용 튜닝, 템플릿 생성물)
+  settings.json      ← 모델·훅·statusline·권한
+  statusline-command.sh
+  skills/            ← 스킬 20개
+  commands/savelog.md
+  hooks/             ← docs-commit-gate, stop-gate, sudo-gate
+  plugins/           ← 공식 마켓플레이스 플러그인 캐시
 ```
 
----
+Codex도 같은 방식으로 `~/.codex/`(AGENTS.md, skills, hooks)를 관리한다.
 
-## OMC (Oh My Claude Code)
+## chezmoi 소스 매핑
 
-멀티 에이전트 오케스트레이션 플러그인.
+소스: `~/Projects/dotfiles-chezmoi` (`chezmoi source-path`)
 
-**설치:**
-```bash
-npm install -g oh-my-claude-sisyphus
-# Claude Code에서
-/plugin install oh-my-claudecode
-/reload-plugins
-/oh-my-claudecode:omc-setup
-```
+| 소스 | 타깃 |
+|---|---|
+| `dot_claude/CLAUDE.md.tmpl` | `~/.claude/CLAUDE.md` |
+| `dot_claude/modify_settings.json.tmpl` | `~/.claude/settings.json` |
+| `dot_claude/skills/<name>/SKILL.md.tmpl` | `~/.claude/skills/<name>/SKILL.md` |
+| `dot_claude/hooks/*` | `~/.claude/hooks/*` |
+| `dot_codex/AGENTS.md.tmpl` | `~/.codex/AGENTS.md` |
+| `private_dot_local/libexec/agent-hooks/*` | `~/.local/libexec/agent-hooks/*` |
 
-**주요 기능:**
-- 전문화된 에이전트 자동 위임 (executor, architect, debugger 등)
-- HUD statusline (컨텍스트 사용량, 에이전트 상태 등)
-- ultrawork, ralph, autopilot 등 실행 모드
+## 지침은 공통 + 도구별로 분리
 
----
+`~/.claude/CLAUDE.md`와 `~/.codex/AGENTS.md`는 각각 두 조각을 이어 붙인 생성물이다.
 
-## 전역 스킬 (Matt Pocock 기반)
+- `.chezmoitemplates/agent-common.md` — 두 도구 공통 규칙 (응답 언어, 실행 기준, 비협상 규칙, 코딩 원칙). 이 안의 `Coding Principles` 4개가 [[karpathy-coding-principles]]에 해당한다.
+- `.chezmoitemplates/agent-tuning-claude.md` / `agent-tuning-codex.md` — 도구별 보정
 
-`~/.agents/skills/`에 설치. 한국어 트리거 추가됨.
+같은 규칙을 두 파일에 복사해 두면 한쪽만 갱신되어 갈라진다. 공통 부분을 한 곳에 두고 주입하는 구조가 그 드리프트를 막는다.
 
-| 스킬 | 용도 | 한국어 트리거 |
-|------|------|--------------|
-| caveman | 토큰 절약 압축 모드 | 짧게 말해, 간단하게 |
-| diagnose | 버그 진단 루프 | 진단해줘, 디버그해줘 |
-| grill-me | 설계 검토 인터뷰 | 내 계획 검토, 설계 피드백 |
-| grill-with-docs | 문서 기반 설계 검토 | 문서 기반으로 검토 |
-| handoff | 대화 핸드오프 문서 | 핸드오프, 다음 에이전트에 넘겨 |
-| improve-codebase-architecture | 아키텍처 개선 | 리팩토링 기회 찾아줘 |
-| prototype | 빠른 프로토타입 | 프로토타입 만들어줘, UI 시안 |
-| tdd | 테스트 주도 개발 | TDD로 해줘 |
-| write-a-skill | 새 스킬 작성 | 새 스킬 만들어줘 |
-| zoom-out | 큰 그림 파악 | 전체 그림 보여줘, 맥락 설명해줘 |
+## 스킬도 단일 소스
 
-**설치 방법:**
-```bash
-npx skills@latest add mattpocock/skills -g
-# 불필요한 스킬 제거
-rm -rf ~/.agents/skills/setup-matt-pocock-skills
-rm -rf ~/.agents/skills/to-issues
-rm -rf ~/.agents/skills/to-prd
-rm -rf ~/.agents/skills/triage
-```
+`.chezmoitemplates/skills/<name>/SKILL.md`가 실제 본문이고, `dot_claude/skills`·`dot_codex/skills`는 `includeTemplate`으로 그것을 참조만 한다. 스킬 하나를 고치면 두 도구에 동시에 반영된다.
 
----
+외부 스킬셋(Matt Pocock 기반) 위에 직접 만든 스킬을 얹어 쓴다.
 
-## Karpathy 4원칙
+| 구분 | 스킬 |
+|---|---|
+| 외부 기반 | caveman, diagnose, grill-me, grill-with-docs, handoff, improve-codebase-architecture, prototype, tdd, write-a-skill, zoom-out |
+| 자체 제작 | agent-bootstrap, consensus, debate, delegate, review, savelog, obsidian-import, worklog-chain, works-kanban, works-wiki |
 
-`~/.claude/CLAUDE.md`에 전역 적용 중. 원칙 상세는 [[karpathy-coding-principles]] 참고.
+`consensus`·`debate`·`delegate`·`review`는 Claude가 Codex를 호출하는 쪽이라 Claude에만 두고, Codex 쪽에는 역방향인 `claude-review`를 둔다. 자세한 사용 패턴은 [[hetero-model-review-loop]] 참고.
 
----
+## 훅으로 거는 게이트
 
-## /savelog 커맨드
+지침 문장만으로는 잘 지켜지지 않는 규칙을 훅으로 강제한다.
 
-작업 내용을 `~/Downloads/`에 마크다운으로 저장하고 프로젝트 메모리 업데이트.
-전역 설치: `~/.claude/commands/savelog.md`
-어느 프로젝트에서든 `/savelog` 호출 가능.
+- `docs-commit-gate` — 문서 커밋 남발 차단
+- `stop-gate` — 작업을 덜 끝내고 턴을 종료하는 것 차단
+- `sudo-gate` — 권한 상승 명령 확인
+- `rg-flag-gate` — `grep -r` 형태의 잘못된 ripgrep 플래그 차단
 
----
+## 플러그인
 
-## dotfiles 동기화
+공식 마켓플레이스에서 playwright, rust-analyzer-lsp, frontend-design만 사용한다.
 
-GitHub: `git@github.com:<YOUR_GITHUB_USER>/dotfiles.git`
+## 프로젝트별 로컬 지침
 
-**새 기기 세팅:**
-```bash
-git clone git@github.com:<YOUR_GITHUB_USER>/dotfiles.git ~/dotfiles
-bash ~/dotfiles/install.sh
-# Claude 열고
-/plugin install oh-my-claudecode
-```
+전역(`~/.claude/CLAUDE.md`) + 프로젝트 로컬이 함께 읽히고 충돌 시 로컬이 우선한다. 이 vault처럼 로컬 `CLAUDE.md`가 `AGENTS.md`를 `@` import 하게 두면, 규칙 소스를 한 파일로 두고 Claude·Codex 양쪽이 같은 내용을 읽는다.
 
-**동기화:**
-```bash
-# 변경 후
-cd ~/dotfiles && git add . && git commit -m "..." && git push
+## 주의
 
-# 다른 기기에서
-cd ~/dotfiles && git pull
-```
+> [!WARNING]
+> `~/.claude/CLAUDE.md`, `settings.json`, `skills/**`를 직접 편집하면 다음 `chezmoi apply`에 사라진다. `chezmoi edit <타깃>`을 쓰거나 소스를 고친 뒤 apply 한다.
 
----
+## 폐기된 세팅
 
-## 프로젝트별 로컬 CLAUDE.md
-
-- 전역(`~/.claude/CLAUDE.md`) + 로컬(`.claude/CLAUDE.md`) 둘 다 읽힘
-- 충돌 시 로컬이 우선
-- 전역: 항상 적용할 행동 원칙 (Karpathy, OMC)
-- 로컬: 프로젝트 특화 정보 (기술 스택, 컨벤션, 도메인 용어)
-- 새 프로젝트에서 `/init` 실행하면 로컬 CLAUDE.md 자동 생성
+- **OMC (oh-my-claudecode)** — 멀티 에이전트 오케스트레이션 플러그인. Claude Code 자체 서브에이전트·스킬·훅으로 같은 일이 되면서 제거했다. HUD도 직접 만든 `statusline-command.sh`로 대체.
+- **`~/dotfiles` + `install.sh` 심볼릭 링크 방식** — chezmoi로 이전. `~/.agents/skills/`의 링크는 그 시절 잔재이며 지금은 끊어져 있다. 이력은 [[dotfiles]] 참고.
 
 ---
 
 ## 관련
 
 - [[dotfiles]]
+- [[hetero-model-review-loop]]
+- [[single-window-multi-session-worktree]]
 - [[ai-workflow-tools]]
 - [[karpathy-coding-principles]]
