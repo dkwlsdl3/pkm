@@ -6,7 +6,21 @@ import { SimpleSlug } from "./quartz/util/path"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    // all-notes 페이지에서만 전체 노트를 날짜 내림차순으로 나열한다
+    Component.ConditionalRender({
+      component: Component.RecentNotes({
+        limit: Number.MAX_SAFE_INTEGER,
+        title: "전체 노트 (날짜순)",
+        showTags: true,
+        filter: (f) => {
+          const slug = f.slug ?? ""
+          return slug !== "all-notes" && slug !== "index" && !slug.endsWith("/index")
+        },
+      }),
+      condition: (page) => page.fileData.slug === "all-notes",
+    }),
+  ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
@@ -46,7 +60,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.RecentNotes({
       limit: 10,
       title: "최근 노트",
-      linkToMore: "tags/tech" as SimpleSlug,
+      linkToMore: "all-notes" as SimpleSlug,
     }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),

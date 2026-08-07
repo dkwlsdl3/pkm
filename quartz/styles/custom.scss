@@ -1,3 +1,36 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// 사이드바는 height: 100vh + position: sticky 라서 내용이 화면보다 길면
+// 넘치는 부분이 잘리고 스크롤도 되지 않는다(그래프 + 최근 노트 + 목차 + 백링크).
+// 데스크톱에서 사이드바 자체를 스크롤 가능하게 만든다.
+@media all and ($desktop) {
+  .sidebar {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    // 스크롤바는 hover 시에만 드러나게 해 평소 레이아웃을 흐트리지 않는다
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    &:hover {
+      scrollbar-color: var(--lightgray) transparent;
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 3px;
+    }
+    &:hover::-webkit-scrollbar-thumb {
+      background: var(--lightgray);
+    }
+  }
+
+  // 사이드바 안에서 목록이 길어질 때 개별 블록도 제 높이를 갖도록
+  .sidebar.right > * {
+    flex: 0 0 auto;
+  }
+}
