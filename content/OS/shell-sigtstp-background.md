@@ -2,6 +2,7 @@
 title: SIGTSTP 백그라운드 정지 문제
 tags:
   - tech
+created: 2026-07-24 (금)
 ---
 
 # SIGTSTP 백그라운드 정지 문제

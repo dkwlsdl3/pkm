@@ -5,6 +5,7 @@ tags:
   - ha
   - drbd
   - zfs
+created: 2026-07-21 (화)
 ---
 
 # 공유스토리지 없는 2노드 Lustre HA (DRBD + ZFS OSD)

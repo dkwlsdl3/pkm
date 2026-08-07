@@ -5,6 +5,7 @@ tags:
   - grpc
   - tls
   - firewalld
+created: 2026-07-10 (금)
 ---
 
 # 기존 웹 프록시 옆에 gRPC 수신 붙이기 — 전용 포트 패턴

@@ -4,6 +4,7 @@ tags:
   - cicd
   - gitlab
   - deployment
+created: 2026-07-24 (금)
 ---
 
 # manual 배포 버튼이 빌드 없는 파이프라인에도 뜨는 함정

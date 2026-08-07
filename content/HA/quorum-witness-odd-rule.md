@@ -4,6 +4,7 @@ tags:
   - ha
   - cluster
   - quorum
+created: 2026-07-24 (금)
 ---
 
 # 정족수(Quorum)와 Witness — 홀수 규칙

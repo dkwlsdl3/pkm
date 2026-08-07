@@ -4,6 +4,7 @@ tags:
   - tech
   - moc
   - ha
+created: 2026-07-24 (금)
 ---
 
 # HA / 클러스터 개요 (MOC)

@@ -4,6 +4,7 @@ tags:
   - zfs
   - storage
   - hardware
+created: 2026-07-24 (금)
 ---
 
 # 하드웨어 RAID vs HBA/JBOD 패스스루 (ZFS 스토리지)

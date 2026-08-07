@@ -5,6 +5,7 @@ tags:
   - kernel
   - rhel
   - boot
+created: 2026-07-21 (화)
 ---
 
 # EL8/9 커널 스왑 안전수칙 (벤더 패치커널 함정)

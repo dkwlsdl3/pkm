@@ -5,6 +5,7 @@ tags:
   - hardware
   - bmc
   - troubleshooting
+created: 2026-07-24 (금)
 ---
 
 # 서버 팬 폭음 진단

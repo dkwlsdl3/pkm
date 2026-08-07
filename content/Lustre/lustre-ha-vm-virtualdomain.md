@@ -5,6 +5,7 @@ tags:
   - ha
   - drbd
   - zfs
+created: 2026-07-24 (금)
 ---
 
 # VM 기반 Lustre HA (Pacemaker VirtualDomain)

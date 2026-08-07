@@ -5,6 +5,7 @@ tags:
   - grpc
   - tls
   - firewalld
+created: 2026-07-24 (금)
 ---
 
 # gRPC 경로 검증 — 무인증 Ping과 SSH 터널 SNI 오버라이드

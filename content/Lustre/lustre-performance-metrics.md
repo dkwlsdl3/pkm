@@ -3,6 +3,7 @@ title: Lustre 성능 지표 수집 (proc/sysfs 기반, 에이전트리스)
 tags:
   - lustre
   - monitoring
+created: 2026-07-08 (수)
 ---
 
 # Lustre 성능 지표 수집 (proc/sysfs 기반, 에이전트리스)

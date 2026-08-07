@@ -4,6 +4,7 @@ tags:
   - rust
   - utoipa
   - openapi
+created: 2026-07-10 (금)
 ---
 
 # utoipa 자기참조 스키마 — 기동 시 stack overflow

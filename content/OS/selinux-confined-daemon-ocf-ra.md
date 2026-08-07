@@ -5,6 +5,7 @@ tags:
   - selinux
   - pacemaker
   - troubleshooting
+created: 2026-07-24 (금)
 ---
 
 # confined SELinux 도메인이 실행하는 OCF/RA가 rc=1로 실패할 때

@@ -4,6 +4,7 @@ tags:
   - gitlab-ci
   - deployment
   - configuration
+created: 2026-07-10 (금)
 ---
 
 # 공유 배포 env 템플릿의 opt-in 플래그 함정

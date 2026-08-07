@@ -3,6 +3,7 @@ title: 보상(Compensation/Saga) 설계 함정 — 프로비저닝 Job에서 실
 tags:
   - design-pattern
   - distributed
+created: 2026-07-08 (수)
 ---
 
 # 보상(Compensation/Saga) 설계 함정 — 프로비저닝 Job에서 실증된 4가지

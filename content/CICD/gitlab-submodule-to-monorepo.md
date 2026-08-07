@@ -4,6 +4,7 @@ tags:
   - cicd
   - gitlab
   - git
+created: 2026-07-08 (수)
 ---
 
 # GitLab 서브모듈 → 모노레포 전환 함정 모음

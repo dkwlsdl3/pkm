@@ -6,6 +6,7 @@ tags:
   - pacemaker
   - corosync
   - drbd
+created: 2026-07-24 (금)
 ---
 
 # HA 클러스터 3대 요소 — Pacemaker / Corosync / DRBD (입문)
