@@ -8,7 +8,37 @@ created: 2026-05-12 (화)
 
 # Lustre 파일시스템 개요 (MOC)
 
-> HPC 환경의 고성능 분산 파일시스템 — 대용량 병렬 I/O 특화
+> HPC(High Performance Computing, 고성능 컴퓨팅) 환경의 분산 파일시스템 — 대용량 병렬 I/O 특화
+
+---
+
+## 용어
+
+Lustre 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면 여기로 돌아온다.
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| MGS | Management Server | 파일시스템 전체 설정을 관리하는 **서버** |
+| MGT | Management Target | MGS가 설정을 저장하는 **디스크** |
+| MDS | Metadata Server | 파일명·디렉토리·권한을 관리하는 **서버** |
+| MDT | Metadata Target | MDS가 메타데이터를 저장하는 **디스크** |
+| OSS | Object Storage Server | 실제 파일 데이터를 저장하는 **서버** |
+| OST | Object Storage Target | OSS가 데이터를 저장하는 **디스크** (여러 개를 묶어 용량을 늘림) |
+| OSD | Object Storage Device | OST 아래에서 실제 파일시스템(ldiskfs/ZFS)에 쓰는 백엔드 계층 |
+| LNET | Lustre Networking | Lustre 전용 네트워크 계층. `tcp0`, `o2ib` 같은 이름으로 인터페이스를 지정 |
+| HA | High Availability | 고가용성. 한 노드가 죽어도 서비스가 이어지는 이중화 구성 |
+| DoM | Data on MDT | 작은 파일은 OST로 가지 않고 MDT에 바로 담는 기능 |
+| OBD | Object-Based Device | Lustre 내부 장치 추상화. `lctl dl`로 보이는 항목들 |
+| IOR | Interleaved Or Random | HPC 병렬 I/O 벤치마크 도구 이름 |
+| NIC | Network Interface Card | 네트워크 인터페이스(랜카드) |
+| ARC | Adaptive Replacement Cache | ZFS의 메모리 읽기 캐시 |
+| txg | transaction group | ZFS가 쓰기를 묶어 주기적으로 디스크에 반영하는 단위 |
+| CoV | Coefficient of Variation | 변동계수(표준편차/평균) → [[storage-perf-latency-percentiles]] |
+| EL8 / EL9 | Enterprise Linux 8 / 9 | RHEL 및 그 호환 배포판(Rocky, Alma) 계열 버전 |
+
+> **서버(S)와 타겟(T)의 구분**이 핵심이다. MGS·MDS·OSS는 프로세스가 도는 **서버**, MGT·MDT·OST는 데이터가 놓이는 **디스크**다. `mkfs.lustre`로 포맷하는 대상은 항상 타겟 쪽이다.
+
+제품·모듈 이름은 풀이 대상이 아니다: `ldiskfs`(ext4를 Lustre용으로 확장한 백엔드 파일시스템), `DRBD`(Distributed Replicated Block Device, 노드 간 블록 장치를 실시간 복제하는 소프트웨어), `Pacemaker`(HA 클러스터 자원 관리자).
 
 ---
 

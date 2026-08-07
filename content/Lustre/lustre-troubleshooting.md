@@ -9,6 +9,8 @@ created: 2026-05-12 (화)
 
 > **TL;DR**: Lustre 운영에서 자주 만나는 문제와 재부팅 후 자동 마운트 설정
 
+> 역할 약어(MGS·MDS·OSS·MDT·OST·LNET)는 [[lustre-overview]]의 용어 표 참고.
+
 ---
 
 ## identity_upcall — 비root 접근 권한 거부
@@ -49,6 +51,8 @@ mount -t lustre /dev/vdb /mnt/ost0
 ---
 
 ## OBD 디바이스 커널 잔존 (재부팅 필요)
+
+OBD(Object-Based Device)는 Lustre가 커널 안에 만드는 장치 추상화다. `lctl dl`로 나열되는 항목들이 그것이며, 이름 끝의 `C`는 Client 측 장치를 뜻한다.
 
 **증상**: `umount /mnt/lustre` 후에도 `lnetctl lnet unconfigure` 실패.
 
@@ -155,9 +159,9 @@ WHERE is_lustre_node = TRUE
 
 ## 단일 OST DISCONN이 전체 서비스로 전파 — 집계 RPC hang
 
-**증상**: OSS 한 대(또는 OST 하나)가 죽었을 뿐인데 NAS/상위 서비스 전체가 마비된 것처럼 보인다. 특정 파일이 아니라 쿼터 조회·용량 표시·업로드까지 광범위하게 실패/hang.
+**증상**: OSS 한 대(또는 OST 하나)가 죽었을 뿐인데 NAS(Network Attached Storage, 네트워크 연결 스토리지)/상위 서비스 전체가 마비된 것처럼 보인다. 특정 파일이 아니라 쿼터 조회·용량 표시·업로드까지 광범위하게 실패/hang.
 
-**원인**: OST가 내려가면 클라이언트 osc가 `DISCONN`(또는 `CONNECTING` 반복)으로 방치되는데, **모든 OST를 순회하는 집계성 RPC**(`lfs quota`, 쿼터 enforcement, 일부 `lfs df`)가 죽은 OST 응답을 기다리다 `-EIO`(rc=-5)로 실패하거나 무기한 hang한다. Lustre는 OST 간 복제가 없으므로 "그 OST의 파일 접근 불가"는 설계상 정상이지만, **집계 경로가 부분 장애를 전면 장애로 증폭**시킨다.
+**원인**: OST가 내려가면 클라이언트 osc가 `DISCONN`(disconnected, 연결 끊김)으로 방치되는데, **모든 OST를 순회하는 집계성 RPC**(Remote Procedure Call, 원격 프로시저 호출 — `lfs quota`, 쿼터 enforcement, 일부 `lfs df`)가 죽은 OST 응답을 기다리다 `-EIO`(rc=-5)로 실패하거나 무기한 hang한다. Lustre는 OST 간 복제가 없으므로 "그 OST의 파일 접근 불가"는 설계상 정상이지만, **집계 경로가 부분 장애를 전면 장애로 증폭**시킨다.
 
 ```
 LustreError: ...osc_quota.c:...:osc_quotactl()) ptlrpc_queue_wait failed, rc: -5

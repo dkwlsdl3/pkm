@@ -7,7 +7,9 @@ created: 2026-05-12 (화)
 
 # Lustre 서버 설치 (EL8)
 
-> **TL;DR**: Rocky Linux 8 / RHEL 8 기준 MGS+MDT+OST Lustre 서버 구성 가이드
+> **TL;DR**: EL8(Enterprise Linux 8 = Rocky Linux 8 / RHEL 8) 기준으로 MGS(설정 관리 서버) + MDT(메타데이터 디스크) + OST(데이터 디스크)를 올리는 절차.
+
+> 약어는 [[lustre-overview]]의 용어 표 참고. 핵심은 **S로 끝나면 서버, T로 끝나면 디스크**다.
 
 ---
 
@@ -83,7 +85,7 @@ mkfs.lustre --fsname=<fsname> --ost --mgsnode=<MGS_IP>@tcp --index=1 /dev/vdb
 
 ## 4. firewalld 비활성화 및 LNET 설정
 
-LNET 미설정 또는 firewalld 차단 시 OST 마운트 타임아웃 발생.
+LNET(Lustre Networking, Lustre 전용 네트워크 계층) 미설정 또는 firewalld 차단 시 OST 마운트 타임아웃 발생.
 
 ```bash
 # firewalld 비활성화 (개발 환경)
