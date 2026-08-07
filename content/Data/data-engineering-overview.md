@@ -12,6 +12,24 @@ created: 2026-05-13 (수)
 
 ---
 
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| OLTP | Online Transaction Processing | 서비스가 쓰는 트랜잭션 처리용 DB. 짧은 읽기·쓰기가 많다 → [[db-oltp]] |
+| OLAP | Online Analytical Processing | 분석용 처리. 대량 집계 쿼리에 맞춰져 있다 → [[data-warehouse]] |
+| DW | Data Warehouse | 정제된 데이터를 분석용으로 모아둔 창고(OLAP용) |
+| DL | Data Lake | 원시 데이터를 형식 그대로 쌓아두는 저장소 |
+| ETL / ELT | Extract, Transform, Load / Extract, Load, Transform | 추출·변환·적재의 순서 차이. 변환을 적재 전에 하느냐 후에 하느냐 → [[etl-elt]] |
+| ACID | Atomicity, Consistency, Isolation, Durability | 원자성·일관성·격리성·지속성. 트랜잭션 안전 보장 4원칙 → [[acid]] |
+| NULL | — | "값이 없음"을 나타내는 SQL의 특수 표기. 같은지 비교하면 참이 아니라 NULL이 나온다 |
+| CDC | Change Data Capture | 원본 DB의 변경분만 뽑아 하류로 전달하는 방식 |
+| S3 | Simple Storage Service | AWS의 오브젝트 스토리지. 그 API가 사실상 표준이 되어 호환 제품이 많다 → [[minio]] |
+| ECM | Enterprise Content Management | 기업 문서를 중앙에서 관리하는 체계 → [[ecm]] |
+| dbt | data build tool | SQL로 데이터 변환을 관리하는 도구 (제품명) |
+
+---
+
 ## 핵심 개념
 
 - [[etl-elt]] — 데이터 파이프라인의 두 가지 패턴

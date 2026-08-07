@@ -12,6 +12,23 @@ created: 2026-05-13 (수)
 
 ---
 
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| LLM | Large Language Model | 대규모 언어 모델 |
+| RAG | Retrieval-Augmented Generation | 외부 문서를 검색해 그 내용을 근거로 답을 만드는 방식 → [[rag]] |
+| VRAM | Video RAM | GPU에 붙은 메모리. 모델을 올릴 수 있는지가 이 용량으로 결정된다 |
+| MCP | Model Context Protocol | 모델에 외부 도구·데이터 소스를 연결하는 프로토콜 |
+| JSONL | JSON Lines | 한 줄에 JSON 하나씩 담는 형식. 세션 로그가 이 형식이라 `rg`·`jq`로 바로 훑을 수 있다 → [[session-log-search-rg-jq]] |
+| UTC | Coordinated Universal Time | 표준시. 로그 타임스탬프가 UTC라 한국 시간과 9시간 차이가 나므로 날짜 경계를 변환해야 한다 |
+| PSI / KS | Population Stability Index / Kolmogorov-Smirnov | 데이터 분포가 학습 때와 달라졌는지 재는 지표 → [[model-drift]] |
+| HUD | Head-Up Display | 터미널 상단·하단에 상태를 띄우는 표시줄(statusline) |
+
+`CLAUDE.md`·`AGENTS.md`는 약어가 아니라 에이전트가 읽는 지침 파일 이름이다.
+
+---
+
 ## Claude Code
 
 - [[claude-code-setup]] — 전역 지침·스킬·훅의 chezmoi 단일 소스 관리 구조

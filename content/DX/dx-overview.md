@@ -8,7 +8,27 @@ created: 2026-05-13 (수)
 
 # DX 개요 (MOC)
 
-> Developer Experience — 개발 환경 세팅 및 생산성 도구 모음
+> DX(Developer Experience, 개발자 경험) — 개발 환경 세팅 및 생산성 도구 모음
+
+---
+
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| DX | Developer Experience | 개발자 경험. 도구·환경이 개발을 얼마나 매끄럽게 하는지 |
+| TUI | Text-based User Interface | 터미널 안에서 화면을 그리는 UI(vim, htop 등) |
+| PKM | Personal Knowledge Management | 개인 지식 관리 → [[pkm-zettelkasten]] |
+| MOC | Map of Content | 특정 주제의 노트를 모아 길잡이 역할을 하는 색인 노트 |
+| E2E | End-to-End | 사용자 관점에서 전체 흐름을 실제로 돌려보는 테스트 |
+| SPA | Single Page Application | 페이지 전환 없이 한 문서에서 동작하는 프런트엔드 구조 |
+| ESM | ECMAScript Module | JavaScript 표준 모듈 방식(`import`/`export`). CommonJS(`require`)와 해석 규칙이 다르다 |
+| CWD | Current Working Directory | 현재 작업 디렉토리. 프로세스가 상대 경로를 해석하는 기준점 |
+| GLIBC | GNU C Library | 리눅스 표준 C 라이브러리. 빌드 환경보다 낮은 버전에서 실행하면 깨진다 |
+| RPM | RPM Package Manager | RHEL 계열 패키지 형식·도구 |
+| RC | Release Candidate | 정식 배포 후보 버전. 의존성 해석에서 정식판과 섞이면 충돌한다 |
+| OTP | One-Time Password | 일회용 비밀번호. E2E 테스트에서 로그인 자동화의 걸림돌이 된다 |
+| NFS | Network File System | 네트워크로 공유하는 파일시스템. 응답이 느려지면 파일 I/O가 블로킹된다 |
 
 ---
 
@@ -23,7 +43,7 @@ created: 2026-05-13 (수)
 
 ## 설정 파일 관리
 
-- [[dotfiles]] — dotfiles를 Git으로 관리해 여러 기기에서 동일 환경 유지
+- [[dotfiles]] — chezmoi로 dotfiles를 관리하는 이 환경의 구성(소스 레포 구조·타깃 매핑·새 기기 세팅)
 - [[chezmoi]] — chezmoi 관리 파일은 타깃 직접 편집 시 apply로 소실, 소스 편집 후 apply
 
 ## 키보드 & 입력

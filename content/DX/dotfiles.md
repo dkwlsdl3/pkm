@@ -93,5 +93,6 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply \
 
 ## 관련
 
+- [[chezmoi]] — 관리 파일을 직접 편집하면 apply에 소실되는 함정(소스 찾기·역반영)
 - [[claude-code-setup]] — 에이전트 지침·스킬·훅 구조
 - [[terminal-setup]] — zsh, starship, nvim 세팅

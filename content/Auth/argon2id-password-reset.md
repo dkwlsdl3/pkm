@@ -23,6 +23,8 @@ created: 2026-06-08 (월)
 
 ### PHC 문자열 전체를 저장한다
 
+**PHC**(Password Hashing Competition) 문자열은 해시 결과를 표준 형식 하나로 담는 표기다. `$argon2id$v=19$m=65536,t=3,p=4$<salt>$<hash>` 처럼 **알고리즘·버전·cost 파라미터·salt·해시**가 한 문자열에 다 들어 있어, 검증할 때 별도 컬럼을 참조하지 않아도 된다.
+
 argon2id는 salt와 cost parameter가 포함된 PHC 문자열을 저장한다. DB에는 raw password가 아니라 생성된 PHC 문자열 전체를 넣는다.
 
 ### 비밀번호와 잠금 상태는 함께 본다

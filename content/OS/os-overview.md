@@ -12,6 +12,89 @@ created: 2026-05-13 (수)
 
 ---
 
+## 용어
+
+OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면 여기로 돌아온다.
+
+**서버 원격 관리 (OS가 죽어도 접근하는 경로)**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| BMC | Baseboard Management Controller | 메인보드에 붙어 OS와 독립적으로 동작하는 관리 칩. 아래 iDRAC·XCC·iLO는 모두 그 구현체 |
+| iDRAC | integrated Dell Remote Access Controller | Dell 서버의 BMC |
+| XCC | XClarity Controller | Lenovo 서버의 BMC |
+| iLO | integrated Lights-Out | HP 서버의 BMC |
+| IPMI | Intelligent Platform Management Interface | BMC를 제어하는 표준 인터페이스(`ipmitool`) |
+| Redfish | — | IPMI를 대체하는 REST 기반 관리 표준 |
+
+**배포판 · 패키징 · 부팅**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| RHEL | Red Hat Enterprise Linux | Red Hat의 상용 리눅스 |
+| EL8 / EL9 | Enterprise Linux 8 / 9 | RHEL과 그 호환 배포판(Rocky, Alma) 계열 버전 |
+| RPM | RPM Package Manager | RHEL 계열 패키지 형식·도구 (원래 Red Hat Package Manager) |
+| DKMS | Dynamic Kernel Module Support | 커널이 바뀌면 외부 모듈을 자동 재빌드하는 장치 → [[dkms]] |
+| GRUB | GRand Unified Bootloader | 리눅스 부트로더 → [[grub-kernel-pinning]] |
+| BIOS | Basic Input/Output System | 펌웨어 초기화 단계. 요즘은 UEFI가 대신하지만 관행상 BIOS라 부른다 |
+| ISO | — | 광학 디스크 이미지 파일(ISO 9660 형식) |
+
+**가상화 · 스토리지**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| KVM | Kernel-based Virtual Machine | 리눅스 커널 내장 하이퍼바이저 → [[kvm-libvirt]] |
+| QEMU | Quick Emulator | 가상 하드웨어를 제공하는 에뮬레이터. KVM과 짝으로 쓴다 |
+| LVM | Logical Volume Manager | 물리 디스크를 논리 볼륨으로 추상화하는 리눅스 계층 |
+| UUID | Universally Unique Identifier | 장치·객체를 유일하게 식별하는 값. fstab은 이걸로 적는다 → [[fstab-uuid-mount]] |
+| NVMe | Non-Volatile Memory express | PCIe에 직접 붙는 SSD 규격. 디바이스명이 부팅마다 바뀔 수 있다 |
+| SMART | Self-Monitoring, Analysis and Reporting Technology | 디스크 자기진단 기능 → [[smartctl]] |
+
+**보안 · 인증**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| SELinux | Security-Enhanced Linux | 프로세스가 접근할 수 있는 대상을 레이블로 강제하는 커널 보안 모듈 |
+| AVC | Access Vector Cache | SELinux의 접근 판정 캐시. 거부 로그가 `avc: denied`로 찍힌다 |
+| OCF / RA | Open Cluster Framework / Resource Agent | 클러스터가 자원을 시작·정지·감시할 때 호출하는 표준 스크립트 규약 |
+| SAML | Security Assertion Markup Language | XML 기반 SSO 표준 → [[saml]] |
+| IdP / SP | Identity Provider / Service Provider | 신원을 증명하는 쪽 / 그 증명을 받아 로그인시키는 쪽 |
+
+**네트워크 · 원격 접속**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| NIC | Network Interface Card | 네트워크 인터페이스(랜카드) |
+| VPN | Virtual Private Network | 공용망 위에 암호화 터널을 만들어 사설망처럼 쓰는 기술 → [[vpn-fundamentals]] |
+| vNIC | virtual NIC | VPN·가상화가 만드는 가상 네트워크 인터페이스 |
+| LAN | Local Area Network | 같은 구내망(사무실·집 내부 네트워크) |
+| mDNS | multicast DNS | DNS 서버 없이 같은 LAN 안에서 이름을 찾는 방식. LAN 밖에서는 동작하지 않는다 |
+| NAT | Network Address Translation | 주소 변환. `MASQUERADE`는 iptables에서 출발지 주소를 나가는 인터페이스 주소로 바꾸는 NAT 규칙 이름이다 |
+| ACL | Access Control List | 접근 제어 목록(무엇을 허용/차단하는지 나열한 규칙) |
+| REST | Representational State Transfer | HTTP 메서드와 URL로 자원을 다루는 API 양식 |
+| LDAP | Lightweight Directory Access Protocol | 사용자·조직 정보를 담은 디렉터리 서비스 조회 프로토콜 |
+| SSO | Single Sign-On | 한 번 로그인으로 여러 서비스를 쓰는 방식 → [[sso]] |
+| VNC / vKVM | Virtual Network Computing / virtual KVM | 원격 화면 공유 방식 / BMC가 제공하는 원격 콘솔 |
+
+**디스크 인터페이스 · 기타**
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| SATA / SAS | Serial ATA / Serial Attached SCSI | 디스크 연결 규격. SAS가 서버용 상위 규격이다 |
+| SCSI | Small Computer System Interface | 오래된 스토리지 명령 체계. 지금도 프로토콜 계층으로 남아 `-d sat` 같은 옵션에 등장한다 → [[smartctl-device-type-sat-cciss]] |
+| AHCI | Advanced Host Controller Interface | SATA 컨트롤러 표준 동작 모드 |
+| WWN | World Wide Name | 스토리지 장치에 부여되는 전역 고유 식별자 |
+| VE | Virtual Environment | Proxmox VE 제품명의 일부 |
+| HA | High Availability | 고가용성. 한 노드가 죽어도 서비스가 이어지는 구성 → [[ha-overview]] |
+| GUI | Graphical User Interface | 그래픽 화면 인터페이스 |
+| XML | Extensible Markup Language | 태그 기반 데이터 형식. libvirt 도메인 정의와 SAML이 이 형식이다 |
+| GNU | GNU's Not Unix | 자유 소프트웨어 프로젝트 이름(재귀 약어). `GNU tar`처럼 구현체를 구분할 때 쓴다 |
+| SIGTSTP / SIGPIPE / SIGKILL | signal: terminal stop / broken pipe / kill | 프로세스에 보내는 시그널. 각각 터미널 정지(`Ctrl+Z`), 읽는 쪽이 사라진 파이프에 쓰기, 강제 종료 |
+
+인증 약어(JWT·OIDC·RBAC·CSRF 등)는 [[auth-overview]], 물리 링크·스위치 약어(L1/L2/L3·LACP·STP·SNI 등)는 [[network-overview]]의 용어 표 참고.
+
+---
+
 ## 네트워크 & 원격 접속
 
 - [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향)

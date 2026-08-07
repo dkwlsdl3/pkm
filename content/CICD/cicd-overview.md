@@ -12,6 +12,17 @@ created: 2026-06-25 (목)
 
 ---
 
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| CI / CD | Continuous Integration / Continuous Delivery·Deployment | 변경을 자주 합쳐 자동 검증하는 것 / 그 결과를 자동으로 배포 가능 상태까지 또는 실제 배포까지 가져가는 것 |
+| RPM | RPM Package Manager | RHEL 계열 패키지 형식. 빌드 산출물을 이 형식으로 배포한다 |
+| runner | — | GitLab CI에서 job을 실제로 실행하는 에이전트. tag가 맞는 runner가 없으면 job은 pending에 머문다 |
+| artifact | — | job이 남기는 산출물(빌드 결과·리포트). 다음 job이 내려받아 쓴다 |
+
+---
+
 ## 핵심 개념
 
 - [[gitlab-ci-deploy-runner]] — deploy job tag·러너 매칭, 러너 없으면 배포 안 됨(pending)

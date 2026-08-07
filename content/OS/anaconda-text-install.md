@@ -14,7 +14,7 @@ created: 2026-06-12 (금)
 ## 개요
 
 - **무엇인가**: Rocky/RHEL 계열 설치기(Anaconda)의 텍스트 모드 사용법
-- **왜 쓰는가**: 구형 서버 GPU(예: ATI ES1000)는 X 그래픽 모드 전환 시 모니터가 못 받는 신호를 쏴서 "신호 없음"이 됨. EDID 읽기 실패가 원인이라 모니터 탓이 아님
+- **왜 쓰는가**: 구형 서버 GPU(예: ATI ES1000)는 X 그래픽 모드 전환 시 모니터가 못 받는 신호를 쏴서 "신호 없음"이 됨. EDID(Extended Display Identification Data, 모니터가 자기 해상도·주사율을 알려주는 데이터) 읽기 실패가 원인이라 모니터 탓이 아님
 - **언제 쓰는가**: 헤드리스에 가까운 서버, VGA 직결 구형 장비 설치
 
 ---
@@ -46,17 +46,17 @@ inst.text nomodeset
 ### 설치 소스 의미 (USB 부팅 시)
 
 - **CD/DVD**: USB로 부팅해도 USB 미디어가 CD/DVD로 인식됨 → 이걸 선택
-- local ISO: 하드디스크 안에 든 ISO 파일용
+- local ISO: 하드디스크 안에 든 ISO 파일용 (ISO = 광학 디스크 이미지 파일 형식)
 - Network: boot.iso(최소 부팅) + 미러 설치용
 
 ### 네트워크 설정
 
-- **"Connect automatically after reboot" 체크가 핵심** — Rocky 기본값은 NIC 비활성이라 안 켜면 설치 후 첫 부팅에 네트워크 죽어 있음
+- **"Connect automatically after reboot" 체크가 핵심** — Rocky 기본값은 NIC(Network Interface Card, 랜카드) 비활성이라 안 켜면 설치 후 첫 부팅에 네트워크 죽어 있음
 - "Apply configuration in installer"는 설치 중 네트워크가 필요할 때만 (USB 소스면 미체크 무해)
 
 ### 기타
 
-- 파티션: 기본 LVM 권장 (Standard는 크기 변경 불가, Thin은 오버커밋 모니터링 부담)
+- 파티션: 기본 LVM(Logical Volume Manager, 물리 디스크를 논리 볼륨으로 추상화하는 계층) 권장 (Standard는 크기 변경 불가, Thin은 오버커밋 모니터링 부담)
 - 설치 중 쉘: Anaconda는 tmux 기반 — `Ctrl+b 2` 쉘, `Ctrl+b 1` 복귀
 
 ---
@@ -64,7 +64,7 @@ inst.text nomodeset
 ## 주의사항
 
 > [!WARNING]
-> 구형 BIOS 장비는 설치 후 재부팅 시 부트 순서가 USB로 남아 있거나, CMOS 배터리 방전으로 설정이 리셋될 수 있다. 설치 후 USB 제거 + 부트 디스크 1순위 확인까지가 설치다.
+> 구형 BIOS(Basic Input/Output System, 펌웨어 초기화 단계) 장비는 설치 후 재부팅 시 부트 순서가 USB로 남아 있거나, CMOS 배터리 방전으로 설정이 리셋될 수 있다. 설치 후 USB 제거 + 부트 디스크 1순위 확인까지가 설치다.
 
 ---
 

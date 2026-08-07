@@ -11,6 +11,8 @@ tags:
 
 > **TL;DR**: 운영 서버에 데이터를 쓰지 않고도 gRPC 에러 코드만으로 TCP→TLS→프록시→백엔드 전 구간을 진단하고, 공인망에 포트가 없을 때는 SSH 터널 + SNI 오버라이드로 내부 경로를 그대로 검증한다.
 
+> 용어: **gRPC**(Google이 만든 RPC = 원격 프로시저 호출 프레임워크, HTTP/2 기반) · **TLS**(Transport Layer Security, 통신 암호화) · **SNI**(Server Name Indication, TLS 핸드셰이크에서 접속할 호스트명을 미리 알리는 확장) · **LB**(Load Balancer, 부하 분산기) · **NAT**(Network Address Translation, 주소 변환). → [[network-overview]] 용어 표
+
 ## 경로 검증 트릭 — 데이터 없이 전 구간 증명
 
 토큰 인증이 있는 gRPC 서버라면 **무인증 Ping 한 방**으로 충분하다:

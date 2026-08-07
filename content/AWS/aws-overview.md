@@ -8,7 +8,19 @@ created: 2026-06-01 (월)
 
 # AWS 개요 (MOC)
 
-> AWS 운영 — EC2, 접속·관리, 인프라 트러블슈팅
+> AWS(Amazon Web Services) 운영 — EC2, 접속·관리, 인프라 트러블슈팅
+
+---
+
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| EC2 | Elastic Compute Cloud | AWS의 가상 서버 서비스 |
+| SSM | AWS Systems Manager | 인스턴스를 에이전트로 관리하는 서비스. Session Manager는 그중 접속 기능 |
+| IAM | Identity and Access Management | AWS의 권한 관리 체계. 사용자·역할에 정책을 붙여 접근을 제어한다 |
+| S3 | Simple Storage Service | 오브젝트 스토리지 |
+| Nitro | — | AWS의 하이퍼바이저·하드웨어 플랫폼 이름. NVMe 디바이스명이 부팅마다 바뀔 수 있다 |
 
 ---
 

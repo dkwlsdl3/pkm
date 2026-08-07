@@ -11,6 +11,8 @@ created: 2026-05-18 (월)
 
 > **TL;DR**: 한 번 로그인으로 사내 모든 서비스 접속 — SAML(기업), OIDC(현대 앱), OAuth(API 권한 위임)
 
+> 용어: **SSO**(Single Sign-On) · **SAML**(Security Assertion Markup Language, XML 기반 SSO 표준) · **OIDC**(OpenID Connect) · **LDAP**(Lightweight Directory Access Protocol, 사용자·조직 정보 디렉터리 조회 프로토콜) → [[auth-overview]] 용어 표
+
 ---
 
 ## 개념

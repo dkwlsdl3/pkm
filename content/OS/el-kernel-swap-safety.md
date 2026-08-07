@@ -11,6 +11,8 @@ tags:
 
 원격/물리 서버에서 새 커널(특히 벤더 패치커널 — Lustre `*_lustre`, DRBD, GPU 등)로 부팅하기 전 반드시 확인. 안 지키면 **부팅 불능(dracut emergency)** 으로 원격 접근이 전부 끊긴다.
 
+> 용어: **EL8/9**(Enterprise Linux 8/9 = RHEL 및 호환 배포판 계열) · **initramfs**(부팅 초기에 커널이 먼저 올리는 임시 루트 이미지. 여기에 디스크 드라이버가 없으면 실제 루트를 못 찾는다) · **dracut**(그 initramfs를 만드는 도구) · **BMC**(Baseboard Management Controller, OS와 독립된 원격 관리 칩 — Dell은 iDRAC, Lenovo는 XCC) · **kABI**(kernel Application Binary Interface, 커널 모듈 호환성 규약). → [[os-overview]] 용어 표
+
 ## 실패 사례
 Lustre ldiskfs용 패치커널 설치 시 의존성이 **`kernel-core`만** 끌어오고 **`kernel-modules`**(스토리지 컨트롤러 megaraid_sas/mpt3sas·NIC 드라이버 다수 포함)를 누락 → 그 커널의 initramfs가 부팅 디스크(HBA/RAID) 드라이버를 못 담아 **루트 LVM(`/dev/mapper/*-root`)을 못 찾고 dracut 응급셸**. 네트워크도 NIC 드라이버 없어 죽음.
 

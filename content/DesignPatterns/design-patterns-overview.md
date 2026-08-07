@@ -18,6 +18,18 @@ created: 2026-05-15 (금)
 
 > "패턴을 외우는 게 아니라, 언제 이 패턴이 필요한지 느끼는 게 중요하다."
 
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| GoF | Gang of Four | 위 23개 패턴을 정립한 저자 4인 |
+| SOLID | — | 객체지향 설계 5원칙의 머리글자 모음(SRP·OCP·LSP·ISP·DIP) |
+| OCP | Open-Closed Principle | 개방-폐쇄 원칙. **확장에는 열려 있고 수정에는 닫혀 있어야 한다** — 기능을 추가할 때 기존 코드를 고치지 않아도 되게 만든다. 패턴 대부분이 이 원칙을 지키기 위한 장치다 |
+| SRP | Single Responsibility Principle | 단일 책임 원칙. 한 클래스는 하나의 이유로만 바뀌어야 한다 |
+| DI | Dependency Injection | 의존성 주입. 필요한 객체를 스스로 만들지 않고 외부에서 받는다 → [[dependency-injection]] |
+| ORM | Object-Relational Mapping | 객체와 관계형 DB 테이블을 자동 대응시키는 계층 |
+| DOM | Document Object Model | 브라우저가 HTML 문서를 객체 트리로 표현한 것 |
+
 ---
 
 ## 생성 패턴 (Creational)

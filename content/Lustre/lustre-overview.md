@@ -29,6 +29,10 @@ Lustre 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만�
 | HA | High Availability | 고가용성. 한 노드가 죽어도 서비스가 이어지는 이중화 구성 |
 | DoM | Data on MDT | 작은 파일은 OST로 가지 않고 MDT에 바로 담는 기능 |
 | OBD | Object-Based Device | Lustre 내부 장치 추상화. `lctl dl`로 보이는 항목들 |
+| NID | Network Identifier | LNET에서 노드를 가리키는 주소 표기(`<IP>@tcp0` 형태) |
+| MGC / MDC / OSC | Management / Metadata / Object Storage Client | 클라이언트 쪽에서 각각 MGS·MDT·OST와 통신하는 장치. 끝의 `C`가 Client다 → [[lustre-troubleshooting]] |
+| UID / GID | User / Group Identifier | 사용자·그룹 번호. 클라이언트와 서버의 번호가 어긋나면 권한 거부가 난다 → [[lustre-identity-upcall]] |
+| MMP | Multiple Mount Protection | 같은 타겟을 두 노드가 동시에 마운트하는 것을 막는 ldiskfs 기능. 주기적 쓰기 때문에 지연 꼬리를 키울 수 있다 |
 | IOR | Interleaved Or Random | HPC 병렬 I/O 벤치마크 도구 이름 |
 | NIC | Network Interface Card | 네트워크 인터페이스(랜카드) |
 | ARC | Adaptive Replacement Cache | ZFS의 메모리 읽기 캐시 |
@@ -38,7 +42,7 @@ Lustre 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만�
 
 > **서버(S)와 타겟(T)의 구분**이 핵심이다. MGS·MDS·OSS는 프로세스가 도는 **서버**, MGT·MDT·OST는 데이터가 놓이는 **디스크**다. `mkfs.lustre`로 포맷하는 대상은 항상 타겟 쪽이다.
 
-제품·모듈 이름은 풀이 대상이 아니다: `ldiskfs`(ext4를 Lustre용으로 확장한 백엔드 파일시스템), `DRBD`(Distributed Replicated Block Device, 노드 간 블록 장치를 실시간 복제하는 소프트웨어), `Pacemaker`(HA 클러스터 자원 관리자).
+제품·모듈 이름은 풀이 대상이 아니다: `ldiskfs`(ext4를 Lustre용으로 확장한 백엔드 파일시스템), `DRBD`(Distributed Replicated Block Device, 노드 간 블록 장치를 실시간 복제하는 소프트웨어), `Pacemaker`(HA 클러스터 자원 관리자), `KVM`(Kernel-based Virtual Machine, 리눅스 커널 하이퍼바이저), `DKMS`(Dynamic Kernel Module Support, 커널 교체 시 모듈 자동 재빌드), `ZFS`(OSD 백엔드로 쓰는 파일시스템 → [[zfs-overview]]).
 
 ---
 

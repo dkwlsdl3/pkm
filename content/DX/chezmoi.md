@@ -14,18 +14,18 @@ created: 2026-06-30 (화)
 
 ## 개념
 
-chezmoi는 dotfiles를 **소스 디렉토리**(`~/.local/share/chezmoi`)에서 관리하고,
+chezmoi는 dotfiles를 **소스 디렉토리**에서 관리하고,
 `chezmoi apply`로 홈의 **타깃 경로**에 렌더링해 내려보낸다.
+소스 위치는 `chezmoi source-path`로 확인한다(기본값은 `~/.local/share/chezmoi`이지만 다른 경로일 수 있다).
 
 ```
-소스: ~/.local/share/chezmoi/dot_config/foo/bar.conf
+소스: <source-path>/dot_config/foo/bar.conf
   │  chezmoi apply (렌더링·복사)
   ▼
 타깃: ~/.config/foo/bar.conf   ← 실제 사용 파일 (소스의 복사본)
 ```
 
-심링크 방식 [[dotfiles]](원본을 한 곳에 두고 링크)와 **다른 점**: 타깃은 링크가 아니라
-**실제 복사본**이라, 타깃을 직접 편집해도 소스엔 반영되지 않고 다음 apply에서 날아간다.
+**심링크 방식과 다른 점**: 심링크로 관리하면 타깃이 소스를 가리키는 링크라서 타깃을 고치는 것이 곧 소스를 고치는 것이다. chezmoi의 타깃은 링크가 아니라 **실제 복사본**이라, 타깃을 직접 편집해도 소스엔 반영되지 않고 다음 apply에서 날아간다. 이 환경의 실제 구성은 [[dotfiles]] 참고.
 
 ---
 
@@ -65,5 +65,5 @@ chezmoi apply ~/.config/foo/bar.conf
 
 ## 관련
 
-- [[dotfiles]] — 심링크 기반 dotfiles 관리(타깃=링크, 직접 편집해도 원본 반영)
+- [[dotfiles]] — 이 환경의 dotfiles 관리 구성(소스 레포 구조·타깃 매핑·새 기기 세팅)
 - [[git-workflow]]

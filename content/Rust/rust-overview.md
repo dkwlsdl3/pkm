@@ -12,6 +12,18 @@ created: 2026-06-04 (목)
 
 ---
 
+## 용어
+
+| 표기 | 원어 | 뜻 |
+|---|---|---|
+| RAII | Resource Acquisition Is Initialization | 자원을 객체 수명에 묶어 스코프를 벗어나면 자동 해제하는 방식. Rust의 소유권이 이걸 강제한다 |
+| RHEL | Red Hat Enterprise Linux | Red Hat 상용 리눅스. 오래된 glibc·OpenSSL 버전 때문에 크로스 빌드 이슈가 잦다 |
+| musl | — | glibc 대신 정적 링크에 쓰는 경량 C 라이브러리. 배포 환경 glibc 버전 의존을 없앤다 |
+| FFI | Foreign Function Interface | 다른 언어(주로 C) 함수를 호출하는 경계 |
+| ORM | Object-Relational Mapping | 객체와 DB 테이블을 대응시키는 계층(sqlx는 ORM이 아니라 쿼리 검증 방식) |
+
+---
+
 ## 노트
 
 - [[sqlx-timestamptz-string-decode]] — TIMESTAMPTZ를 `Option<String>`으로 받으면 조용히 None이 되는 함정

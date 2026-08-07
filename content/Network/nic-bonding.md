@@ -9,6 +9,8 @@ created: 2026-06-12 (금)
 
 > **TL;DR**: 랜선 2개를 그냥 꽂으면 아무 효과 없다. 본딩 설정이 필요하고, 모드에 따라 "장애 대비"인지 "대역폭 합산"인지가 갈린다.
 
+> **NIC**(Network Interface Card)는 랜카드, **LACP**(Link Aggregation Control Protocol)는 여러 링크를 하나로 묶는 표준 프로토콜이다. → [[network-overview]] 용어 표
+
 ---
 
 ## 개요
@@ -30,7 +32,7 @@ created: 2026-06-12 (금)
 ### LACP / 802.3ad (mode 4)
 
 - 두 포트를 동시에 사용해 **합산 대역폭** 확보
-- **스위치에 LAG(Link Aggregation) 설정 필수** — 관리형 스위치만 가능
+- **스위치에 LAG(Link Aggregation Group, 묶인 포트 그룹) 설정 필수** — 관리형 스위치만 가능. `802.3ad`는 LACP를 규정한 IEEE 표준 번호다
 - 함정: 해시 분배 방식이라 **단일 TCP 연결(플로우)은 여전히 1포트 속도가 상한**. 1G×2 LACP에서 단일 파일 전송은 1G. 클라이언트/연결이 여러 개일 때만 합산 효과
 
 ---
