@@ -7,13 +7,15 @@ created: 2026-06-18 (목)
 
 # ZFS ARC 캐시 착시와 Lustre+ZFS 계층 오버헤드
 
-> **TL;DR**: ZFS ARC 때문에 read가 디스크가 아닌 메모리 성능으로 보이는 착시, 그리고 Lustre+VM+zvol+ZFS+HDD 다층 스택의 오버헤드·tail latency.
+> **TL;DR**: ZFS ARC(Adaptive Replacement Cache, 메모리 읽기 캐시) 때문에 read가 디스크가 아닌 메모리 성능으로 보이는 착시, 그리고 Lustre+VM+zvol(ZFS가 블록 장치로 노출하는 볼륨)+ZFS+HDD 다층 스택의 오버헤드·tail latency(꼬리 지연).
+
+> 약어는 [[zfs-overview]]·[[lustre-overview]]의 용어 표 참고.
 
 ---
 
 ## 개요
 
-- **무엇인가**: ZFS를 Lustre OSD 백엔드로 쓸 때의 캐시 착시·계층 오버헤드 해석법
+- **무엇인가**: ZFS를 Lustre OSD(Object Storage Device, OST 아래에서 실제 파일시스템에 쓰는 백엔드 계층) 백엔드로 쓸 때의 캐시 착시·계층 오버헤드 해석법
 - **왜 쓰는가**: read 대역폭이 비정상적으로 높거나 tail latency가 튈 때 원인을 ZFS/계층으로 귀속하기 위함
 - **언제 쓰는가**: ZFS 위 zvol → VM → Lustre OST 구조의 성능 측정·해석
 

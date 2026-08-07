@@ -11,6 +11,8 @@ created: 2026-05-18 (월)
 
 > **TL;DR**: Copy-On-Write + 무결성 체크섬 내장 파일시스템 — 데이터 부패 자동 감지·복구, 즉시 스냅샷
 
+> 약어(HBA·JBOD·ECC·SMART·vdev·zvol 등)는 [[zfs-overview]]의 용어 표 참고.
+
 ---
 
 ## 핵심 원리
@@ -41,10 +43,10 @@ created: 2026-05-18 (월)
 
 ## ZFS + Lustre 연계
 
-Lustre OSS의 OST를 ZFS로 구성하면 최상의 궁합:
+Lustre의 OSS(Object Storage Server, 데이터 저장 서버)가 쓰는 OST(Object Storage Target, 데이터 저장 디스크)를 ZFS로 구성하면 최상의 궁합 (Lustre 약어는 [[lustre-overview]] 용어 표 참고):
 - ZFS RAID-Z2가 디스크 장애 복구
 - ZFS 스냅샷으로 Lustre 데이터 백업
-- ZFS 체크섬으로 HPC 데이터 무결성 보장
+- ZFS 체크섬으로 HPC(High Performance Computing, 고성능 컴퓨팅) 데이터 무결성 보장
 
 ---
 

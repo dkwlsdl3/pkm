@@ -7,13 +7,14 @@ created: 2026-06-18 (목)
 
 # ZFS ARC 캐시 착시와 Direct IO 측정
 
-> **TL;DR**: ZFS ARC 때문에 read가 디스크가 아닌 메모리 성능으로 보이는 착시와, ZFS 2.2+ Direct IO로 이를 분리 측정하는 법.
+> **TL;DR**: ZFS ARC(Adaptive Replacement Cache, ZFS의 메모리 읽기 캐시) 때문에 read가 디스크가 아닌 메모리 성능으로 보이는 착시와, ZFS 2.2+ Direct IO로 이를 분리 측정하는 법.
 
 ---
 
 ## ARC 캐시 착시
 
 - ZFS ARC = RAM 캐시. **측정 데이터셋이 ARC보다 작으면 read가 메모리 성능으로 나옴**
+- `O_DIRECT`는 페이지 캐시를 우회해 디스크에 직접 읽고 쓰라는 열기 옵션이다. `direct=1`은 fio에서 그걸 켜는 설정이다.
 - 예: ARC 최대 **31GB**인 환경에서 `FIO_SIZE=4G` → 통째로 캐시 → read 대역폭이 디스크가 아닌 메모리 속도로 착시
 - 차단법(안전순): **데이터셋을 ARC보다 크게** (예: 16G/job × 4 = 64G > 31G) > direct=1 > cold/warm 분리
 - **ARC 강제 flush는 금지** — drop_caches처럼 안전한 표준이 없고, 31GB evict는 운영 영향

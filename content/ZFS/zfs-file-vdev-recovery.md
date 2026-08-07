@@ -7,7 +7,7 @@ created: 2026-06-25 (목)
 
 # ZFS 파일/loop vdev 재부팅 복구
 
-> **TL;DR**: 파일(루프백 이미지) vdev로 만든 zpool은 재부팅 시 loop 연결이 풀려 사라진다. `losetup` 재연결 후 import해야 하며, 파일을 직접 import하면 vdev 타입이 `disk`일 때 실패한다.
+> **TL;DR**: 파일(루프백 이미지) vdev(virtual device, zpool을 구성하는 가상 장치 단위)로 만든 zpool(ZFS 저장 풀)은 재부팅 시 loop 연결이 풀려 사라진다. `losetup` 재연결 후 import해야 하며, 파일을 직접 import하면 vdev 타입이 `disk`일 때 실패한다.
 
 ---
 

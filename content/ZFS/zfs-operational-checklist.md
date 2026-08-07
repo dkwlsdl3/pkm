@@ -9,11 +9,13 @@ created: 2026-05-18 (월)
 
 # ZFS 운영 체크리스트
 
-> **TL;DR**: ZFS를 안정적으로 운영하려면 HW RAID 금지, ECC 메모리, 주기적 Scrub, 80% 용량 룰 네 가지를 지켜야 한다.
+> **TL;DR**: ZFS를 안정적으로 운영하려면 HW RAID(hardware RAID, 하드웨어 RAID) 금지, ECC(Error-Correcting Code, 오류 정정) 메모리, 주기적 Scrub, 80% 용량 룰 네 가지를 지켜야 한다.
+
+> 약어는 [[zfs-overview]]의 용어 표 참고.
 
 ---
 
-## 1. HW RAID 컨트롤러 금지 — JBOD(Pass-through) 모드 사용
+## 1. HW RAID 컨트롤러 금지 — JBOD(Just a Bunch Of Disks, 낱개 원본 노출) 모드 사용
 
 ZFS는 디스크를 직접 제어해야 체크섬·RAID-Z가 정상 동작한다. HW RAID가 끼어들면 ZFS가 오류를 감지 못한다. → 자세히: [[zfs-hba-vs-hwraid]]
 

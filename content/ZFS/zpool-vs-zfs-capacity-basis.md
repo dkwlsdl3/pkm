@@ -8,6 +8,8 @@ created: 2026-08-03 (월)
 
 # zpool list와 zfs list의 용량 기준은 다르다
 
+> 용어: RAIDZ(ZFS의 패리티 RAID) · zvol(ZFS가 블록 장치로 노출하는 볼륨) · refreservation(그 볼륨이 미리 확보해 두는 예약 용량) → [[zfs-overview]]
+
 > **TL;DR**: `zpool list`의 SIZE는 RAIDZ 패리티를 **포함**하고 ALLOC은 zvol 예약을 **세지 않는다**. `zfs list`의 AVAIL은 패리티·예약을 **차감**한 실사용 가능량이다. 두 출처를 한 응답에 섞으면 `capacity − allocated ≠ available`이 되어 **각 값은 맞는데 화면끼리 정반대로 보인다**. 용량은 한 기준으로 통일하고 `전체 = 사용 + 여유` 항등식으로 검산한다.
 
 ## 증상
