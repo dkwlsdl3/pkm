@@ -50,6 +50,22 @@ export default (() => {
             )}
           </>
         )}
+        {/* 한글 본문 폰트. Google Fonts에 없어 jsDelivr에서 직접 받는다.
+            Pretendard는 동적 서브셋이라 페이지에 실제 쓰인 글자만 내려받는다.
+            CSS @import 는 @use 뒤에 올 수 없어 SCSS 대신 여기서 링크한다. */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/400.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/600.css"
+        />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

@@ -20,12 +20,17 @@ const config: QuartzConfig = {
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
-      fontOrigin: "googleFonts",
+      // 화면 표시 폰트는 Pretendard(jsDelivr)로, Head.tsx에서 직접 링크하고
+      // custom.scss에서 --headerFont/--bodyFont 를 덮어쓴다.
+      // 여기 typography 는 OG 소셜 이미지(satori)가 Google Fonts API로 받아 쓰는
+      // 폰트라서 Google에 실제로 있는 이름이어야 한다 — Pretendard는 없다.
+      // Noto Sans KR 로 두면 소셜 카드의 한글도 깨지지 않는다.
+      fontOrigin: "local",
       cdnCaching: true,
       typography: {
-        header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
-        code: "IBM Plex Mono",
+        header: "Noto Sans KR",
+        body: "Noto Sans KR",
+        code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
