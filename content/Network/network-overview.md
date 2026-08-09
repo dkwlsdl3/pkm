@@ -48,6 +48,7 @@ Network 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만�
 
 - [[nic-bonding]] — NIC 2포트 본딩: active-backup vs LACP, 단일 플로우 대역폭 한계
 - [[nginx-grpc-gateway-dedicated-port]] — 기존 443 옆 gRPC 수신: 전용 포트 server 블록 + 출발지 한정 방화벽
+- [[reverse-proxy-response-timeout-long-download]] — 큰 폴더 다운로드만 간헐 504: `proxy_read_timeout` 기본 60초는 전체 시간이 아니라 읽기 간격 상한
 - [[grpc-connectivity-verification]] — 무인증 Ping·에러코드 매핑·SSH터널 SNI로 gRPC 경로 진단
 
 ---
