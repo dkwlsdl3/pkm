@@ -50,6 +50,13 @@ export default (() => {
             )}
           </>
         )}
+        {/* 사이드바 접힘 상태를 DOM 파싱 전에 복원한다.
+            JS(afterDOMLoaded)에서 붙이면 펼쳐진 사이드바가 잠깐 보였다 사라진다(FOUC). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem("sidebar-collapsed")==="true"){document.documentElement.classList.add("sidebar-collapsed")}}catch(e){}`,
+          }}
+        />
         {/* 한글 본문 폰트. Google Fonts에 없어 jsDelivr에서 직접 받는다.
             Pretendard는 동적 서브셋이라 페이지에 실제 쓰인 글자만 내려받는다.
             CSS @import 는 @use 뒤에 올 수 없어 SCSS 대신 여기서 링크한다. */}

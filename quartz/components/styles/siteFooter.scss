@@ -1,0 +1,29 @@
+.site-footer {
+  margin: 3rem 0 4rem;
+
+  & > .footer-inner {
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--lightgray);
+  }
+
+  & a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--gray);
+    font-size: 0.85rem;
+    background-color: transparent;
+    text-decoration: none;
+
+    & svg {
+      opacity: 0.8;
+    }
+
+    &:hover {
+      color: var(--secondary);
+      & svg {
+        opacity: 1;
+      }
+    }
+  }
+}

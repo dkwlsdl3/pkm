@@ -87,6 +87,8 @@ function createFileNode(currentSlug: FullSlug, node: FileTrieNode): HTMLLIElemen
   a.href = resolveRelative(currentSlug, node.slug)
   a.dataset.for = node.slug
   a.textContent = node.displayName
+  // 좁은 사이드바에서 긴 제목은 잘리므로 전체 제목을 툴팁으로 남긴다
+  a.title = node.displayName
 
   if (currentSlug === node.slug) {
     a.classList.add("active")

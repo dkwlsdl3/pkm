@@ -1,0 +1,36 @@
+.nav-shortcuts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0.2rem 0 0.6rem;
+
+  & .nav-shortcut {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--darkgray);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color 0.12s ease,
+      color 0.12s ease;
+
+    & svg {
+      flex: 0 0 auto;
+      opacity: 0.75;
+    }
+
+    &:hover {
+      background-color: var(--highlight);
+      color: var(--secondary);
+    }
+  }
+}

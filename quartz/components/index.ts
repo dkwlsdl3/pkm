@@ -19,6 +19,9 @@ import Footer from "./Footer"
 import DesktopOnly from "./DesktopOnly"
 import MobileOnly from "./MobileOnly"
 import RecentNotes from "./RecentNotes"
+import NavShortcuts from "./NavShortcuts"
+import SidebarToggle from "./SidebarToggle"
+import SiteFooter from "./SiteFooter"
 import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
@@ -45,6 +48,9 @@ export {
   DesktopOnly,
   MobileOnly,
   RecentNotes,
+  NavShortcuts,
+  SidebarToggle,
+  SiteFooter,
   NotFound,
   Breadcrumbs,
   Comments,

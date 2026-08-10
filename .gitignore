@@ -9,3 +9,6 @@ tsconfig.tsbuildinfo
 private/
 .replit
 replit.nix
+
+# 로컬 리뷰/검증 산출물
+.claude/

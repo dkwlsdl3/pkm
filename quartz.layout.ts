@@ -1,11 +1,21 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import { SimpleSlug } from "./quartz/util/path"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [],
+  // 좌상단 고정 툴바. 사이드바 밖이라 접어도 쓸 수 있고,
+  // header 는 본문보다 앞이라 Tab·스크린리더 순서도 자연스럽다.
+  header: [
+    Component.Flex({
+      gap: "0.4rem",
+      components: [
+        { Component: Component.SidebarToggle() },
+        { Component: Component.Search() },
+        { Component: Component.Darkmode() },
+      ],
+    }),
+  ],
   afterBody: [
     // all-notes 페이지에서만 전체 노트를 날짜 내림차순으로 나열한다
     Component.ConditionalRender({
@@ -20,13 +30,14 @@ export const sharedPageComponents: SharedLayout = {
       }),
       condition: (page) => page.fileData.slug === "all-notes",
     }),
+    // 아래는 모두 사이드바 '밖'에 있어야 한다.
+    // 사이드바를 접으면 display:none 이 되어 그 안의 요소는 전부 죽는다
+    // (모달이 안 열리고, 토글 버튼이 사라지고, 검색·다크모드도 못 쓴다).
+    // 그래프 모달 DOM. 사이드바가 접히면(display:none) 모달까지 죽으므로 밖에 둔다.
+    // 모달을 여는 버튼은 header 툴바(SidebarToggle)에 있다.
+    Component.Graph(),
   ],
-  footer: Component.Footer({
-    links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
-    },
-  }),
+  footer: Component.SiteFooter(),
 }
 
 // components for pages that display a single page (e.g. a single note)
@@ -43,28 +54,14 @@ export const defaultContentPageLayout: PageLayout = {
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-        { Component: Component.ReaderMode() },
-      ],
+    Component.NavShortcuts(),
+    Component.Explorer({
+      // all-notes 는 위 "일자별 노트" 바로가기와 같은 페이지라 목록에서 뺀다
+      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "all-notes",
     }),
-    Component.Explorer(),
   ],
-  right: [
-    Component.Graph(),
-    Component.RecentNotes({
-      limit: 10,
-      title: "최근 노트",
-      linkToMore: "all-notes" as SimpleSlug,
-    }),
-    Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
-  ],
+  // 우측 사이드바를 없애고 본문 폭을 넓힌다.
+  right: [],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
@@ -73,16 +70,11 @@ export const defaultListPageLayout: PageLayout = {
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
-    Component.Flex({
-      components: [
-        {
-          Component: Component.Search(),
-          grow: true,
-        },
-        { Component: Component.Darkmode() },
-      ],
+    Component.NavShortcuts(),
+    Component.Explorer({
+      // all-notes 는 위 "일자별 노트" 바로가기와 같은 페이지라 목록에서 뺀다
+      filterFn: (node) => node.slugSegment !== "tags" && node.slugSegment !== "all-notes",
     }),
-    Component.Explorer(),
   ],
   right: [],
 }

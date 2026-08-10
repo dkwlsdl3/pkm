@@ -23,6 +23,18 @@ export function getDate(cfg: GlobalConfiguration, data: QuartzPluginData): Date 
 const DISPLAY_TIME_ZONE = "Asia/Seoul"
 
 export function formatDate(d: Date, locale: ValidLocale = "en-US"): string {
+  // 목록에서 세로로 줄 세울 때 자릿수가 맞아야 읽기 쉬워 2026.08.07 형태로 쓴다.
+  // (ko-KR 기본 "2026년 8월 07일"은 길이가 들쭉날쭉하다)
+  if (locale === "ko-KR") {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      timeZone: DISPLAY_TIME_ZONE,
+    }).format(d) // en-CA => YYYY-MM-DD
+    return parts.replace(/-/g, ".")
+  }
+
   return d.toLocaleDateString(locale, {
     year: "numeric",
     month: "short",

@@ -32,27 +32,29 @@ const config: QuartzConfig = {
         body: "Noto Sans KR",
         code: "JetBrains Mono",
       },
+      // design.md §5.2 — 뉴트럴 그레이 + 블루 액센트.
+      // 라이트/다크 모두 본문·제목·링크·메타가 WCAG AA(4.5:1)를 넘는다.
       colors: {
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          light: "#f7f8fa", // 순백(#fff)은 오래 읽으면 눈이 부시다 — 한 단계 낮춤
+          lightgray: "#e4e7ec",
+          gray: "#6b7280", // 메타. 4.55:1
+          darkgray: "#4b5563", // 본문. 7.11:1
+          dark: "#111827", // 제목. 16.69:1
+          secondary: "#2456c9", // 링크. 채도를 한 단계 낮춰 자극을 줄임. 6.08:1
+          tertiary: "#5b87e0",
+          highlight: "rgba(36, 86, 201, 0.07)",
+          textHighlight: "#fde68a88",
         },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          light: "#1e2128", // 기존 #0f1115 는 너무 어두워 대비가 과했다
+          lightgray: "#2e323b",
+          gray: "#8b929e", // 5.1:1
+          darkgray: "#c8cdd6", // 본문. 10.1:1
+          dark: "#e9ecf1", // 제목. 13.6:1
+          secondary: "#7aa2f7", // 링크. 6.4:1
+          tertiary: "#93b4ff",
+          highlight: "rgba(122, 162, 247, 0.12)",
           textHighlight: "#b3aa0288",
         },
       },
