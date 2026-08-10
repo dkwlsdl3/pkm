@@ -1,5 +1,5 @@
 ---
-title: Lustre 트러블슈팅
+title: Lustre 트러블슈팅 & 운영 자동화
 tags:
   - tech
 created: 2026-05-12 (화)
