@@ -106,7 +106,11 @@ article {
   // 본문 첫 h1 은 frontmatter title 과 같은 문장이라 화면에 두 번 나온다
   // (vault 노트 279개 중 277개가 동일, 나머지 2개도 title 을 본문에 맞춰 통일함).
   // ArticleTitle 이 이미 제목을 렌더하므로 본문 쪽을 접는다.
-  & > h1:first-of-type {
+  //
+  // 단 ArticleTitle 이 있는 문서에서만이다. 404 페이지에는 제목 영역이 없고
+  // 본문 h1("404")이 그 페이지의 유일한 제목이라, 조건 없이 숨기면
+  // 제목 없는 페이지가 된다.
+  .page-header:has(h1.article-title) + & > h1:first-of-type {
     display: none;
   }
   & h2 {
@@ -243,19 +247,27 @@ article .table-container {
   }
 }
 
-// "탐색기" 제목은 없앤다. 도메인 목록이 항상 보이므로 라벨이 필요 없다.
+// "탐색기" 제목은 없애고 도메인 목록을 항상 펼쳐 둔다 — 단 데스크톱에서만.
+//
+// 모바일(800px 미만)에서는 탐색기가 본문 위에 덮이는 전체 화면 목록이고,
+// `button.mobile-explorer.explorer-toggle` 이 그것을 여닫는 유일한 수단이다.
+// 이 버튼까지 숨기면 explorer.inline.ts 의
+// `if (mobileExplorer.checkVisibility()) explorer.classList.add("collapsed")`
+// 가 거짓이 되어 접힘 클래스도 안 붙고, 목록이 본문을 영구히 가린다.
+// 그래서 모바일은 Quartz 기본 동작(토글 + 기본 접힘)을 그대로 둔다.
+//
 // explorer.scss 가 `.explorer button.desktop-explorer { display: flex }` 로
 // 태그 선택자까지 붙여 두므로 같은 형태로 맞춰야 이긴다.
-.explorer button.title-button,
-.explorer button.desktop-explorer,
-.explorer button.mobile-explorer.explorer-toggle {
-  display: none;
-}
+@media all and ($desktop) {
+  .explorer button.title-button,
+  .explorer button.desktop-explorer {
+    display: none;
+  }
 
-// 탐색기 본문은 항상 펼쳐 둔다
-.explorer .explorer-content {
-  display: block !important;
-  max-height: none !important;
+  .explorer .explorer-content {
+    display: block !important;
+    max-height: none !important;
+  }
 }
 
 // 바로가기(일자별 노트·그래프 뷰)와 도메인 목록 사이 구분선
@@ -496,9 +508,11 @@ ul.section-ul {
   }
 }
 
-// 페이지 상단 "N건의 항목"
-.popover-hint > p,
-article > p:first-child:has(+ ul.section-ul) {
+// 목록 페이지 상단 "N건의 항목".
+// `.popover-hint > p` 로 잡으면 안 된다 — Content.tsx 가 모든 문서의 <article> 에
+// popover-hint 를 붙이므로 본문 문단 전체가 회색 작은 글씨가 된다.
+// 실제 마크업은 article 밖의 `<div class="page-listing"><p>21건의 항목</p>` 이다.
+.page-listing > p:first-child {
   color: var(--gray);
   font-size: var(--fs-meta);
 }
@@ -564,10 +578,22 @@ article > p:first-child:has(+ ul.section-ul) {
     justify-self: stretch;
     margin-left: 0;
     margin-right: 0;
-    // 좌우 padding 을 같게 둬야 본문이 '화면' 가운데에 온다.
-    // 왼쪽 최소값은 사이드바(300px)를 피할 만큼(316px).
+    // 왼쪽은 고정 사이드바(300px)를 피할 만큼 항상 확보한다.
     padding-left: max(3rem, 316px);
-    padding-right: max(3rem, 316px);
+
+    // 오른쪽까지 316px 을 대칭으로 주면 본문이 화면 가운데에 오지만,
+    // 좁은 데스크톱에서는 본문이 오히려 태블릿보다 좁아진다.
+    // (1200px 진입 시 1200 - 316*2 = 568px. 1199px 태블릿의 842px 보다 좁다)
+    // 그래서 대칭 여백은 본문 최대폭 1000px 이 실제로 확보되는
+    // 1632px(= 1000 + 316*2) 이상에서만 준다.
+    padding-right: 3rem;
+  }
+
+  @media all and (min-width: 1632px) {
+    .page > #quartz-body > .center,
+    .page > #quartz-body > footer {
+      padding-right: max(3rem, 316px);
+    }
   }
 
   // .center 의 모든 직계 자식(제목 영역 page-header, 본문 article, page-footer)을
