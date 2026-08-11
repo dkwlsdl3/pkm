@@ -682,6 +682,13 @@ ul.section-ul {
   gap: 0.4rem;
 }
 
+// 이 규칙이 display:flex 를 명시하므로 `[hidden]` 을 함께 처리해야 한다.
+// UA 스타일시트의 `[hidden]{display:none}` 은 특이성이 낮아 밀린다.
+// 탐색기가 없는 404 에서 sidebarToggle.inline.ts 가 hidden 을 붙인다.
+.page-header .toolbar-btn[hidden] {
+  display: none;
+}
+
 .page-header .toolbar-btn,
 .page-header .search-button,
 .page-header button.darkmode {

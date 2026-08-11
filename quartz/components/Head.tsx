@@ -120,11 +120,18 @@ export default (() => {
           </>
         )}
 
+        {/* 404 에는 og:url/twitter:url 을 주지 않는다. 홈 URL 을 그대로 쓰면
+            noindex 를 준 페이지가 소셜 크롤러에게는 홈페이지라고 주장하는
+            셈이 되어 같은 문서의 메타데이터가 서로 다른 정체성을 말한다. */}
         {cfg.baseUrl && (
           <>
             <meta property="twitter:domain" content={cfg.baseUrl}></meta>
-            <meta property="og:url" content={socialUrl}></meta>
-            <meta property="twitter:url" content={socialUrl}></meta>
+            {fileData.slug !== "404" && (
+              <>
+                <meta property="og:url" content={socialUrl}></meta>
+                <meta property="twitter:url" content={socialUrl}></meta>
+              </>
+            )}
           </>
         )}
 

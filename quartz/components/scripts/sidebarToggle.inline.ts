@@ -44,8 +44,18 @@ function linkControls() {
   const sidebar = document.querySelector(".sidebar.left")
   if (!sidebar) return
   if (!sidebar.id) sidebar.id = "left-sidebar"
+
+  // 404 처럼 탐색기가 없는 페이지에는 여닫을 대상이 없다. renderPage 는
+  // left 가 비어도 사이드바 컨테이너를 항상 출력하므로 버튼만 남는다.
+  // CSS 로 숨기면 .toolbar-btn 규칙과 특이성 싸움이 되므로 hidden 속성을 쓴다.
+  const hasExplorer = !!document.querySelector(".explorer")
   for (const btn of document.getElementsByClassName("sidebar-toggle")) {
     btn.setAttribute("aria-controls", sidebar.id)
+    if (hasExplorer) {
+      btn.removeAttribute("hidden")
+    } else {
+      btn.setAttribute("hidden", "")
+    }
   }
 }
 
@@ -67,12 +77,17 @@ function isAlwaysOpen(): boolean {
 }
 
 function syncExplorerAria() {
-  if (!isAlwaysOpen()) return
   const explorer = document.querySelector(".explorer")
-  // CSS 가 강제로 펼쳐 놓았으므로 접힘 클래스도 남겨 두면 안 된다.
-  explorer?.classList.remove("collapsed")
+  if (!explorer) return // 404 처럼 탐색기가 없는 레이아웃
+
+  const open = isAlwaysOpen()
+
+  // 양방향으로 맞춰야 한다. 데스크톱 쪽만 처리하면 900px→375px 로 좁혔을 때
+  // 우리가 펼쳐 둔 목록이 그대로 남아 본문을 덮는다(전체 화면 오버레이).
+  // 모바일로 들어가면 Quartz 기본 상태(접힘)로 돌려놓는다.
+  explorer.classList.toggle("collapsed", !open)
   for (const el of document.querySelectorAll(".explorer, .explorer-content")) {
-    el.setAttribute("aria-expanded", "true")
+    el.setAttribute("aria-expanded", String(open))
   }
 }
 
