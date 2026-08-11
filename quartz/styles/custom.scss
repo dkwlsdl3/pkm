@@ -110,7 +110,11 @@ article {
   // 단 ArticleTitle 이 있는 문서에서만이다. 404 페이지에는 제목 영역이 없고
   // 본문 h1("404")이 그 페이지의 유일한 제목이라, 조건 없이 숨기면
   // 제목 없는 페이지가 된다.
-  .page-header:has(h1.article-title) + & > h1:first-of-type {
+  // 인접 형제(`+`)로 잡으면 안 된다. 폴더·태그 페이지는 .page-header 와
+  // article 사이에 `<div class="popover-hint">` 래퍼를 하나 더 둬서
+  // 선택자가 빗나가고 그 페이지들만 제목이 다시 중복된다.
+  // .center 에 제목 영역이 있는지로 판단하면 래퍼 유무와 무관하다.
+  .center:has(> .page-header h1.article-title) & > h1:first-of-type {
     display: none;
   }
   & h2 {
@@ -582,22 +586,33 @@ ul.section-ul {
     justify-self: stretch;
     margin-left: 0;
     margin-right: 0;
-    // 왼쪽은 고정 사이드바(300px)를 피할 만큼 항상 확보한다.
-    padding-left: max(3rem, 316px);
-
-    // 오른쪽까지 316px 을 대칭으로 주면 본문이 화면 가운데에 오지만,
-    // 좁은 데스크톱에서는 본문이 오히려 태블릿보다 좁아진다.
-    // (1200px 진입 시 1200 - 316*2 = 568px. 1199px 태블릿의 842px 보다 좁다)
-    // 그래서 대칭 여백은 본문 최대폭 1000px 이 실제로 확보되는
-    // 1632px(= 1000 + 316*2) 이상에서만 준다.
-    padding-right: 3rem;
-  }
-
-  @media all and (min-width: 1632px) {
-    .page > #quartz-body > .center,
-    .page > #quartz-body > footer {
-      padding-right: max(3rem, 316px);
-    }
+    // 좌우 여백을 뷰포트에 따라 연속적으로 계산한다.
+    //
+    // 목표는 두 가지고 서로 충돌한다.
+    //  (a) 본문 1000px 을 화면 가운데에 두고 싶다 → 좌우 대칭 여백
+    //  (b) 왼쪽은 고정 사이드바(300px)를 피해야 한다 → 최소 316px
+    // 좁은 화면에서 (b) 를 양쪽에 대칭으로 걸면 본문이 태블릿보다 좁아진다
+    // (1200px 에서 1200 - 316*2 = 568px, 1199px 태블릿은 842px).
+    //
+    // 그래서 "화면 중앙에 필요한 여백"을 기준값으로 삼고 각 변의 최소치만
+    // 따로 건다. min()/max() 로 조건 분기를 대신하므로 값이 연속적이다.
+    // 미디어쿼리로 1632px 에서 대칭으로 갈아타면 그 지점에서 본문이
+    // 133px 순간 이동한다 — 그것을 피하는 것이 이 식의 요점이다.
+    //
+    // 두 변 모두 "화면 중앙에 필요한 여백"을 쓰고, 각자의 최소치만 다르게
+    // 건다. 왼쪽은 사이드바를 피할 316px, 오른쪽은 숨 쉴 틈 3rem.
+    // gutter 가 316px 을 넘는 넓은 화면에서는 양쪽이 같은 값이 되어 본문이
+    // 정확히 화면 가운데에 온다. 오른쪽에 상한(min)을 걸면 넓은 화면에서
+    // 좌우가 어긋난 채로 남는다.
+    //
+    //   1200px → left 316, right 100  (본문 784)
+    //   1400px → left 316, right 200  (본문 884)
+    //   1632px → left 316, right 316  (본문 1000, 여기서부터 화면 중앙)
+    //   1920px → left 460, right 460  (본문 1000, 화면 중앙)
+    // 1000px 은 아래 `.center > *` 의 max-width 와 같은 값이어야 한다.
+    --center-gutter: calc((100vw - 1000px) / 2);
+    padding-left: max(316px, var(--center-gutter));
+    padding-right: max(3rem, var(--center-gutter));
   }
 
   // .center 의 모든 직계 자식(제목 영역 page-header, 본문 article, page-footer)을

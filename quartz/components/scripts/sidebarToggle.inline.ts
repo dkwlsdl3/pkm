@@ -50,14 +50,27 @@ function linkControls() {
 }
 
 // 모바일 위 폭에서는 탐색기를 CSS 로 항상 펼쳐 두는데,
-// Explorer.tsx 는 aria-expanded 를 false 로 하드코딩해 둔다.
-// 화면은 열려 있고 접근성 트리는 닫힘이라고 말하는 불일치를 맞춘다.
+// Explorer.tsx 는 aria-expanded 를 false 로 하드코딩하고 explorer.inline.ts 는
+// `collapsed` 클래스를 남긴다. 화면은 열려 있고 접근성 트리·클래스는 닫힘이라고
+// 말하는 모순을 맞춘다.
 //
-// 브레이크포인트 값을 여기 다시 적지 않는다. CSS 가 라벨 버튼을 숨겼는지로
-// 판단하면 variables.scss 의 경계가 바뀌어도 따라가고, 이중 관리가 없다.
+// 판별 기준은 '모바일 토글 버튼이 보이는지' 다.
+// 데스크톱 라벨(button.desktop-explorer)의 display 로 판단하면 안 된다 —
+// 그 버튼은 모바일에서도 CSS 로 숨겨지므로, 닫혀 있는 모바일 탐색기를
+// 펼쳐진 것으로 오판해 aria-expanded="true" 를 잘못 씌운다.
+// 브레이크포인트 숫자를 JS 에 다시 적지 않으려고 CSS 상태를 읽는 방식은
+// 유지하되, 모바일에서만 보이는 요소를 기준으로 삼는다.
+function isAlwaysOpen(): boolean {
+  const mobileToggle = document.querySelector(".explorer button.mobile-explorer")
+  if (!mobileToggle) return false
+  return getComputedStyle(mobileToggle).display === "none"
+}
+
 function syncExplorerAria() {
-  const label = document.querySelector(".explorer button.desktop-explorer")
-  if (!label || getComputedStyle(label).display !== "none") return
+  if (!isAlwaysOpen()) return
+  const explorer = document.querySelector(".explorer")
+  // CSS 가 강제로 펼쳐 놓았으므로 접힘 클래스도 남겨 두면 안 된다.
+  explorer?.classList.remove("collapsed")
   for (const el of document.querySelectorAll(".explorer, .explorer-content")) {
     el.setAttribute("aria-expanded", "true")
   }
@@ -70,6 +83,18 @@ function setup() {
   apply(readSaved())
   linkControls()
   syncExplorerAria()
+
+  // 브레이크포인트를 넘는 리사이즈도 따라간다. nav 에서만 맞추면
+  // 800px 로 열었다가 900px 로 넓혔을 때 CSS 는 펼치는데 클래스·ARIA 는
+  // 모바일 상태로 남아 시각 상태와 어긋난다.
+  //
+  // resize 마다 getComputedStyle 을 부르지 않도록 브레이크포인트 전환
+  // 시점에만 반응한다. 값은 CSS 가 알려 주는 게 아니어서 여기서만
+  // 예외적으로 쓰지만, 판정 자체는 syncExplorerAria 가 CSS 상태로 한다.
+  const bp = window.matchMedia("(max-width: 800px)")
+  const onChange = () => syncExplorerAria()
+  bp.addEventListener("change", onChange)
+  window.addCleanup?.(() => bp.removeEventListener("change", onChange))
 
   for (const btn of document.getElementsByClassName("sidebar-toggle")) {
     const handler = () => {

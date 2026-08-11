@@ -128,7 +128,14 @@ export default (() => {
           </>
         )}
 
-        <link rel="canonical" href={socialUrl} />
+        {/* 404 는 색인 대상이 아니다. 실제 없는 경로는 서버가 404 를 주지만
+            `/404.html` 자체는 200 으로 열리므로, 그 페이지를 홈페이지의
+            복제본처럼 canonical 로 선언하면 신호가 어긋난다. noindex 를 준다. */}
+        {fileData.slug === "404" ? (
+          <meta name="robots" content="noindex" />
+        ) : (
+          <link rel="canonical" href={socialUrl} />
+        )}
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
