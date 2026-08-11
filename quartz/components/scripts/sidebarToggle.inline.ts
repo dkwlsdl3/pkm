@@ -57,6 +57,30 @@ function linkControls() {
       btn.setAttribute("hidden", "")
     }
   }
+
+  // 탐색기가 없으면 빈 사이드바 레일(폭 + 오른쪽 테두리)도 남을 이유가 없다.
+  // 그 상태로 두면 404 에서 아무것도 없는 300px 기둥이 서 있고 본문도
+  // 그만큼 밀린다. CSS 만으로는 `.center` 의 패딩까지 되돌리기 번거로워
+  // 루트 클래스를 붙여 한 번에 처리한다.
+  document.documentElement.classList.toggle("no-explorer", !hasExplorer)
+}
+
+// 모바일 탐색기를 사용자가 직접 열었을 때 `.explorer-content` 의 ARIA 가
+// 갱신되지 않는다. 업스트림 toggleExplorer() 가 `.explorer` 만 바꾸기 때문이다.
+// 시각 상태와 접근성 상태를 맞춘다.
+function watchMobileToggle() {
+  const btn = document.querySelector(".explorer button.mobile-explorer")
+  const explorer = document.querySelector(".explorer")
+  const content = document.querySelector(".explorer-content")
+  if (!btn || !explorer || !content) return
+  const onClick = () => {
+    // 업스트림 핸들러가 클래스를 바꾼 뒤에 읽어야 한다
+    requestAnimationFrame(() => {
+      content.setAttribute("aria-expanded", String(!explorer.classList.contains("collapsed")))
+    })
+  }
+  btn.addEventListener("click", onClick)
+  window.addCleanup?.(() => btn.removeEventListener("click", onClick))
 }
 
 // 모바일 위 폭에서는 탐색기를 CSS 로 항상 펼쳐 두는데,
@@ -98,6 +122,7 @@ function setup() {
   apply(readSaved())
   linkControls()
   syncExplorerAria()
+  watchMobileToggle()
 
   // 브레이크포인트를 넘는 리사이즈도 따라간다. nav 에서만 맞추면
   // 800px 로 열었다가 900px 로 넓혔을 때 CSS 는 펼치는데 클래스·ARIA 는

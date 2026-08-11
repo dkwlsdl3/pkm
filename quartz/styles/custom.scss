@@ -548,13 +548,38 @@ ul.section-ul {
     column-gap: 0;
   }
 
+  // 탐색기가 없는 페이지(404)에는 빈 사이드바 레일을 두지 않는다.
+  // sidebarToggle.inline.ts 가 루트에 .no-explorer 를 붙인다.
+  .no-explorer .page > #quartz-body > .sidebar.left {
+    display: none;
+  }
+
+  // 레일을 없앴으면 본문 왼쪽 여백도 사이드바 몫을 빼야 한다.
+  .no-explorer .page > #quartz-body > .center,
+  .no-explorer .page > #quartz-body > footer {
+    padding-left: max(3rem, var(--center-gutter));
+  }
+
+  // 사이드바 폭을 화면에 따라 줄인다.
+  //
+  // 300px 고정이면 데스크톱 진입점(1200px)에서 본문에 남는 폭이 갑자기
+  // 좁아진다(1199px 태블릿 842px → 1200px 784px, 58px 단절). 좁은
+  // 데스크톱에서만 사이드바를 240px 까지 줄이면 그 단절이 2px 로 줄어든다.
+  // 20vw 는 1200px 에서 240px, 1500px 에서 300px 이 되어 상한에 닿는다.
+  //
+  // 변수는 사이드바와 .center 가 함께 보는 조상에 둔다. 미디어쿼리 바로
+  // 아래에는 선언을 놓을 수 없다(선택자 블록이 필요하다).
+  .page > #quartz-body {
+    --sidebar-width: clamp(240px, 20vw, 300px);
+  }
+
   // base.scss 가 `.page ... .sidebar.left` 로 잡으므로 특이성을 올린다
   .page > #quartz-body > .sidebar.left {
     position: fixed;
     left: 0;
     top: 0;
-    width: 300px;
-    max-width: 300px;
+    width: var(--sidebar-width);
+    max-width: var(--sidebar-width);
     height: 100vh;
     z-index: 5;
     // 상단 여백은 고정 툴바(top 1rem + 34px 버튼) 아래로 내용을 밀어낸다.
@@ -600,18 +625,18 @@ ul.section-ul {
     // 133px 순간 이동한다 — 그것을 피하는 것이 이 식의 요점이다.
     //
     // 두 변 모두 "화면 중앙에 필요한 여백"을 쓰고, 각자의 최소치만 다르게
-    // 건다. 왼쪽은 사이드바를 피할 316px, 오른쪽은 숨 쉴 틈 3rem.
+    // 건다. 왼쪽은 사이드바 폭 + 16px, 오른쪽은 숨 쉴 틈 3rem.
     // gutter 가 316px 을 넘는 넓은 화면에서는 양쪽이 같은 값이 되어 본문이
     // 정확히 화면 가운데에 온다. 오른쪽에 상한(min)을 걸면 넓은 화면에서
     // 좌우가 어긋난 채로 남는다.
     //
-    //   1200px → left 316, right 100  (본문 784)
-    //   1400px → left 316, right 200  (본문 884)
+    //   1200px → left 256, right 100  (본문 844, 1199px 태블릿 842 와 2px 차)
+    //   1400px → left 296, right 200  (본문 904)
     //   1632px → left 316, right 316  (본문 1000, 여기서부터 화면 중앙)
     //   1920px → left 460, right 460  (본문 1000, 화면 중앙)
     // 1000px 은 아래 `.center > *` 의 max-width 와 같은 값이어야 한다.
     --center-gutter: calc((100vw - 1000px) / 2);
-    padding-left: max(316px, var(--center-gutter));
+    padding-left: max(calc(var(--sidebar-width) + 16px), var(--center-gutter));
     padding-right: max(3rem, var(--center-gutter));
   }
 

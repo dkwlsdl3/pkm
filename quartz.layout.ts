@@ -49,9 +49,12 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ArticleTitle(),
     // 읽기 시간(“5 min read”)은 끈다. 개인 지식 노트에서 큰 의미가 없고,
-    // Quartz 는 세그먼트 사이 구분자를 `.content-meta[show-comma="true"]` CSS 로
-    // 넣는데 서버 렌더링에서 그 boolean 속성이 HTML 로 나오지 않아
-    // 날짜와 붙어 "2026.08.045 min read" 처럼 보였다. 날짜만 남기면 사라진다.
+    // 한국어 사이트인데 ko-KR 로케일이 이 문구만 번역하지 않아 영어가 섞였다.
+    // (읽기 시간을 "2026.08.04" 뒤에 붙는 영어로 보고 싶지 않다는 요청)
+    //
+    // 참고: 날짜와 붙어 보이는 것은 마크업 문제가 아니다. `show-comma="true"` 는
+    // 정상 렌더되고 CSS 가 쉼표를 `::after` 로 넣는다. 그 쉼표는 텍스트로
+    // 복사되지 않아 옮겨 적을 때만 붙어 보인다.
     Component.ContentMeta({ showReadingTime: false }),
     Component.TagList(),
   ],
