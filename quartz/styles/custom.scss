@@ -247,7 +247,11 @@ article .table-container {
   }
 }
 
-// "탐색기" 제목은 없애고 도메인 목록을 항상 펼쳐 둔다 — 단 데스크톱에서만.
+// "탐색기" 제목은 없애고 도메인 목록을 항상 펼쳐 둔다 — 모바일만 예외.
+//
+// 경계를 $desktop(1200px)으로 잡으면 800~1199px 구간에서 "탐색기" 라벨이
+// 되살아난다. 그 구간의 탐색기는 사이드바 안에 있어 본문을 가리지 않으므로
+// 라벨을 없애고 펼쳐 두는 편이 맞다. 그래서 $mobile 만 예외로 둔다.
 //
 // 모바일(800px 미만)에서는 탐색기가 본문 위에 덮이는 전체 화면 목록이고,
 // `button.mobile-explorer.explorer-toggle` 이 그것을 여닫는 유일한 수단이다.
@@ -258,7 +262,7 @@ article .table-container {
 //
 // explorer.scss 가 `.explorer button.desktop-explorer { display: flex }` 로
 // 태그 선택자까지 붙여 두므로 같은 형태로 맞춰야 이긴다.
-@media all and ($desktop) {
+@media all and not ($mobile) {
   .explorer button.title-button,
   .explorer button.desktop-explorer {
     display: none;

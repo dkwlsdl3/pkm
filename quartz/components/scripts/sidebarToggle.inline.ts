@@ -49,12 +49,15 @@ function linkControls() {
   }
 }
 
-// 데스크톱에서는 탐색기를 CSS 로 항상 펼쳐 두는데,
+// 모바일 위 폭에서는 탐색기를 CSS 로 항상 펼쳐 두는데,
 // Explorer.tsx 는 aria-expanded 를 false 로 하드코딩해 둔다.
 // 화면은 열려 있고 접근성 트리는 닫힘이라고 말하는 불일치를 맞춘다.
+//
+// 브레이크포인트 값을 여기 다시 적지 않는다. CSS 가 라벨 버튼을 숨겼는지로
+// 판단하면 variables.scss 의 경계가 바뀌어도 따라가고, 이중 관리가 없다.
 function syncExplorerAria() {
-  const alwaysOpen = window.matchMedia("(min-width: 1200px)").matches
-  if (!alwaysOpen) return
+  const label = document.querySelector(".explorer button.desktop-explorer")
+  if (!label || getComputedStyle(label).display !== "none") return
   for (const el of document.querySelectorAll(".explorer, .explorer-content")) {
     el.setAttribute("aria-expanded", "true")
   }
