@@ -41,6 +41,10 @@ created: 2026-05-13 (수)
 - [[acid]] — 데이터 안전 보장 4원칙
 - [[sql-view-silent-column-absence-trap]] — 뷰 경유 조회의 silent 컬럼 부재 함정 (실증)
 - [[postgres-write-skew-serialization-row]] — `NOT EXISTS`로는 write skew를 못 막는다, guard 행 `FOR UPDATE` 직렬화 (실증)
+- [[sql-like-wildcard-unescaped-user-input]] — 바인딩해도 `LIKE` 메타문자(`_`·`%`)는 값 안에서 해석돼 남의 행이 매칭된다 (실증)
+- [[dual-writer-no-owner-of-record]] — 두 서비스가 같은 테이블에 upsert하는데 정본이 없으면 유령 행·상호 덮어쓰기 (실증)
+- [[unique-index-null-semantics]] — 유니크 인덱스에서 NULL은 서로 다른 값이라 `ON CONFLICT`가 무력화된다(하루 15만 행 실증)
+- [[collector-orphan-cleanup]] — upsert만 하는 수집기는 사라진 자원을 영원히 쌓는다, 삭제를 넣을 때의 안전 조건 2가지
 
 ---
 
@@ -49,6 +53,9 @@ created: 2026-05-13 (수)
 - [[migrations-replayed-in-full]] — 전량 재실행 모델에서 앞 파일이 뒤 파일 효과를 조용히 되돌리는 함정 (실증)
 - [[psql-exit-code-zero-on-partial-restore]] — `psql -f`는 문장 실패에도 exit 0, 반쪽 복원이 "성공"으로 보고된다
 - [[is-not-distinct-from-index-pushout]] — NULL 안전 비교가 인덱스를 필터로 밀어내 순차 스캔이 된다(실측 1.357ms→0.013ms)
+- [[idempotent-seed-resurrects-deletion]] — `ON CONFLICT DO NOTHING` 시드는 관리자의 삭제를 매 배포마다 되살린다 (실증)
+- [[online-migration-competing-writers]] — CI는 앱만 멈춘다, 데몬·에이전트가 정리 중에도 써서 인덱스 생성이 실패 (실증)
+- [[migration-lock-timeout]] — 잠금 대기는 오류가 아니라 무기한 대기, `lock_timeout`은 트랜잭션 바깥에 (실증)
 
 ---
 

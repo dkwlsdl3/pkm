@@ -99,6 +99,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 
 - [[ssh-key-auth]] — SSH 키 인증 설정 (Ubuntu ↔ Mac 양방향)
 - [[ssh-config-alias]] — SSH config Host alias로 접속 정보 재사용
+- [[ssh-n-stdin-truncation]] — `ssh -n`이 표준입력을 끊어 파일이 0바이트로 배포되고도 성공으로 보인다
 - [[dns-hosts-emergency-bypass]] — DNS 장애 시 hosts 파일로 서비스 도메인 긴급 우회
 - [[iptables-nat]] — NAT/MASQUERADE 설정, VM 인터넷 연결
 - [[network-bridge]] — 가상 브리지 설정, STP
@@ -135,7 +136,11 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[shell-sigtstp-background]] — 터미널 SIGTSTP로 백그라운드 프로세스가 정지되는 문제
 - [[shell-heredoc-pitfall]] — heredoc을 `&&`로 이어붙이면 종결자 오염, write 후 read-back 검증
 - [[pipefail-grep-q-sigpipe]] — `producer | grep -q`가 pipefail+SIGPIPE로 "찾았을 때 실패"하는 역전
+- [[filename-nul-boundary]] — 파일 이름 경계는 개행이 아니라 NUL, 목록·정렬·대조·세기 전부 바꿔야 한다
 - [[cli-output-locale-translated-header]] — CLI 출력 헤더는 로케일 번역됨, 컬럼명 매칭 금지 · 위치 파싱
+- [[kernel-ring-buffer-overflow-counting]] — 커널 링 버퍼가 넘치면 사건 수가 줄어 개선처럼 보인다
+- [[debugfs-pseudo-file-read-buffer]] — 크기 0으로 보고되는 의사 파일을 작은 버퍼로 읽으면 EINVAL, `cat`은 되는데 코드만 실패
+- [[sysfs-enotdir-vs-notfound]] — `/sys` 순회에서 파일 항목의 ENOTDIR을 안 걸러내면 라운드 전체가 실패
 - [[systemd-user-timer]] — user 타이머 무인 주기 작업: Persistent+linger, XDG_RUNTIME_DIR
 - [[systemd-unit-name-distro-variance]] — 유닛명이 배포판마다 다름(smb/smbd), `is-active`의 inactive가 "유닛 없음"을 숨긴다
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
@@ -151,6 +156,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[smartctl]] — SMART 수집 기본 명령어, sudoers 경로
 - [[smartctl-device-type-sat-cciss]] — `-d sat` vs `-d cciss,N` 디바이스 타입 선택
 - [[smartctl-raw-value-parsing]] — RAW_VALUE 컬럼 파싱 함정
+- [[sas-selftest-scsi-log-page]] — SAS 자기진단은 SMART 속성이 아니라 SCSI 로그 페이지(0x10), 전송 둘·파서 하나
 - [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset
 - [[conda-breaks-system-dnf]] — conda가 시스템 dnf libsolv 충돌, `env -u LD_LIBRARY_PATH dnf` 우회
 - [[el-kernel-swap-safety]] — 벤더 패치커널 스왑 전 확인, 안 하면 dracut emergency

@@ -103,5 +103,11 @@ created: 2026-05-15 (금)
 - [[lease-derived-from-ledger]] — 점유(lease)를 별도 저장하지 말고 원장에서 파생: 반납 코드가 사라진다(실증)
 - [[partial-failure-reported-as-success]] — 다단계 작업의 부분 실패가 완료로 보고되는 것: 응답과 화면 두 겹을 다 고쳐야 끝난다(실증)
 - [[external-command-timeout-bulkhead]] — 외부 명령 hang 격벽: 타임드 래퍼+락 밖 실행+후조건 검증(실증)
+- [[dual-writer-no-owner-of-record]] — 같은 테이블에 두 writer, 정본(키·소유 컬럼·삭제 책임) 미정의가 유령 행을 만든다(실증)
+- [[timeout-is-unknown-not-failure]] — 시간 초과는 실패가 아니라 "결과를 모름": 성공/확정실패/미지 3값으로 가른다(실증)
+- [[error-marker-substring-overreach]] — 오류 문구를 낱말 부분일치로 판정하면 데이터에 섞인 그 낱말에 뒤집힌다(실증)
+- [[mutual-exclusion-key-mismatch]] — 두 작업이 서로 다른 키를 잠그면 락이 있어도 상호배제가 성립하지 않는다(실증)
+- [[truncated-identifier-collision]] — 길이 제한 식별자를 앞자르기 하면 접두가 같은 대상이 충돌한다(실증)
+- [[derived-value-vs-canonical-source]] — 파생 이름에서 되계산하지 말고 정본을 읽는다(실증)
 - [[ai-overview]]
 - [[dx-overview]]

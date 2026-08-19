@@ -33,6 +33,7 @@ created: 2026-06-25 (목)
 - [[gitlab-rules-first-match-wins]] — `rules:`는 먼저 맞는 하나만 적용, 뒤의 `when: manual`은 죽은 규칙(승인 없이 자동 배포)
 - [[provisioning-tool-antipatterns]] — 설치/프로비저닝 자동화 CLI 안티패턴 4종(--help 오실행·대상 하드코딩·BatchMode 누락 hang·태그부재 stale)
 - [[deploy-job-ordering-uncoordinated]] — 배포 잡이 서로를 `needs`로 모르면 순서가 빌드 시간에 좌우("구 백엔드 + 신 프론트" 창)
+- [[release-version-single-source]] — 컴포넌트는 태그로 빌드하는데 메타패키지는 별도 버전 파일을 참조 → 태그 다는 순간 설치 불가
 
 ---
 

@@ -41,6 +41,14 @@ created: 2026-06-08 (월)
 - [[authz-cutover-observe-rehearse-enforce]] — 인가 전환은 관찰 → 리허설 → 강제 3단, 리허설과 강제가 같은 판정 함수를 공유
 - [[central-route-table-as-policy-source]] — 중앙 라우트표은 배선이 아니라 정책을 적는 문서 + 정책 축의 런타임 소비자 확인
 
+## 경로 기반 접근 제어
+
+- [[acl-check-before-path-canonicalization]] — 권한 검사가 경로 정규화보다 먼저면 표기 변형(`//`·`..`)으로 통째로 우회된다
+- [[path-acl-most-specific-wins]] — 상위 허용이 하위 제한을 덮으면 하위 제한은 존재하지 않는 것과 같다: 최장 일치로 판정
+- [[sql-like-wildcard-unescaped-user-input]] — 경로·이름을 LIKE로 조회하면 `_`·`%`가 남의 권한 설정을 끌어온다
+- [[permission-check-path-vs-write-path]] — 이름 충돌 회피로 저장 경로가 바뀌면 요청 경로에 대한 검사는 무효다
+- [[share-link-authz-at-issue-time]] — 발급 시점에만 검사하는 공유 링크는 나중에 들어온 제한 파일을 노출한다
+
 ## 토큰 / 세션
 
 - [[api-key-derived-token-scope]] — API 키 파생 토큰에 스코프 강제(전권 발급 = 권한 상승)

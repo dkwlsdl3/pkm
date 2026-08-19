@@ -19,6 +19,7 @@ created: 2026-06-04 (목)
 - [[sidebar-active-menu-longest-match]] — 활성 메뉴는 startsWith가 아니라 최장 경로 매칭 단일 활성(접두어 관계 메뉴 오매칭 방지)
 - [[websocket-reconnect-budget-stability]] — 재연결 예산은 "붙었다"가 아니라 "안정 유지"로 리셋 + CONNECTING 영구 정지 해소
 - [[flex-min-height-auto-blocks-scroll]] — flex 자식의 `min-height:auto`가 스크롤바 생성 조건 자체를 없앤다(`min-h-0`)
+- [[query-failure-vs-empty-state]] — 조회 실패를 빈 목록·0으로 그리면 사용자가 그것을 사실로 읽는다(토스트만으로는 부족)
 
 ---
 

@@ -51,6 +51,7 @@ ZFS 노트 전반에서 반복되는 약어·고유 용어. 개별 노트에서 
 - [[zfs-arc-cache-illusion]] — ZFS ARC read 성능 착시와 Direct IO 분리 측정
 - [[zfs-sync-write-weakness]] — ZFS 동기 쓰기 성능 약점(worst-case 조건)
 - [[lustre-zvol-vm-layering-overhead]] — Lustre+zvol+VM 다층 스택 오버헤드·tail latency
+- [[zvol-blocksize-filesystem-mismatch]] — zvol 블록 크기와 그 위 파일시스템 블록 크기가 어긋나면 쓰기 증폭이 생긴다(volblocksize는 사후 변경 불가)
 - [[zfs-file-vdev-recovery]] — 파일/loop vdev zpool 재부팅 복구 (losetup 재연결 필수)
 - [[zfs-hba-vs-hwraid]] — 하드웨어 RAID vs HBA/JBOD 패스스루, ZFS가 패스스루여야 하는 이유
 - [[zpool-vs-zfs-capacity-basis]] — `zpool list`(패리티 포함·예약 미반영)와 `zfs list`(차감 후) 용량 기준 차이, 섞으면 화면끼리 모순
