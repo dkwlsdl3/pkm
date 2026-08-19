@@ -18,7 +18,7 @@ const config: QuartzConfig = {
     locale: "ko-KR",
     baseUrl: "dkwlsdl3.github.io/pkm",
     ignorePatterns: ["private", "templates", ".obsidian"],
-    defaultDateType: "modified",
+    defaultDateType: "created",
     theme: {
       // 화면 표시 폰트는 Pretendard(jsDelivr)로, Head.tsx에서 직접 링크하고
       // custom.scss에서 --headerFont/--bodyFont 를 덮어쓴다.
