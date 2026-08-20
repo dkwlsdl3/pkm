@@ -48,6 +48,8 @@ created: 2026-06-08 (월)
 - [[sql-like-wildcard-unescaped-user-input]] — 경로·이름을 LIKE로 조회하면 `_`·`%`가 남의 권한 설정을 끌어온다
 - [[permission-check-path-vs-write-path]] — 이름 충돌 회피로 저장 경로가 바뀌면 요청 경로에 대한 검사는 무효다
 - [[share-link-authz-at-issue-time]] — 발급 시점에만 검사하는 공유 링크는 나중에 들어온 제한 파일을 노출한다
+- [[public-link-owner-lifecycle-gate]] — 공개 링크의 수명은 만든 사람의 계정 상태에 매단다(그룹 자원은 판별자가 다르다)
+- [[not-found-response-uniformity]] — 비활성 리소스와 없는 리소스의 404 가 다르면 토큰 존재가 새어 나간다
 
 ## 토큰 / 세션
 
@@ -55,6 +57,7 @@ created: 2026-06-08 (월)
 - [[session-keepalive-refresh-vs-relogin]] — authToken은 refresh, refreshToken은 재로그인으로 리셋
 - [[http-200-fake-write-failure]] — write 인증실패가 HTTP 200+success:false로 위장되는 함정
 - [[csrf-double-submit-sibling-subdomain]] — OAuth `state`의 double-submit 쿠키를 형제 서브도메인이 우회, `__Host-` 접두사로 차단
+- [[revoke-other-sessions-rotation-race]] — "다른 세션 로그아웃"의 현재 세션 식별과 토큰 회전 경합(쿠키 없으면 거부)
 
 ---
 

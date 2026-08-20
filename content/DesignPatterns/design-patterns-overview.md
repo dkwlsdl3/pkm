@@ -109,5 +109,6 @@ created: 2026-05-15 (금)
 - [[mutual-exclusion-key-mismatch]] — 두 작업이 서로 다른 키를 잠그면 락이 있어도 상호배제가 성립하지 않는다(실증)
 - [[truncated-identifier-collision]] — 길이 제한 식별자를 앞자르기 하면 접두가 같은 대상이 충돌한다(실증)
 - [[derived-value-vs-canonical-source]] — 파생 이름에서 되계산하지 말고 정본을 읽는다(실증)
+- [[sync-response-to-job-handoff]] — 동기 응답을 작업 접수로 옮길 때: 접수의 원자성·재시작 정리·성공 판정의 이동(실증)
 - [[ai-overview]]
 - [[dx-overview]]

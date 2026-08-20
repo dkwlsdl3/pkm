@@ -53,4 +53,4 @@ t1: 서버가 "R1 이 아닌 것 전부 폐기" 실행 → R2 도 폐기됨 → 
 ## 관련
 
 - [[session-keepalive-refresh-vs-relogin]]
-- [[guard-test-discriminating-power]] — 시험이 실제로 잠그는지 재는 법
+- [[mutation-check-test-effectiveness]] — 시험이 실제로 잠그는지 재는 법

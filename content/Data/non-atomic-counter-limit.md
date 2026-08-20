@@ -58,5 +58,5 @@ match updated {
 
 ## 관련
 
-- [[partial-failure-is-not-success]]
+- [[partial-failure-reported-as-success]]
 - [[public-link-owner-lifecycle-gate]]

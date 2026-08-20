@@ -55,4 +55,4 @@ grep -rhoE '"[a-z_]+"' src/query/ | sort -u > /tmp/used-columns.txt
 - [[sql-view-silent-column-absence-trap]] — 뷰가 노출 안 하는 컬럼을 관용 폴백으로 꺼내는 자리
 - [[handwritten-schema-fixture-rot]] — 시험 픽스처 쪽에서 같은 드리프트가 생기는 경우
 - [[sqlx-integer-i64-decode-mismatch]] — 컬럼은 있는데 타입이 어긋나 늘 기본값이 되는 경우
-- [[partial-failure-is-not-success]]
+- [[partial-failure-reported-as-success]]

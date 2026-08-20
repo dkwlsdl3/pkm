@@ -18,6 +18,7 @@ created: 2026-06-08 (월)
 - [[handwritten-schema-fixture-rot]] — 손으로 쓴 축소 스키마 픽스처는 조용히 썩고 `#[ignore]`가 그것을 감춘다
 - [[verdict-pipeline-layer-gap]] — 계층마다 시험이 있어도 계층 사이의 전달은 아무도 고정하지 않는다
 - [[verdict-missing-value-fail-open]] — "이상이면 막는다"는 판정이 아예 없는 경우를 통과시킨다
+- [[runtime-sql-schema-drift]] — 시험이 안 태우는 경로는 컴파일러도 안 본다(종단점이 죽은 채 green)
 
 ---
 

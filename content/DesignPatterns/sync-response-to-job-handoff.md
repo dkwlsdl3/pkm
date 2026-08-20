@@ -55,5 +55,5 @@ created: 2026-08-19 (수)
 ## 관련
 
 - [[timeout-is-unknown-not-failure]] — 왜 동기 응답이 위험한지의 뿌리
-- [[partial-failure-is-not-success]]
+- [[partial-failure-reported-as-success]]
 - [[external-command-timeout-bulkhead]]

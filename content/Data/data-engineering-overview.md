@@ -45,6 +45,7 @@ created: 2026-05-13 (수)
 - [[dual-writer-no-owner-of-record]] — 두 서비스가 같은 테이블에 upsert하는데 정본이 없으면 유령 행·상호 덮어쓰기 (실증)
 - [[unique-index-null-semantics]] — 유니크 인덱스에서 NULL은 서로 다른 값이라 `ON CONFLICT`가 무력화된다(하루 15만 행 실증)
 - [[collector-orphan-cleanup]] — upsert만 하는 수집기는 사라진 자원을 영원히 쌓는다, 삭제를 넣을 때의 안전 조건 2가지
+- [[non-atomic-counter-limit]] — 읽고-비교하고-쓰는 상한은 경합에서 초과를 허용한다, 조건을 UPDATE 문장 안으로 (실증)
 
 ---
 
@@ -56,6 +57,7 @@ created: 2026-05-13 (수)
 - [[idempotent-seed-resurrects-deletion]] — `ON CONFLICT DO NOTHING` 시드는 관리자의 삭제를 매 배포마다 되살린다 (실증)
 - [[online-migration-competing-writers]] — CI는 앱만 멈춘다, 데몬·에이전트가 정리 중에도 써서 인덱스 생성이 실패 (실증)
 - [[migration-lock-timeout]] — 잠금 대기는 오류가 아니라 무기한 대기, `lock_timeout`은 트랜잭션 바깥에 (실증)
+- [[runtime-sql-schema-drift]] — 런타임 SQL 은 빌드가 검증하지 않는다, 지워진 컬럼을 쓰는 종단점이 죽은 채 배포된다 (실증)
 
 ---
 
