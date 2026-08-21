@@ -62,6 +62,20 @@ frontend:deploy:dev:
 > [!WARNING]
 > stage 순서를 믿지 말라. `needs`를 쓰는 순간 그 잡은 stage 게이트를 벗어나 **DAG 순서로만** 실행된다.
 
+## 후속 (2026-08-20): 교차 needs로 못 고치는 경우 — 스테이지 배리어가 답
+
+위의 교차 `needs + optional: true` 방안을 실제로 적용하려다 **세 가지가 겹치면 `needs`로는 순서를 고정할 수 없다**는 것이 확인됐다.
+
+- 기다릴 잡이 `allow_failure: true`면 `needs`로 기다려도 **실패가 무시**된다 — 시험을 기다리게 해도 게이트가 안 된다.
+- 컴포넌트별 `rules:changes` 때문에 대상 잡이 생성되지 않으면 파이프라인 생성이 실패하고, `optional: true`로 덮으면 그 순간 **순서 보장이 사라진다**(함정 ①의 해결책이 목적을 무너뜨린다).
+- 배포 잡 여럿의 상호 순서까지 `needs` 그물로 짜면 그래프가 유지 불가능해진다.
+
+결론: **순서는 스테이지가, 산출물 전달은 `dependencies`가 맡는다.** 스테이지 배리어는 잡이 생성되지 않아도 성립하므로 `rules:changes`와 충돌하지 않는다.
+
+- 배포를 의존 방향대로 스테이지로 쪼갠다 (예: `deploy:schema` → `deploy:services` → `deploy:ui`). 순서는 코드에서 도출한다 — 누가 스키마를 직접 읽고 누가 HTTP만 쓰는지.
+- DB 마이그레이션은 특정 컴포넌트 배포 잡에서 떼어 **모든 소비자보다 앞 스테이지의 독립 잡**으로 둔다. 컴포넌트 배포에 묶어두면 그 컴포넌트가 안 바뀐 푸시에서 스키마 갱신이 통째로 빠진다. `changes` 없이 항상 생성되는 고정점으로.
+- 마이그레이션에 `lock_timeout`을 건다 — `ALTER TABLE`류의 ACCESS EXCLUSIVE 잠금이 긴 질의 뒤에 줄을 서면 그동안 테이블 접근이 전부 막힌다. → [[migration-lock-timeout]]
+
 > [!NOTE]
 > 원인 확정은 파이프라인 하나만 실측하면 끝난다 — 각 배포 잡의 시작·종료 타임스탬프와 `needs` 그래프를 나란히 놓는다. 추측할 필요가 없다.
 
@@ -70,6 +84,7 @@ frontend:deploy:dev:
 ## 관련
 
 - [[gitlab-rules-first-match-wins]] — `rules`가 잡 생성을 좌우한다
+- [[allow-failure-hides-fail-fast-skip]] — 기다려 봐야 소용없는 이유: allow_failure 잡은 게이트가 아니다
 - [[gitlab-manual-deploy-rules-changes]]
 - [[deploy-env-optin-flags-and-manual-button-trap]]
 - [[gitlab-ci-deploy-runner]]

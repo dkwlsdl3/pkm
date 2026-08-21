@@ -46,6 +46,7 @@ created: 2026-05-13 (수)
 - [[unique-index-null-semantics]] — 유니크 인덱스에서 NULL은 서로 다른 값이라 `ON CONFLICT`가 무력화된다(하루 15만 행 실증)
 - [[collector-orphan-cleanup]] — upsert만 하는 수집기는 사라진 자원을 영원히 쌓는다, 삭제를 넣을 때의 안전 조건 2가지
 - [[non-atomic-counter-limit]] — 읽고-비교하고-쓰는 상한은 경합에서 초과를 허용한다, 조건을 UPDATE 문장 안으로 (실증)
+- [[select-for-update-of-lock-scope]] — 조인 있는 FOR UPDATE는 OF 없이는 조인 행까지 잠가 데드락 (실증)
 
 ---
 

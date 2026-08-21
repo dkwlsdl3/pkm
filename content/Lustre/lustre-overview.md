@@ -92,6 +92,7 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[lustre-ha-vm-virtualdomain]] — VM 기반 Lustre HA(Pacemaker VirtualDomain) 변형
 - [[el-kernel-swap-safety]] — 벤더 패치커널(ldiskfs 등) 스왑 함정: kernel-modules·initramfs·fallback 확인(안 하면 dracut emergency)
 - [[lfs-dstate-circuit-breaker]] — hang나는 lfs 호출을 백그라운드 게이트+서킷브레이커로 격리
+- [[lfs-df-exit-code-partial-failure]] — lfs df 비영 종료코드는 개별 타깃 실패의 합, 종료코드 단독 판정 금지
 - [[lustre-client-eviction-under-load]] — 클라이언트 축출로 EIO 중단, 원인은 클라이언트 방화벽이 막은 서버→클라이언트 역방향 연결(한 방향만 열려도 마운트는 된다)
 
 ---
