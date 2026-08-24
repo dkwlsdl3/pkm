@@ -35,6 +35,7 @@ created: 2026-06-25 (목)
 - [[deploy-job-ordering-uncoordinated]] — 배포 잡이 서로를 `needs`로 모르면 순서가 빌드 시간에 좌우("구 백엔드 + 신 프론트" 창) + 후속: needs로 못 고치면 스테이지 배리어
 - [[allow-failure-hides-fail-fast-skip]] — fail-fast 러너 + allow_failure 잡 조합이 시험 205건 생략을 green으로 은폐 (실증)
 - [[release-version-single-source]] — 컴포넌트는 태그로 빌드하는데 메타패키지는 별도 버전 파일을 참조 → 태그 다는 순간 설치 불가
+- [[test-selection-zero-match]] — 이름/glob 시험 선택은 0건 매치여도 green, 선택 개수를 별도 게이트에서 단언
 
 ---
 

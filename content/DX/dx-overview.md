@@ -63,6 +63,7 @@ created: 2026-05-13 (수)
 - [[adversarial-cross-review]] — 구현자≠검증자 적대적 교차검증, 하루 2회전에 실버그 11건 적발한 운용법
 - [[unknown-is-not-absent]] — "모름"을 "없음·정상"으로 접지 말 것: 3값 outcome과 "확인 불가" 표시(실증 6사례)
 - [[duplicate-code-normalized-hash-detection]] — 이름만 다른 복사본은 토큰 복붙 탐지로 못 잡는다, 정규화 해시 + 클론 무리 세기
+- [[code-fork-drift]] — 복사된 모듈은 반드시 드리프트한다(9쌍 중 미반영 3건 실측), 공용 라이브러리 추출 또는 주기 전수 대조
 
 ## 문서 변환
 

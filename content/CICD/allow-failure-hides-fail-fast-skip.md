@@ -50,3 +50,4 @@ test:list-guard:            # allow_failure 없음 → 배포를 실제로 막�
 - [[deploy-job-ordering-uncoordinated]] — 같은 파이프라인의 순서 함정: `needs`는 스테이지 배리어를 우회한다
 - [[gitlab-rules-first-match-wins]] — 잡 생성 규칙 쪽의 유사 함정
 - [[mutation-check-test-effectiveness]] — "시험이 실제로 잠그는가"를 재는 법. 이 함정은 그 전 단계인 "시험이 실제로 도는가"
+- [[test-selection-zero-match]] — 같은 계열: 시험 선택이 0건 매치여도 잡은 green
