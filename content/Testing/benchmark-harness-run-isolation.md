@@ -30,6 +30,12 @@ created: 2026-08-13 (목)
 
 계측기 시작이 실패했는데 종료 코드가 0이면, 하네스는 **계측 없이 측정을 진행하고 정상 종료로 기록한다.** 나중에 보면 결과 파일만 비어 있다.
 
+## 원인 ④ — 호스트 수를 집합 크기로 세면 중복 행이 통과한다
+
+다중 호스트 측정에서 집계기가 "참여 호스트 N 대" 를 **호스트 이름의 집합 크기**로 세면, 같은 호스트의 결과가 두 번 들어와도(원인 ①·③으로 지난 회차와 섞여) 집합 크기는 그대로 N 이라 **정상으로 통과**한다. 순차 실행 3대 합산은 겹침률 0% 로 걸리지만, 같은 3대가 2회씩 6행이면 겹침도 있고 호스트 수도 맞아 OK 가 된다(재현 fixture 로 확인).
+
+여기에 전처리(원격 결과 정리·worker·계측기 배포)의 실패를 `WARN` 으로만 남기고 진행하면 그 중복이 **실제로 생긴다** — fail-open 이 회차를 섞는 입구다.
+
 ## 해결
 
 ```bash
@@ -43,6 +49,12 @@ mkdir -p "$RUN_DIR"      # 기존 회차를 절대 건드리지 않는다
 # ② 겹침 차단 — 락 파일로 동시 실행을 거부한다
 exec 9>"$LOCK" || exit 1
 flock -n 9 || { echo "다른 측정이 진행 중이다 — 거부"; exit 1; }
+
+# ④ 생산자·소비자 이중 방어
+#    생산자: 전처리 실패는 측정하지 않고 종료 — VERDICT 를 명시해 "안 잰 것" 이 기록에 남게
+clear_remote_results || { VERDICT=remote_result_cleanup_failed; write_done; exit 1; }
+#    소비자: (시나리오, 동작, 호스트) 당 행이 정확히 1개인지 단언. 아니면 그 시나리오 INVALID
+#      duplicate_host_rows=hostA=2|hostB=2  → invalid=True   (집합 크기가 아니라 개수를 본다)
 
 # ③ 계측기 시작 실패를 종료 코드로 전파
 start_probe || { echo "계측기 시작 실패"; exit 1; }
@@ -65,3 +77,5 @@ test -s "$RUN_DIR/probe.out" || exit 1
 - [[benchmark-baseline-drift-within-run]] — 조건 간 비교는 같은 실행 창 안에서만
 - [[benchmark-invalid-value-quarantine]] — 무효값을 집계에서 격리하는 법
 - [[unattended-benchmark-runner]] — 무인 실행에서 이 격리를 코드로 옮기기
+- [[unknown-is-not-absent]] — 전처리 실패를 WARN 으로 접고 진행하는 것이 이 결함군의 입구
+- [[verdict-missing-value-fail-open]] — 검사가 "이상" 만 찾으면 "중복" 은 통과한다

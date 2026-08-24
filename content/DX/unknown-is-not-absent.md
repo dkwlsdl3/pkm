@@ -30,6 +30,9 @@ created: 2026-07-31 (금)
 | 화면 상세 조회 | 없는 DB 함수를 부르고 그 오류를 잡아 버림 | 상세 탭이 **늘 비어 있는데 오류 표시가 없어**, 사용자는 "이 장치는 원래 값이 없구나"로 읽는다 |
 | 식별자 조회 헬퍼 | 조회 실패(Err)와 "행 없음"(None)을 한 값으로 접음 | 장애가 **"대상 없음"으로 위장** — 같은 조회가 다섯 벌 복사돼 있어 결함도 다섯 벌. 오류 보존형(`Result<Option<T>>`) 공용 조회로 통합 |
 | 홈 디렉터리 조회 | 실패 원인을 삼키고 **모든 실패에 같은 문구** | "권한 없음"과 "경로 없음"과 "서버 응답 없음"이 한 문장으로 뭉개져 조치를 고를 수 없다 |
+| 로그인 잠금 계수 | `SELECT COUNT(*)` 의 `unwrap_or((0,))` — COUNT 는 행이 항상 하나라 이 기본값이 삼키는 것은 **순수하게 DB 오류만** | 조회가 실패하면 실패 횟수가 0 이 되어 **비밀번호 무제한 대입**이 열린다(fail-open). 같은 모양이 인증 경로에 9자리 → [[sqlx-fetch-optional-ok-flatten-fail-open]] |
+| 결함 전수조사 수집기 | 의존 명령(`rg`·`awk`)이 없으면 개수 칸을 비운 채 **종료코드 0** | "0건 매칭인데 성공 종료" 를 찾는 스크립트가 **자기 안에 그 결함**을 갖고 있었다 → [[code-audit-collector-design]] |
+| 벤치 하네스 전처리 | 원격 결과 정리·계측기 배포 실패를 `WARN` 으로 남기고 **측정을 계속** | 지난 회차 산출물과 섞여 호스트별 행이 중복되는데 집계는 정상으로 통과 → [[benchmark-harness-run-isolation]] |
 
 ### 조사·검증에도 같은 함정이 있다
 
@@ -108,4 +111,7 @@ MetadataMissing    error  "라우트 메타데이터 없음"
 - [[selinux-unlabeled-mount-no-avc]] — 로그가 없다고 원인이 아닌 것은 아니다
 - [[partial-failure-reported-as-success]] — "일부 실패"를 "전체 성공"으로 접는 것: 고치는 자리가 조회 지점이 아니라 보고 지점이다
 - [[test-selection-zero-match]] — 시험 선택 0건도 같은 계열: 아무것도 안 골랐는데 green
+- [[sqlx-fetch-optional-ok-flatten-fail-open]] — `fetch_optional` 뒤 `.ok().flatten().unwrap_or()` 가 DB 오류를 기본값으로(인증 9자리 실측)
+- [[code-audit-collector-design]] — 이 결함군을 전수조사하는 수집기 설계, 수집기 자신부터 fail-closed
+- [[clipboard-api-secure-context-fallback]] — 복사 결과를 모르는 채 성공 토스트를 띄우는 프론트 판
 - [[dx-overview]]

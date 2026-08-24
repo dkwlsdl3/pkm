@@ -34,6 +34,7 @@ ZFS 노트 전반에서 반복되는 약어·고유 용어. 개별 노트에서 
 | ECC | Error-Correcting Code | 오류를 스스로 정정하는 메모리. ZFS 운영 권장 사항 |
 | SMART | Self-Monitoring, Analysis and Reporting Technology | 디스크 자기진단 기능 |
 | BBU | Battery Backup Unit | RAID 컨트롤러 캐시를 정전으로부터 보호하는 배터리 |
+| MMP | Multi-Modifier Protection | `multihost=on` 이 켜는 기능. 풀 레이블에 하트비트를 써서 두 호스트의 동시 import 를 막는다. 단일 호스트에서는 대가만 남는다 → [[zfs-multihost-mmp-suspend]] |
 
 > ZFS 자체는 Zettabyte File System에서 온 이름이지만 지금은 고유명사로 쓴다.
 
@@ -55,6 +56,7 @@ ZFS 노트 전반에서 반복되는 약어·고유 용어. 개별 노트에서 
 - [[zfs-file-vdev-recovery]] — 파일/loop vdev zpool 재부팅 복구 (losetup 재연결 필수)
 - [[zfs-hba-vs-hwraid]] — 하드웨어 RAID vs HBA/JBOD 패스스루, ZFS가 패스스루여야 하는 이유
 - [[zpool-vs-zfs-capacity-basis]] — `zpool list`(패리티 포함·예약 미반영)와 `zfs list`(차감 후) 용량 기준 차이, 섞으면 화면끼리 모순
+- [[zfs-multihost-mmp-suspend]] — `multihost=on`(MMP)은 하트비트 10초 실패 시 디스크 정상인데 풀만 SUSPENDED, 기본 off·단일 호스트는 끄고 HA 는 `cachefile=none` 짝
 
 ---
 

@@ -37,6 +37,8 @@ created: 2026-06-04 (목)
 - [[form-urlencoded-space-plus-mangling]] — query 재직렬화가 %20→+ 변조, URL 수정은 raw 세그먼트 필터링으로
 - [[route-inventory-syn-ast]] — 라우트 인벤토리를 정규식 대신 syn AST로 파싱, 표↔실등록 exact-set 비교로 CI 차단
 - [[uds-http-shutdown-truncates-response]] — 유닉스 소켓에 HTTP를 직접 조립할 때 `shutdown(SHUT_WR)`을 부르면 hyper가 응답 전에 연결을 끊는다
+- [[sqlx-fetch-optional-ok-flatten-fail-open]] — `fetch_optional` 뒤 `.ok().flatten().unwrap_or()` 는 DB 오류와 행 없음을 같은 기본값으로(보호 장치 fail-open, 9자리 실측)
+- [[cargo-deny-shared-policy-multi-lockfile]] — 워크스페이스 없는 다중 Cargo.lock 에 공유 deny.toml: `--config` 필수·`-W unmaintained` 는 호출 인자·공유 ignore 금지·`publish=false`+private
 
 ---
 

@@ -36,6 +36,7 @@ created: 2026-06-25 (목)
 - [[allow-failure-hides-fail-fast-skip]] — fail-fast 러너 + allow_failure 잡 조합이 시험 205건 생략을 green으로 은폐 (실증)
 - [[release-version-single-source]] — 컴포넌트는 태그로 빌드하는데 메타패키지는 별도 버전 파일을 참조 → 태그 다는 순간 설치 불가
 - [[test-selection-zero-match]] — 이름/glob 시험 선택은 0건 매치여도 green, 선택 개수를 별도 게이트에서 단언
+- [[ci-test-precompile-cache-tradeoff]] — 빌드 잡 시험 선컴파일→캐시는 전송 비용으로 순손실 가능(+2:32 실측), 되돌릴 때 캐시 키 무효화 동반
 
 ---
 
