@@ -58,3 +58,4 @@ return 2   →   return 0
 - [[mutation-check-test-effectiveness]] — 되돌려도 통과하는 시험은 장식이다
 - [[verdict-missing-value-fail-open]] — 판정 값이 비었을 때 통과시키는 문제
 - [[unattended-benchmark-runner]] — 무인 실행에서는 이 사각이 곧 값 손실이 된다
+- [[two-verdict-sources-consumer-gap]] — 판정 장부가 둘일 때 소비자가 앞쪽만 읽는 사고

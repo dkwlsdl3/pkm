@@ -78,3 +78,4 @@ INTERNALLY_ENFORCED_CAPABILITIES = [terminal_ws, ...]
 - [[route-inventory-syn-ast]] — 표↔실등록 exact-set 검증
 - [[mutation-check-test-effectiveness]] · [[api-key-derived-token-scope]]
 - [[auth-overview]]
+- [[fixed-capability-skips-permission-matrix]] — 라우트 메타의 고정 capability 가 매트릭스를 건너뛴다

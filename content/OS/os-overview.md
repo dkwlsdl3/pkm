@@ -136,6 +136,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[shell-sigtstp-background]] — 터미널 SIGTSTP로 백그라운드 프로세스가 정지되는 문제
 - [[shell-heredoc-pitfall]] — heredoc을 `&&`로 이어붙이면 종결자 오염, write 후 read-back 검증
 - [[pipefail-grep-q-sigpipe]] — `producer | grep -q`가 pipefail+SIGPIPE로 "찾았을 때 실패"하는 역전
+- [[process-substitution-hides-exit-code]] — `while … done < <(cmd)` 는 생산자 종료 코드를 안 봐서, 중간에 죽어도 부분 출력이 완주로 읽힌다
 - [[filename-nul-boundary]] — 파일 이름 경계는 개행이 아니라 NUL, 목록·정렬·대조·세기 전부 바꿔야 한다
 - [[cli-output-locale-translated-header]] — CLI 출력 헤더는 로케일 번역됨, 컬럼명 매칭 금지 · 위치 파싱
 - [[kernel-ring-buffer-overflow-counting]] — 커널 링 버퍼가 넘치면 사건 수가 줄어 개선처럼 보인다
@@ -150,6 +151,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[rsync-delete-path-normalization]] — `--delete` 보호 목록은 경로 정규화 없이 뚫린다 + 원격 와일드카드는 셸에서 확장
 - [[rsync-checksum-verify-cost]] — `--checksum` 은 전량 읽기, 안전 확인은 원본 삭제 직전 dry-run 패스에만
 - [[binary-vs-decimal-byte-units]] — 1024 로 나눈 값에 TB 라벨을 붙이면 디스크 스펙과 어긋난다
+- [[statvfs-used-vs-df-reserved-blocks]] — `used = total - bavail` 은 root 예약분을 사용으로 센다(`df` 와 어긋남, `used + free < total` 이 정상)
 - [[dkms]] — 커널 업데이트 시 모듈 자동 재빌드
 - [[grub-kernel-pinning]] — GRUB 커널 고정(인덱스 vs 이름) + apt-mark hold
 - [[musl-static-binary]] — glibc 버전 불일치 해결, musl 정적 빌드

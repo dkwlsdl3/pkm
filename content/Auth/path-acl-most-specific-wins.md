@@ -66,3 +66,4 @@ created: 2026-08-11 (화)
 - [[central-route-table-as-policy-source]]
 - [[linux-permissions]]
 - [[auth-overview]]
+- [[acl-key-without-owner-crosses-homes]] — 조회 키에 소유자가 없으면 개인 홈끼리 설정이 번진다

@@ -73,3 +73,4 @@ export function formatBytes(v, digits = 1) {
 - [[duplicate-code-normalized-hash-detection]] — 복사본 26벌을 찾아 걷어내는 방법
 - [[unknown-is-not-absent]] — 모르는 값을 0 으로 단정하는 결함군
 - [[linux-permissions]]
+- [[statvfs-used-vs-df-reserved-blocks]] — 같은 블록 수를 어떤 정의로 세느냐에서 오는 어긋남

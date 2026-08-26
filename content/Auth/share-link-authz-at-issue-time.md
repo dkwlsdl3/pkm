@@ -55,3 +55,4 @@ created: 2026-08-11 (화)
 - [[path-acl-most-specific-wins]] — 하위 경로 제한의 판정 규칙
 - [[api-key-derived-token-scope]] — 파생 토큰의 권한 범위
 - [[unknown-is-not-absent]] — 판정할 수 없는 것을 허용으로 흘리지 않는다
+- [[authz-enforce-at-consumption-point]] — 발급 차단만으로 부족한 이유와 소비 지점 방어

@@ -45,3 +45,4 @@ if verdict != 'OK':
 - [[verdict-pipeline-layer-gap]] — 판정이 계층을 넘을 때 생기는 시험 사각
 - [[benchmark-invalid-value-quarantine]] — 무효값을 표시만 하고 격리하지 않으면 인용될 때 표시가 떨어진다
 - [[verify-criteria-before-seeing-values]] — 값 보기 전에 판정 기준을 확정한다
+- [[process-substitution-hides-exit-code]] — 셸에서 같은 fail-open 이 나는 자리(생산자가 죽어도 통과)

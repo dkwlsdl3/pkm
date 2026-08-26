@@ -82,3 +82,4 @@ fi
 - [[unknown-is-not-absent]] — 실패·모름을 정상으로 접는 같은 계열
 - [[mutation-check-test-effectiveness]] — 검증이 실제로 결함을 잡는지 되돌려 확인
 - [[os-overview]]
+- [[process-substitution-hides-exit-code]] — `pipefail` 로도 못 잡는 프로세스 치환 쪽 종료 코드 유실

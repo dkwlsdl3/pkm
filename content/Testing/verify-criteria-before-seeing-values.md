@@ -53,3 +53,4 @@ created: 2026-08-13 (목)
 - [[storage-perf-reporting-honesty]] — 결과 보고의 정직성 가드
 - [[benchmark-invalid-value-quarantine]] — 무효값 격리
 - [[mutation-check-test-effectiveness]] — 검증이 실제로 작동하는지 확인하는 발상
+- [[measurement-name-overclaims-scope]] — 기준을 고정해도 이름이 넓으면 결론이 과해진다
