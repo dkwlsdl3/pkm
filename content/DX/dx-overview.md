@@ -116,6 +116,7 @@ created: 2026-05-13 (수)
 - [[live-canvas-vs-standalone-export]] — 라이브 디자인 캔버스와 내보내기 스냅샷의 버전 불일치 — 정본은 뷰어가 여는 파일
 - [[nuxt-tooling]] — Nuxt 타입체크·ESLint CI 게이트
 - [[nuxt-bundle-optimization]] — xlsx 지연 로딩·미사용 차트 제거로 번들 축소
+- [[server-bundle-import-outside-source-tree]] — 서버 라우트가 소스 트리 밖 유틸을 상대 경로로 가져오면 개발 모드만 500: 프로덕션 빌드·단위시험·정적검사가 전부 통과한다
 
 ## 패키지 매니저
 

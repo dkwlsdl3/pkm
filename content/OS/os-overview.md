@@ -158,6 +158,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[smartctl]] — SMART 수집 기본 명령어, sudoers 경로
 - [[smartctl-device-type-sat-cciss]] — `-d sat` vs `-d cciss,N` 디바이스 타입 선택
 - [[smartctl-raw-value-parsing]] — RAW_VALUE 컬럼 파싱 함정
+- [[smartctl-exit-status-bitmask]] — 종료코드는 비트마스크: Bit3~7 은 「디스크가 나쁘다」는 정상 신호라 `!= 0` 을 실패로 읽으면 나빠지는 순간 수집이 멈춘다
 - [[sas-selftest-scsi-log-page]] — SAS 자기진단은 SMART 속성이 아니라 SCSI 로그 페이지(0x10), 전송 둘·파서 하나
 - [[anaconda-text-install]] — Rocky/RHEL 텍스트 설치: inst.text nomodeset
 - [[conda-breaks-system-dnf]] — conda가 시스템 dnf libsolv 충돌, `env -u LD_LIBRARY_PATH dnf` 우회
