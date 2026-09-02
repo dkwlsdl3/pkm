@@ -46,6 +46,7 @@ created: 2026-05-13 (수)
 - [[unique-index-null-semantics]] — 유니크 인덱스에서 NULL은 서로 다른 값이라 `ON CONFLICT`가 무력화된다(하루 15만 행 실증)
 - [[collector-orphan-cleanup]] — upsert만 하는 수집기는 사라진 자원을 영원히 쌓는다, 삭제를 넣을 때의 안전 조건 2가지
 - [[non-atomic-counter-limit]] — 읽고-비교하고-쓰는 상한은 경합에서 초과를 허용한다, 조건을 UPDATE 문장 안으로 (실증)
+- [[export-count-then-fetch-truncation]] — 건수를 센 뒤 조회하는 내보내기는 그 사이 늘어난 행 때문에 잘린 CSV를 정상 응답으로 내보낸다 (실증)
 - [[select-for-update-of-lock-scope]] — 조인 있는 FOR UPDATE는 OF 없이는 조인 행까지 잠가 데드락 (실증)
 
 ---
@@ -53,6 +54,7 @@ created: 2026-05-13 (수)
 ## 스키마 마이그레이션
 
 - [[migrations-replayed-in-full]] — 전량 재실행 모델에서 앞 파일이 뒤 파일 효과를 조용히 되돌리는 함정 (실증)
+- [[migration-baseline-squash]] — 마이그레이션 50개를 기준선 하나로 접을 수 있는 조건은 "모든 환경이 그 지점을 지났다" 하나, 압축보다 적용 진입점 통합이 먼저 (실증)
 - [[psql-exit-code-zero-on-partial-restore]] — `psql -f`는 문장 실패에도 exit 0, 반쪽 복원이 "성공"으로 보고된다
 - [[is-not-distinct-from-index-pushout]] — NULL 안전 비교가 인덱스를 필터로 밀어내 순차 스캔이 된다(실측 1.357ms→0.013ms)
 - [[idempotent-seed-resurrects-deletion]] — `ON CONFLICT DO NOTHING` 시드는 관리자의 삭제를 매 배포마다 되살린다 (실증)
