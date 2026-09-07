@@ -85,6 +85,8 @@ created: 2026-05-13 (수)
 - [[playwright-selector-wait-strategy]] — role 없는 셀렉터 대체·SPA 초기화 대기
 - [[playwright-mcp-session-persistence]] — Playwright MCP에서 세션 쿠키 기반 로그인을 storageState로 유지
 - [[agent-skill-sharing-symlink]] — 에이전트 도구가 같은 스킬을 심링크로 공유하는 방식
+- [[preflight-before-destructive-work]] — 파괴적 설치 앞의 읽기 전용 가부 판정, 점검과 설치가 같은 정본을 읽는지 잠그기
+- [[install-rerun-idempotency]] — 「이미 있으면 건너뛴다」가 재실행에서 구성 보장을 통째로 날린다, 덧붙이기에는 마커 가드
 
 ## 버전 관리
 

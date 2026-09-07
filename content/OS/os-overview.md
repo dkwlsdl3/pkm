@@ -118,6 +118,8 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[oauth2]] — OAuth 2.0 Access Token 위임 흐름
 - [[selinux-confined-daemon-ocf-ra]] — confined SELinux 도메인이 실행하는 OCF/RA rc=1 실패 진단
 - [[selinux-unlabeled-mount-no-avc]] — `unlabeled_t` 마운트 접근 차단이 AVC 로그를 안 남긴다, 경로만 바꿔 가르는 분리 실험
+- [[secret-in-process-argv]] — 비밀값을 명령 인자로 주면 `/proc/*/cmdline` 으로 같은 호스트의 남이 읽는다, 표준입력·환경변수로 옮기기
+- [[secret-masking-escape-gaps]] — 마스킹은 값이 원형일 때만 듣는다: 감싼 문법이 벗겨진 형태·짧은 조각·개행 든 값
 
 ## 가상화
 
@@ -164,6 +166,9 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[conda-breaks-system-dnf]] — conda가 시스템 dnf libsolv 충돌, `env -u LD_LIBRARY_PATH dnf` 우회
 - [[el-kernel-swap-safety]] — 벤더 패치커널 스왑 전 확인, 안 하면 dracut emergency
 - [[server-fan-noise-bmc-diagnosis]] — 서버 팬 폭음 진단: 온도+BMC 팬정책, 1U baseline 오해 주의
+- [[package-manager-exit-code-not-success]] — `%post` 실패를 rpm 이 되돌리지 못해 마이그레이션이 깨져도 `dnf` 는 0 을 낸다
+- [[rpm-scriptlet-pre-vs-post]] — 설치를 막을 수 있는 것은 `%pre` 뿐, 다만 그것도 「이 패키지 교체 차단」이다
+- [[self-update-killed-by-own-cgroup]] — 자기를 갱신하는 서비스가 자기 cgroup 에서 `dnf` 를 돌리면 `%post` 의 stop 이 rpm 트랜잭션을 죽인다
 
 ## 스토리지 & 마운트
 

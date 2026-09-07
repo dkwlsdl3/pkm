@@ -23,6 +23,7 @@ created: 2026-06-08 (월)
 - [[adoption-gate-weaker-than-runner]] — 채택 게이트에 실행기 검사가 빠지면 통과한 회차가 본 실행에서 무효가 된다
 - [[runtime-sql-schema-drift]] — 시험이 안 태우는 경로는 컴파일러도 안 본다(종단점이 죽은 채 green)
 - [[cargo-mutants-lib-only-false-missed]] — `cargo mutants --lib` 는 통합시험을 안 돌려 잠긴 자리도 MISSED(5건 중 3건 착시), `--re` 는 필드 삭제 변이를 안 걸러냄
+- [[root-runner-breaks-permission-tests]] — `chmod 000` 으로 만든 실패 조건은 root 러너에서 성립하지 않아 거짓 실패·조용한 skip 이 된다(판별력 0)
 
 ---
 

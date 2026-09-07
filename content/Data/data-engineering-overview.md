@@ -61,6 +61,7 @@ created: 2026-05-13 (수)
 - [[online-migration-competing-writers]] — CI는 앱만 멈춘다, 데몬·에이전트가 정리 중에도 써서 인덱스 생성이 실패 (실증)
 - [[migration-lock-timeout]] — 잠금 대기는 오류가 아니라 무기한 대기, `lock_timeout`은 트랜잭션 바깥에 (실증)
 - [[runtime-sql-schema-drift]] — 런타임 SQL 은 빌드가 검증하지 않는다, 지워진 컬럼을 쓰는 종단점이 죽은 채 배포된다 (실증)
+- [[schema-change-with-live-consumers]] — 정지가 배포 뒤 단계에 남으면 구 코드가 새 스키마를 보는 창이 열린다(실측 약 6초), 되살리는 것은 새 바이너리 쪽의 몫
 
 ---
 

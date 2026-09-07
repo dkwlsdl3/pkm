@@ -79,4 +79,5 @@ COMMIT;
 - [[unique-index-null-semantics]] — 이 마이그레이션이 왜 필요했는가
 - [[is-not-distinct-from-index-pushout]] — 정리가 O(n²)가 되는 이유
 - [[migrations-replayed-in-full]] — 마이그레이션 재실행 모델의 함정
+- [[schema-change-with-live-consumers]] — 배포 단계에서 그 writer 들을 언제 세우고 누가 되살리는가
 - [[dual-writer-no-owner-of-record]] — 여러 writer가 한 테이블을 쓸 때의 구조 문제
