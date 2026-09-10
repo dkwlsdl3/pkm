@@ -112,5 +112,6 @@ created: 2026-05-15 (금)
 - [[truncated-identifier-collision]] — 길이 제한 식별자를 앞자르기 하면 접두가 같은 대상이 충돌한다(실증)
 - [[derived-value-vs-canonical-source]] — 파생 이름에서 되계산하지 말고 정본을 읽는다(실증)
 - [[sync-response-to-job-handoff]] — 동기 응답을 작업 접수로 옮길 때: 접수의 원자성·재시작 정리·성공 판정의 이동(실증)
+- [[observation-failure-recorded-as-value]] — 관측 실패를 `0`·빈 목록으로 **DB 에 적으면** 경보가 영구히 꺼지고 되돌릴 때 마이그레이션이 따라온다
 - [[ai-overview]]
 - [[dx-overview]]

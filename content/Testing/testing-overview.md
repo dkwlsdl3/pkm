@@ -49,6 +49,7 @@ created: 2026-06-08 (월)
 - [[measurement-name-overclaims-scope]] — 잰 범위보다 넓은 이름을 붙이면 결론이 먼저 과해진다(오염 변수는 기록하고 그대로 둔다)
 - [[ratio-of-mismatched-windows]] — 서로 다른 구간을 잰 두 값의 비율은 구간 길이를 잰다(누적량으로 대조)
 - [[outlier-discard-survivor-bias]] — 느린 회차를 이상치로 버리면 성능 문제를 표본에서 지운다
+- [[automation-infeasible-misclassification]] — 「자동화 불가」를 케이스 유형 이름으로 판정하면 대량 오분류(실측 2783→243), 조작 내용으로 재판정하라
 
 ---
 

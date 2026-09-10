@@ -38,6 +38,7 @@ created: 2026-06-25 (목)
 - [[test-selection-zero-match]] — 이름/glob 시험 선택은 0건 매치여도 green, 선택 개수를 별도 게이트에서 단언
 - [[ci-test-precompile-cache-tradeoff]] — 빌드 잡 시험 선컴파일→캐시는 전송 비용으로 순손실 가능(+2:32 실측), 되돌릴 때 캐시 키 무효화 동반
 - [[shallow-clone-blinds-diff-gate]] — 얕은 클론이면 merge-base 가 실패해 기준이 HEAD 로 폴백 → 증가 0 → 잡이 영원히 초록
+- [[image-tag-pinning-bypass]] — 이미지 태그 고정 검사는 태그 생략·extends 상속·접두사로 뚫린다, 검사 자신도 시험으로 잠근다
 - [[count-comparison-is-not-a-freeze-gate]] — 개수 비교 동결 게이트는 삭제+추가·내용 증식·없는 ref 로 뚫린다, 집합·blob 비교로 계약
 
 ---
