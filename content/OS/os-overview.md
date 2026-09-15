@@ -174,6 +174,8 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 
 - [[fstab-uuid-mount]] — fstab은 UUID로(raw 디바이스명 금지), NVMe 변동·`nofail` 함정
 - [[disk-by-id-canonicalize-pitfall]] — by-id 심링크를 canonicalize로 풀어버리는 안티패턴
+- [[device-identity-key-wwid]] — 디스크 식별은 이름·전역 컨트롤러 스위치가 아니라 WWID, 값은 커널·smartctl 해석분을 쓰고 직접 파싱하지 않는다
+- [[cross-filesystem-move-preservation]] — 파일시스템 경계를 넘는 이동은 복사+삭제가 되면서 소유자·setgid·심링크·덮어쓸 inode 가 달라진다
 - [[systemd-automount-watchdog]] — automount 마운트 watchdog: stale 복구·hang 방어
 - [[unmounted-path-looks-absent]] — 마운트가 빠지면 하위 전 경로가 "없음"으로 보인다, 정리 작업은 fail-closed 로
 - [[storcli-eall-sall-boot-disk]] — 컨트롤러 일괄 범위(eall/sall) 명령이 부팅 디스크까지 전환하는 함정

@@ -48,6 +48,7 @@ created: 2026-05-13 (수)
 - [[non-atomic-counter-limit]] — 읽고-비교하고-쓰는 상한은 경합에서 초과를 허용한다, 조건을 UPDATE 문장 안으로 (실증)
 - [[export-count-then-fetch-truncation]] — 건수를 센 뒤 조회하는 내보내기는 그 사이 늘어난 행 때문에 잘린 CSV를 정상 응답으로 내보낸다 (실증)
 - [[select-for-update-of-lock-scope]] — 조인 있는 FOR UPDATE는 OF 없이는 조인 행까지 잠가 데드락 (실증)
+- [[keyset-pagination-tie-on-sort-key]] — 유일하지 않은 정렬키 하나로 페이지를 나누면 경계에서 행이 중복되거나 빠진다
 
 ---
 

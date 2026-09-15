@@ -57,6 +57,7 @@ ZFS 노트 전반에서 반복되는 약어·고유 용어. 개별 노트에서 
 - [[zfs-hba-vs-hwraid]] — 하드웨어 RAID vs HBA/JBOD 패스스루, ZFS가 패스스루여야 하는 이유
 - [[zpool-vs-zfs-capacity-basis]] — `zpool list`(패리티 포함·예약 미반영)와 `zfs list`(차감 후) 용량 기준 차이, 섞으면 화면끼리 모순
 - [[zfs-multihost-mmp-suspend]] — `multihost=on`(MMP)은 하트비트 10초 실패 시 디스크 정상인데 풀만 SUSPENDED, 기본 off·단일 호스트는 끄고 HA 는 `cachefile=none` 짝
+- [[zpool-identity-guid-not-label]] — 풀 이름은 고유하지 않다, import 후보를 이름으로 고르면 남의 풀을 파괴 대상으로 내준다(파괴 후 labelclear 까지)
 
 ---
 

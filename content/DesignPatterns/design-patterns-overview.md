@@ -113,5 +113,8 @@ created: 2026-05-15 (금)
 - [[derived-value-vs-canonical-source]] — 파생 이름에서 되계산하지 말고 정본을 읽는다(실증)
 - [[sync-response-to-job-handoff]] — 동기 응답을 작업 접수로 옮길 때: 접수의 원자성·재시작 정리·성공 판정의 이동(실증)
 - [[observation-failure-recorded-as-value]] — 관측 실패를 `0`·빈 목록으로 **DB 에 적으면** 경보가 영구히 꺼지고 되돌릴 때 마이그레이션이 따라온다
+- [[fencing-generation-late-destructive-command]] — 잠금만으로는 발송 후 도착 전 구간을 못 막는다, 파괴 명령에 세대 값을 실어 노드가 거절하게 한다
+- [[cancel-overwrites-confirmed-result]] — 취소 플래그가 이미 확정된 조각별 성공·실패를 덮어쓰면 무엇이 올라갔는지 알 수 없게 된다
+- [[error-detail-leak-in-response]] — 명령 stderr·DB 오류를 응답에서 빼려면 그 문구로 하던 판정을 먼저 값으로 올려야 한다
 - [[ai-overview]]
 - [[dx-overview]]
