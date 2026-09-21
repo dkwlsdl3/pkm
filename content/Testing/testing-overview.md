@@ -25,6 +25,8 @@ created: 2026-06-08 (월)
 - [[runtime-sql-schema-drift]] — 시험이 안 태우는 경로는 컴파일러도 안 본다(종단점이 죽은 채 green)
 - [[cargo-mutants-lib-only-false-missed]] — `cargo mutants --lib` 는 통합시험을 안 돌려 잠긴 자리도 MISSED(5건 중 3건 착시), `--re` 는 필드 삭제 변이를 안 걸러냄
 - [[root-runner-breaks-permission-tests]] — `chmod 000` 으로 만든 실패 조건은 root 러너에서 성립하지 않아 거짓 실패·조용한 skip 이 된다(판별력 0)
+- [[source-parsing-guard-vs-execution-test]] — 계약을 소스 파싱으로 판정하는 가드는 분석기가 되어 리팩터링만으로 깨진다, 경계를 주입해 실행으로 지켜라
+- [[feature-gated-tests-silently-skipped]] — 조건부 컴파일로 빠진 시험은 skip 에도 안 잡힌다(DB 시험 52건이 조용히 잠들어 있었다)
 
 ---
 

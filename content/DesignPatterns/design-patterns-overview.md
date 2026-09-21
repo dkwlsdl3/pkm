@@ -116,5 +116,6 @@ created: 2026-05-15 (금)
 - [[fencing-generation-late-destructive-command]] — 잠금만으로는 발송 후 도착 전 구간을 못 막는다, 파괴 명령에 세대 값을 실어 노드가 거절하게 한다
 - [[cancel-overwrites-confirmed-result]] — 취소 플래그가 이미 확정된 조각별 성공·실패를 덮어쓰면 무엇이 올라갔는지 알 수 없게 된다
 - [[error-detail-leak-in-response]] — 명령 stderr·DB 오류를 응답에서 빼려면 그 문구로 하던 판정을 먼저 값으로 올려야 한다
+- [[no-op-change-fails-verification-rollback]] — 확인을 「무엇이 바뀌었나」로 구현하면 변화를 안 만드는 정당한 변경이 반드시 원복된다
 - [[ai-overview]]
 - [[dx-overview]]

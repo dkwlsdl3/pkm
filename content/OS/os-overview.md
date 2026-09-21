@@ -148,6 +148,7 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[systemd-unit-name-distro-variance]] — 유닛명이 배포판마다 다름(smb/smbd), `is-active`의 inactive가 "유닛 없음"을 숨긴다
 - [[linux-permissions]] — rwx 권한, sticky bit, setuid/setgid
 - [[systemd-umask-file-permission-drift]] — 서비스 umask(0077)와 대화형 셸(0022)이 달라 같은 코드가 다른 권한 파일을 만든다
+- [[daemon-already-root-sudo-fails]] — 개발 때 붙인 `sudo` 가 root 서비스에 남아 매 라운드 실패하고 로그만 쌓는다
 - [[backup-strips-source-permissions]] — 백업 아카이브가 원본 640 보호를 벗겨 secret을 world-readable로 남기는 유출
 - [[tar-root-restores-archived-modes]] — root 의 GNU tar 는 `-p`·`--same-owner` 가 기본이라 해제 전 하드닝이 되돌아간다
 - [[rsync-delete-path-normalization]] — `--delete` 보호 목록은 경로 정규화 없이 뚫린다 + 원격 와일드카드는 셸에서 확장

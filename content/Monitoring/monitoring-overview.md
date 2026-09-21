@@ -22,6 +22,7 @@ created: 2026-06-25 (목)
 - [[derived-metric-recomputed-at-consumer]] — 화면이 `여유 = 전체 − 사용` 으로 되만들면 수집기 정의 수정이 그 자리에서 되돌아간다
 - [[loss-rate-zero-denominator]] — 유입이 0 이면 손실률도 0 이라 「정상」으로 보인다, 비율에는 분모와 관측 가능 여부를 함께 실어라
 - [[health-metric-blind-to-connect-failure]] — 건강값·축출 기록은 맺어진 연결의 열화만 본다, 연결 수립 실패는 능동 탐침으로 따로 재라
+- [[cold-start-unknown-reported-as-failure]] — 기동 직후 수집 전 상태를 장애로 접으면 재시작마다 거짓 경보가 나간다, 미수집은 제3의 상태로 둬라
 
 ---
 
