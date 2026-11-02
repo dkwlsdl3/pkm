@@ -34,6 +34,7 @@ created: 2026-06-08 (월)
 
 - [[argon2id-password-reset]] — argon2id PHC 문자열을 생성해 dev/test 계정 비밀번호와 로그인 잠금 상태를 복구하는 패턴
 - [[credential-update-backup-first]] — 자격증명 UPDATE는 원본 파괴 — 변경 전 대상 확인+기존 해시 SELECT 백업
+- [[forced-password-change-all-login-paths]] — "다음 로그인 때 변경"은 패스키 포함 모든 경로·재설정 직전 진행 중 로그인까지, 집행은 발급 한 곳에서
 
 ## 인가 / RBAC
 

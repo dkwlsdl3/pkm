@@ -63,6 +63,7 @@ created: 2026-05-13 (수)
 - [[migration-lock-timeout]] — 잠금 대기는 오류가 아니라 무기한 대기, `lock_timeout`은 트랜잭션 바깥에 (실증)
 - [[runtime-sql-schema-drift]] — 런타임 SQL 은 빌드가 검증하지 않는다, 지워진 컬럼을 쓰는 종단점이 죽은 채 배포된다 (실증)
 - [[schema-change-with-live-consumers]] — 정지가 배포 뒤 단계에 남으면 구 코드가 새 스키마를 보는 창이 열린다(실측 약 6초), 되살리는 것은 새 바이너리 쪽의 몫
+- [[parallel-branch-migration-number-collision]] — 병렬 브랜치가 같은 순번을 쓰면 합친 뒤 체크섬 오류, 꼬인 DB는 이름이 아니라 체크섬·적용 시각으로 정리
 
 ---
 

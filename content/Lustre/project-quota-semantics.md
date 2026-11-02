@@ -44,6 +44,19 @@ lfs project /.trash/uuid-1234
 - 휴지통으로 옮겨도 **원 저장소 쿼터(용량+inode)를 계속 점유** — "휴지통 비워야 용량 확보" 의미론이 자동으로 성립 (Synology 등 상용 NAS와 동일)
 - 반대로 휴지통 이동 시 쿼터를 즉시 해제하려면 `lfs project -p 0` 재지정 + 복원 시 재상속 처리가 필요 — 복잡도 대비 이득이 작아 보류가 합리적일 수 있음
 
+### 폴더 rename은 EXDEV로 막힌다 (2026-10-22 실측 추가)
+
+위의 "파일은 따라간다"는 **파일 하나** 기준이다. 상속 플래그(P)가 걸린 트리에서 **project ID가 다른 상속 디렉터리로 폴더를 rename하면**, 같은 파일시스템인데도 커널이 `EXDEV`(Cross-device link, 원래는 "다른 장치로는 rename 불가"라는 오류)를 돌려준다. 프로젝트 쿼터를 쓰는 Linux 파일시스템(ext4·XFS)과 같은 규칙이다.
+
+- `mv`는 `EXDEV`를 받으면 조용히 **복사 + 삭제**로 넘어간다. 그래서 휴지통 이동이 rename 한 번이 아니라 전체 복사가 된다(실측: 파일 6만 개 폴더에 14분).
+- 복사로 만든 사본은 대상 쪽 ID(예: 0)를 받는다. 결국 **원래 저장소 쿼터에서 빠져** 사용량이 줄어든 것처럼 보인다.
+- 해결: 휴지통 자리를 **원본 부모의 project ID별로** 나눠 두고 그 안으로 rename한다. ID가 같으면 rename이 그대로 성공한다.
+
+```bash
+mv /nas/shared/dev/big-folder /nas/.trash/0/   # 대상 ID ≠ 106 → EXDEV → mv 가 복사로 대체
+mv /nas/shared/dev/big-folder /nas/.trash/106/ # 같은 project ID 자리 → rename 즉시 완료
+```
+
 ---
 
 ## 코드 / 사용 예시
@@ -73,3 +86,4 @@ lfs project /path/to/file
 
 - [[lustre-overview]]
 - [[lustre-troubleshooting]]
+- [[cross-filesystem-move-preservation]] — 복사로 대체된 이동이 잃는 것들

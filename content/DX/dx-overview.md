@@ -66,6 +66,7 @@ created: 2026-05-13 (수)
 - [[duplicate-code-normalized-hash-detection]] — 이름만 다른 복사본은 토큰 복붙 탐지로 못 잡는다, 정규화 해시 + 클론 무리 세기
 - [[code-fork-drift]] — 복사된 모듈은 반드시 드리프트한다(9쌍 중 미반영 3건 실측), 공용 라이브러리 추출 또는 주기 전수 대조
 - [[code-audit-collector-design]] — 코드 전수조사 수집기 설계: 수집기 자신부터 fail-closed, 적중 수≠검토 단위(고유 위치), 반대 성격 그룹 분리, 정답지 재현율
+- [[jsonl-slurp-one-bad-line-fails-open]] — JSONL을 `jq -s`로 통째로 읽으면 깨진 한 줄에 판정 게이트가 영구히 열린다, `fromjson?` 줄 단위 읽기
 
 ## 문서 변환
 
@@ -87,6 +88,7 @@ created: 2026-05-13 (수)
 - [[agent-skill-sharing-symlink]] — 에이전트 도구가 같은 스킬을 심링크로 공유하는 방식
 - [[preflight-before-destructive-work]] — 파괴적 설치 앞의 읽기 전용 가부 판정, 점검과 설치가 같은 정본을 읽는지 잠그기
 - [[install-rerun-idempotency]] — 「이미 있으면 건너뛴다」가 재실행에서 구성 보장을 통째로 날린다, 덧붙이기에는 마커 가드
+- [[reset-scope-includes-dependent-state]] — purge·reset 범위는 지운 자원을 가리키는 설정·계정·DB 밖 상태 파일까지(업계 비교와 관리자 0명 사례)
 
 ## 버전 관리
 

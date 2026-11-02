@@ -43,13 +43,14 @@ Network 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만�
 
 - [[link-layer-debugging]] — sysfs speed·RX 카운터·ip neigh로 L1→L2→L3 단계 진단, 스위치 LED 읽는 법
 - [[bond-bridge-topology-verification]] — 본딩/브리지 토폴로지는 문서가 아니라 4종 명령 실측이 정본
+- [[private-vm-subnet-unreachable-from-lan]] — 사설 대역 VM에 사내 PC가 안 닿으면 반환 경로보다 "패킷이 오기는 하나"부터, 정적 경로·NAT·사내 IP 부여 중 선택
 
 ## 구성
 
 - [[nic-bonding]] — NIC 2포트 본딩: active-backup vs LACP, 단일 플로우 대역폭 한계
 - [[bond-slave-collision-half-bandwidth]] — 두 클라이언트가 같은 슬레이브에 해시되면 각자 회선의 절반만 쓴다(실측 판별법)
 - [[nginx-grpc-gateway-dedicated-port]] — 기존 443 옆 gRPC 수신: 전용 포트 server 블록 + 출발지 한정 방화벽
-- [[reverse-proxy-response-timeout-long-download]] — 큰 폴더 다운로드만 간헐 504: `proxy_read_timeout` 기본 60초는 전체 시간이 아니라 읽기 간격 상한
+- [[reverse-proxy-response-timeout-long-download]] — 큰 폴더 다운로드만 간헐 504: `proxy_read_timeout` 기본 60초는 전체 시간이 아니라 읽기 간격 상한 · 다단 프록시는 가장 짧은 단이 이긴다(499 해석)
 - [[grpc-connectivity-verification]] — 무인증 Ping·에러코드 매핑·SSH터널 SNI로 gRPC 경로 진단
 - [[connect-timeout-vs-total-timeout]] — 총 상한만 걸면 죽은 상대를 총 상한만큼 기다린다, 연결 상한을 따로 걸어 재시도 안전성까지 가른다
 

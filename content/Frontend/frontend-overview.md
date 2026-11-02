@@ -22,6 +22,7 @@ created: 2026-06-04 (목)
 - [[query-failure-vs-empty-state]] — 조회 실패를 빈 목록·0으로 그리면 사용자가 그것을 사실로 읽는다(토스트만으로는 부족)
 - [[route-hidden-in-menu-is-not-blocked]] — 메뉴에서 항목을 빼도 주소를 치면 열린다, 차단은 라우트·서버 종단점에서
 - [[clipboard-api-secure-context-fallback]] — `navigator.clipboard` 는 http 에서 undefined, await 없는 호출 + 성공 토스트가 거짓 성공을 만든다(불리언 반환 + execCommand 폴백)
+- [[browser-blob-download-memory-limit]] — 청크를 모아 Blob으로 저장하는 다운로드는 대용량에서 렌더러 메모리 한도(16GiB)에 막힌다, 네이티브 다운로드·스트림 저장으로
 
 ---
 

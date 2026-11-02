@@ -53,6 +53,8 @@ created: 2026-06-08 (월)
 - [[ratio-of-mismatched-windows]] — 서로 다른 구간을 잰 두 값의 비율은 구간 길이를 잰다(누적량으로 대조)
 - [[outlier-discard-survivor-bias]] — 느린 회차를 이상치로 버리면 성능 문제를 표본에서 지운다
 - [[automation-infeasible-misclassification]] — 「자동화 불가」를 케이스 유형 이름으로 판정하면 대량 오분류(실측 2783→243), 조작 내용으로 재판정하라
+- [[browser-automation-interception-skews-throughput]] — 요청 가로채기·네트워크 감시를 켠 브라우저 자동화의 업로드 처리량은 도구 성능(4.78 → 87.37MiB/s)
+- [[nested-vm-measurement-needs-same-host-control]] — 중첩 VM 값을 실물 예상치로 쓰지 말고 같은 호스트 대조 경로로 상대값을 말한다(실물이 1.96~3.06배)
 
 ---
 

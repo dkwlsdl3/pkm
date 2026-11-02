@@ -70,6 +70,22 @@ curl -o /dev/null -s -w 'ttfb=%{time_starttransfer}s total=%{time_total}s code=%
 # ttfb 가 60초 근처에서 code=504 면 준비 구간이 원인이다
 ```
 
+## 프록시가 여러 단이면 가장 짧은 단이 이긴다 (2026-10-22 실측 추가)
+
+서버 nginx의 값을 300초로 올렸는데도 사용자 쪽은 여전히 **60초에 504**가 났다. 원인은 서버 앞에 있는 사내 게이트웨이(다른 팀 관리)의 기본 60초였다. 경로에 프록시가 여러 단 있으면 **그중 가장 짧은 타임아웃이 전체 상한**이 된다. 내가 고친 단의 값은 앞단을 넘어서지 못한다.
+
+- **499 해석**: 앞단이 먼저 끊으면 뒷단 nginx 로그에는 504가 아니라 **499**(Client Closed Request — 클라이언트가 응답 전에 연결을 닫음)로 남는다. 서버 로그에 499가 60초 근처에 몰려 있으면 앞쪽 어딘가가 끊은 것이다.
+- **시험 창구로 단을 가른다**: 일부러 N초(예: 90초) 동안 아무것도 보내지 않다가 응답하는 시험용 경로를 잠시 열고, 두 경로로 부른다.
+
+```bash
+# 앞단 게이트웨이 경유 vs 서버 직접 — 끊기는 시간이 다르면 끊는 단을 특정한 것
+curl -o /dev/null -s -w 'code=%{http_code} total=%{time_total}s\n' https://<SERVICE_DOMAIN>/__sleep90
+curl -o /dev/null -s -w 'code=%{http_code} total=%{time_total}s\n' --resolve <SERVICE_DOMAIN>:443:<SERVER_IP> https://<SERVICE_DOMAIN>/__sleep90
+# 실측: 경유 code=504 total=60.03s / 직접 code=200 total=90s
+```
+
+- 시험 창구는 확인이 끝나면 바로 닫는다. 앞단 값은 내 권한 밖일 수 있으니, **실측 근거(두 경로의 시간)를 붙여** 관리 주체에 요청하는 것이 가장 빠르다.
+
 ---
 
 ## 관련

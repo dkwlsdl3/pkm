@@ -30,4 +30,5 @@ Lustre에서 OST 축소는 일반 데이터베이스 행 삭제처럼 "이름을
 
 ## 관련
 
+- [[lustre-conf-param-delete-before-requeue]] — 비활성화 레코드를 클라이언트가 다시 읽기 전에 지우면 전달되지 않는다
 - [[lustre-ost-drain]]

@@ -39,6 +39,7 @@ created: 2026-05-13 (수)
 
 - [[hetero-model-review-loop]] — 설계·구현·검증을 다른 모델에 나눠 맡기는 이유와 패턴
 - [[single-window-multi-session-worktree]] — 병렬 세션을 한 창에 모으고 충돌은 worktree로 물리 분리
+- [[agent-goal-loop-on-external-blocker]] — 외부 요인에 막힌 무인 목표 루프는 반복 보고·재시도로 429까지, 걸기 전 전제 확인·같은 막힘 N회면 중단
 
 ## 로컬 LLM
 

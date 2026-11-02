@@ -95,6 +95,12 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[lfs-df-exit-code-partial-failure]] — lfs df 비영 종료코드는 개별 타깃 실패의 합, 종료코드 단독 판정 금지
 - [[lustre-ost-destroys-in-flight-orphan-space]] — 파일 0개인데 OST 용량 잔존: unlink 후 destroy RPC 큐(`destroys_in_flight`) 정체, `force_sync` 타임아웃이면 실제 막힘
 - [[lustre-client-eviction-under-load]] — 클라이언트 축출로 EIO 중단, 원인은 클라이언트 방화벽이 막은 서버→클라이언트 역방향 연결(한 방향만 열려도 마운트는 된다) · 개방 후 3대 동시 10GB 쓰기 완주 실측(2026-08-28)
+- [[lustre-pfl-directory-layout-inheritance]] — 디렉터리 stripe는 새로 생길 것에만, layout 없는 기존 하위 폴더는 루트 기본값을 따른다 · 관리형 서비스는 루트 PFL · O_APPEND는 count 1
+- [[lfs-setstripe-missing-dir-creates-file]] — 없는 경로에 `lfs setstripe` 하면 빈 파일을 만들고 0 종료, `<dir>/.`로 막는다
+- [[lustre-conf-param-delete-before-requeue]] — 비활성화 레코드를 클라이언트 재읽기(약 12초) 전에 지우면 일부 클라이언트에 전달되지 않는다
+- [[lustre-client-oss-same-node-deadlock]] — 클라이언트와 OSS를 같은 커널에 두면 메모리 압박에서 교착, OSS VM 분리 시 메모리 고정·ARC 상한
+- [[lustre-second-lnet-for-external-clients]] — 다른 IP망 클라이언트는 별도 LNet 망(`tcp1`) + `replace_nids`로 붙인다
+- [[wsl-mirrored-lnet-kernel-socket]] — WSL mirrored 모드에서 LNet 커널 소켓이 응답을 못 받는다(포트 등록 보조 프로세스·512~1023 방화벽)
 
 ---
 

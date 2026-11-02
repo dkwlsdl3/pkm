@@ -170,6 +170,9 @@ OS 노트 전반에서 반복되는 약어. 개별 노트에서 처음 만나면
 - [[package-manager-exit-code-not-success]] — `%post` 실패를 rpm 이 되돌리지 못해 마이그레이션이 깨져도 `dnf` 는 0 을 낸다
 - [[rpm-scriptlet-pre-vs-post]] — 설치를 막을 수 있는 것은 `%pre` 뿐, 다만 그것도 「이 패키지 교체 차단」이다
 - [[self-update-killed-by-own-cgroup]] — 자기를 갱신하는 서비스가 자기 cgroup 에서 `dnf` 를 돌리면 `%post` 의 stop 이 rpm 트랜잭션을 죽인다
+- [[dnf-unpinned-install-repo-drift]] — 판 미지정 `dnf install`은 켜진 저장소 중 최고 판을 골라 장비마다 판이 갈린다, 이름-판 고정·RPM 판 비교
+- [[flock-fd-inherited-by-orphan-child]] — flock 잠금 fd를 물려받은 고아 자식이 잠금을 계속 쥔다(`lsof`로 찾기, `flock -o`로 예방)
+- [[wsl-exe-output-encoding]] — `wsl.exe` 자체 출력은 UTF-16LE, Linux 출력은 UTF-8 — `WSL_UTF8=1` + PowerShell 출력 인코딩 맞추기
 
 ## 스토리지 & 마운트
 
