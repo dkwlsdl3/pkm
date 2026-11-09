@@ -64,6 +64,8 @@ created: 2026-05-13 (수)
 - [[unknown-is-not-absent]] — "모름"을 "없음·정상"으로 접지 말 것: 3값 outcome과 "확인 불가" 표시(실증 6사례)
 - [[design-draft-eviction-to-adr]] — 구현이 끝난 설계 초안은 「지금도 유효한 계획」으로 읽힌다: 결정은 ADR·실측은 데이터 경로·판단은 코드 옆으로 퇴거(퇴거는 반드시 무언가를 잃으므로 교차검증 필수)
 - [[duplicate-code-normalized-hash-detection]] — 이름만 다른 복사본은 토큰 복붙 탐지로 못 잡는다, 정규화 해시 + 클론 무리 세기
+- [[narrow-lint-rule-false-negative]] — 오탐을 피하려 좁힌 정적 규칙은 원래 버그를 놓친다, 오탐 원인을 걷어내고 전면 금지(넓히자 위반 20건)
+- [[append-only-knowledge-doc-rot]] — 덧붙이기만 한 지식 문서는 4일 만에 291→745줄로 불어 찾지 못하게 된다, 쓰는 규칙 다섯
 - [[code-fork-drift]] — 복사된 모듈은 반드시 드리프트한다(9쌍 중 미반영 3건 실측), 공용 라이브러리 추출 또는 주기 전수 대조
 - [[code-audit-collector-design]] — 코드 전수조사 수집기 설계: 수집기 자신부터 fail-closed, 적중 수≠검토 단위(고유 위치), 반대 성격 그룹 분리, 정답지 재현율
 - [[jsonl-slurp-one-bad-line-fails-open]] — JSONL을 `jq -s`로 통째로 읽으면 깨진 한 줄에 판정 게이트가 영구히 열린다, `fromjson?` 줄 단위 읽기

@@ -35,5 +35,5 @@ created: 2026-05-13 (수)
 
 ## 관련
 
-- [[Tech/AI/]]
+- [[ai-overview]]
 - [[data-storage]]

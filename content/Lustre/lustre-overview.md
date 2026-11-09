@@ -83,6 +83,7 @@ OSS (Object Storage Server) × N  ← 실제 데이터 저장
 - [[lustre-ior-measurement-pitfalls]] — IOR 측정 3대 함정(O_DIRECT·write/read·ZFS)
 - [[lustre-benchmark-cache-artifact]] — drop_caches·ZFS ARC/txg가 만드는 CoV 아티팩트·sar 판별
 - [[lustre-node-topology]] — 논리 노드(역할 VM) vs 물리 노드, 스케일아웃(용량)≠HA(이중화) 구분
+- [[lustre-osd-backend]] — OSD 백엔드 ldiskfs vs ZFS, Lustre 스냅샷은 전 타깃이 ZFS 여야 한다(zvol 위 ldiskfs 는 해당 없음)
 - [[lustre-ost-add-no-rebalance]] — OST 추가 시 기존 데이터는 이동하지 않는다(증설 소요의 실체는 타겟 포맷)·DoM
 - [[lustre-ost-drain]] — OST 제거 전 데이터 비우기(deactivate → lfs migrate → 비움검증)
 - [[lustre-ost-permanent-removal]] — OST 영구 제거(conf_param vs writeconf)·인덱스 재사용

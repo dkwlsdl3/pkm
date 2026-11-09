@@ -23,6 +23,9 @@ created: 2026-06-04 (목)
 - [[route-hidden-in-menu-is-not-blocked]] — 메뉴에서 항목을 빼도 주소를 치면 열린다, 차단은 라우트·서버 종단점에서
 - [[clipboard-api-secure-context-fallback]] — `navigator.clipboard` 는 http 에서 undefined, await 없는 호출 + 성공 토스트가 거짓 성공을 만든다(불리언 반환 + execCommand 폴백)
 - [[browser-blob-download-memory-limit]] — 청크를 모아 Blob으로 저장하는 다운로드는 대용량에서 렌더러 메모리 한도(16GiB)에 막힌다, 네이티브 다운로드·스트림 저장으로
+- [[ko-kr-hour12-default]] — ko-KR 날짜 포맷은 기본 12시간제(실측 영문 `PM`), `hour12:false` 는 문장형 — 자리수 조립 유틸로 고정
+- [[tolocalestring-locale-drift]] — 로케일 인자 없는 `toLocaleString` 은 사용자 환경을 따라 `1,234`→`1.234`, 로케일 고정 유틸로
+- [[vue-template-lint-blind-spot]] — `no-restricted-syntax` 는 `<script>` 만 본다, 템플릿은 `vue/no-restricted-syntax` 를 같은 selector 로
 
 ---
 

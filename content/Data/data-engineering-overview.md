@@ -49,6 +49,9 @@ created: 2026-05-13 (수)
 - [[export-count-then-fetch-truncation]] — 건수를 센 뒤 조회하는 내보내기는 그 사이 늘어난 행 때문에 잘린 CSV를 정상 응답으로 내보낸다 (실증)
 - [[select-for-update-of-lock-scope]] — 조인 있는 FOR UPDATE는 OF 없이는 조인 행까지 잠가 데드락 (실증)
 - [[keyset-pagination-tie-on-sort-key]] — 유일하지 않은 정렬키 하나로 페이지를 나누면 경계에서 행이 중복되거나 빠진다
+- [[soft-delete-as-suppression-source]] — 중복 억제 근거인 행을 물리 삭제하면 치운 경고가 되살아난다, 소프트 삭제 + 억제 창 밖만 정리 (실증)
+- [[retention-zero-means-delete-all]] — 「0 = 전량 삭제」 함수에 설정 기본값 0 이 흘러들어 기동만으로 8개 테이블 삭제 가능, 범위를 타입으로 분리 (실증)
+- [[fk-no-action-blocks-batch-cleanup]] — 정리를 한 트랜잭션으로 묶으면 NO ACTION 참조 하나에 매 주기 전체 롤백, 참조된 행은 다음 주기로 (실증)
 
 ---
 
@@ -64,6 +67,7 @@ created: 2026-05-13 (수)
 - [[runtime-sql-schema-drift]] — 런타임 SQL 은 빌드가 검증하지 않는다, 지워진 컬럼을 쓰는 종단점이 죽은 채 배포된다 (실증)
 - [[schema-change-with-live-consumers]] — 정지가 배포 뒤 단계에 남으면 구 코드가 새 스키마를 보는 창이 열린다(실측 약 6초), 되살리는 것은 새 바이너리 쪽의 몫
 - [[parallel-branch-migration-number-collision]] — 병렬 브랜치가 같은 순번을 쓰면 합친 뒤 체크섬 오류, 꼬인 DB는 이름이 아니라 체크섬·적용 시각으로 정리
+- [[schema-diff-use-catalog-not-pgdump]] — 환경 간 스키마 비교는 `pg_dump` 텍스트가 아니라 카탈로그 조회로, CHECK 표기 차이는 드리프트로 단정 금지 (실증)
 
 ---
 
