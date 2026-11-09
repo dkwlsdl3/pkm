@@ -27,7 +27,7 @@ created: 2026-08-18 (화)
 ## 해결
 
 ```sql
--- 잠금을 얻는 데 드는 시간의 상한. 트랜잭션 "바깥"에 둔다
+-- 잠금을 얻는 데 드는 시간의 상한. 세션 단위로, 잠금을 기다릴 문장보다 먼저 둔다
 SET lock_timeout = '15s';
 BEGIN;
   ALTER TABLE ...;
@@ -52,8 +52,21 @@ fn wrap_migration_sql(sql: &str) -> String {
 ## 주의
 
 > [!WARNING]
-> **`lock_timeout` 은 트랜잭션 바깥에 둬야 한다.** `BEGIN` 안에 두면 그 트랜잭션에서만 살아 있고,
-> 정작 **트랜잭션을 여는 순간의 잠금 획득**에는 적용되지 않는다.
+> **트랜잭션 안이냐 밖이냐가 아니라, 잠금을 기다릴 문장보다 먼저 실행됐느냐와 언제까지 살아 있느냐가 문제다.**
+> `BEGIN` 은 잠금을 잡지 않는다. PostgreSQL 16 실측(2026-11-09, 테이블 잠금을 다른 세션이 쥔 상태):
+>
+> | 순서 | 결과 |
+> |---|---|
+> | `SET lock_timeout='2s'; BEGIN; ALTER …` | 2초 뒤 `canceling statement due to lock timeout` |
+> | `BEGIN; SET LOCAL lock_timeout='2s'; ALTER …` | 2초 뒤 같은 오류 — **트랜잭션 안에서도 적용된다** |
+> | `BEGIN; SET LOCAL …; COMMIT; BEGIN; ALTER …` | 무기한 대기 — `SET LOCAL` 은 트랜잭션이 끝나면 사라진다 |
+> | `BEGIN; ALTER …; SET LOCAL …` | 무기한 대기 — 설정이 대기보다 늦었다 |
+> | `SET lock_timeout='2s'; SELECT pg_advisory_lock(…)` | 2초 뒤 같은 오류 — advisory lock 대기에도 적용된다 |
+> | `SELECT pg_advisory_lock(…); BEGIN; SET LOCAL …` | 무기한 대기 |
+>
+> 마지막 줄이 실제로 걸리는 자리다. sqlx 마이그레이션 실행기는 각 마이그레이션 트랜잭션을 열기 **전에**
+> `pg_advisory_lock` 을 잡는다(sqlx 0.8 `Migrator::run_direct`). 마이그레이션 파일 안의 설정은 그 대기에 닿지 않는다.
+> ⇒ 접속 직후 **세션 단위 `SET lock_timeout`** 을 건다(sqlx 라면 풀의 `after_connect`).
 
 > [!WARNING]
 > **`statement_timeout` 과 다르다.** `lock_timeout` = 잠금을 **얻는** 데 드는 시간의 상한,
